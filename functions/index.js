@@ -276,3 +276,4 @@ exports.deleteAccount = onCall({ cors: true }, async (request) => {
 
   return { success: true };
 });
+

@@ -31,8 +31,33 @@ export const Header: React.FC<HeaderProps> = ({ currentView, onNavigate }) => {
         </div>
 
         {/* Navigation & User actions */}
-        <div className="flex items-center gap-2 sm:gap-4">
+        <div className="flex items-center gap-1.5 sm:gap-3">
           
+          {/* Party Mode link */}
+          <button
+            onClick={() => onNavigate('party-setup')}
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs sm:text-sm font-bold transition-all ${
+              currentView === 'party-setup' || currentView === 'party-game'
+                ? 'bg-brand-pink/20 text-pink-300 border border-brand-pink/50 shadow-neon-pink/30'
+                : 'text-zinc-300 hover:text-white hover:bg-white/[0.05]'
+            }`}
+          >
+            <Sparkles className="w-4 h-4 text-brand-pink" />
+            <span>Party Mode</span>
+          </button>
+
+          {/* Multiplayer Rooms link */}
+          <button
+            onClick={() => onNavigate('multiplayer')}
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs sm:text-sm font-bold transition-all ${
+              currentView === 'multiplayer'
+                ? 'bg-purple-950/60 text-purple-300 border border-purple-500/50 shadow-neon-violet/30'
+                : 'text-zinc-300 hover:text-white hover:bg-white/[0.05]'
+            }`}
+          >
+            <span className="hidden sm:inline">Multiplayer</span> Rooms
+          </button>
+
           {/* Custom Decks link for logged-in users */}
           {isAuthenticated && (
             <button
@@ -44,7 +69,7 @@ export const Header: React.FC<HeaderProps> = ({ currentView, onNavigate }) => {
               }`}
             >
               <Layers className="w-4 h-4 text-brand-pink" />
-              <span>My Decks</span>
+              <span className="hidden md:inline">My Decks</span>
             </button>
           )}
 
@@ -103,3 +128,4 @@ export const Header: React.FC<HeaderProps> = ({ currentView, onNavigate }) => {
     </header>
   );
 };
+

@@ -18,3 +18,4 @@ export interface CommunitySubmission {
   reviewedAt?: number;
   createdAt: number;
 }
+

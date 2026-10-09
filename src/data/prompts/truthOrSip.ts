@@ -38,3 +38,4 @@ export const TRUTH_OR_SIP_PROMPTS: PromptItem[] = [
   { id: 'tos-k-2', gameId: 'truth-or-sip', category: 'kids', text: "Have you ever hidden a toy under your bed so your sibling couldn't find it?", forfeit: "Do 5 silly bunny hops!" },
   { id: 'tos-k-3', gameId: 'truth-or-sip', category: 'kids', text: "What is the most disgusting food your parents ever made you try?", forfeit: "Make your best funny monster sound!" },
 ];
+

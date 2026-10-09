@@ -35,3 +35,4 @@ export const AUTHOR_CONFIG: AuthorConfig = {
     },
   ],
 };
+

@@ -269,3 +269,4 @@ export const ProfilePage: React.FC<{ onNavigate: (view: string) => void }> = ({ 
     </div>
   );
 };
+

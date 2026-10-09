@@ -117,3 +117,4 @@ export const useGameSettings = () => {
   if (!context) throw new Error('useGameSettings must be used within GameSettingsProvider');
   return context;
 };
+

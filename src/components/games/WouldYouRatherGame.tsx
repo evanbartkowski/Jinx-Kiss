@@ -157,3 +157,4 @@ export const WouldYouRatherGame: React.FC<WouldYouRatherGameProps> = ({ prompts,
     </div>
   );
 };
+

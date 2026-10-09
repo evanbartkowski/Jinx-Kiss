@@ -70,3 +70,4 @@ export const CategorySelector: React.FC<CategorySelectorProps> = ({
     </>
   );
 };
+

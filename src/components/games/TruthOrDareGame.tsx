@@ -186,3 +186,4 @@ export const TruthOrDareGame: React.FC<TruthOrDareGameProps> = ({ prompts, playe
     </div>
   );
 };
+

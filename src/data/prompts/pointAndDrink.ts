@@ -42,3 +42,4 @@ export const POINT_AND_DRINK_PROMPTS: PromptItem[] = [
   { id: 'pad-k-3', gameId: 'point-and-drink', category: 'kids', text: "Who tells the funniest jokes in the family?" },
   { id: 'pad-k-4', gameId: 'point-and-drink', category: 'kids', text: "Who is most likely to adopt ten puppies at the same time?" },
 ];
+

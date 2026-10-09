@@ -1,0 +1,68 @@
+import { MysteryCard } from '../types/game';
+
+export const MYSTERY_CARDS: MysteryCard[] = [
+  {
+    id: 'myst-1',
+    title: 'The Puppet Master',
+    description: 'The active player gains the power to answer for another chosen player during their next turn.',
+    type: 'modifier',
+    durationRounds: 1,
+    points: 15,
+  },
+  {
+    id: 'myst-2',
+    title: 'Code of Silence',
+    description: 'Anyone who laughs, chuckles, or speaks out of turn during this round loses 10 points or takes a sip.',
+    type: 'chaos',
+    durationRounds: 1,
+    points: 20,
+  },
+  {
+    id: 'myst-3',
+    title: 'Accented Royalty',
+    description: 'Every player must adopt a pretentious British or French accent for the next two full rounds.',
+    type: 'modifier',
+    durationRounds: 2,
+    points: 25,
+  },
+  {
+    id: 'myst-4',
+    title: 'Secret Alliance',
+    description: 'Pick another player secretly. Whenever they earn points in the next 3 rounds, you gain half!',
+    type: 'bonus',
+    durationRounds: 3,
+    points: 30,
+  },
+  {
+    id: 'myst-5',
+    title: 'Floor is Lava',
+    description: 'The last person to lift both feet off the floor right now faces an instant penalty dare!',
+    type: 'challenge',
+    durationRounds: 1,
+    points: 20,
+  },
+  {
+    id: 'myst-6',
+    title: 'Double Jeopardy',
+    description: 'The next round awards triple points to whoever successfully performs the prompt, but double penalty if skipped!',
+    type: 'modifier',
+    durationRounds: 1,
+    points: 50,
+  },
+  {
+    id: 'myst-7',
+    title: 'The Confession Box',
+    description: 'One player chosen by group vote must answer any unfiltered question the room comes up with.',
+    type: 'secret-vote',
+    durationRounds: 1,
+    points: 25,
+  },
+  {
+    id: 'myst-8',
+    title: 'No Names Allowed',
+    description: 'Saying any player\'s real name is forbidden for the next 2 rounds. Refer to everyone as "Commander".',
+    type: 'modifier',
+    durationRounds: 2,
+    points: 20,
+  },
+];

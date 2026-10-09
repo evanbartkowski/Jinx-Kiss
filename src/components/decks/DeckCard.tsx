@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { CustomDeck } from '../../types/deck';
 import { GAMES_CONFIG } from '../../data/gamesConfig';
-import { Play, Layers, Lock, Globe, Link2, Copy, Trash2, Edit } from 'lucide-react';
+import { Play, Layers, Lock, Globe, Link2, Copy, Trash2, Edit, QrCode, X, Check } from 'lucide-react';
+import { generateQRCodeSVG } from '../../utils/qrCode';
+import { useToast } from '../../context/ToastContext';
 
 interface DeckCardProps {
   deck: CustomDeck;
@@ -20,8 +22,23 @@ export const DeckCard: React.FC<DeckCardProps> = ({
   onDelete,
   isOwner = false,
 }) => {
+  const { showToast } = useToast();
+  const [showQRModal, setShowQRModal] = useState(false);
+  const [copied, setCopied] = useState(false);
+
   const gameMeta = GAMES_CONFIG[deck.gameId] || GAMES_CONFIG['truth-or-dare'];
   const themeColor = deck.themeColor || gameMeta.themeColor;
+  const shareUrl = typeof window !== 'undefined'
+    ? `${window.location.origin}/#/deck/${deck.shareToken || deck.id}`
+    : '';
+
+  const handleCopyLink = () => {
+    navigator.clipboard.writeText(shareUrl).then(() => {
+      setCopied(true);
+      showToast('Deck link copied to clipboard!', 'success');
+      setTimeout(() => setCopied(false), 2500);
+    });
+  };
 
   return (
     <div
@@ -102,12 +119,21 @@ export const DeckCard: React.FC<DeckCardProps> = ({
           <span>Play Deck</span>
         </button>
 
+        {/* QR Share Button */}
+        <button
+          onClick={() => setShowQRModal(true)}
+          className="p-2.5 rounded-xl text-zinc-400 hover:text-white bg-zinc-900 border border-white/10 hover:border-white/20 transition-all"
+          title="Share Deck QR Code"
+        >
+          <QrCode className="w-3.5 h-3.5" />
+        </button>
+
         {isOwner && (
           <div className="flex items-center gap-1">
             {onEdit && (
               <button
                 onClick={() => onEdit(deck)}
-                className="p-2 rounded-xl text-zinc-400 hover:text-white bg-zinc-900 border border-white/10 hover:border-white/20 transition-all"
+                className="p-2.5 rounded-xl text-zinc-400 hover:text-white bg-zinc-900 border border-white/10 hover:border-white/20 transition-all"
                 title="Edit Deck"
               >
                 <Edit className="w-3.5 h-3.5" />
@@ -116,7 +142,7 @@ export const DeckCard: React.FC<DeckCardProps> = ({
             {onDuplicate && (
               <button
                 onClick={() => onDuplicate(deck)}
-                className="p-2 rounded-xl text-zinc-400 hover:text-white bg-zinc-900 border border-white/10 hover:border-white/20 transition-all"
+                className="p-2.5 rounded-xl text-zinc-400 hover:text-white bg-zinc-900 border border-white/10 hover:border-white/20 transition-all"
                 title="Duplicate Deck"
               >
                 <Copy className="w-3.5 h-3.5" />
@@ -125,7 +151,7 @@ export const DeckCard: React.FC<DeckCardProps> = ({
             {onDelete && (
               <button
                 onClick={() => onDelete(deck)}
-                className="p-2 rounded-xl text-zinc-400 hover:text-red-400 bg-zinc-900 border border-white/10 hover:border-red-500/30 transition-all"
+                className="p-2.5 rounded-xl text-zinc-400 hover:text-red-400 bg-zinc-900 border border-white/10 hover:border-red-500/30 transition-all"
                 title="Delete Deck"
               >
                 <Trash2 className="w-3.5 h-3.5" />
@@ -135,6 +161,40 @@ export const DeckCard: React.FC<DeckCardProps> = ({
         )}
       </div>
 
+      {/* QR Share Modal */}
+      {showQRModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md animate-fade-in">
+          <div className="w-full max-w-xs rounded-3xl glass-panel border border-brand-pink/50 p-6 text-center relative shadow-neon-pink/30">
+            <button
+              onClick={() => setShowQRModal(false)}
+              className="absolute top-4 right-4 text-zinc-400 hover:text-white"
+            >
+              <X className="w-5 h-5" />
+            </button>
+
+            <h4 className="text-base font-black uppercase text-white mb-1">
+              Share Deck
+            </h4>
+            <p className="text-xs text-zinc-400 mb-4 line-clamp-1">
+              {deck.title}
+            </p>
+
+            {/* QR View */}
+            <div
+              className="w-44 h-44 mx-auto rounded-2xl bg-white p-2 flex items-center justify-center shadow-lg mb-4"
+              dangerouslySetInnerHTML={{ __html: generateQRCodeSVG(shareUrl, 160) }}
+            />
+
+            <button
+              onClick={handleCopyLink}
+              className="w-full py-2.5 rounded-xl bg-brand-pink/20 border border-brand-pink/50 text-pink-300 font-bold text-xs flex items-center justify-center gap-2 hover:bg-brand-pink/30 active:scale-95 transition-all"
+            >
+              {copied ? <Check className="w-4 h-4 text-emerald-400" /> : <Copy className="w-4 h-4" />}
+              <span>{copied ? 'Link Copied!' : 'Copy Share Link'}</span>
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

@@ -43,3 +43,4 @@ export const RED_FLAG_GREEN_FLAG_PROMPTS: PromptItem[] = [
   { id: 'rf-k-3', gameId: 'red-flag-green-flag', category: 'kids', text: "They invite the new kid who is sitting alone to join the playground game." },
   { id: 'rf-k-4', gameId: 'red-flag-green-flag', category: 'kids', text: "They refuse to let anyone else play with their favorite video game controller." },
 ];
+

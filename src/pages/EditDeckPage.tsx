@@ -21,3 +21,4 @@ export const EditDeckPage: React.FC<EditDeckPageProps> = ({ deck, onDeckUpdated,
 
   return <DeckEditor initialDeck={deck} onSave={handleSave} onCancel={onCancel} />;
 };
+

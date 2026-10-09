@@ -85,3 +85,4 @@ describe('Authentication & Access Control', () => {
     await expect(authService.login('DeleteMe', 'secret123')).rejects.toThrow('Invalid username or password.');
   });
 });
+

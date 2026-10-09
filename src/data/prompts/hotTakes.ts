@@ -38,3 +38,4 @@ export const HOT_TAKES_PROMPTS: PromptItem[] = [
   { id: 'ht-k-2', gameId: 'hot-takes', category: 'kids', text: "Video games should count as official school subjects.", discussionPrompt: "Is Minecraft real engineering?" },
   { id: 'ht-k-3', gameId: 'hot-takes', category: 'kids', text: "Ice cream tastes better in the freezing winter than in the hot summer.", discussionPrompt: "Does the ice cream not melt make it tastier?" },
 ];
+

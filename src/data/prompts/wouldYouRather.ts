@@ -39,3 +39,4 @@ export const WOULD_YOU_RATHER_PROMPTS: PromptItem[] = [
   { id: 'wyr-k-2', gameId: 'would-you-rather', category: 'kids', text: "Would You Rather...", optionA: "Swim in a giant swimming pool filled with warm chocolate pudding", optionB: "Jump on a trampoline the size of an entire football field" },
   { id: 'wyr-k-3', gameId: 'would-you-rather', category: 'kids', text: "Would You Rather...", optionA: "Never have to do homework ever again", optionB: "Have recess last for 3 hours every single school day" },
 ];
+

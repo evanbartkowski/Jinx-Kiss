@@ -97,3 +97,4 @@ export const TRUTH_OR_DARE_PROMPTS: PromptItem[] = [
   { id: 'tod-k-d-3', gameId: 'truth-or-dare', category: 'kids', type: 'dare', text: "Try to say the alphabet backwards from Z to T in 10 seconds." },
   { id: 'tod-k-d-4', gameId: 'truth-or-dare', category: 'kids', type: 'dare', text: "Pretend you are a secret agent trying to sneak into the kitchen." },
 ];
+

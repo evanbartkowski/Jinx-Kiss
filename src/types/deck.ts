@@ -20,3 +20,4 @@ export interface CustomDeck {
   updatedAt: number;
   playCount?: number;
 }
+

@@ -50,3 +50,4 @@ export const AgeConfirmationModal: React.FC<AgeConfirmationModalProps> = ({
     </div>
   );
 };
+

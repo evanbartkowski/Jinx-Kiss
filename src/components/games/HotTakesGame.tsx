@@ -133,3 +133,4 @@ export const HotTakesGame: React.FC<HotTakesGameProps> = ({ prompts, players }) 
     </div>
   );
 };
+

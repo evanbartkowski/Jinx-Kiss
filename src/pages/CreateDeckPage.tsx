@@ -16,3 +16,4 @@ export const CreateDeckPage: React.FC<CreateDeckPageProps> = ({ onDeckCreated, o
 
   return <DeckEditor onSave={handleSave} onCancel={onCancel} />;
 };
+

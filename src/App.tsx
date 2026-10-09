@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { GameId } from './types/game';
+import { GameId, PartyModeConfig } from './types/game';
 import { CustomDeck } from './types/deck';
+import { GAMES_CONFIG } from './data/gamesConfig';
 import { ToastProvider } from './context/ToastContext';
 import { AuthProvider } from './context/AuthContext';
 import { GameSettingsProvider } from './context/GameSettingsContext';
@@ -12,19 +13,34 @@ import { AuthModal } from './components/auth/AuthModal';
 // Pages
 import { HomePage } from './pages/HomePage';
 import { GamePage } from './pages/GamePage';
+import { PartyModeSetupPage } from './pages/PartyModeSetupPage';
+import { PartyModeGame } from './components/party/PartyModeGame';
+import { MultiplayerRoomPage } from './pages/MultiplayerRoomPage';
 import { MyDecksPage } from './pages/MyDecksPage';
 import { CreateDeckPage } from './pages/CreateDeckPage';
 import { EditDeckPage } from './pages/EditDeckPage';
 import { ProfilePage } from './pages/ProfilePage';
 import { AdminDashboardPage } from './pages/AdminDashboardPage';
 
-export type AppView = 'home' | 'game' | 'my-decks' | 'create-deck' | 'edit-deck' | 'profile' | 'admin';
+export type AppView =
+  | 'home'
+  | 'game'
+  | 'party-setup'
+  | 'party-game'
+  | 'multiplayer'
+  | 'my-decks'
+  | 'create-deck'
+  | 'edit-deck'
+  | 'profile'
+  | 'admin';
 
 function AppContent() {
   const [currentView, setCurrentView] = useState<AppView>('home');
   const [selectedGameId, setSelectedGameId] = useState<GameId>('truth-or-dare');
   const [activeCustomDeck, setActiveCustomDeck] = useState<CustomDeck | null>(null);
   const [editingDeck, setEditingDeck] = useState<CustomDeck | null>(null);
+  const [activePartyConfig, setActivePartyConfig] = useState<PartyModeConfig | null>(null);
+  const [activeRoomCode, setActiveRoomCode] = useState<string>('');
 
   // Sync with browser URL hash / history
   useEffect(() => {
@@ -35,6 +51,14 @@ function AppContent() {
         setSelectedGameId(id);
         setActiveCustomDeck(null);
         setCurrentView('game');
+      } else if (hash.startsWith('room/')) {
+        const code = hash.replace('room/', '');
+        setActiveRoomCode(code);
+        setCurrentView('multiplayer');
+      } else if (hash === 'multiplayer' || hash === 'rooms') {
+        setCurrentView('multiplayer');
+      } else if (hash === 'party' || hash === 'party-setup') {
+        setCurrentView('party-setup');
       } else if (hash === 'my-decks') {
         setCurrentView('my-decks');
       } else if (hash === 'create-deck') {
@@ -61,6 +85,9 @@ function AppContent() {
     } else if (view === 'game') {
       window.location.hash = `#/game/${param || selectedGameId}`;
       window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else if (view === 'multiplayer') {
+      window.location.hash = param ? `#/room/${param}` : `#/rooms`;
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     } else {
       window.location.hash = `#/${view}`;
       window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -86,6 +113,27 @@ function AppContent() {
     navigateTo('edit-deck');
   };
 
+  const handleStartPartyMode = (config: PartyModeConfig) => {
+    setActivePartyConfig(config);
+    setCurrentView('party-game');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleQuickPlay = () => {
+    const quickConfig: PartyModeConfig = {
+      playerNames: ['Sam', 'Alex', 'Jordan', 'Taylor'],
+      selectedGames: Object.keys(GAMES_CONFIG) as GameId[],
+      categories: ['medium', 'spicy'],
+      roundCount: 20,
+      enableChaosWheel: true,
+      enableMysteryCards: true,
+      enableScoring: true,
+      timerSeconds: 30,
+      contentBoundary: 'all',
+    };
+    handleStartPartyMode(quickConfig);
+  };
+
   return (
     <div className="min-h-screen flex flex-col bg-[#050505] text-[#f3f4f6] relative">
       <AmbientBackground />
@@ -96,6 +144,30 @@ function AppContent() {
           <HomePage
             onSelectGame={handleSelectGame}
             onPlayDeck={handlePlayDeck}
+            onStartPartyMode={() => navigateTo('party-setup')}
+            onOpenMultiplayer={() => navigateTo('multiplayer')}
+            onQuickPlay={handleQuickPlay}
+          />
+        )}
+
+        {currentView === 'party-setup' && (
+          <PartyModeSetupPage
+            onStartParty={handleStartPartyMode}
+            onCancel={() => navigateTo('home')}
+          />
+        )}
+
+        {currentView === 'party-game' && activePartyConfig && (
+          <PartyModeGame
+            config={activePartyConfig}
+            onExit={() => navigateTo('home')}
+          />
+        )}
+
+        {currentView === 'multiplayer' && (
+          <MultiplayerRoomPage
+            initialRoomCode={activeRoomCode}
+            onExit={() => navigateTo('home')}
           />
         )}
 

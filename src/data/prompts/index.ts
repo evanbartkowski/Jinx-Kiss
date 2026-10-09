@@ -7,6 +7,10 @@ import { DARE_ROULETTE_PROMPTS } from './dareRoulette';
 import { RED_FLAG_GREEN_FLAG_PROMPTS } from './redFlagGreenFlag';
 import { TRUTH_OR_SIP_PROMPTS } from './truthOrSip';
 import { POINT_AND_DRINK_PROMPTS } from './pointAndDrink';
+import { MOST_LIKELY_TO_PROMPTS } from './mostLikelyTo';
+import { IMPOSTER_PROMPTS } from './imposter';
+import { WHOS_LYING_PROMPTS } from './whosLying';
+import { CONFESSIONS_PROMPTS } from './confessions';
 
 export const ALL_DEFAULT_PROMPTS: Record<GameId, PromptItem[]> = {
   'truth-or-dare': TRUTH_OR_DARE_PROMPTS,
@@ -17,6 +21,10 @@ export const ALL_DEFAULT_PROMPTS: Record<GameId, PromptItem[]> = {
   'red-flag-green-flag': RED_FLAG_GREEN_FLAG_PROMPTS,
   'truth-or-sip': TRUTH_OR_SIP_PROMPTS,
   'point-and-drink': POINT_AND_DRINK_PROMPTS,
+  'most-likely-to': MOST_LIKELY_TO_PROMPTS,
+  'imposter': IMPOSTER_PROMPTS,
+  'whos-lying': WHOS_LYING_PROMPTS,
+  'confessions': CONFESSIONS_PROMPTS,
 };
 
 /**
@@ -38,3 +46,4 @@ export function getDefaultPromptsForGame(gameId: GameId, category?: GameCategory
     return p.category === category;
   });
 }
+

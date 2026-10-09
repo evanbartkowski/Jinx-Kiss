@@ -256,3 +256,4 @@ export const SuggestCardModal: React.FC<SuggestCardModalProps> = ({
     </div>
   );
 };
+
