@@ -240,3 +240,4 @@ export const ConfessionsGame: React.FC<ConfessionsGameProps> = ({ prompts, playe
     </div>
   );
 };
+

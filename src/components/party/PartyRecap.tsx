@@ -179,3 +179,4 @@ export const PartyRecap: React.FC<PartyRecapProps> = ({
     </div>
   );
 };
+

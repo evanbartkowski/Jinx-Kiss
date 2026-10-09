@@ -128,3 +128,4 @@ export const MysteryCardModal: React.FC<MysteryCardModalProps> = ({ card, onClos
     </div>
   );
 };
+

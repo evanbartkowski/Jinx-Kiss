@@ -315,3 +315,4 @@ export const ImposterGame: React.FC<ImposterGameProps> = ({ prompts, players }) 
     </div>
   );
 };
+

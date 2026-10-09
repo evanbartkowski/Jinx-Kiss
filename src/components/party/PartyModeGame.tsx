@@ -452,3 +452,4 @@ export const PartyModeGame: React.FC<PartyModeGameProps> = ({ config, onExit }) 
     </div>
   );
 };
+

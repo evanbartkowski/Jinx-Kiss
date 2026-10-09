@@ -255,3 +255,4 @@ export const IMPOSTER_PROMPTS: PromptItem[] = [
     imposterClue: 'The tallest animal with yellow spots and a long neck',
   },
 ];
+

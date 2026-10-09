@@ -1,15 +1,15 @@
 import { initializeApp, getApps, getApp, FirebaseApp } from 'firebase/app';
 import { getAuth, Auth, browserLocalPersistence, setPersistence } from 'firebase/auth';
-import { getFirestore, Firestore, enableIndexedDbPersistence } from 'firebase/firestore';
+import { getFirestore, Firestore } from 'firebase/firestore';
 
 export const firebaseConfig = {
-  projectId: "starlight-fishing",
-  appId: "1:1092703473317:web:bd339b3915feb05633c74c",
-  storageBucket: "starlight-fishing.firebasestorage.app",
-  apiKey: "AIzaSyAshP_PJhPYe_8Ug6eDRV_gUDw0LdEQ8bU",
-  authDomain: "starlight-fishing.firebaseapp.com",
-  messagingSenderId: "1092703473317",
-  measurementId: "G-8ED6NF7DNC",
+  projectId: "jinxkiss-cfbaf",
+  appId: "1:1044843832410:web:97cf361b4767a5c56c6463",
+  storageBucket: "jinxkiss-cfbaf.firebasestorage.app",
+  apiKey: "AIzaSyAFW1y8_fpLjTb4hv8w5_RsbYe4igCqteM",
+  authDomain: "jinxkiss-cfbaf.firebaseapp.com",
+  messagingSenderId: "1044843832410",
+  measurementId: "G-D8X88WG3WH",
 };
 
 let app: FirebaseApp;
@@ -32,4 +32,3 @@ try {
 }
 
 export { app, auth, db };
-

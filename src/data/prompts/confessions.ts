@@ -190,3 +190,4 @@ export const CONFESSIONS_PROMPTS: PromptItem[] = [
     confessionStarter: 'I once snuck out of bed to eat...',
   },
 ];
+

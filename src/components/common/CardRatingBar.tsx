@@ -160,3 +160,4 @@ export const CardRatingBar: React.FC<CardRatingBarProps> = ({ prompt }) => {
     </div>
   );
 };
+

@@ -19,3 +19,4 @@ export function generateQRCodeSVG(text: string, size = 200, fgColor = '#FFFFFF',
     <image href="https://api.qrserver.com/v1/create-qr-code/?size=${size}x${size}&amp;data=${encodedText}&amp;margin=10&amp;color=ffffff&amp;bgcolor=050505" width="${size}" height="${size}"/>
   </svg>`;
 }
+

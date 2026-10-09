@@ -66,3 +66,4 @@ export const MYSTERY_CARDS: MysteryCard[] = [
     points: 20,
   },
 ];
+

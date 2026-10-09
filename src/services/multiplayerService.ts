@@ -127,7 +127,16 @@ export const multiplayerService = {
       lastSeen: Date.now(),
     };
 
-    // Check if room exists in Firestore
+    // Update local memory map
+    let pMap = fallbackPlayers.get(cleanCode);
+    if (!pMap) {
+      pMap = new Map();
+      fallbackPlayers.set(cleanCode, pMap);
+    }
+    pMap.set(playerId, newPlayer);
+    notifyFallbackPlayers(cleanCode);
+
+    // Persist to Firestore
     try {
       if (db) {
         const roomRef = doc(db, 'rooms', cleanCode);
@@ -139,18 +148,10 @@ export const multiplayerService = {
         }
       }
     } catch {
-      // Check fallback
+      // Offline fallback
     }
 
-    // Fallback check
     if (fallbackRooms.has(cleanCode)) {
-      let pMap = fallbackPlayers.get(cleanCode);
-      if (!pMap) {
-        pMap = new Map();
-        fallbackPlayers.set(cleanCode, pMap);
-      }
-      pMap.set(playerId, newPlayer);
-      notifyFallbackPlayers(cleanCode);
       return { playerId, success: true };
     }
 
@@ -402,3 +403,4 @@ export const multiplayerService = {
     }
   },
 };
+

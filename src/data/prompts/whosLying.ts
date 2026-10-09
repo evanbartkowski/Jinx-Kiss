@@ -191,3 +191,4 @@ export const WHOS_LYING_PROMPTS: PromptItem[] = [
     explanation: 'Snakes don\'t have external ears or eardrums! They only sense ground vibrations and low-frequency airborne sounds from nearby.',
   },
 ];
+
