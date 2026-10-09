@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "starlight-fishing"
+  },
+  "targets": {
+    "starlight-fishing": {
+      "hosting": {
+        "jinxkiss": [
+          "jinxkiss"
+        ]
+      }
+    }
+  }
+}

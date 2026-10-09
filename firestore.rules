@@ -1,0 +1,79 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Mutated only by Admin SDK transactions; public visits use a sanitized callable.
+    match /daily_tips/{id} { allow read, write: if false; }
+    match /aquariumTipReceipts/{id} { allow read, write: if false; }
+    match /aquariums/{uid} { allow read, write: if false; }
+    match /premiumReceipts/{id} { allow read, write: if false; }
+    match /catchAnnouncements/{id} { allow read, write: if false; }
+    match /stripeReceipts/{id} { allow read, write: if false; }
+    match /gemCheckouts/{id} { allow read, write: if false; }
+    // Purchased gems: only verified Stripe fulfillment can create/increase credit.
+    match /players/{uid} {
+      allow get: if request.auth != null && request.auth.uid == uid;
+      allow update: if request.auth != null && request.auth.uid == uid
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['gems', 'cosmetics', 'updatedAt'])
+        && request.resource.data.gems is int && request.resource.data.gems >= 0
+        && request.resource.data.gems <= resource.data.gems
+        && request.resource.data.cosmetics is list && request.resource.data.cosmetics.size() <= 200
+        && request.resource.data.updatedAt == request.time;
+    }
+    match /fleetSenders/{uid} {
+      allow read: if request.auth != null && request.auth.uid == uid;
+      allow create, update: if request.auth != null && request.auth.uid == uid
+        && request.resource.data.keys().hasOnly(['sentAt', 'messageId'])
+        && request.resource.data.sentAt == request.time
+        && request.resource.data.messageId is string
+        && (!exists(/databases/$(database)/documents/fleetSenders/$(uid))
+          || request.time >= resource.data.sentAt + duration.value(2, 's'));
+    }
+    match /fleetMessages/{id} {
+      allow list: if request.auth != null && request.query.limit != null && request.query.limit <= 50;
+      allow create: if request.auth != null
+        && request.resource.data.keys().hasOnly(['senderId', 'sender', 'text', 'kind', 'createdAt'])
+        && request.resource.data.senderId == request.auth.uid
+        && request.resource.data.sender is string && request.resource.data.sender.size() >= 1 && request.resource.data.sender.size() <= 40
+        && request.resource.data.text is string && request.resource.data.text.size() >= 1 && request.resource.data.text.size() <= 180
+        && request.resource.data.kind == 'player' && request.resource.data.createdAt == request.time
+        && getAfter(/databases/$(database)/documents/fleetSenders/$(request.auth.uid)).data.sentAt == request.time
+        && getAfter(/databases/$(database)/documents/fleetSenders/$(request.auth.uid)).data.messageId == id;
+    }
+    match /captainSaves/{uid} {
+      allow read: if request.auth != null && request.auth.uid == uid;
+      allow create, update: if request.auth != null && request.auth.uid == uid
+        && request.resource.data.keys().hasOnly(['snapshot', 'revision', 'updatedAt'])
+        && request.resource.data.snapshot is string && request.resource.data.snapshot.size() <= 900000
+        && request.resource.data.revision is int && request.resource.data.revision > 0
+        && request.resource.data.updatedAt == request.time;
+    }
+    // Public, client-reported scores. Every captain can only update their own row.
+    match /leaderboard/{uid} {
+      function bounded(value, maximum) {
+        return value is int && value >= 0 && value <= maximum;
+      }
+      function validScore() {
+        let score = request.resource.data;
+        return score.keys().hasAll(['username', 'level', 'xp', 'coins', 'totalGoldEarned', 'totalFishCaught', 'maxDepthReached', 'createdAt', 'updatedAt'])
+          && score.keys().hasOnly(['username', 'level', 'xp', 'coins', 'totalGoldEarned', 'totalFishCaught', 'maxDepthReached', 'createdAt', 'updatedAt'])
+          && score.username is string && score.username.size() >= 3 && score.username.size() <= 20
+          && score.username.matches('^[a-zA-Z0-9_ -]+$')
+          && bounded(score.level, 1000000)
+          && bounded(score.xp, 1000000000000000)
+          && bounded(score.coins, 1000000000000000)
+          && bounded(score.totalGoldEarned, 1000000000000000)
+          && bounded(score.totalFishCaught, 1000000000000000)
+          && bounded(score.maxDepthReached, 1000000000000000)
+          && bounded(score.createdAt, 1000000000000000)
+          && score.updatedAt == request.time;
+      }
+      allow get: if true;
+      allow list: if request.query.limit != null && request.query.limit <= 100;
+      allow create: if request.auth != null && request.auth.uid == uid && validScore();
+      allow update: if request.auth != null && request.auth.uid == uid && validScore()
+        && request.resource.data.username == resource.data.username
+        && request.resource.data.createdAt == resource.data.createdAt;
+      allow delete: if request.auth != null && request.auth.uid == uid;
+    }
+  }
+}
