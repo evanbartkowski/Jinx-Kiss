@@ -47,21 +47,21 @@ export const HotTakesGame: React.FC<HotTakesGameProps> = ({ prompts, players }) 
   };
 
   return (
-    <div className="w-full max-w-2xl flex flex-col items-center gap-6">
+    <div className="w-full max-w-4xl flex flex-col items-center gap-6 animate-fade-in select-none">
       
       {/* Category header */}
-      <span className="px-4 py-1.5 rounded-full text-xs font-black uppercase tracking-widest bg-orange-950/60 border border-orange-500/50 text-orange-300 shadow-neon-amber/20">
+      <span className="px-5 py-2 rounded-full text-xs sm:text-sm font-black uppercase tracking-widest bg-orange-950/60 border border-orange-500/50 text-orange-300 shadow-neon-amber/20">
         🔥 Hot Take #{currentIndex + 1}
       </span>
 
       {/* Main Hot Take Card */}
-      <div className="w-full min-h-[300px] p-8 sm:p-12 rounded-3xl glass-panel border border-orange-500/40 shadow-neon-amber/30 flex flex-col justify-between items-center text-center relative overflow-hidden animate-scale-in">
+      <div className="w-full min-h-[360px] sm:min-h-[440px] p-8 sm:p-14 rounded-3xl sm:rounded-4xl glass-panel border border-orange-500/40 shadow-[0_0_40px_rgba(249,115,22,0.3)] flex flex-col justify-between items-center text-center relative overflow-hidden animate-scale-in">
         
-        <span className="text-xs uppercase tracking-widest text-zinc-500 font-semibold">
+        <span className="text-xs uppercase tracking-widest text-zinc-400 font-bold">
           Unpopular Opinion
         </span>
 
-        <p className="text-xl sm:text-2xl md:text-3xl font-extrabold text-white leading-relaxed my-6 max-w-xl">
+        <p className="text-2xl sm:text-4xl md:text-5xl font-black text-white leading-snug sm:leading-tight my-8 sm:my-10 max-w-3xl drop-shadow-[0_0_20px_rgba(255,255,255,0.2)]">
           "{currentPrompt?.text}"
         </p>
 

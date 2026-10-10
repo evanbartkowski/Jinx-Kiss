@@ -4,7 +4,7 @@ import { CategorySelector } from '../common/CategorySelector';
 import { PlayerSetupModal } from '../common/PlayerSetupModal';
 import { SuggestCardModal } from '../common/SuggestCardModal';
 import { useGameSettings } from '../../context/GameSettingsContext';
-import { ArrowLeft, RotateCcw, Users, PlusCircle, Coffee, Wine, Sparkles } from 'lucide-react';
+import { ArrowLeft, RotateCcw, Users, PlusCircle, Coffee, Wine } from 'lucide-react';
 
 interface GameShellProps {
   metadata: GameMetadata;
@@ -56,16 +56,6 @@ export const GameShell: React.FC<GameShellProps> = ({
               <ArrowLeft className="w-4 h-4" />
               <span>All Games</span>
             </button>
-
-            {onChangeMode && (
-              <button
-                onClick={onChangeMode}
-                className="flex items-center gap-1 px-3 py-1.5 rounded-xl border border-white/10 bg-zinc-900/60 text-zinc-300 hover:text-white hover:border-white/20 hover:bg-zinc-800 transition-all text-xs font-semibold active:scale-95"
-              >
-                <Sparkles className="w-3.5 h-3.5 text-brand-pink" />
-                <span>Change Mode</span>
-              </button>
-            )}
           </div>
 
           {/* Game Title & Theme Badge */}
@@ -154,14 +144,14 @@ export const GameShell: React.FC<GameShellProps> = ({
         {children}
       </div>
 
-      {/* Bottom Suggest Card Button */}
+      {/* Bottom Request Card Button */}
       <div className="w-full pt-4 flex items-center justify-center border-t border-white/[0.06]">
         <button
           onClick={() => setIsSuggestModalOpen(true)}
           className="flex items-center gap-2 px-4 py-2 rounded-xl border border-white/10 bg-zinc-900/40 text-xs font-medium text-zinc-400 hover:text-white hover:border-brand-pink/40 hover:bg-zinc-900/80 hover:shadow-neon-pink/20 transition-all active:scale-95"
         >
           <PlusCircle className="w-3.5 h-3.5 text-brand-pink" />
-          <span>+ Suggest a Card</span>
+          <span>+ Request a Card to be added</span>
         </button>
       </div>
 

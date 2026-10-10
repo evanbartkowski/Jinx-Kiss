@@ -123,7 +123,7 @@ export const GamePage: React.FC<GamePageProps> = ({ gameId, customDeck, onExit }
       return (
         <div className="text-center py-16 glass-panel rounded-3xl p-8 border border-white/10 max-w-md mx-auto">
           <p className="text-base font-bold text-white mb-2">No prompts found for this category.</p>
-          <p className="text-xs text-zinc-400 mb-4">Try choosing another category or suggesting a card!</p>
+          <p className="text-xs text-zinc-400 mb-4">Try choosing another category or requesting a card to be added!</p>
           <button
             onClick={() => setIsSelectingMode(true)}
             className="px-5 py-2.5 rounded-xl bg-brand-pink/20 border border-brand-pink/50 text-pink-300 text-xs font-bold"

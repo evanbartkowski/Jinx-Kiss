@@ -58,7 +58,7 @@ export const NeverHaveIEverGame: React.FC<NeverHaveIEverGameProps> = ({ prompts,
   };
 
   return (
-    <div className="w-full max-w-2xl flex flex-col items-center gap-6">
+    <div className="w-full max-w-4xl flex flex-col items-center gap-6 animate-fade-in select-none">
       
       {/* Group Scoring Bar if players exist */}
       {players.length > 0 && (
@@ -88,19 +88,19 @@ export const NeverHaveIEverGame: React.FC<NeverHaveIEverGameProps> = ({ prompts,
         </div>
       )}
 
-      {/* Main Statement Card */}
-      <div className="w-full min-h-[300px] p-8 sm:p-12 rounded-3xl glass-panel border border-brand-violet/40 shadow-neon-violet/30 flex flex-col justify-between items-center text-center relative overflow-hidden animate-scale-in">
+      {/* Main Statement Card (Significantly Bigger & High-Impact) */}
+      <div className="w-full min-h-[360px] sm:min-h-[440px] p-8 sm:p-14 rounded-3xl sm:rounded-4xl glass-panel border border-brand-violet/50 shadow-[0_0_40px_rgba(168,85,247,0.3)] flex flex-col justify-between items-center text-center relative overflow-hidden animate-scale-in">
         
         <div className="flex items-center gap-2">
-          <span className="px-4 py-1.5 rounded-full text-xs font-black uppercase tracking-widest bg-brand-violet/20 border border-brand-violet text-violet-300 shadow-neon-violet/20">
+          <span className="px-5 py-2 rounded-full text-xs sm:text-sm font-black uppercase tracking-widest bg-brand-violet/20 border border-brand-violet text-violet-300 shadow-neon-violet/30">
             Never Have I Ever
           </span>
-          <span className="text-xs text-zinc-500 font-medium">
+          <span className="text-xs text-zinc-400 font-semibold">
             Card #{currentIndex + 1} of {prompts.length}
           </span>
         </div>
 
-        <p className="text-xl sm:text-2xl md:text-3xl font-extrabold text-white leading-relaxed my-8 max-w-xl">
+        <p className="text-2xl sm:text-4xl md:text-5xl font-black text-white leading-snug sm:leading-tight my-8 sm:my-10 max-w-3xl drop-shadow-[0_0_20px_rgba(255,255,255,0.2)]">
           "{currentPrompt?.text}"
         </p>
 

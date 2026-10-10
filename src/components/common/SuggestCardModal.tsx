@@ -87,8 +87,8 @@ export const SuggestCardModal: React.FC<SuggestCardModalProps> = ({
               <Sparkles className="w-5 h-5" />
             </div>
             <div>
-              <h3 className="text-lg font-bold text-white">Suggest a Card</h3>
-              <p className="text-xs text-zinc-400">Share your wild, hilarious prompt with the community</p>
+              <h3 className="text-lg font-bold text-white">Request a Card to be Added</h3>
+              <p className="text-xs text-zinc-400">Share your wild, hilarious prompt to be added to official decks</p>
             </div>
           </div>
           <button
@@ -107,13 +107,13 @@ export const SuggestCardModal: React.FC<SuggestCardModalProps> = ({
             </div>
             <h4 className="text-base font-bold text-white mb-2">Account Required to Submit</h4>
             <p className="text-xs text-zinc-400 max-w-xs mb-6">
-              Create a free username account or sign in to suggest new cards for our official decks and get credited!
+              Create a free username account or sign in to request new cards to be added to our official decks and get credited!
             </p>
             <button
               onClick={() => openAuthModal('login')}
               className="px-6 py-2.5 bg-gradient-to-r from-brand-pink to-brand-violet rounded-xl text-sm font-semibold text-white shadow-neon-pink hover:opacity-95 active:scale-95 transition-all"
             >
-              Sign In to Suggest
+              Sign In to Request Card
             </button>
           </div>
         ) : (
@@ -245,7 +245,7 @@ export const SuggestCardModal: React.FC<SuggestCardModalProps> = ({
                 className="w-full py-3 bg-gradient-to-r from-brand-pink to-brand-violet hover:from-pink-500 hover:to-purple-500 rounded-xl font-semibold text-sm text-white shadow-neon-pink flex items-center justify-center gap-2 transition-all active:scale-[0.98] disabled:opacity-50"
               >
                 <Send className="w-4 h-4" />
-                <span>{isSubmitting ? 'Submitting...' : 'Submit Card for Review'}</span>
+                <span>{isSubmitting ? 'Submitting...' : 'Submit Request for Review'}</span>
               </button>
             </div>
 

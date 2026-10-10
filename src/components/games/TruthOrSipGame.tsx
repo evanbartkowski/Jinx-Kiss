@@ -44,23 +44,23 @@ export const TruthOrSipGame: React.FC<TruthOrSipGameProps> = ({ prompts, players
   };
 
   return (
-    <div className="w-full max-w-2xl flex flex-col items-center gap-6">
+    <div className="w-full max-w-4xl flex flex-col items-center gap-6 animate-fade-in select-none">
       
       {/* Turn indicator */}
       {activePlayer && (
         <div className="text-center animate-fade-in">
           <span className="text-xs uppercase tracking-widest text-zinc-400 font-semibold">Active Confessor</span>
-          <h3 className="text-2xl font-black text-amber-300 drop-shadow-[0_0_12px_rgba(245,158,11,0.4)]">
+          <h3 className="text-2xl sm:text-4xl font-black text-amber-300 drop-shadow-[0_0_12px_rgba(245,158,11,0.4)]">
             {activePlayer}
           </h3>
         </div>
       )}
 
       {/* Main Golden Amber Card */}
-      <div className="w-full min-h-[300px] p-8 sm:p-12 rounded-3xl glass-panel border border-amber-500/40 shadow-neon-amber/30 flex flex-col justify-between items-center text-center relative overflow-hidden animate-scale-in">
+      <div className="w-full min-h-[360px] sm:min-h-[440px] p-8 sm:p-14 rounded-3xl sm:rounded-4xl glass-panel border border-amber-500/40 shadow-[0_0_40px_rgba(245,158,11,0.3)] flex flex-col justify-between items-center text-center relative overflow-hidden animate-scale-in">
         
         <div className="flex items-center gap-2">
-          <span className="px-4 py-1.5 rounded-full text-xs font-black uppercase tracking-widest bg-amber-950/60 border border-amber-500/50 text-amber-300 shadow-neon-amber/20">
+          <span className="px-5 py-2 rounded-full text-xs sm:text-sm font-black uppercase tracking-widest bg-amber-950/60 border border-amber-500/50 text-amber-300 shadow-neon-amber/20">
             {isKids ? 'Truth or Snack' : 'Truth or Sip'}
           </span>
           <span className="text-xs text-zinc-400 font-medium">
@@ -68,7 +68,7 @@ export const TruthOrSipGame: React.FC<TruthOrSipGameProps> = ({ prompts, players
           </span>
         </div>
 
-        <p className="text-xl sm:text-2xl md:text-3xl font-extrabold text-white leading-relaxed my-6 max-w-xl">
+        <p className="text-2xl sm:text-4xl md:text-5xl font-black text-white leading-snug sm:leading-tight my-8 sm:my-10 max-w-3xl drop-shadow-[0_0_20px_rgba(255,255,255,0.2)]">
           "{currentPrompt?.text}"
         </p>
 

@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { PromptItem } from '../../types/game';
 import { CardRatingBar } from '../common/CardRatingBar';
-import { Disc3, RotateCcw, ArrowRight, UserCheck, Flame } from 'lucide-react';
+import { soundEffects } from '../../utils/audio';
+import { Disc3, RotateCcw, Flame, Sparkles } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
 interface DareRouletteGameProps {
@@ -17,14 +18,13 @@ const DEFAULT_DARE_SECTORS = [
   'Phone Dare',
   'Social Media',
   'Secret Dare',
-  'Double Dare',
+  'Double Trouble',
   'Mystery Dare',
 ];
 
 export const DareRouletteGame: React.FC<DareRouletteGameProps> = ({
   prompts,
   players,
-  onOpenPlayerModal,
 }) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
@@ -46,12 +46,18 @@ export const DareRouletteGame: React.FC<DareRouletteGameProps> = ({
     }
   }, [players]);
 
-  const wheelColors = [
-    '#EF4444', '#FF4DA6', '#A855F7', '#06B6D4',
-    '#F59E0B', '#10B981', '#3B82F6', '#EC4899'
+  const wheelGradients = [
+    { start: '#DC2626', end: '#991B1B' }, // Red
+    { start: '#EC4899', end: '#BE185D' }, // Pink
+    { start: '#8B5CF6', end: '#6D28D9' }, // Purple
+    { start: '#06B6D4', end: '#0E7490' }, // Cyan
+    { start: '#F59E0B', end: '#B45309' }, // Amber
+    { start: '#10B981', end: '#047857' }, // Emerald
+    { start: '#3B82F6', end: '#1D4ED8' }, // Blue
+    { start: '#F43F5E', end: '#BE123C' }, // Rose
   ];
 
-  // Draw the roulette wheel on canvas
+  // Draw the roulette wheel on canvas with premium casino neon aesthetics
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -60,56 +66,136 @@ export const DareRouletteGame: React.FC<DareRouletteGameProps> = ({
 
     const size = canvas.width;
     const center = size / 2;
-    const radius = center - 12;
+    const radius = center - 30; // Leave room for outer metallic rim and perimeter pegs
     const count = activeSegments.length;
     const arc = (Math.PI * 2) / count;
 
     ctx.clearRect(0, 0, size, size);
 
-    // Save and rotate according to current angle
+    // 1. Draw outer glowing casing
+    ctx.save();
+    ctx.beginPath();
+    ctx.arc(center, center, radius + 24, 0, Math.PI * 2);
+    ctx.fillStyle = '#0A0A0E';
+    ctx.fill();
+    ctx.strokeStyle = 'rgba(239, 68, 68, 0.6)';
+    ctx.lineWidth = 4;
+    ctx.shadowColor = 'rgba(239, 68, 68, 0.7)';
+    ctx.shadowBlur = 18;
+    ctx.stroke();
+    ctx.restore();
+
+    // 2. Draw rotating wheel body
     ctx.save();
     ctx.translate(center, center);
     ctx.rotate(rotationAngle);
     ctx.translate(-center, -center);
 
-    // Draw wheel segments
+    // Draw wheel segments with radial gradients
     activeSegments.forEach((segment, i) => {
       const angle = i * arc;
+      const gradConfig = wheelGradients[i % wheelGradients.length];
+
       ctx.beginPath();
-      ctx.fillStyle = wheelColors[i % wheelColors.length];
+      const grad = ctx.createRadialGradient(center, center, 35, center, center, radius);
+      grad.addColorStop(0, '#151520');
+      grad.addColorStop(0.2, gradConfig.end);
+      grad.addColorStop(1, gradConfig.start);
+
+      ctx.fillStyle = grad;
       ctx.moveTo(center, center);
       ctx.arc(center, center, radius, angle, angle + arc);
       ctx.lineTo(center, center);
       ctx.fill();
 
-      // Border between segments
-      ctx.strokeStyle = '#050505';
-      ctx.lineWidth = 2.5;
+      // Sharp dark divider line between segments
+      ctx.strokeStyle = '#050507';
+      ctx.lineWidth = 3;
       ctx.stroke();
 
-      // Text inside segment
+      // Inner subtle edge highlight
+      ctx.beginPath();
+      ctx.arc(center, center, radius - 2, angle, angle + arc);
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.25)';
+      ctx.lineWidth = 1.5;
+      ctx.stroke();
+
+      // Segment text with drop shadow
       ctx.save();
       ctx.translate(center, center);
       ctx.rotate(angle + arc / 2);
       ctx.textAlign = 'right';
-      ctx.fillStyle = '#ffffff';
-      ctx.font = 'bold 14px sans-serif';
-      ctx.shadowColor = 'rgba(0,0,0,0.8)';
-      ctx.shadowBlur = 4;
-      ctx.fillText(segment, radius - 16, 5);
+      ctx.fillStyle = '#FFFFFF';
+      ctx.font = '900 14px system-ui, -apple-system, sans-serif';
+      ctx.shadowColor = 'rgba(0, 0, 0, 0.95)';
+      ctx.shadowBlur = 6;
+      ctx.shadowOffsetX = 1;
+      ctx.shadowOffsetY = 1;
+      
+      const maxTextWidth = radius - 70;
+      const displayText = segment.length > 16 ? segment.substring(0, 14) + '...' : segment;
+      ctx.fillText(displayText.toUpperCase(), radius - 20, 5, maxTextWidth);
       ctx.restore();
     });
 
-    // Center glowing hub
+    // Outer wheel border line
     ctx.beginPath();
-    ctx.arc(center, center, 24, 0, Math.PI * 2);
-    ctx.fillStyle = '#09090D';
-    ctx.fill();
-    ctx.strokeStyle = '#EF4444';
-    ctx.lineWidth = 4;
+    ctx.arc(center, center, radius, 0, Math.PI * 2);
+    ctx.strokeStyle = '#FFFFFF';
+    ctx.lineWidth = 2;
     ctx.stroke();
 
+    // 3. Center multi-tiered glowing hub
+    // Hub tier 1 (outer dark chrome)
+    ctx.beginPath();
+    ctx.arc(center, center, 42, 0, Math.PI * 2);
+    ctx.fillStyle = '#0F0F14';
+    ctx.fill();
+    ctx.strokeStyle = '#EF4444';
+    ctx.lineWidth = 3;
+    ctx.shadowColor = 'rgba(239, 68, 68, 0.8)';
+    ctx.shadowBlur = 10;
+    ctx.stroke();
+
+    // Hub tier 2 (inner metallic disc)
+    ctx.beginPath();
+    ctx.arc(center, center, 28, 0, Math.PI * 2);
+    const hubGrad = ctx.createLinearGradient(center - 28, center - 28, center + 28, center + 28);
+    hubGrad.addColorStop(0, '#EF4444');
+    hubGrad.addColorStop(0.5, '#BE185D');
+    hubGrad.addColorStop(1, '#6D28D9');
+    ctx.fillStyle = hubGrad;
+    ctx.fill();
+    ctx.strokeStyle = '#FFFFFF';
+    ctx.lineWidth = 2;
+    ctx.stroke();
+
+    // Hub tier 3 (center jewel)
+    ctx.beginPath();
+    ctx.arc(center, center, 12, 0, Math.PI * 2);
+    ctx.fillStyle = '#FFFFFF';
+    ctx.shadowColor = '#FFFFFF';
+    ctx.shadowBlur = 12;
+    ctx.fill();
+
     ctx.restore();
+
+    // 4. Perimeter Casino LED Pegs (fixed relative to canvas rim)
+    const numPegs = Math.max(16, count * 2);
+    for (let p = 0; p < numPegs; p++) {
+      const pegAngle = (p * Math.PI * 2) / numPegs;
+      const pegX = center + (radius + 12) * Math.cos(pegAngle);
+      const pegY = center + (radius + 12) * Math.sin(pegAngle);
+
+      ctx.save();
+      ctx.beginPath();
+      ctx.arc(pegX, pegY, 3.5, 0, Math.PI * 2);
+      ctx.fillStyle = p % 2 === 0 ? '#FBBF24' : '#F43F5E';
+      ctx.shadowColor = p % 2 === 0 ? 'rgba(251, 191, 36, 0.8)' : 'rgba(244, 63, 94, 0.8)';
+      ctx.shadowBlur = 6;
+      ctx.fill();
+      ctx.restore();
+    }
   }, [activeSegments, rotationAngle]);
 
   const spinWheel = () => {
@@ -118,17 +204,22 @@ export const DareRouletteGame: React.FC<DareRouletteGameProps> = ({
     setSelectedWinner(null);
     setCurrentDare(null);
 
+    soundEffects.playWheelTick();
+
     // Pick winning index fairly
     const winnerIndex = Math.floor(Math.random() * activeSegments.length);
     const count = activeSegments.length;
     const arc = (Math.PI * 2) / count;
 
     // Pointer is at the top (angle = 3*PI/2)
-    const targetSectorAngle = 3 * Math.PI / 2 - (winnerIndex * arc + arc / 2);
-    const fullSpins = (5 + Math.floor(Math.random() * 4)) * (Math.PI * 2);
-    const totalRotation = rotationAngle + fullSpins + ((targetSectorAngle - (rotationAngle % (Math.PI * 2)) + Math.PI * 4) % (Math.PI * 2));
+    const targetSectorAngle = (3 * Math.PI) / 2 - (winnerIndex * arc + arc / 2);
+    const fullSpins = (6 + Math.floor(Math.random() * 4)) * (Math.PI * 2);
+    const totalRotation =
+      rotationAngle +
+      fullSpins +
+      (((targetSectorAngle - (rotationAngle % (Math.PI * 2))) + Math.PI * 4) % (Math.PI * 2));
 
-    const duration = 4000;
+    const duration = 4200;
     const startTime = performance.now();
     const initialAngle = rotationAngle;
 
@@ -149,19 +240,22 @@ export const DareRouletteGame: React.FC<DareRouletteGameProps> = ({
         setSelectedWinner(winner);
 
         // Pick a dare from prompts
-        const randomDare = prompts[Math.floor(Math.random() * prompts.length)] || {
-          id: 'default_dare',
-          gameId: 'dare-roulette',
-          category: 'medium',
-          text: 'Do your best celebration dance for 30 seconds!'
-        };
+        const randomDare =
+          prompts[Math.floor(Math.random() * prompts.length)] || {
+            id: 'default_dare',
+            gameId: 'dare-roulette',
+            category: 'medium',
+            text: 'Do your best celebration dance for 30 seconds!',
+          };
         setCurrentDare(randomDare);
 
+        soundEffects.playSuccess();
+
         confetti({
-          particleCount: 45,
-          spread: 70,
+          particleCount: 50,
+          spread: 75,
           origin: { y: 0.6 },
-          colors: ['#EF4444', '#FF4DA6', '#F59E0B'],
+          colors: ['#EF4444', '#FF4DA6', '#F59E0B', '#10B981'],
         });
       }
     };
@@ -170,73 +264,80 @@ export const DareRouletteGame: React.FC<DareRouletteGameProps> = ({
   };
 
   return (
-    <div className="w-full max-w-2xl flex flex-col items-center gap-6">
-      
+    <div className="w-full max-w-4xl flex flex-col items-center gap-6 animate-fade-in select-none">
       {/* Active turn or Winner Banner */}
       {selectedWinner ? (
         <div className="text-center animate-scale-in">
-          <span className="text-xs font-black uppercase tracking-widest text-red-400 bg-red-950/60 border border-red-500/40 px-3 py-1 rounded-full shadow-neon-red">
+          <span className="text-xs font-black uppercase tracking-widest text-red-400 bg-red-950/70 border border-red-500/50 px-4 py-1.5 rounded-full shadow-neon-red">
             {isPlayerMode ? '🎯 Chosen by Fate' : '🔥 Selected Challenge Category'}
           </span>
-          <h3 className="text-3xl font-black text-white mt-2 drop-shadow-[0_0_15px_rgba(239,68,68,0.5)]">
+          <h3 className="text-3xl sm:text-5xl font-black text-white mt-3 drop-shadow-[0_0_20px_rgba(239,68,68,0.6)]">
             {selectedWinner}!
           </h3>
         </div>
       ) : (
         <div className="text-center">
-          <span className="text-xs uppercase tracking-widest text-zinc-400 font-semibold">
-            {isPlayerMode ? `${activeSegments.length} Players on Wheel` : 'Dare Roulette'}
-          </span>
-          <p className="text-sm text-zinc-300 mt-1">
-            {isPlayerMode ? 'Spin to see who faces the punishment' : 'Spin to determine your challenge'}
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-red-950/40 border border-red-500/30 text-red-400 mb-1">
+            <Sparkles className="w-3.5 h-3.5" />
+            <span>{isPlayerMode ? `${activeSegments.length} Players on Wheel` : 'Dare Roulette Wheel'}</span>
+          </div>
+          <p className="text-xs sm:text-sm text-zinc-300 font-medium">
+            {isPlayerMode ? 'Spin to select who faces the next dare' : 'Spin the neon roulette to determine your challenge'}
           </p>
         </div>
       )}
 
-      {/* Wheel Canvas Container */}
-      <div className="relative flex items-center justify-center my-2">
-        
-        {/* Top Pointer Needle */}
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 z-20 w-0 h-0 border-l-[14px] border-l-transparent border-r-[14px] border-r-transparent border-t-[26px] border-t-red-500 drop-shadow-[0_0_10px_rgba(239,68,68,0.8)] filter" />
+      {/* High-Resolution Roulette Wheel Container */}
+      <div className="relative flex items-center justify-center my-3">
+        {/* Ambient Neon Backlight Halo */}
+        <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-red-600/30 via-pink-600/20 to-purple-600/30 blur-3xl pointer-events-none scale-110" />
 
-        {/* Canvas */}
-        <div className="p-2 rounded-full border-2 border-red-500/40 shadow-neon-red/40 bg-black/60">
-          <canvas
-            ref={canvasRef}
-            width={340}
-            height={340}
-            className="rounded-full max-w-[280px] sm:max-w-[340px] max-h-[280px] sm:max-h-[340px]"
-          />
+        {/* Top Pointer Needle (Crisp Metallic Triangular Indicator) */}
+        <div className="absolute -top-3 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center filter drop-shadow-[0_4px_12px_rgba(239,68,68,0.9)]">
+          <div className="w-0 h-0 border-l-[18px] border-l-transparent border-r-[18px] border-r-transparent border-t-[34px] border-t-red-500" />
+          <div className="w-2.5 h-2.5 rounded-full bg-white -mt-1 shadow-[0_0_8px_#FFFFFF]" />
         </div>
 
+        {/* Canvas Display */}
+        <div className="relative p-2.5 rounded-full border-2 border-red-500/50 shadow-[0_0_40px_rgba(239,68,68,0.35)] bg-black/80 backdrop-blur-md">
+          <canvas
+            ref={canvasRef}
+            width={520}
+            height={520}
+            className="rounded-full w-[310px] h-[310px] sm:w-[420px] sm:h-[420px] md:w-[460px] md:h-[460px] cursor-pointer transition-transform duration-300 hover:scale-[1.01]"
+            onClick={spinWheel}
+          />
+        </div>
       </div>
 
-      {/* Dare Card for Selected Player or Dare Type */}
+      {/* Dare Card for Selected Player or Dare Type (Significantly Bigger & Readable) */}
       {currentDare && selectedWinner && (
-        <div className="w-full p-6 sm:p-8 rounded-3xl glass-panel border border-red-500/50 shadow-neon-red/30 text-center animate-scale-in">
-          <div className="flex items-center justify-center gap-2 mb-3">
-            <Flame className="w-5 h-5 text-red-400" />
-            <span className="text-xs font-black uppercase tracking-widest text-red-400">
-              {isPlayerMode ? `The Dare for ${selectedWinner}` : `Challenge: ${selectedWinner}`}
+        <div className="w-full max-w-3xl p-8 sm:p-12 rounded-3xl sm:rounded-4xl glass-panel border border-red-500/60 shadow-[0_0_35px_rgba(239,68,68,0.3)] text-center animate-scale-in">
+          <div className="flex items-center justify-center gap-2 mb-4">
+            <Flame className="w-6 h-6 text-red-400" />
+            <span className="text-xs sm:text-sm font-black uppercase tracking-widest text-red-400 bg-red-950/60 border border-red-500/40 px-3 py-1 rounded-full">
+              {isPlayerMode ? `Dare for ${selectedWinner}` : `Challenge: ${selectedWinner}`}
             </span>
           </div>
-          <p className="text-xl sm:text-2xl font-black text-white leading-relaxed max-w-lg mx-auto mb-4">
+
+          <p className="text-2xl sm:text-3xl md:text-4xl font-black text-white leading-snug sm:leading-tight max-w-2xl mx-auto my-6 drop-shadow-[0_0_15px_rgba(239,68,68,0.3)]">
             "{currentDare.text}"
           </p>
-          <div className="w-full max-w-sm mx-auto">
+
+          <div className="w-full max-w-md mx-auto pt-2">
             <CardRatingBar prompt={currentDare} />
           </div>
         </div>
       )}
 
       {/* Controls */}
-      <div className="flex flex-wrap items-center justify-center gap-4">
+      <div className="flex flex-wrap items-center justify-center gap-4 mt-2">
         <button
           onClick={spinWheel}
           disabled={isSpinning || activeSegments.length < 2}
-          className="px-8 py-4 rounded-2xl bg-gradient-to-r from-red-600 to-pink-600 hover:from-red-500 hover:to-pink-500 text-white font-black text-base shadow-neon-red flex items-center gap-2.5 transition-all active:scale-95 disabled:opacity-50"
+          className="px-8 sm:px-10 py-4 sm:py-5 rounded-2xl sm:rounded-3xl bg-gradient-to-r from-red-600 via-pink-600 to-purple-600 hover:from-red-500 hover:to-pink-500 text-white font-black text-base sm:text-lg shadow-[0_0_25px_rgba(239,68,68,0.5)] flex items-center gap-3 transition-all active:scale-95 disabled:opacity-50 cursor-pointer"
         >
-          <Disc3 className={`w-5 h-5 ${isSpinning ? 'animate-spin' : ''}`} />
+          <Disc3 className={`w-6 h-6 ${isSpinning ? 'animate-spin' : ''}`} />
           <span>{isSpinning ? 'Spinning the Wheel...' : selectedWinner ? 'Spin Again' : 'Spin the Wheel!'}</span>
         </button>
 
@@ -245,16 +346,15 @@ export const DareRouletteGame: React.FC<DareRouletteGameProps> = ({
             onClick={() => {
               const nextDare = prompts[Math.floor(Math.random() * prompts.length)];
               setCurrentDare(nextDare);
+              soundEffects.playCardFlip();
             }}
-            className="px-5 py-4 rounded-2xl border border-white/10 bg-zinc-900/60 hover:bg-zinc-800 text-zinc-300 font-semibold text-sm flex items-center gap-2 transition-all"
+            className="px-6 py-4 sm:py-5 rounded-2xl sm:rounded-3xl border border-white/15 bg-zinc-900/80 hover:bg-zinc-800 text-zinc-200 hover:text-white font-bold text-sm sm:text-base flex items-center gap-2 transition-all active:scale-95"
           >
             <RotateCcw className="w-4 h-4" />
             <span>Next Dare</span>
           </button>
         )}
       </div>
-
     </div>
   );
 };
-

@@ -185,7 +185,7 @@ export const ChaosMixGame: React.FC<ChaosMixGameProps> = ({ prompts, players }) 
         </div>
 
         {/* Prompt Text */}
-        <p className="text-2xl sm:text-3xl md:text-4xl font-black text-white leading-relaxed my-6 max-w-2xl">
+        <p className="text-2xl sm:text-4xl md:text-5xl font-black text-white leading-snug sm:leading-tight my-8 sm:my-10 max-w-3xl drop-shadow-[0_0_20px_rgba(255,255,255,0.2)]">
           "{currentPrompt.text}"
         </p>
 

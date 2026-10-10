@@ -238,6 +238,13 @@ export const soundEffects = {
   },
 
   /**
+   * Alias for wheel tick sound
+   */
+  playWheelTick() {
+    this.playTick();
+  },
+
+  /**
    * Success / fanfare
    */
   playSuccess() {
@@ -268,6 +275,13 @@ export const soundEffects = {
     } catch {
       // ignore
     }
+  },
+
+  /**
+   * Celebration alias
+   */
+  playCelebration() {
+    this.playSuccess();
   },
 
   /**

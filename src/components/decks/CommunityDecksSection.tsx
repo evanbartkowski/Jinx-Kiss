@@ -97,7 +97,7 @@ export const CommunityDecksSection: React.FC<CommunityDecksSectionProps> = ({ on
             className="bg-zinc-900/80 border border-white/10 rounded-xl px-3 py-2 text-xs text-zinc-300 focus:outline-none focus:border-brand-pink"
           >
             <option value="all">All Modes</option>
-            {(['easy', 'medium', 'extreme', 'couples', '18+', 'spicy', 'kids'] as GameCategory[]).map((mode) => (
+            {(['kids', 'easy', 'medium', 'extreme', 'unhinged', 'couples', 'spicy', '18+'] as GameCategory[]).map((mode) => (
               <option key={mode} value={mode}>
                 {CATEGORY_LABELS[mode]?.label || mode}
               </option>
