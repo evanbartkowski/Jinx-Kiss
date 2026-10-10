@@ -25,7 +25,7 @@ export const TruthOrSipGame: React.FC<TruthOrSipGameProps> = ({ prompts, players
       category: 'medium',
       text: 'Truth or Sip...',
     };
-    return rollForLegendaryCard(initial, initial.category || 'medium', 'truth-or-sip');
+    return rollForLegendaryCard(initial, initial.category || 'medium', 'truth-or-sip', 0.02, initial.playMode);
   });
 
   const isLegendary = isPromptLegendary(activePrompt);
@@ -58,7 +58,7 @@ export const TruthOrSipGame: React.FC<TruthOrSipGameProps> = ({ prompts, players
     const nextIdx = (currentIndex + 1) % prompts.length;
     setCurrentIndex(nextIdx);
     const nextP = prompts[nextIdx] || prompts[0];
-    const rolled = rollForLegendaryCard(nextP, nextP.category || 'medium', 'truth-or-sip');
+    const rolled = rollForLegendaryCard(nextP, nextP.category || 'medium', 'truth-or-sip', 0.02, nextP?.playMode);
     setActivePrompt(rolled);
     if (players.length > 0) {
       setPlayerIndex(prev => (prev + 1) % players.length);

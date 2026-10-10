@@ -42,7 +42,7 @@ export const TruthOrDareGame: React.FC<TruthOrDareGameProps> = ({ prompts, playe
     }
 
     // Rare roll to summon a legendary card for the category
-    chosen = rollForLegendaryCard(chosen, chosen.category || 'medium', 'truth-or-dare');
+    chosen = rollForLegendaryCard(chosen, chosen.category || 'medium', 'truth-or-dare', 0.02, chosen.playMode);
 
     setTimeout(() => {
       setCurrentPrompt(chosen);

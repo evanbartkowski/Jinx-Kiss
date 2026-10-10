@@ -83,11 +83,18 @@ export const GamePage: React.FC<GamePageProps> = ({ gameId, customDeck, onExit }
       // 2. Merge any approved community/admin prompts
       let rawPool: PromptItem[] = base;
       try {
-        const overrides = await adminService.getAllPromptsForManager(gameId, selectedCategory);
+        const overrides = await adminService.getAllPromptsForManager(gameId, selectedCategory, playMode);
         const activeOverrides = overrides.filter(p => p.isActive !== false);
         rawPool = activeOverrides.length > 0 ? activeOverrides : base;
       } catch {
         rawPool = base;
+      }
+
+      // Hard quarantine: in Online mode, strictly ensure NO in-person prompts ever leak in
+      if (playMode === 'online') {
+        rawPool = rawPool.filter(p => p.playMode === 'online');
+      } else {
+        rawPool = rawPool.filter(p => p.playMode !== 'online');
       }
 
       // 3. Deduplicate: only show unseen cards until collection exhausted (isolated by playMode)

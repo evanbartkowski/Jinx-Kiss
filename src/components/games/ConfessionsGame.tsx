@@ -24,8 +24,8 @@ export const ConfessionsGame: React.FC<ConfessionsGameProps> = ({ prompts, playe
   const hasPlayers = activePlayers.length >= 2;
   const [currentIndex, setCurrentIndex] = useState(0);
   const [activePrompt, setActivePrompt] = useState<PromptItem>(() => {
-    const first = prompts[0] || { id: 'cf-default', gameId: 'confessions', category: 'medium', text: 'Share a secret nobody in this room knows about you.' };
-    return rollForLegendaryCard(first, first.category, 'confessions');
+    const first = prompts[0] || { id: 'cf-default', gameId: 'confessions', category: 'medium', text: 'Share a secret nobody in this game or call knows about you.' };
+    return rollForLegendaryCard(first, first.category, 'confessions', 0.02, first.playMode);
   });
   const [anonymousSubmissions, setAnonymousSubmissions] = useState<SubmittedConfession[]>([]);
   const [inputConfession, setInputConfession] = useState('');
@@ -39,7 +39,7 @@ export const ConfessionsGame: React.FC<ConfessionsGameProps> = ({ prompts, playe
   useEffect(() => {
     if (prompts.length > 0) {
       const p = prompts[currentIndex] || prompts[0];
-      setActivePrompt(rollForLegendaryCard(p, p.category, 'confessions'));
+      setActivePrompt(rollForLegendaryCard(p, p.category, 'confessions', 0.02, p?.playMode));
     }
   }, [currentIndex, prompts]);
 
@@ -105,7 +105,7 @@ export const ConfessionsGame: React.FC<ConfessionsGameProps> = ({ prompts, playe
       // Loop or advance prompt
       const nextIdx = (currentIndex + 1) % prompts.length;
       const nextP = prompts[nextIdx] || prompts[0];
-      setActivePrompt(rollForLegendaryCard(nextP, nextP.category, 'confessions'));
+      setActivePrompt(rollForLegendaryCard(nextP, nextP.category, 'confessions', 0.02, nextP?.playMode));
       setCurrentIndex(nextIdx);
       setMode('submit');
       setAnonymousSubmissions([]);
@@ -158,7 +158,9 @@ export const ConfessionsGame: React.FC<ConfessionsGameProps> = ({ prompts, playe
           <div className="w-full flex flex-col items-center">
             {currentIndex === 0 && (
               <p className="text-xs sm:text-sm text-zinc-300 mb-4 sm:mb-6 max-w-lg">
-                Pass the phone to submit anonymous answers or drop your secrets below!
+                {activePrompt?.playMode === 'online'
+                  ? 'Drop your secrets anonymously below into the digital vault!'
+                  : 'Pass the phone to submit anonymous answers or drop your secrets below!'}
               </p>
             )}
 
@@ -232,7 +234,7 @@ export const ConfessionsGame: React.FC<ConfessionsGameProps> = ({ prompts, playe
             {hasPlayers ? (
               <div className="w-full max-w-xl my-3 sm:my-4">
                 <span className="text-[11px] sm:text-xs font-bold uppercase text-zinc-400 block mb-2">
-                  Who in the room confessed this?
+                  {activePrompt?.playMode === 'online' ? 'Who on this call confessed this?' : 'Who in the room confessed this?'}
                 </span>
 
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
@@ -252,7 +254,9 @@ export const ConfessionsGame: React.FC<ConfessionsGameProps> = ({ prompts, playe
               </div>
             ) : (
               <div className="text-xs sm:text-sm text-zinc-400 my-2">
-                Discuss as a group and guess who in the room wrote this confession!
+                {activePrompt?.playMode === 'online'
+                  ? 'Discuss on call and guess who submitted this confession!'
+                  : 'Discuss as a group and guess who in the room wrote this confession!'}
               </div>
             )}
 

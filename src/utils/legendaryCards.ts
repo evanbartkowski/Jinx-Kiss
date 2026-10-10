@@ -69,7 +69,10 @@ export function rollForLegendaryCard(
     return chosenPrompt;
   }
 
-  const resolvedPlayMode: PlayMode = playMode || chosenPrompt.playMode || 'in-person';
+  const resolvedPlayMode: PlayMode =
+    playMode ||
+    chosenPrompt.playMode ||
+    (chosenPrompt.id?.startsWith('on-') ? 'online' : 'in-person');
 
   // Rare roll for a category-specific legendary card
   if (Math.random() < chance) {

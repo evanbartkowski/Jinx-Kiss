@@ -217,3 +217,4 @@ export const ONLINE_LEGENDARY_CARDS: PromptItem[] = [
     forfeit: "Take 3 massive penalty drinks"
   }
 ];
+

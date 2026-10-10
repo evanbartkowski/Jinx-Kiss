@@ -73,3 +73,4 @@ export function getOnlinePromptsForGame(gameId: GameId, category?: GameCategory)
   if (!category) return allPrompts;
   return allPrompts.filter(p => p.category === category);
 }
+

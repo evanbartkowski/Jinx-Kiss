@@ -281,7 +281,7 @@ export const ONLINE_POINT_AND_DRINK_PROMPTS: PromptItem[] = [
     gameId: 'point-and-drink',
     category: 'kids',
     playMode: 'online',
-    text: "Point at whoever has the coolest toys or gaming setup in the room!"
+    text: "Point at whoever has the coolest toys or gaming setup in their room or webcam background!"
   },
   {
     id: 'on-pad-kids-3',
@@ -296,5 +296,283 @@ export const ONLINE_POINT_AND_DRINK_PROMPTS: PromptItem[] = [
     category: 'kids',
     playMode: 'online',
     text: "Point at whoever laughs the loudest when someone tells a silly joke!"
+  },
+
+  // ==========================================
+  // EXPANDED EASY (Fun, low-stakes remote pointing)
+  // ==========================================
+  {
+    id: 'on-pad-easy-7',
+    gameId: 'point-and-drink',
+    category: 'easy',
+    playMode: 'online',
+    text: "Point at whoever is most likely to have 20 browser tabs open playing music and can't find which one it is."
+  },
+  {
+    id: 'on-pad-easy-8',
+    gameId: 'point-and-drink',
+    category: 'easy',
+    playMode: 'online',
+    text: "Point at whoever has the cleanest desk setup right now on webcam."
+  },
+  {
+    id: 'on-pad-easy-9',
+    gameId: 'point-and-drink',
+    category: 'easy',
+    playMode: 'online',
+    text: "Point at whoever is most likely to type a message with capslock on and not notice."
+  },
+  {
+    id: 'on-pad-easy-10',
+    gameId: 'point-and-drink',
+    category: 'easy',
+    playMode: 'online',
+    text: "Point at whoever sends the best reaction memes in group chats."
+  },
+  {
+    id: 'on-pad-easy-11',
+    gameId: 'point-and-drink',
+    category: 'easy',
+    playMode: 'online',
+    text: "Point at whoever is most likely to eat cereal out of a giant mixing bowl."
+  },
+
+  // ==========================================
+  // EXPANDED MEDIUM (Relatable webcam pointing)
+  // ==========================================
+  {
+    id: 'on-pad-med-7',
+    gameId: 'point-and-drink',
+    category: 'medium',
+    playMode: 'online',
+    text: "Point at whoever spends the most money on food delivery apps each month."
+  },
+  {
+    id: 'on-pad-med-8',
+    gameId: 'point-and-drink',
+    category: 'medium',
+    playMode: 'online',
+    text: "Point at whoever is most likely to hold a 2-hour FaceTime call while lying completely still in bed."
+  },
+  {
+    id: 'on-pad-med-9',
+    gameId: 'point-and-drink',
+    category: 'medium',
+    playMode: 'online',
+    text: "Point at whoever has the most chaotic camera angle right now."
+  },
+  {
+    id: 'on-pad-med-10',
+    gameId: 'point-and-drink',
+    category: 'medium',
+    playMode: 'online',
+    text: "Point at whoever is most likely to forget someone's birthday despite seeing it on their calendar."
+  },
+  {
+    id: 'on-pad-med-11',
+    gameId: 'point-and-drink',
+    category: 'medium',
+    playMode: 'online',
+    text: "Point at whoever is most likely to re-read their own sent texts 10 times to admire how funny they are."
+  },
+
+  // ==========================================
+  // EXPANDED EXTREME (High-stakes digital pointing)
+  // ==========================================
+  {
+    id: 'on-pad-ext-6',
+    gameId: 'point-and-drink',
+    category: 'extreme',
+    playMode: 'online',
+    text: "Point at whoever has the darkest or most unhinged internet search history right now."
+  },
+  {
+    id: 'on-pad-ext-7',
+    gameId: 'point-and-drink',
+    category: 'extreme',
+    playMode: 'online',
+    text: "Point at whoever is most likely to accidentally share their screen with something embarrassing open."
+  },
+  {
+    id: 'on-pad-ext-8',
+    gameId: 'point-and-drink',
+    category: 'extreme',
+    playMode: 'online',
+    text: "Point at whoever is most likely to stalk an ex's social media and accidentally like a 2-year-old post."
+  },
+  {
+    id: 'on-pad-ext-9',
+    gameId: 'point-and-drink',
+    category: 'extreme',
+    playMode: 'online',
+    text: "Point at whoever is most likely to ghost an entire friend group for 3 weeks when overwhelmed."
+  },
+  {
+    id: 'on-pad-ext-10',
+    gameId: 'point-and-drink',
+    category: 'extreme',
+    playMode: 'online',
+    text: "Point at whoever would crack first under intense interrogation about their group chat history."
+  },
+
+  // ==========================================
+  // EXPANDED UNHINGED (Chaotic remote targets)
+  // ==========================================
+  {
+    id: 'on-pad-unh-5',
+    gameId: 'point-and-drink',
+    category: 'unhinged',
+    playMode: 'online',
+    text: "Point at whoever is most likely to stay in a Discord voice channel completely silent for 6 hours."
+  },
+  {
+    id: 'on-pad-unh-6',
+    gameId: 'point-and-drink',
+    category: 'unhinged',
+    playMode: 'online',
+    text: "Point at whoever is most likely to buy a completely absurd $200 gadget on TikTok shop at 3 AM."
+  },
+  {
+    id: 'on-pad-unh-7',
+    gameId: 'point-and-drink',
+    category: 'unhinged',
+    playMode: 'online',
+    text: "Point at whoever is most likely to start a fistfight with an NPC in a cozy game."
+  },
+  {
+    id: 'on-pad-unh-8',
+    gameId: 'point-and-drink',
+    category: 'unhinged',
+    playMode: 'online',
+    text: "Point at whoever would survive the longest if trapped inside a horror video game."
+  },
+
+  // ==========================================
+  // EXPANDED COUPLES (Romantic & tender call targets)
+  // ==========================================
+  {
+    id: 'on-pad-cpl-5',
+    gameId: 'point-and-drink',
+    category: 'couples',
+    playMode: 'online',
+    text: "Point at whoever gets more clingy and affectionate during late-night video calls."
+  },
+  {
+    id: 'on-pad-cpl-6',
+    gameId: 'point-and-drink',
+    category: 'couples',
+    playMode: 'online',
+    text: "Point at whoever falls asleep first when watching a movie together on screen-share."
+  },
+  {
+    id: 'on-pad-cpl-7',
+    gameId: 'point-and-drink',
+    category: 'couples',
+    playMode: 'online',
+    text: "Point at whoever is most likely to send a 5-minute good-morning voice note describing their dreams."
+  },
+  {
+    id: 'on-pad-cpl-8',
+    gameId: 'point-and-drink',
+    category: 'couples',
+    playMode: 'online',
+    text: "Point at whoever would plan the most romantic surprise virtual date night."
+  },
+
+  // ==========================================
+  // EXPANDED 18+ (Adult late-night dynamics)
+  // ==========================================
+  {
+    id: 'on-pad-18-5',
+    gameId: 'point-and-drink',
+    category: '18+',
+    playMode: 'online',
+    text: "Point at whoever has the highest sex drive when communicating late at night online."
+  },
+  {
+    id: 'on-pad-18-6',
+    gameId: 'point-and-drink',
+    category: '18+',
+    playMode: 'online',
+    text: "Point at whoever has the spiciest hidden photo folder on their phone right now."
+  },
+  {
+    id: 'on-pad-18-7',
+    gameId: 'point-and-drink',
+    category: '18+',
+    playMode: 'online',
+    text: "Point at whoever has the most seductive talking voice over microphone."
+  },
+  {
+    id: 'on-pad-18-8',
+    gameId: 'point-and-drink',
+    category: '18+',
+    playMode: 'online',
+    text: "Point at whoever is most likely to have initiated a spicy FaceTime call while intoxicated."
+  },
+
+  // ==========================================
+  // EXPANDED SPICY (Sensual chemistry & teasing)
+  // ==========================================
+  {
+    id: 'on-pad-spicy-5',
+    gameId: 'point-and-drink',
+    category: 'spicy',
+    playMode: 'online',
+    text: "Point at whoever would be the most dominant during a private late-night webcam session."
+  },
+  {
+    id: 'on-pad-spicy-6',
+    gameId: 'point-and-drink',
+    category: 'spicy',
+    playMode: 'online',
+    text: "Point at whoever looks the most irresistibly kissable on camera right now."
+  },
+  {
+    id: 'on-pad-spicy-7',
+    gameId: 'point-and-drink',
+    category: 'spicy',
+    playMode: 'online',
+    text: "Point at whoever is most likely to send an unprompted spicy tease while sitting in their room."
+  },
+  {
+    id: 'on-pad-spicy-8',
+    gameId: 'point-and-drink',
+    category: 'spicy',
+    playMode: 'online',
+    text: "Point at whoever has the biggest flirtatious energy in this call right now."
+  },
+
+  // ==========================================
+  // EXPANDED KIDS (Pure silly family pointing)
+  // ==========================================
+  {
+    id: 'on-pad-kids-5',
+    gameId: 'point-and-drink',
+    category: 'kids',
+    playMode: 'online',
+    text: "Point at whoever has the best video game skills in Minecraft or Roblox!"
+  },
+  {
+    id: 'on-pad-kids-6',
+    gameId: 'point-and-drink',
+    category: 'kids',
+    playMode: 'online',
+    text: "Point at whoever is most likely to eat a whole tub of ice cream without sharing!"
+  },
+  {
+    id: 'on-pad-kids-7',
+    gameId: 'point-and-drink',
+    category: 'kids',
+    playMode: 'online',
+    text: "Point at whoever does the silliest dance when their favorite song plays!"
+  },
+  {
+    id: 'on-pad-kids-8',
+    gameId: 'point-and-drink',
+    category: 'kids',
+    playMode: 'online',
+    text: "Point at whoever has the coolest superhero superpower imagination!"
   }
 ];
+

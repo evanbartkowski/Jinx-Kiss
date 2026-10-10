@@ -57,7 +57,7 @@ export const ChaosMixGame: React.FC<ChaosMixGameProps> = ({ prompts, players }) 
 
     newSeen.add(chosen.id);
     setSeenPromptIds(newSeen);
-    const rolled = rollForLegendaryCard(chosen, chosen.category, 'chaos-mix');
+    const rolled = rollForLegendaryCard(chosen, chosen.category, 'chaos-mix', 0.02, chosen.playMode);
     setCurrentPrompt(rolled);
     setRoundNumber(prev => prev + 1);
     soundEffects.playCardFlip();

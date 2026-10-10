@@ -1,10 +1,10 @@
 import { CommunitySubmission } from '../types/submission';
 import { CustomDeck } from '../types/deck';
-import { GameCategory, GameId, PromptItem } from '../types/game';
+import { GameCategory, GameId, PlayMode, PromptItem } from '../types/game';
 import { UserProfile } from '../types/user';
 import { submissionService } from './submissionService';
 import { deckService } from './deckService';
-import { ALL_DEFAULT_PROMPTS } from '../data/prompts';
+import { ALL_DEFAULT_PROMPTS, ALL_ONLINE_PROMPTS } from '../data/prompts';
 import { db } from '../config/firebase';
 import { collection, doc, getDocs, setDoc, updateDoc, deleteDoc } from 'firebase/firestore';
 
@@ -106,30 +106,38 @@ export class AdminService {
   }
 
   /**
-   * Game Content Manager: Get all active prompts for game & category, including default & overrides
+   * Game Content Manager: Get all active prompts for game & category, including default & overrides for playMode
    */
-  async getAllPromptsForManager(gameId?: GameId, category?: GameCategory): Promise<PromptItem[]> {
+  async getAllPromptsForManager(
+    gameId?: GameId,
+    category?: GameCategory,
+    playMode: PlayMode = 'in-person'
+  ): Promise<PromptItem[]> {
     const overrides = this.getLocalOfficialPrompts();
     let prompts: PromptItem[] = [];
 
+    const sourceMap = playMode === 'online' ? ALL_ONLINE_PROMPTS : ALL_DEFAULT_PROMPTS;
+
     // Base default prompts
     if (gameId) {
-      prompts = [...(ALL_DEFAULT_PROMPTS[gameId] || [])];
+      prompts = [...(sourceMap[gameId] || [])];
     } else {
-      Object.values(ALL_DEFAULT_PROMPTS).forEach(list => {
+      Object.values(sourceMap).forEach(list => {
         prompts.push(...list);
       });
     }
 
-    // Merge in admin added/overridden prompts
-    overrides.forEach(ov => {
-      const existingIdx = prompts.findIndex(p => p.id === ov.id);
-      if (existingIdx !== -1) {
-        prompts[existingIdx] = ov;
-      } else {
-        prompts.unshift(ov);
-      }
-    });
+    // Merge in admin added/overridden prompts matching playMode
+    overrides
+      .filter(ov => (ov.playMode || 'in-person') === playMode)
+      .forEach(ov => {
+        const existingIdx = prompts.findIndex(p => p.id === ov.id);
+        if (existingIdx !== -1) {
+          prompts[existingIdx] = ov;
+        } else {
+          prompts.unshift(ov);
+        }
+      });
 
     if (category) {
       prompts = prompts.filter(p => p.category === category);
@@ -175,6 +183,12 @@ export class AdminService {
       for (const list of Object.values(ALL_DEFAULT_PROMPTS)) {
         found = list.find(p => p.id === promptId);
         if (found) break;
+      }
+      if (!found) {
+        for (const list of Object.values(ALL_ONLINE_PROMPTS)) {
+          found = list.find(p => p.id === promptId);
+          if (found) break;
+        }
       }
       if (found) {
         overrides.push({ ...found, ...updates });

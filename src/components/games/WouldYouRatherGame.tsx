@@ -25,7 +25,7 @@ export const WouldYouRatherGame: React.FC<WouldYouRatherGameProps> = ({ prompts,
       category: 'medium',
       text: 'Would you rather?',
     };
-    return rollForLegendaryCard(initial, initial.category || 'medium', 'would-you-rather');
+    return rollForLegendaryCard(initial, initial.category || 'medium', 'would-you-rather', 0.02, initial.playMode);
   });
 
   const isLegendary = isPromptLegendary(activePrompt);
@@ -67,7 +67,7 @@ export const WouldYouRatherGame: React.FC<WouldYouRatherGameProps> = ({ prompts,
     const nextIdx = (currentIndex + 1) % prompts.length;
     setCurrentIndex(nextIdx);
     const nextP = prompts[nextIdx] || prompts[0];
-    const rolled = rollForLegendaryCard(nextP, nextP.category || 'medium', 'would-you-rather');
+    const rolled = rollForLegendaryCard(nextP, nextP.category || 'medium', 'would-you-rather', 0.02, nextP?.playMode);
     setActivePrompt(rolled);
   };
 

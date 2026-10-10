@@ -19,7 +19,8 @@ export const GameModeSelectScreen: React.FC<GameModeSelectScreenProps> = ({
   onSelectCategory,
   onBack,
 }) => {
-  const { isAgeConfirmed, confirmAge } = useGameSettings();
+  const { isAgeConfirmed, confirmAge, playMode } = useGameSettings();
+  const isOnline = playMode === 'online';
   const [pendingCategory, setPendingCategory] = useState<GameCategory | null>(null);
 
   const [activeSession, setActiveSession] = useState<GameSession | null>(() => {
@@ -69,7 +70,9 @@ export const GameModeSelectScreen: React.FC<GameModeSelectScreenProps> = ({
           color: '#EF4444',
           icon: '🔴',
           badge: 'No Limits',
-          desc: 'Intense physical dares, wild questions, and high-adrenaline tests.',
+          desc: isOnline
+            ? 'High-stakes screen shares, intense call dares, and high-voltage tests.'
+            : 'Intense physical dares, wild questions, and high-adrenaline tests.',
         };
       case 'unhinged':
         return {

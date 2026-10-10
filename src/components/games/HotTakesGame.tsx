@@ -24,7 +24,7 @@ export const HotTakesGame: React.FC<HotTakesGameProps> = ({ prompts, players }) 
       category: 'medium',
       text: 'Hot take...',
     };
-    return rollForLegendaryCard(initial, initial.category || 'medium', 'hot-takes');
+    return rollForLegendaryCard(initial, initial.category || 'medium', 'hot-takes', 0.02, initial.playMode);
   });
 
   const isLegendary = isPromptLegendary(activePrompt);
@@ -63,7 +63,7 @@ export const HotTakesGame: React.FC<HotTakesGameProps> = ({ prompts, players }) 
     const nextIdx = (currentIndex + 1) % prompts.length;
     setCurrentIndex(nextIdx);
     const nextP = prompts[nextIdx] || prompts[0];
-    const rolled = rollForLegendaryCard(nextP, nextP.category || 'medium', 'hot-takes');
+    const rolled = rollForLegendaryCard(nextP, nextP.category || 'medium', 'hot-takes', 0.02, nextP?.playMode);
     setActivePrompt(rolled);
   };
 

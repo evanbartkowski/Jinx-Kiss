@@ -24,15 +24,28 @@ const DEFAULT_DARE_SECTORS = [
   'Mystery Dare',
 ];
 
+const ONLINE_DARE_SECTORS = [
+  'Webcam Dare',
+  'Wild Dare',
+  'Spicy Dare',
+  'Phone Dare',
+  'Social Media',
+  'Secret Dare',
+  'Discord Dare',
+  'Mystery Dare',
+];
+
 export const DareRouletteGame: React.FC<DareRouletteGameProps> = ({
   prompts,
   players,
 }) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
+  const isOnline = prompts[0]?.playMode === 'online';
+  const defaultSectors = isOnline ? ONLINE_DARE_SECTORS : DEFAULT_DARE_SECTORS;
   const isPlayerMode = players.length >= 2;
   const [activeSegments, setActiveSegments] = useState<string[]>(
-    isPlayerMode ? players : DEFAULT_DARE_SECTORS
+    isPlayerMode ? players : defaultSectors
   );
   const [selectedWinner, setSelectedWinner] = useState<string | null>(null);
   const [currentDare, setCurrentDare] = useState<PromptItem | null>(null);
@@ -249,9 +262,12 @@ export const DareRouletteGame: React.FC<DareRouletteGameProps> = ({
             id: 'default_dare',
             gameId: 'dare-roulette',
             category: 'medium',
-            text: 'Do your best celebration dance for 30 seconds!',
+            playMode: isOnline ? 'online' : 'in-person',
+            text: isOnline
+              ? 'Deliver a dramatic 15-second infomercial selling whatever item is on your desk right now!'
+              : 'Do your best celebration dance for 30 seconds!',
           };
-        randomDare = rollForLegendaryCard(randomDare, randomDare.category || 'medium', 'dare-roulette');
+        randomDare = rollForLegendaryCard(randomDare, randomDare.category || 'medium', 'dare-roulette', 0.02, randomDare.playMode);
         setCurrentDare(randomDare);
 
         if (isPromptLegendary(randomDare)) {
@@ -371,7 +387,7 @@ export const DareRouletteGame: React.FC<DareRouletteGameProps> = ({
           <button
             onClick={() => {
               let nextDare = prompts[Math.floor(Math.random() * prompts.length)];
-              nextDare = rollForLegendaryCard(nextDare, nextDare.category || 'medium', 'dare-roulette');
+              nextDare = rollForLegendaryCard(nextDare, nextDare.category || 'medium', 'dare-roulette', 0.02, nextDare.playMode);
               setCurrentDare(nextDare);
               if (isPromptLegendary(nextDare)) {
                 triggerLegendaryCardEffects(nextDare);

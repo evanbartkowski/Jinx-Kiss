@@ -22,7 +22,7 @@ export const RedFlagGreenFlagGame: React.FC<RedFlagGreenFlagGameProps> = ({ prom
       category: 'medium',
       text: 'Scenario...',
     };
-    return rollForLegendaryCard(initial, initial.category || 'medium', 'red-flag-green-flag');
+    return rollForLegendaryCard(initial, initial.category || 'medium', 'red-flag-green-flag', 0.02, initial.playMode);
   });
 
   const isLegendary = isPromptLegendary(activePrompt);
@@ -50,7 +50,7 @@ export const RedFlagGreenFlagGame: React.FC<RedFlagGreenFlagGameProps> = ({ prom
     const nextIdx = (currentIndex + 1) % prompts.length;
     setCurrentIndex(nextIdx);
     const nextP = prompts[nextIdx] || prompts[0];
-    const rolled = rollForLegendaryCard(nextP, nextP.category || 'medium', 'red-flag-green-flag');
+    const rolled = rollForLegendaryCard(nextP, nextP.category || 'medium', 'red-flag-green-flag', 0.02, nextP?.playMode);
     setActivePrompt(rolled);
   };
 

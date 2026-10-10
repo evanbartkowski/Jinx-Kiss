@@ -2,6 +2,7 @@ import { describe, it, expect, beforeEach } from 'vitest';
 import { getPromptsForGame, ALL_DEFAULT_PROMPTS, ALL_ONLINE_PROMPTS } from '../data/prompts';
 import { getLegendaryCardForCategory, rollForLegendaryCard } from '../utils/legendaryCards';
 import { deckService } from '../services/deckService';
+import { adminService } from '../services/adminService';
 import { multiplayerService } from '../services/multiplayerService';
 import { GameId, GameCategory, PlayMode } from '../types/game';
 
@@ -31,6 +32,18 @@ describe('PlayMode (In-Person vs Online) Architecture', () => {
       expect(onlinePrompts.length).toBeGreaterThan(0);
       expect(onlinePrompts.every(p => p.playMode === 'online')).toBe(true);
     });
+  });
+
+  it('adminService.getAllPromptsForManager strictly isolates online prompts', async () => {
+    for (const gameId of coreGames) {
+      const onlinePrompts = await adminService.getAllPromptsForManager(gameId, undefined, 'online');
+      expect(onlinePrompts.length).toBeGreaterThan(0);
+      expect(onlinePrompts.every(p => p.playMode === 'online')).toBe(true);
+
+      const inPersonPrompts = await adminService.getAllPromptsForManager(gameId, undefined, 'in-person');
+      expect(inPersonPrompts.length).toBeGreaterThan(0);
+      expect(inPersonPrompts.every(p => p.playMode !== 'online')).toBe(true);
+    }
   });
 
   it('keeps in-person default prompts isolated from online prompts', () => {

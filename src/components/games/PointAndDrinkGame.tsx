@@ -27,7 +27,7 @@ export const PointAndDrinkGame: React.FC<PointAndDrinkGameProps> = ({ prompts, p
       category: 'medium',
       text: 'Point and Drink...',
     };
-    return rollForLegendaryCard(initial, initial.category || 'medium', 'point-and-drink');
+    return rollForLegendaryCard(initial, initial.category || 'medium', 'point-and-drink', 0.02, initial.playMode);
   });
 
   const isLegendary = isPromptLegendary(activePrompt);
@@ -87,7 +87,7 @@ export const PointAndDrinkGame: React.FC<PointAndDrinkGameProps> = ({ prompts, p
     const nextIdx = (currentIndex + 1) % prompts.length;
     setCurrentIndex(nextIdx);
     const nextP = prompts[nextIdx] || prompts[0];
-    const rolled = rollForLegendaryCard(nextP, nextP.category || 'medium', 'point-and-drink');
+    const rolled = rollForLegendaryCard(nextP, nextP.category || 'medium', 'point-and-drink', 0.02, nextP?.playMode);
     setActivePrompt(rolled);
   };
 
@@ -164,10 +164,14 @@ export const PointAndDrinkGame: React.FC<PointAndDrinkGameProps> = ({ prompts, p
         {currentIndex === 0 && (
           <div className="text-xs sm:text-base text-zinc-300 font-semibold my-2 z-10">
             {countdown === null
-              ? 'Tap Start, then on "POINT!" point your finger at someone!'
+              ? activePrompt?.playMode === 'online'
+                ? 'Tap Start, then on "POINT!" aim at their webcam tile or type their name!'
+                : 'Tap Start, then on "POINT!" point your finger at someone!'
               : hasPlayers
                 ? 'Tap player below to record finger points!'
-                : 'Look around the room and count the fingers!'}
+                : activePrompt?.playMode === 'online'
+                  ? 'Count the webcam points or chat votes!'
+                  : 'Look around the room and count the fingers!'}
           </div>
         )}
 

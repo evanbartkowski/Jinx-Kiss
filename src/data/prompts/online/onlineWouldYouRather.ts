@@ -396,5 +396,352 @@ export const ONLINE_WOULD_YOU_RATHER_PROMPTS: PromptItem[] = [
     text: "Would you rather have to wear a giant superhero cape every time you join a video call or wear wacky sunglasses?",
     optionA: "Giant superhero cape",
     optionB: "Wacky sunglasses"
+  },
+  // ==========================================
+  // EXPANDED EASY (Light, relatable remote dilemmas)
+  // ==========================================
+  {
+    id: 'on-wyr-easy-9',
+    gameId: 'would-you-rather',
+    category: 'easy',
+    playMode: 'online',
+    text: "Would you rather have every video call automatically play an 80s laugh track every time you speak or have an anime sparkle filter over your eyes permanently?",
+    optionA: "80s laugh track",
+    optionB: "Anime sparkle eyes"
+  },
+  {
+    id: 'on-wyr-easy-10',
+    gameId: 'would-you-rather',
+    category: 'easy',
+    playMode: 'online',
+    text: "Would you rather always accidentally double-tap and like 3-year-old Instagram posts or accidentally send a voice note of you chewing loudly?",
+    optionA: "Like 3-year-old post",
+    optionB: "Loud chewing voice note"
+  },
+  {
+    id: 'on-wyr-easy-11',
+    gameId: 'would-you-rather',
+    category: 'easy',
+    playMode: 'online',
+    text: "Would you rather all your text messages auto-translate to Shakespearean English or pirate talk?",
+    optionA: "Shakespearean English",
+    optionB: "Pirate slang"
+  },
+  {
+    id: 'on-wyr-easy-12',
+    gameId: 'would-you-rather',
+    category: 'easy',
+    playMode: 'online',
+    text: "Would you rather lose the ability to use backspace forever or have your spacebar trigger a random Discord server emoji?",
+    optionA: "No backspace forever",
+    optionB: "Emoji on every spacebar"
+  },
+  {
+    id: 'on-wyr-easy-13',
+    gameId: 'would-you-rather',
+    category: 'easy',
+    playMode: 'online',
+    text: "Would you rather have a 10-second delay on every meme sent to you or only be able to watch YouTube videos in 360p resolution?",
+    optionA: "10-second meme delay",
+    optionB: "Permanent 360p video"
+  },
+
+  // ==========================================
+  // EXPANDED MEDIUM (Awkward digital dilemmas)
+  // ==========================================
+  {
+    id: 'on-wyr-med-8',
+    gameId: 'would-you-rather',
+    category: 'medium',
+    playMode: 'online',
+    text: "Would you rather screen-share your Spotify Wrapped from last year without hiding anything or reveal your top 3 most-watched Twitch/YouTube streamers?",
+    optionA: "Spotify Wrapped reveal",
+    optionB: "Top 3 streamers reveal"
+  },
+  {
+    id: 'on-wyr-med-9',
+    gameId: 'would-you-rather',
+    category: 'medium',
+    playMode: 'online',
+    text: "Would you rather accidentally call someone on FaceTime while half-asleep in bed or have someone send a screenshot of your deleted message into the main group chat?",
+    optionA: "Accidental half-asleep FaceTime",
+    optionB: "Deleted message screenshot"
+  },
+  {
+    id: 'on-wyr-med-10',
+    gameId: 'would-you-rather',
+    category: 'medium',
+    playMode: 'online',
+    text: "Would you rather have your family find your main Reddit account or have your boss read your Twitter bookmarks?",
+    optionA: "Family finds Reddit",
+    optionB: "Boss reads bookmarks"
+  },
+  {
+    id: 'on-wyr-med-11',
+    gameId: 'would-you-rather',
+    category: 'medium',
+    playMode: 'online',
+    text: "Would you rather have everyone on call know how many hours you spent scrolling TikTok yesterday or know the exact time you woke up today?",
+    optionA: "TikTok screen time exposed",
+    optionB: "Wake-up time exposed"
+  },
+  {
+    id: 'on-wyr-med-12',
+    gameId: 'would-you-rather',
+    category: 'medium',
+    playMode: 'online',
+    text: "Would you rather be forced to react with an enthusiastic thumbs-up to every bad take in chat or never be allowed to use reaction emojis again?",
+    optionA: "Compulsory thumbs-up",
+    optionB: "Zero reaction emojis"
+  },
+
+  // ==========================================
+  // EXPANDED EXTREME (High-stakes screen shares)
+  // ==========================================
+  {
+    id: 'on-wyr-ext-6',
+    gameId: 'would-you-rather',
+    category: 'extreme',
+    playMode: 'online',
+    text: "Would you rather livestream your uncensored phone Notes app for 30 seconds or let the group read your last 3 drafts that you never posted?",
+    optionA: "Notes app livestream (30s)",
+    optionB: "3 unposted drafts read"
+  },
+  {
+    id: 'on-wyr-ext-7',
+    gameId: 'would-you-rather',
+    category: 'extreme',
+    playMode: 'online',
+    text: "Would you rather have your camera roll automatically upload your last taken photo to your Instagram story or have your microphone stay live for 10 minutes while you think you're muted?",
+    optionA: "Auto-post last photo to story",
+    optionB: "10-minute live unmuted mic"
+  },
+  {
+    id: 'on-wyr-ext-8',
+    gameId: 'would-you-rather',
+    category: 'extreme',
+    playMode: 'online',
+    text: "Would you rather let someone in this call go through your blocked users list and ask why each person is there or screen-share your blocked numbers?",
+    optionA: "Blocked users interrogated",
+    optionB: "Screen-share blocked numbers"
+  },
+  {
+    id: 'on-wyr-ext-9',
+    gameId: 'would-you-rather',
+    category: 'extreme',
+    playMode: 'online',
+    text: "Would you rather have an audio alert notify everyone whenever you mute yourself on call or have your webcam flash red whenever you switch to another browser tab?",
+    optionA: "Mute audio alert",
+    optionB: "Tab switch webcam alert"
+  },
+  {
+    id: 'on-wyr-ext-10',
+    gameId: 'would-you-rather',
+    category: 'extreme',
+    playMode: 'online',
+    text: "Would you rather confess your most unhinged online purchase in front of this call or let the group pick your Discord profile banner for a week?",
+    optionA: "Confess unhinged purchase",
+    optionB: "Group picks banner (1 week)"
+  },
+
+  // ==========================================
+  // EXPANDED UNHINGED (Chaotic webcam & audio chaos)
+  // ==========================================
+  {
+    id: 'on-wyr-unh-5',
+    gameId: 'would-you-rather',
+    category: 'unhinged',
+    playMode: 'online',
+    text: "Would you rather every time you join a voice call have a robotic TTS voice announce your battery percentage and screen brightness or have your webcam automatically mirror your video horizontally?",
+    optionA: "TTS battery announcement",
+    optionB: "Mirrored webcam permanently"
+  },
+  {
+    id: 'on-wyr-unh-6',
+    gameId: 'would-you-rather',
+    category: 'unhinged',
+    playMode: 'online',
+    text: "Would you rather have your microphone pitch-shifted up two octaves like a chipmunk for the next hour of gaming or have heavy reverb added to every syllable?",
+    optionA: "Chipmunk pitch-shift",
+    optionB: "Massive cavernous reverb"
+  },
+  {
+    id: 'on-wyr-unh-7',
+    gameId: 'would-you-rather',
+    category: 'unhinged',
+    playMode: 'online',
+    text: "Would you rather only be able to type in all caps on Discord for a full month or have your avatar replaced with a cursed low-res Shrek thumbnail?",
+    optionA: "ALL CAPS FOR A MONTH",
+    optionB: "Cursed Shrek avatar"
+  },
+  {
+    id: 'on-wyr-unh-8',
+    gameId: 'would-you-rather',
+    category: 'unhinged',
+    playMode: 'online',
+    text: "Would you rather have an unskippable 5-second slide whistle sound play every time you enter a voice channel or have your screen dim to 10% whenever anyone says your name?",
+    optionA: "Slide whistle entry chime",
+    optionB: "Screen dims on your name"
+  },
+
+  // ==========================================
+  // EXPANDED COUPLES (Long-distance & video intimacy)
+  // ==========================================
+  {
+    id: 'on-wyr-cpl-5',
+    gameId: 'would-you-rather',
+    category: 'couples',
+    playMode: 'online',
+    text: "Would you rather spend 5 hours building a Minecraft house together on call or fall asleep on a silent video call while listening to soft rain?",
+    optionA: "Minecraft co-op build",
+    optionB: "Silent rainy video sleep call"
+  },
+  {
+    id: 'on-wyr-cpl-6',
+    gameId: 'would-you-rather',
+    category: 'couples',
+    playMode: 'online',
+    text: "Would you rather write a shared digital bucket list of 20 things we must do together or record a 5-minute audio message about how your life changed when we met?",
+    optionA: "Shared digital bucket list",
+    optionB: "5-minute audio love message"
+  },
+  {
+    id: 'on-wyr-cpl-7',
+    gameId: 'would-you-rather',
+    category: 'couples',
+    playMode: 'online',
+    text: "Would you rather receive an unexpected good morning video note from me every day for a year or a 30-minute late-night deep talk call every Friday?",
+    optionA: "Daily morning video note",
+    optionB: "Friday deep talk call"
+  },
+  {
+    id: 'on-wyr-cpl-8',
+    gameId: 'would-you-rather',
+    category: 'couples',
+    playMode: 'online',
+    text: "Would you rather share a synchronized Spotify listening session for 2 hours with zero talking or stay on video call while we both read our favorite books?",
+    optionA: "Synchronized silent Spotify",
+    optionB: "Cozy webcam reading session"
+  },
+
+  // ==========================================
+  // EXPANDED 18+ (Adult online secrets)
+  // ==========================================
+  {
+    id: 'on-wyr-18-5',
+    gameId: 'would-you-rather',
+    category: '18+',
+    playMode: 'online',
+    text: "Would you rather have someone on this call discover your secret spicy burner account or hear your most unhinged romantic late-night confession?",
+    optionA: "Spicy burner account exposed",
+    optionB: "Unhinged late-night confession"
+  },
+  {
+    id: 'on-wyr-18-6',
+    gameId: 'would-you-rather',
+    category: '18+',
+    playMode: 'online',
+    text: "Would you rather confess the most embarrassing kink you secretly find hot or take 2 consecutive penalty sips on camera right now?",
+    optionA: "Confess secret kink",
+    optionB: "Take 2 penalty sips"
+  },
+  {
+    id: 'on-wyr-18-7',
+    gameId: 'would-you-rather',
+    category: '18+',
+    playMode: 'online',
+    text: "Would you rather let someone in this call ask you ANY unfiltered adult question with zero skips allowed or show the last NSFW photo you saved?",
+    optionA: "1 unfiltered adult question",
+    optionB: "Last saved NSFW photo"
+  },
+  {
+    id: 'on-wyr-18-8',
+    gameId: 'would-you-rather',
+    category: '18+',
+    playMode: 'online',
+    text: "Would you rather trade a risqué webcam screenshot with someone here or confess what you were wearing the last time you thought about them?",
+    optionA: "Trade risqué cam screenshot",
+    optionB: "Confess outfit during thought"
+  },
+
+  // ==========================================
+  // EXPANDED SPICY (Sensual webcam & audio dares)
+  // ==========================================
+  {
+    id: 'on-wyr-spicy-5',
+    gameId: 'would-you-rather',
+    category: 'spicy',
+    playMode: 'online',
+    text: "Would you rather do a slow 30-second camera zoom teasing your favorite physical asset or whisper an explicit bedroom fantasy directly into the mic?",
+    optionA: "30-second cam tease zoom",
+    optionB: "Whispered explicit fantasy"
+  },
+  {
+    id: 'on-wyr-spicy-6',
+    gameId: 'would-you-rather',
+    category: 'spicy',
+    playMode: 'online',
+    text: "Would you rather have someone here pick an article of clothing you must remove on camera or describe your most sensitive pleasure spot in vivid detail?",
+    optionA: "Remove article of clothing on cam",
+    optionB: "Describe pleasure spot in detail"
+  },
+  {
+    id: 'on-wyr-spicy-7',
+    gameId: 'would-you-rather',
+    category: 'spicy',
+    playMode: 'online',
+    text: "Would you rather send an unfiltered audio clip of you catching your breath or leave your webcam on while you change your shirt?",
+    optionA: "Breathless audio clip",
+    optionB: "Webcam on while changing shirt"
+  },
+  {
+    id: 'on-wyr-spicy-8',
+    gameId: 'would-you-rather',
+    category: 'spicy',
+    playMode: 'online',
+    text: "Would you rather give someone here complete command over what you do with your hands for 45 seconds or tell them exactly how you would undress them over call?",
+    optionA: "45-second hand command on cam",
+    optionB: "Describe undressing them on call"
+  },
+
+  // ==========================================
+  // EXPANDED KIDS (Silly, wholesome digital dilemmas)
+  // ==========================================
+  {
+    id: 'on-wyr-kids-5',
+    gameId: 'would-you-rather',
+    category: 'kids',
+    playMode: 'online',
+    text: "Would you rather have a pet dragon that fits inside your pocket or a pet giant panda that gives the best fluffy hugs?",
+    optionA: "Pocket dragon",
+    optionB: "Giant huggy panda"
+  },
+  {
+    id: 'on-wyr-kids-6',
+    gameId: 'would-you-rather',
+    category: 'kids',
+    playMode: 'online',
+    text: "Would you rather be able to jump as high as a two-story building or run as fast as a cheetah while making racecar noises?",
+    optionA: "Jump 2 stories high",
+    optionB: "Cheetah speed with racecar noises"
+  },
+  {
+    id: 'on-wyr-kids-7',
+    gameId: 'would-you-rather',
+    category: 'kids',
+    playMode: 'online',
+    text: "Would you rather only eat waffles with chocolate syrup for a week or build the world's biggest pillow castle in your living room?",
+    optionA: "Chocolate waffles week",
+    optionB: "World's biggest pillow castle"
+  },
+  {
+    id: 'on-wyr-kids-8',
+    gameId: 'would-you-rather',
+    category: 'kids',
+    playMode: 'online',
+    text: "Would you rather have a magic pencil where anything you draw turns into real candy or sneakers that light up and play your favorite cartoon theme song?",
+    optionA: "Magic candy drawing pencil",
+    optionB: "Musical light-up sneakers"
   }
 ];
+

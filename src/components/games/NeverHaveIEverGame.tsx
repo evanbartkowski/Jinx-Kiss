@@ -23,7 +23,7 @@ export const NeverHaveIEverGame: React.FC<NeverHaveIEverGameProps> = ({ prompts,
       category: 'medium',
       text: 'Never have I ever...',
     };
-    return rollForLegendaryCard(initial, initial.category || 'medium', 'never-have-i-ever');
+    return rollForLegendaryCard(initial, initial.category || 'medium', 'never-have-i-ever', 0.02, initial.playMode);
   });
 
   const isLegendary = isPromptLegendary(activePrompt);
@@ -58,7 +58,7 @@ export const NeverHaveIEverGame: React.FC<NeverHaveIEverGameProps> = ({ prompts,
       }
       setCurrentIndex(nextIdx);
       const nextP = prompts[nextIdx] || prompts[0];
-      const rolled = rollForLegendaryCard(nextP, nextP.category || 'medium', 'never-have-i-ever');
+      const rolled = rollForLegendaryCard(nextP, nextP.category || 'medium', 'never-have-i-ever', 0.02, nextP?.playMode);
       setActivePrompt(rolled);
       setIsCompleting(false);
     }, 550);
@@ -157,7 +157,9 @@ export const NeverHaveIEverGame: React.FC<NeverHaveIEverGameProps> = ({ prompts,
         {/* Helper description - ONLY on first card */}
         {usedIndices.length === 0 && (
           <div className="text-sm sm:text-base text-zinc-300 font-semibold my-2 z-10 animate-fade-in">
-            Drink, drop a finger, or confess with your crew!
+            {activePrompt?.playMode === 'online'
+              ? 'Drink on cam, drop a finger, or confess in call!'
+              : 'Drink, drop a finger, or confess with your crew!'}
           </div>
         )}
 

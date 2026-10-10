@@ -25,7 +25,7 @@ export const MostLikelyToGame: React.FC<MostLikelyToGameProps> = ({ prompts, pla
       category: 'medium',
       text: 'Most likely to...',
     };
-    return rollForLegendaryCard(initial, initial.category || 'medium', 'most-likely-to');
+    return rollForLegendaryCard(initial, initial.category || 'medium', 'most-likely-to', 0.02, initial.playMode);
   });
 
   const isLegendary = isPromptLegendary(activePrompt);
@@ -65,7 +65,7 @@ export const MostLikelyToGame: React.FC<MostLikelyToGameProps> = ({ prompts, pla
     const nextIdx = (currentIndex + 1) % prompts.length;
     setCurrentIndex(nextIdx);
     const nextP = prompts[nextIdx] || prompts[0];
-    const rolled = rollForLegendaryCard(nextP, nextP.category || 'medium', 'most-likely-to');
+    const rolled = rollForLegendaryCard(nextP, nextP.category || 'medium', 'most-likely-to', 0.02, nextP?.playMode);
     setActivePrompt(rolled);
   };
 
@@ -109,7 +109,7 @@ export const MostLikelyToGame: React.FC<MostLikelyToGameProps> = ({ prompts, pla
         />
 
         <span className="text-[11px] sm:text-sm uppercase tracking-widest text-zinc-400 font-semibold z-10">
-          Who In The Room Is...
+          {activePrompt?.playMode === 'online' ? 'Who In This Call Is...' : 'Who In The Room Is...'}
         </span>
 
         <p className={`text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-black leading-tight sm:leading-snug my-5 sm:my-10 max-w-4xl z-10 ${
@@ -138,7 +138,9 @@ export const MostLikelyToGame: React.FC<MostLikelyToGameProps> = ({ prompts, pla
               ? `${totalVotes} votes cast so far`
               : hasPlayers
                 ? 'Tap any player below to cast fingers or votes!'
-                : 'Point or call out who in the room fits this prompt!'}
+                : activePrompt?.playMode === 'online'
+                  ? 'Vote on screen or call out who in the call fits this prompt!'
+                  : 'Point or call out who in the room fits this prompt!'}
           </div>
         )}
 

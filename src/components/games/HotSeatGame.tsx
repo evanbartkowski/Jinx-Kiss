@@ -16,7 +16,7 @@ export const HotSeatGame: React.FC<HotSeatGameProps> = ({ prompts, players }) =>
   const [currentIndex, setCurrentIndex] = useState(0);
   const [activePrompt, setActivePrompt] = useState<PromptItem>(() => {
     const first = prompts[0] || { id: 'hs-default', gameId: 'hot-seat', category: 'medium', text: 'Confess the most questionable thing currently in your search history.' };
-    return rollForLegendaryCard(first, first.category, 'hot-seat');
+    return rollForLegendaryCard(first, first.category, 'hot-seat', 0.02, first.playMode);
   });
   const [playerIndex, setPlayerIndex] = useState(0);
   const [seenPromptIds, setSeenPromptIds] = useState<Set<string>>(new Set());
@@ -53,7 +53,7 @@ export const HotSeatGame: React.FC<HotSeatGameProps> = ({ prompts, players }) =>
     newSeen.add(chosen.id);
     setSeenPromptIds(newSeen);
     setCurrentIndex(prompts.findIndex(p => p.id === chosen.id));
-    const rolled = rollForLegendaryCard(chosen, chosen.category, 'hot-seat');
+    const rolled = rollForLegendaryCard(chosen, chosen.category, 'hot-seat', 0.02, chosen.playMode);
     setActivePrompt(rolled);
     setQuestionsAnsweredInSeat(prev => prev + 1);
 
