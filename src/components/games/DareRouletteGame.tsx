@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { PromptItem } from '../../types/game';
+import { CardRatingBar } from '../common/CardRatingBar';
 import { Disc3, RotateCcw, ArrowRight, UserCheck, Flame } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
@@ -9,6 +10,17 @@ interface DareRouletteGameProps {
   onOpenPlayerModal?: () => void;
 }
 
+const DEFAULT_DARE_SECTORS = [
+  'Physical Dare',
+  'Wild Dare',
+  'Spicy Dare',
+  'Phone Dare',
+  'Social Media',
+  'Secret Dare',
+  'Double Dare',
+  'Mystery Dare',
+];
+
 export const DareRouletteGame: React.FC<DareRouletteGameProps> = ({
   prompts,
   players,
@@ -16,10 +28,11 @@ export const DareRouletteGame: React.FC<DareRouletteGameProps> = ({
 }) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
-  const [activePlayers, setActivePlayers] = useState<string[]>(
-    players.length >= 2 ? players : ['Sam', 'Alex', 'Jordan', 'Taylor']
+  const isPlayerMode = players.length >= 2;
+  const [activeSegments, setActiveSegments] = useState<string[]>(
+    isPlayerMode ? players : DEFAULT_DARE_SECTORS
   );
-  const [selectedPlayer, setSelectedPlayer] = useState<string | null>(null);
+  const [selectedWinner, setSelectedWinner] = useState<string | null>(null);
   const [currentDare, setCurrentDare] = useState<PromptItem | null>(null);
   const [isSpinning, setIsSpinning] = useState(false);
   const [rotationAngle, setRotationAngle] = useState(0);
@@ -27,7 +40,9 @@ export const DareRouletteGame: React.FC<DareRouletteGameProps> = ({
   // Sync when parent players change
   useEffect(() => {
     if (players.length >= 2) {
-      setActivePlayers(players);
+      setActiveSegments(players);
+    } else {
+      setActiveSegments(DEFAULT_DARE_SECTORS);
     }
   }, [players]);
 
@@ -46,7 +61,7 @@ export const DareRouletteGame: React.FC<DareRouletteGameProps> = ({
     const size = canvas.width;
     const center = size / 2;
     const radius = center - 12;
-    const count = activePlayers.length;
+    const count = activeSegments.length;
     const arc = (Math.PI * 2) / count;
 
     ctx.clearRect(0, 0, size, size);
@@ -58,7 +73,7 @@ export const DareRouletteGame: React.FC<DareRouletteGameProps> = ({
     ctx.translate(-center, -center);
 
     // Draw wheel segments
-    activePlayers.forEach((player, i) => {
+    activeSegments.forEach((segment, i) => {
       const angle = i * arc;
       ctx.beginPath();
       ctx.fillStyle = wheelColors[i % wheelColors.length];
@@ -78,10 +93,10 @@ export const DareRouletteGame: React.FC<DareRouletteGameProps> = ({
       ctx.rotate(angle + arc / 2);
       ctx.textAlign = 'right';
       ctx.fillStyle = '#ffffff';
-      ctx.font = 'bold 15px sans-serif';
+      ctx.font = 'bold 14px sans-serif';
       ctx.shadowColor = 'rgba(0,0,0,0.8)';
       ctx.shadowBlur = 4;
-      ctx.fillText(player, radius - 20, 5);
+      ctx.fillText(segment, radius - 16, 5);
       ctx.restore();
     });
 
@@ -95,26 +110,25 @@ export const DareRouletteGame: React.FC<DareRouletteGameProps> = ({
     ctx.stroke();
 
     ctx.restore();
-  }, [activePlayers, rotationAngle]);
+  }, [activeSegments, rotationAngle]);
 
   const spinWheel = () => {
-    if (isSpinning || activePlayers.length < 2) return;
+    if (isSpinning || activeSegments.length < 2) return;
     setIsSpinning(true);
-    setSelectedPlayer(null);
+    setSelectedWinner(null);
     setCurrentDare(null);
 
     // Pick winning index fairly
-    const winnerIndex = Math.floor(Math.random() * activePlayers.length);
-    const count = activePlayers.length;
+    const winnerIndex = Math.floor(Math.random() * activeSegments.length);
+    const count = activeSegments.length;
     const arc = (Math.PI * 2) / count;
 
     // Pointer is at the top (angle = 3*PI/2)
-    // To land winner at the top, rotation must satisfy: (winnerIndex * arc + arc/2 + rotation) % 2PI = 3PI/2
     const targetSectorAngle = 3 * Math.PI / 2 - (winnerIndex * arc + arc / 2);
-    const fullSpins = (5 + Math.floor(Math.random() * 4)) * (Math.PI * 2); // 5-8 complete revolutions
+    const fullSpins = (5 + Math.floor(Math.random() * 4)) * (Math.PI * 2);
     const totalRotation = rotationAngle + fullSpins + ((targetSectorAngle - (rotationAngle % (Math.PI * 2)) + Math.PI * 4) % (Math.PI * 2));
 
-    const duration = 4000; // 4 seconds spin
+    const duration = 4000;
     const startTime = performance.now();
     const initialAngle = rotationAngle;
 
@@ -131,8 +145,8 @@ export const DareRouletteGame: React.FC<DareRouletteGameProps> = ({
         requestAnimationFrame(animateSpin);
       } else {
         setIsSpinning(false);
-        const winner = activePlayers[winnerIndex];
-        setSelectedPlayer(winner);
+        const winner = activeSegments[winnerIndex];
+        setSelectedWinner(winner);
 
         // Pick a dare from prompts
         const randomDare = prompts[Math.floor(Math.random() * prompts.length)] || {
@@ -159,21 +173,23 @@ export const DareRouletteGame: React.FC<DareRouletteGameProps> = ({
     <div className="w-full max-w-2xl flex flex-col items-center gap-6">
       
       {/* Active turn or Winner Banner */}
-      {selectedPlayer ? (
+      {selectedWinner ? (
         <div className="text-center animate-scale-in">
           <span className="text-xs font-black uppercase tracking-widest text-red-400 bg-red-950/60 border border-red-500/40 px-3 py-1 rounded-full shadow-neon-red">
-            🎯 Chosen by Fate
+            {isPlayerMode ? '🎯 Chosen by Fate' : '🔥 Selected Challenge Category'}
           </span>
           <h3 className="text-3xl font-black text-white mt-2 drop-shadow-[0_0_15px_rgba(239,68,68,0.5)]">
-            {selectedPlayer}!
+            {selectedWinner}!
           </h3>
         </div>
       ) : (
         <div className="text-center">
           <span className="text-xs uppercase tracking-widest text-zinc-400 font-semibold">
-            {activePlayers.length} Players on Wheel
+            {isPlayerMode ? `${activeSegments.length} Players on Wheel` : 'Dare Roulette'}
           </span>
-          <p className="text-sm text-zinc-300 mt-1">Spin to see who faces the punishment</p>
+          <p className="text-sm text-zinc-300 mt-1">
+            {isPlayerMode ? 'Spin to see who faces the punishment' : 'Spin to determine your challenge'}
+          </p>
         </div>
       )}
 
@@ -195,18 +211,21 @@ export const DareRouletteGame: React.FC<DareRouletteGameProps> = ({
 
       </div>
 
-      {/* Dare Card for Selected Player */}
-      {currentDare && selectedPlayer && (
+      {/* Dare Card for Selected Player or Dare Type */}
+      {currentDare && selectedWinner && (
         <div className="w-full p-6 sm:p-8 rounded-3xl glass-panel border border-red-500/50 shadow-neon-red/30 text-center animate-scale-in">
           <div className="flex items-center justify-center gap-2 mb-3">
             <Flame className="w-5 h-5 text-red-400" />
             <span className="text-xs font-black uppercase tracking-widest text-red-400">
-              The Dare for {selectedPlayer}
+              {isPlayerMode ? `The Dare for ${selectedWinner}` : `Challenge: ${selectedWinner}`}
             </span>
           </div>
-          <p className="text-xl sm:text-2xl font-black text-white leading-relaxed max-w-lg mx-auto">
+          <p className="text-xl sm:text-2xl font-black text-white leading-relaxed max-w-lg mx-auto mb-4">
             "{currentDare.text}"
           </p>
+          <div className="w-full max-w-sm mx-auto">
+            <CardRatingBar prompt={currentDare} />
+          </div>
         </div>
       )}
 
@@ -214,14 +233,14 @@ export const DareRouletteGame: React.FC<DareRouletteGameProps> = ({
       <div className="flex flex-wrap items-center justify-center gap-4">
         <button
           onClick={spinWheel}
-          disabled={isSpinning || activePlayers.length < 2}
+          disabled={isSpinning || activeSegments.length < 2}
           className="px-8 py-4 rounded-2xl bg-gradient-to-r from-red-600 to-pink-600 hover:from-red-500 hover:to-pink-500 text-white font-black text-base shadow-neon-red flex items-center gap-2.5 transition-all active:scale-95 disabled:opacity-50"
         >
           <Disc3 className={`w-5 h-5 ${isSpinning ? 'animate-spin' : ''}`} />
-          <span>{isSpinning ? 'Spinning the Wheel...' : selectedPlayer ? 'Spin Again' : 'Spin the Wheel!'}</span>
+          <span>{isSpinning ? 'Spinning the Wheel...' : selectedWinner ? 'Spin Again' : 'Spin the Wheel!'}</span>
         </button>
 
-        {selectedPlayer && (
+        {selectedWinner && (
           <button
             onClick={() => {
               const nextDare = prompts[Math.floor(Math.random() * prompts.length)];

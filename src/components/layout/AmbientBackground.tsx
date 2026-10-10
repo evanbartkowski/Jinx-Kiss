@@ -101,10 +101,11 @@ export const AmbientBackground: React.FC = () => {
 
   return (
     <div className="fixed inset-0 pointer-events-none -z-10 overflow-hidden bg-[#050505]">
-      {/* Soft blurred ambient radial gradients */}
-      <div className="absolute top-[-10%] left-[20%] w-[500px] h-[500px] rounded-full bg-brand-pink/5 blur-[120px] transform-gpu" />
-      <div className="absolute top-[40%] right-[-5%] w-[600px] h-[600px] rounded-full bg-brand-violet/5 blur-[140px] transform-gpu" />
-      <div className="absolute bottom-[-10%] left-[-5%] w-[550px] h-[550px] rounded-full bg-cyan-500/5 blur-[130px] transform-gpu" />
+      {/* Soft blurred moving ambient radial gradients */}
+      <div className="absolute top-[-10%] left-[20%] w-[550px] h-[550px] rounded-full bg-brand-pink/15 blur-[130px] transform-gpu ambient-blob-1" />
+      <div className="absolute top-[35%] right-[-8%] w-[650px] h-[650px] rounded-full bg-brand-violet/15 blur-[150px] transform-gpu ambient-blob-2" />
+      <div className="absolute bottom-[-10%] left-[-8%] w-[600px] h-[600px] rounded-full bg-cyan-500/10 blur-[140px] transform-gpu ambient-blob-3" />
+      <div className="absolute top-[65%] left-[30%] w-[450px] h-[450px] rounded-full bg-purple-900/10 blur-[130px] transform-gpu ambient-blob-1" />
       <canvas ref={canvasRef} className="absolute inset-0 w-full h-full opacity-60" />
     </div>
   );

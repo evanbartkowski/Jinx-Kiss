@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { CustomDeck } from '../../types/deck';
-import { GAMES_CONFIG } from '../../data/gamesConfig';
+import { GAMES_CONFIG, CATEGORY_LABELS } from '../../data/gamesConfig';
 import { Play, Layers, Lock, Globe, Link2, Copy, Trash2, Edit, QrCode, X, Check } from 'lucide-react';
 import { generateQRCodeSVG } from '../../utils/qrCode';
 import { useToast } from '../../context/ToastContext';
@@ -50,7 +50,7 @@ export const DeckCard: React.FC<DeckCardProps> = ({
       <div>
         {/* Top Badges */}
         <div className="flex items-center justify-between gap-2 mb-4">
-          <div className="flex items-center gap-1.5">
+          <div className="flex flex-wrap items-center gap-1.5">
             <span
               className="text-[11px] font-black uppercase tracking-wider px-2.5 py-0.5 rounded-full border"
               style={{
@@ -61,6 +61,13 @@ export const DeckCard: React.FC<DeckCardProps> = ({
             >
               {gameMeta.title}
             </span>
+
+            {/* Game Mode / Category Badge */}
+            {deck.gameMode && (
+              <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-white/10 text-zinc-300 border border-white/10">
+                {CATEGORY_LABELS[deck.gameMode]?.label || deck.gameMode}
+              </span>
+            )}
 
             {/* Visibility Badge */}
             {isOwner && (

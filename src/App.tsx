@@ -9,6 +9,9 @@ import { AmbientBackground } from './components/layout/AmbientBackground';
 import { Header } from './components/layout/Header';
 import { Footer } from './components/layout/Footer';
 import { AuthModal } from './components/auth/AuthModal';
+import { AudioSettingsModal } from './components/common/AudioSettingsModal';
+import { SessionHistoryModal } from './components/common/SessionHistoryModal';
+import { GameSession } from './services/sessionService';
 
 // Pages
 import { HomePage } from './pages/HomePage';
@@ -41,6 +44,8 @@ function AppContent() {
   const [editingDeck, setEditingDeck] = useState<CustomDeck | null>(null);
   const [activePartyConfig, setActivePartyConfig] = useState<PartyModeConfig | null>(null);
   const [activeRoomCode, setActiveRoomCode] = useState<string>('');
+  const [isAudioModalOpen, setIsAudioModalOpen] = useState(false);
+  const [isHistoryModalOpen, setIsHistoryModalOpen] = useState(false);
 
   // Sync with browser URL hash / history
   useEffect(() => {
@@ -134,10 +139,27 @@ function AppContent() {
     handleStartPartyMode(quickConfig);
   };
 
+  const handleResumeSession = (session: GameSession) => {
+    if (session.mode === 'party' && session.partyConfig) {
+      setActivePartyConfig(session.partyConfig);
+      setCurrentView('party-game');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      setSelectedGameId(session.gameId);
+      setActiveCustomDeck(null);
+      navigateTo('game', session.gameId);
+    }
+  };
+
   return (
     <div className="min-h-screen flex flex-col bg-[#050505] text-[#f3f4f6] relative">
       <AmbientBackground />
-      <Header currentView={currentView} onNavigate={(v) => navigateTo(v as AppView)} />
+      <Header
+        currentView={currentView}
+        onNavigate={(v) => navigateTo(v as AppView)}
+        onOpenAudio={() => setIsAudioModalOpen(true)}
+        onOpenHistory={() => setIsHistoryModalOpen(true)}
+      />
 
       <main className="flex-1 flex flex-col">
         {currentView === 'home' && (
@@ -147,6 +169,8 @@ function AppContent() {
             onStartPartyMode={() => navigateTo('party-setup')}
             onOpenMultiplayer={() => navigateTo('multiplayer')}
             onQuickPlay={handleQuickPlay}
+            onResumeSession={handleResumeSession}
+            onOpenHistory={() => setIsHistoryModalOpen(true)}
           />
         )}
 
@@ -216,6 +240,22 @@ function AppContent() {
 
       {/* Auth Modal for Sign In / Sign Up */}
       <AuthModal />
+
+      {/* Audio Settings Modal */}
+      <AudioSettingsModal
+        isOpen={isAudioModalOpen}
+        onClose={() => setIsAudioModalOpen(false)}
+      />
+
+      {/* Session History & Resume Modal */}
+      <SessionHistoryModal
+        isOpen={isHistoryModalOpen}
+        onClose={() => setIsHistoryModalOpen(false)}
+        onResumeSession={(session) => {
+          setIsHistoryModalOpen(false);
+          handleResumeSession(session);
+        }}
+      />
 
       <Footer />
     </div>

@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { PromptItem } from '../../types/game';
+import { CardRatingBar } from '../common/CardRatingBar';
+import { soundEffects } from '../../utils/audio';
 import { ArrowRight, Flag, HelpCircle } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
@@ -16,6 +18,7 @@ export const RedFlagGreenFlagGame: React.FC<RedFlagGreenFlagGameProps> = ({ prom
 
   const handleVote = (choice: 'red' | 'green' | 'depends') => {
     setSelectedFlag(choice);
+    soundEffects.playVoteSubmit();
     confetti({
       particleCount: 25,
       spread: 50,
@@ -25,20 +28,27 @@ export const RedFlagGreenFlagGame: React.FC<RedFlagGreenFlagGameProps> = ({ prom
   };
 
   const nextCard = () => {
+    soundEffects.playCardFlip();
     setSelectedFlag(null);
     setCurrentIndex(prev => (prev + 1) % prompts.length);
   };
 
   return (
-    <div className="w-full max-w-2xl flex flex-col items-center gap-6">
+    <div className="w-full max-w-4xl flex flex-col items-center gap-6">
       
       {/* Category header */}
-      <span className="px-4 py-1.5 rounded-full text-xs font-black uppercase tracking-widest bg-emerald-950/60 border border-emerald-500/50 text-emerald-300 shadow-neon-green/20">
-        🚩 Dealbreaker or Keeper? 🟢
+      <span className="px-5 py-2 rounded-full text-xs font-black uppercase tracking-widest bg-zinc-950/80 border border-white/10 shadow-lg flex items-center gap-2">
+        <span className="text-red-500 flex items-center gap-1.5 drop-shadow-[0_0_8px_rgba(239,68,68,0.5)]">
+          <Flag className="w-3.5 h-3.5 fill-red-500/50" /> Red Flag
+        </span>
+        <span className="text-zinc-500">/</span>
+        <span className="text-emerald-400 flex items-center gap-1.5 drop-shadow-[0_0_8px_rgba(16,185,129,0.5)]">
+          Green Flag <Flag className="w-3.5 h-3.5 fill-emerald-400/50" />
+        </span>
       </span>
 
       {/* Main Situation Card */}
-      <div className={`w-full min-h-[300px] p-8 sm:p-12 rounded-3xl glass-panel border flex flex-col justify-between items-center text-center relative overflow-hidden transition-all duration-300 ${
+      <div className={`w-full min-h-[340px] p-8 sm:p-14 rounded-3xl glass-panel border flex flex-col justify-between items-center text-center relative overflow-hidden transition-all duration-300 ${
         selectedFlag === 'red'
           ? 'border-red-500/60 shadow-neon-red/40'
           : selectedFlag === 'green'
@@ -77,8 +87,13 @@ export const RedFlagGreenFlagGame: React.FC<RedFlagGreenFlagGameProps> = ({ prom
           </div>
         )}
 
-        <div className="text-xs text-zinc-500 font-medium">
+        <div className="text-xs text-zinc-500 font-medium my-2">
           Cast your judgment and defend your standard to the group.
+        </div>
+
+        {/* Card Rating & Report Bar */}
+        <div className="w-full">
+          <CardRatingBar prompt={currentPrompt} />
         </div>
 
       </div>

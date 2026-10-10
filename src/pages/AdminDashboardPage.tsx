@@ -7,11 +7,12 @@ import { GameContentManager } from '../components/admin/GameContentManager';
 import { CommunityDeckManager } from '../components/admin/CommunityDeckManager';
 import { UserManagement } from '../components/admin/UserManagement';
 import { AdminChangePasswordModal } from '../components/auth/AdminChangePasswordModal';
-import { Shield, LayoutDashboard, Clock, FileText, Layers, Users, Lock } from 'lucide-react';
+import { CardReportModeration } from '../components/admin/CardReportModeration';
+import { Shield, LayoutDashboard, Clock, FileText, Layers, Users, Lock, Flag } from 'lucide-react';
 
 export const AdminDashboardPage: React.FC<{ onNavigate: (view: string) => void }> = ({ onNavigate }) => {
   const { currentUser, isAdmin, requiresPasswordChange } = useAuth();
-  const [activeTab, setActiveTab] = useState<'overview' | 'moderation' | 'content' | 'decks' | 'users'>('overview');
+  const [activeTab, setActiveTab] = useState<'overview' | 'moderation' | 'reports' | 'content' | 'decks' | 'users'>('overview');
   const [stats, setStats] = useState<AdminStats>({
     totalUsers: 0,
     totalDecks: 0,
@@ -59,7 +60,8 @@ export const AdminDashboardPage: React.FC<{ onNavigate: (view: string) => void }
 
   const navItems = [
     { id: 'overview', label: 'Overview', icon: LayoutDashboard },
-    { id: 'moderation', label: 'Prompt Moderation', icon: Clock, badge: stats.pendingSubmissions > 0 ? stats.pendingSubmissions : undefined },
+    { id: 'moderation', label: 'Submissions', icon: Clock, badge: stats.pendingSubmissions > 0 ? stats.pendingSubmissions : undefined },
+    { id: 'reports', label: 'Card Reports', icon: Flag },
     { id: 'content', label: 'Game Content Manager', icon: FileText },
     { id: 'decks', label: 'Community Decks', icon: Layers },
     { id: 'users', label: 'User Management', icon: Users },
@@ -92,7 +94,7 @@ export const AdminDashboardPage: React.FC<{ onNavigate: (view: string) => void }
 
         <button
           onClick={() => onNavigate('home')}
-          className="px-4 py-2 rounded-xl border border-white/10 hover:border-white/20 bg-zinc-900 text-xs font-semibold text-zinc-300 hover:text-white transition-all"
+          className="px-4 py-2 rounded-xl border border-white/10 hover:border-white/20 bg-zinc-900 text-xs font-semibold text-zinc-300 hover:text-white transition-all cursor-pointer"
         >
           Back to Website
         </button>
@@ -107,7 +109,7 @@ export const AdminDashboardPage: React.FC<{ onNavigate: (view: string) => void }
             <button
               key={item.id}
               onClick={() => setActiveTab(item.id as any)}
-              className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap transition-all select-none ${
+              className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap transition-all select-none cursor-pointer ${
                 isActive
                   ? 'bg-gradient-to-r from-brand-pink/20 to-brand-violet/20 border border-brand-pink text-white shadow-neon-pink'
                   : 'bg-zinc-900/60 border border-white/[0.06] text-zinc-400 hover:text-white hover:bg-zinc-800'
@@ -140,6 +142,7 @@ export const AdminDashboardPage: React.FC<{ onNavigate: (view: string) => void }
         )}
 
         {activeTab === 'moderation' && <PromptModeration />}
+        {activeTab === 'reports' && <CardReportModeration />}
         {activeTab === 'content' && <GameContentManager />}
         {activeTab === 'decks' && <CommunityDeckManager />}
         {activeTab === 'users' && <UserManagement />}

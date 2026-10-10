@@ -4,8 +4,10 @@ import { CustomDeck } from '../types/deck';
 import { GAMES_CONFIG } from '../data/gamesConfig';
 import { getDefaultPromptsForGame } from '../data/prompts';
 import { adminService } from '../services/adminService';
+import { sessionService } from '../services/sessionService';
 import { useGameSettings } from '../context/GameSettingsContext';
 import { GameShell } from '../components/games/GameShell';
+import { GameModeSelectScreen } from '../components/games/GameModeSelectScreen';
 
 // Game implementations
 import { TruthOrDareGame } from '../components/games/TruthOrDareGame';
@@ -20,6 +22,8 @@ import { MostLikelyToGame } from '../components/games/MostLikelyToGame';
 import { ImposterGame } from '../components/games/ImposterGame';
 import { WhosLyingGame } from '../components/games/WhosLyingGame';
 import { ConfessionsGame } from '../components/games/ConfessionsGame';
+import { ChaosMixGame } from '../components/games/ChaosMixGame';
+import { HotSeatGame } from '../components/games/HotSeatGame';
 
 interface GamePageProps {
   gameId: GameId;
@@ -31,6 +35,7 @@ export const GamePage: React.FC<GamePageProps> = ({ gameId, customDeck, onExit }
   const { selectedCategory, setSelectedCategory, savedPlayers, setSavedPlayers } = useGameSettings();
   const [prompts, setPrompts] = useState<PromptItem[]>([]);
   const [gameKey, setGameKey] = useState(0); // For clean restart
+  const [isSelectingMode, setIsSelectingMode] = useState<boolean>(!customDeck);
 
   const baseMetadata = GAMES_CONFIG[gameId] || GAMES_CONFIG['truth-or-dare'];
   const metadata = customDeck
@@ -45,7 +50,18 @@ export const GamePage: React.FC<GamePageProps> = ({ gameId, customDeck, onExit }
   // Load prompts for current game & category
   useEffect(() => {
     if (customDeck) {
-      setPrompts(customDeck.cards);
+      const unseen = sessionService.filterUnseenCards(customDeck.id, customDeck.cards);
+      setPrompts(unseen);
+      setIsSelectingMode(false);
+      sessionService.saveActiveSession({
+        mode: 'solo',
+        gameId,
+        category: selectedCategory,
+        customDeckId: customDeck.id,
+        customDeckTitle: customDeck.title,
+        players: savedPlayers,
+        currentRound: 1,
+      });
       return;
     }
 
@@ -54,13 +70,27 @@ export const GamePage: React.FC<GamePageProps> = ({ gameId, customDeck, onExit }
       const base = getDefaultPromptsForGame(gameId, selectedCategory);
 
       // 2. Merge any approved community/admin prompts
+      let rawPool: PromptItem[] = base;
       try {
         const overrides = await adminService.getAllPromptsForManager(gameId, selectedCategory);
         const activeOverrides = overrides.filter(p => p.isActive !== false);
-        setPrompts(activeOverrides.length > 0 ? activeOverrides : base);
+        rawPool = activeOverrides.length > 0 ? activeOverrides : base;
       } catch {
-        setPrompts(base);
+        rawPool = base;
       }
+
+      // 3. Deduplicate: only show unseen cards until collection exhausted
+      const deduplicated = sessionService.filterUnseenCards(gameId, rawPool);
+      setPrompts(deduplicated);
+
+      // 4. Auto-save session
+      sessionService.saveActiveSession({
+        mode: 'solo',
+        gameId,
+        category: selectedCategory,
+        players: savedPlayers,
+        currentRound: 1,
+      });
     };
 
     loadPrompts();
@@ -70,12 +100,34 @@ export const GamePage: React.FC<GamePageProps> = ({ gameId, customDeck, onExit }
     setGameKey(prev => prev + 1);
   };
 
+  const handleSelectMode = (cat: GameCategory, progressive?: boolean) => {
+    setSelectedCategory(cat);
+    setIsSelectingMode(false);
+  };
+
+  // If user is choosing a game mode (and not playing a custom deck)
+  if (isSelectingMode && !customDeck) {
+    return (
+      <GameModeSelectScreen
+        metadata={metadata}
+        onSelectCategory={handleSelectMode}
+        onBack={onExit}
+      />
+    );
+  }
+
   const renderActiveGame = () => {
     if (prompts.length === 0) {
       return (
-        <div className="text-center py-16 glass-panel rounded-3xl p-8 border border-white/10">
+        <div className="text-center py-16 glass-panel rounded-3xl p-8 border border-white/10 max-w-md mx-auto">
           <p className="text-base font-bold text-white mb-2">No prompts found for this category.</p>
-          <p className="text-xs text-zinc-400">Try choosing another category or suggesting a card!</p>
+          <p className="text-xs text-zinc-400 mb-4">Try choosing another category or suggesting a card!</p>
+          <button
+            onClick={() => setIsSelectingMode(true)}
+            className="px-5 py-2.5 rounded-xl bg-brand-pink/20 border border-brand-pink/50 text-pink-300 text-xs font-bold"
+          >
+            Choose Another Mode
+          </button>
         </div>
       );
     }
@@ -105,6 +157,10 @@ export const GamePage: React.FC<GamePageProps> = ({ gameId, customDeck, onExit }
         return <WhosLyingGame key={gameKey} prompts={prompts} players={savedPlayers} />;
       case 'confessions':
         return <ConfessionsGame key={gameKey} prompts={prompts} players={savedPlayers} />;
+      case 'chaos-mix':
+        return <ChaosMixGame key={gameKey} prompts={prompts} players={savedPlayers} />;
+      case 'hot-seat':
+        return <HotSeatGame key={gameKey} prompts={prompts} players={savedPlayers} />;
       default:
         return <TruthOrDareGame key={gameKey} prompts={prompts} players={savedPlayers} />;
     }
@@ -115,6 +171,7 @@ export const GamePage: React.FC<GamePageProps> = ({ gameId, customDeck, onExit }
       metadata={metadata}
       category={selectedCategory}
       onCategoryChange={setSelectedCategory}
+      onChangeMode={() => setIsSelectingMode(true)}
       onExit={onExit}
       onRestart={handleRestart}
       players={savedPlayers}
@@ -125,4 +182,3 @@ export const GamePage: React.FC<GamePageProps> = ({ gameId, customDeck, onExit }
     </GameShell>
   );
 };
-

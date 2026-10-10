@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { PromptItem } from '../../types/game';
+import { CardRatingBar } from '../common/CardRatingBar';
+import { soundEffects } from '../../utils/audio';
 import { ArrowRight, RotateCcw, Heart, Check, X } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
@@ -24,6 +26,7 @@ export const NeverHaveIEverGame: React.FC<NeverHaveIEverGameProps> = ({ prompts,
   const currentPrompt = prompts[currentIndex] || prompts[0];
 
   const nextCard = () => {
+    soundEffects.playCardFlip();
     setLastChoice(null);
     let nextIdx = Math.floor(Math.random() * prompts.length);
     if (usedIndices.length < prompts.length) {
@@ -116,8 +119,13 @@ export const NeverHaveIEverGame: React.FC<NeverHaveIEverGameProps> = ({ prompts,
           </div>
         )}
 
-        <div className="text-xs text-zinc-400 font-medium mt-2">
+        <div className="text-xs text-zinc-400 font-medium my-2">
           Drink, drop a finger, or confess with your crew!
+        </div>
+
+        {/* Rating & Reporting */}
+        <div className="w-full">
+          <CardRatingBar prompt={currentPrompt} />
         </div>
 
       </div>

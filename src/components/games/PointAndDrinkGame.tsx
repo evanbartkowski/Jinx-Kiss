@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { PromptItem } from '../../types/game';
 import { useGameSettings } from '../../context/GameSettingsContext';
+import { CardRatingBar } from '../common/CardRatingBar';
+import { soundEffects } from '../../utils/audio';
 import { ArrowRight, Crosshair, Users, Trophy } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
@@ -17,7 +19,8 @@ export const PointAndDrinkGame: React.FC<PointAndDrinkGameProps> = ({ prompts, p
   const [tallies, setTallies] = useState<Record<string, number>>({});
   const [isRevealed, setIsRevealed] = useState(false);
 
-  const activePlayers = players.length >= 2 ? players : ['Sam', 'Alex', 'Jordan', 'Taylor'];
+  const activePlayers = players;
+  const hasPlayers = activePlayers.length >= 2;
   const currentPrompt = prompts[currentIndex] || prompts[0];
   const isKids = selectedCategory === 'kids';
 
@@ -55,6 +58,7 @@ export const PointAndDrinkGame: React.FC<PointAndDrinkGameProps> = ({ prompts, p
   };
 
   const nextCard = () => {
+    soundEffects.playCardFlip();
     setIsRevealed(false);
     setCountdown(null);
     setTallies({});
@@ -91,18 +95,34 @@ export const PointAndDrinkGame: React.FC<PointAndDrinkGameProps> = ({ prompts, p
           </div>
         )}
 
-        {countdown === 0 && leader && (
-          <div className="animate-scale-in p-4 rounded-2xl bg-pink-950/60 border border-pink-500/40 flex items-center gap-3">
-            <Trophy className="w-6 h-6 text-pink-400" />
-            <div className="text-left">
-              <span className="text-xs font-bold text-pink-300 uppercase tracking-wider block">Most Fingers Pointed At:</span>
-              <span className="text-lg font-black text-white">{leader[0]} ({leader[1]} points)</span>
+        {countdown === 0 && (
+          hasPlayers && leader ? (
+            <div className="animate-scale-in p-4 rounded-2xl bg-pink-950/60 border border-pink-500/40 flex items-center gap-3">
+              <Trophy className="w-6 h-6 text-pink-400" />
+              <div className="text-left">
+                <span className="text-xs font-bold text-pink-300 uppercase tracking-wider block">Most Fingers Pointed At:</span>
+                <span className="text-lg font-black text-white">{leader[0]} ({leader[1]} points)</span>
+              </div>
             </div>
-          </div>
+          ) : (
+            <div className="animate-scale-in p-4 rounded-2xl bg-pink-950/60 border border-pink-500/40 text-center">
+              <span className="text-lg font-black text-white block mb-1">👉 POINT AT SOMEONE!</span>
+              <span className="text-xs text-pink-300 font-semibold">Whoever has the most fingers pointed at them takes a sip!</span>
+            </div>
+          )
         )}
 
-        <div className="text-xs text-zinc-400 font-medium">
-          {countdown === null ? 'Tap Start, then on "POINT!" point your finger at someone!' : 'Tap player below to record finger points!'}
+        <div className="text-xs text-zinc-400 font-medium my-2">
+          {countdown === null
+            ? 'Tap Start, then on "POINT!" point your finger at someone!'
+            : hasPlayers
+              ? 'Tap player below to record finger points!'
+              : 'Look around the room and count the fingers!'}
+        </div>
+
+        {/* Card Rating & Report Bar */}
+        <div className="w-full">
+          <CardRatingBar prompt={currentPrompt} />
         </div>
 
       </div>
@@ -118,23 +138,25 @@ export const PointAndDrinkGame: React.FC<PointAndDrinkGameProps> = ({ prompts, p
         </button>
       )}
 
-      {/* Voting Tally Buttons for Players */}
+      {/* Voting Tally Buttons for Players (if players exist) or Next Prompt */}
       {isRevealed && (
         <div className="w-full flex flex-col items-center gap-4 animate-fade-in">
-          <div className="w-full grid grid-cols-2 sm:grid-cols-4 gap-3">
-            {activePlayers.map((player) => (
-              <button
-                key={player}
-                onClick={() => addVote(player)}
-                className="p-3 rounded-2xl glass-panel border border-white/10 hover:border-pink-500/60 hover:shadow-neon-pink/30 flex flex-col items-center justify-center gap-1 transition-all active:scale-95"
-              >
-                <span className="text-sm font-bold text-white truncate max-w-full">{player}</span>
-                <span className="text-xs font-black text-pink-400">
-                  {tallies[player] || 0} votes
-                </span>
-              </button>
-            ))}
-          </div>
+          {hasPlayers && (
+            <div className="w-full grid grid-cols-2 sm:grid-cols-4 gap-3">
+              {activePlayers.map((player) => (
+                <button
+                  key={player}
+                  onClick={() => addVote(player)}
+                  className="p-3 rounded-2xl glass-panel border border-white/10 hover:border-pink-500/60 hover:shadow-neon-pink/30 flex flex-col items-center justify-center gap-1 transition-all active:scale-95"
+                >
+                  <span className="text-sm font-bold text-white truncate max-w-full">{player}</span>
+                  <span className="text-xs font-black text-pink-400">
+                    {tallies[player] || 0} votes
+                  </span>
+                </button>
+              ))}
+            </div>
+          )}
 
           <button
             onClick={nextCard}

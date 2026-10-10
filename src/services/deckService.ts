@@ -32,34 +32,32 @@ export class DeckService {
    * Get all approved public community decks
    */
   async getPublicDecks(): Promise<CustomDeck[]> {
-    // Start with local public decks
-    let decks = this.getLocalDecks().filter(d => d.visibility === 'public' && d.moderationStatus === 'approved');
+    const localPublic = this.getLocalDecks().filter(d => d.visibility === 'public');
+    const mergedMap = new Map<string, CustomDeck>();
+
+    // Load default seed community decks
+    this.getSeedCommunityDecks().forEach(d => mergedMap.set(d.id, d));
 
     try {
       if (db) {
         const q = query(
           collection(db, 'custom_decks'),
-          where('visibility', '==', 'public'),
-          where('moderationStatus', '==', 'approved')
+          where('visibility', '==', 'public')
         );
         const snapshot = await getDocs(q);
-        const cloudDecks: CustomDeck[] = [];
-        snapshot.forEach(docSnap => cloudDecks.push(docSnap.data() as CustomDeck));
-        if (cloudDecks.length > 0) {
-          return cloudDecks;
-        }
+        snapshot.forEach(docSnap => {
+          const deck = docSnap.data() as CustomDeck;
+          mergedMap.set(deck.id, deck);
+        });
       }
     } catch (e) {
       console.warn('Firestore getPublicDecks fallback to local:', e);
     }
 
-    // Default sample community decks if empty
-    if (decks.length === 0) {
-      decks = this.getSeedCommunityDecks();
-      this.saveLocalDecks([...this.getLocalDecks(), ...decks]);
-    }
+    // Local user public decks take precedence and are immediately included
+    localPublic.forEach(d => mergedMap.set(d.id, d));
 
-    return decks;
+    return Array.from(mergedMap.values());
   }
 
   /**
@@ -106,7 +104,7 @@ export class DeckService {
       ...deckData,
       id,
       shareToken,
-      moderationStatus: deckData.visibility === 'public' ? 'pending' : 'approved',
+      moderationStatus: 'approved',
       createdAt: now,
       updatedAt: now,
       playCount: 0,
@@ -143,11 +141,8 @@ export class DeckService {
       throw new Error('You do not have permission to edit this deck.');
     }
 
-    // Changing a public deck resets moderation to pending
-    let moderationStatus = all[index].moderationStatus;
-    if (updates.visibility === 'public' || (all[index].visibility === 'public' && updates.cards)) {
-      moderationStatus = 'pending';
-    }
+    // Public decks remain instantly available
+    const moderationStatus = 'approved';
 
     const updated: CustomDeck = {
       ...all[index],
@@ -235,6 +230,7 @@ export class DeckService {
         title: 'Midnight Confessions',
         description: 'Deep, revealing questions for late night talks and best friend sleepovers.',
         gameId: 'truth-or-sip',
+        gameMode: 'medium',
         themeColor: '#A855F7',
         creatorUid: 'official_jinx',
         creatorUsername: 'JinxKissOfficial',
@@ -257,6 +253,7 @@ export class DeckService {
         title: 'Chaotic Afterparty Dares',
         description: 'Unfiltered, hilarious challenges designed to turn up the volume on any living room party.',
         gameId: 'truth-or-dare',
+        gameMode: 'extreme',
         themeColor: '#FF4DA6',
         creatorUid: 'official_jinx',
         creatorUsername: 'PartyCrew',
@@ -278,6 +275,7 @@ export class DeckService {
         title: 'Impossible Dilemmas',
         description: 'Mind-bending Would You Rather dilemmas that tear groups apart.',
         gameId: 'would-you-rather',
+        gameMode: 'spicy',
         themeColor: '#06B6D4',
         creatorUid: 'official_jinx',
         creatorUsername: 'PhilosopherKing',

@@ -1,4 +1,4 @@
-import { GameId, PromptItem } from './game';
+import { GameId, GameCategory, PromptItem } from './game';
 
 export type DeckVisibility = 'private' | 'unlisted' | 'public';
 export type DeckModerationStatus = 'pending' | 'approved' | 'rejected';
@@ -9,6 +9,7 @@ export interface CustomDeck {
   title: string;
   description: string;
   gameId: GameId;
+  gameMode?: GameCategory;
   themeColor: string;
   creatorUid: string;
   creatorUsername: string;

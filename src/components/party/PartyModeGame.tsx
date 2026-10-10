@@ -1,9 +1,18 @@
 import React, { useState, useEffect, useRef, useMemo } from 'react';
-import { GameId, PartyModeConfig, PromptItem, MysteryCard, SecretMission, Achievement } from '../../types/game';
+import { GameId, GameCategory, PartyModeConfig, PromptItem, MysteryCard, SecretMission, Achievement } from '../../types/game';
 import { GAMES_CONFIG } from '../../data/gamesConfig';
 import { ALL_DEFAULT_PROMPTS, getDefaultPromptsForGame } from '../../data/prompts';
 import { MYSTERY_CARDS } from '../../data/mysteryCards';
 import { SECRET_MISSIONS } from '../../data/secretMissions';
+import { SpecialCard } from '../../types/specialCard';
+import { drawRandomSpecialCard, getSpecialCardChance } from '../../data/specialCards';
+import { SpecialCardOverlay } from '../common/SpecialCardOverlay';
+import {
+  ProgressiveDifficultyState,
+  advanceProgressiveRound,
+} from '../../utils/progressiveDifficulty';
+import { ProgressiveLevelUpModal } from '../common/ProgressiveLevelUpModal';
+import { sessionService } from '../../services/sessionService';
 import { ChaosWheel } from './ChaosWheel';
 import { MysteryCardModal } from './MysteryCardModal';
 import { PartyRecap } from './PartyRecap';
@@ -24,6 +33,7 @@ import {
   EyeOff,
   Flame,
   Check,
+  TrendingUp,
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
@@ -37,6 +47,23 @@ export const PartyModeGame: React.FC<PartyModeGameProps> = ({ config, onExit }) 
   const [activeGameId, setActiveGameId] = useState<GameId>(config.selectedGames[0] || 'truth-or-dare');
   const [activePlayerIndex, setActivePlayerIndex] = useState(0);
   const [currentPrompt, setCurrentPrompt] = useState<PromptItem | null>(null);
+
+  // Progressive Difficulty State
+  const [progressiveState, setProgressiveState] = useState<ProgressiveDifficultyState>(() => ({
+    enabled: !!config.enableProgressiveDifficulty,
+    currentCategory: config.categories[0] || 'medium',
+    initialCategory: config.categories[0] || 'medium',
+    roundsPerLevel: config.roundsPerProgressiveLevel || 5,
+    roundsCompletedAtTier: 0,
+    totalProgressiveRounds: 0,
+    isPaused: false,
+    hasJustLeveledUp: false,
+  }));
+  const [showLevelUpModal, setShowLevelUpModal] = useState(false);
+  const [levelUpInfo, setLevelUpInfo] = useState<{ newCat: GameCategory; prevCat: GameCategory } | null>(null);
+
+  // Special Card State
+  const [activeSpecialCard, setActiveSpecialCard] = useState<SpecialCard | null>(null);
 
   // Scoring
   const [scores, setScores] = useState<Record<string, number>>(() => {
@@ -61,27 +88,46 @@ export const PartyModeGame: React.FC<PartyModeGameProps> = ({ config, onExit }) 
   const players = config.playerNames;
   const activePlayer = players[activePlayerIndex] || players[0];
 
-  // Helper to pick next prompt with balanced variety
-  const pickPromptForGame = (gameId: GameId): PromptItem => {
-    const availableCategories = config.categories;
-    const cat = availableCategories[Math.floor(Math.random() * availableCategories.length)];
+  // Helper to pick next prompt with balanced variety & guaranteed deduplication
+  const pickPromptForGame = (gameId: GameId, categoryOverride?: GameCategory): PromptItem => {
+    const cat = categoryOverride || (progressiveState.enabled ? progressiveState.currentCategory : config.categories[Math.floor(Math.random() * config.categories.length)]);
     const pool = getDefaultPromptsForGame(gameId, cat);
-    if (pool.length > 0) {
-      return pool[Math.floor(Math.random() * pool.length)];
+    
+    // Deduplication filter: exclude previously seen cards for this deck
+    const unseenPool = sessionService.filterUnseenCards(gameId, pool);
+
+    if (unseenPool.length > 0) {
+      const chosen = unseenPool[Math.floor(Math.random() * unseenPool.length)];
+      sessionService.markCardSeen(gameId, chosen.id);
+      return chosen;
     }
+
     const allForGame = ALL_DEFAULT_PROMPTS[gameId] || [];
-    return allForGame[Math.floor(Math.random() * allForGame.length)] || {
+    const chosen = allForGame[Math.floor(Math.random() * allForGame.length)] || {
       id: 'fallback-prompt',
       gameId,
       category: 'medium',
       text: 'Share something nobody in the room knows about you!',
     };
+    sessionService.markCardSeen(gameId, chosen.id);
+    return chosen;
   };
 
-  // Initialize first prompt
+  // Initialize first prompt & auto-save session
   useEffect(() => {
     const initialPrompt = pickPromptForGame(activeGameId);
     setCurrentPrompt(initialPrompt);
+
+    // Save initial session
+    sessionService.saveActiveSession({
+      mode: 'party',
+      gameId: activeGameId,
+      category: progressiveState.currentCategory,
+      players,
+      currentRound: 1,
+      scores,
+      partyConfig: config,
+    });
 
     // Assign secret missions to players
     const missionsMap: Record<string, SecretMission> = {};
@@ -118,14 +164,16 @@ export const PartyModeGame: React.FC<PartyModeGameProps> = ({ config, onExit }) 
 
   // Turn rotation & game advancement
   const handleNextRound = (awardCurrentPlayerPoints = false) => {
-    soundEffects.playClick();
+    soundEffects.playCardFlip();
 
+    let updatedScores = { ...scores };
     if (awardCurrentPlayerPoints) {
       const addedPoints = 10 * multiplier;
-      setScores(prev => ({
-        ...prev,
-        [activePlayer]: (prev[activePlayer] || 0) + addedPoints,
-      }));
+      updatedScores = {
+        ...scores,
+        [activePlayer]: (scores[activePlayer] || 0) + addedPoints,
+      };
+      setScores(updatedScores);
       soundEffects.playSuccess();
       confetti({
         particleCount: 25,
@@ -144,6 +192,7 @@ export const PartyModeGame: React.FC<PartyModeGameProps> = ({ config, onExit }) 
     // Check end condition
     if (config.roundCount !== 'endless' && currentRound >= config.roundCount) {
       setShowPartyRecap(true);
+      sessionService.clearActiveSession();
       return;
     }
 
@@ -154,6 +203,18 @@ export const PartyModeGame: React.FC<PartyModeGameProps> = ({ config, onExit }) 
     const nextPlayerIdx = (activePlayerIndex + 1) % players.length;
     setActivePlayerIndex(nextPlayerIdx);
 
+    // Advance progressive difficulty
+    let activeCat = progressiveState.currentCategory;
+    if (progressiveState.enabled) {
+      const { newState, didLevelUp, newCategory } = advanceProgressiveRound(progressiveState);
+      setProgressiveState(newState);
+      if (didLevelUp) {
+        setLevelUpInfo({ newCat: newCategory, prevCat: activeCat });
+        setShowLevelUpModal(true);
+        activeCat = newCategory;
+      }
+    }
+
     // Pick next game (weighted to ensure variety)
     const otherGames = config.selectedGames.filter(g => g !== activeGameId);
     const nextGame = otherGames.length > 0
@@ -161,24 +222,41 @@ export const PartyModeGame: React.FC<PartyModeGameProps> = ({ config, onExit }) 
       : config.selectedGames[0];
     setActiveGameId(nextGame);
 
-    const nextPrompt = pickPromptForGame(nextGame);
+    const nextPrompt = pickPromptForGame(nextGame, activeCat);
     setCurrentPrompt(nextPrompt);
+
+    // Save game session automatically after every completed card
+    sessionService.saveActiveSession({
+      mode: 'party',
+      gameId: nextGame,
+      category: activeCat,
+      players,
+      currentRound: nextRoundNumber,
+      scores: updatedScores,
+      partyConfig: config,
+    });
 
     // Reset multiplier & timer
     setMultiplier(1);
     setTimerLeft(config.timerSeconds);
     setIsSecretMissionPeeking(false);
 
-    // Rare chance of Mystery Card trigger (approx 15% chance if enabled)
-    if (config.enableMysteryCards && Math.random() < 0.15) {
+    // Rare chance of Special Card trigger
+    if (config.enableSpecialCards !== false) {
+      const specialChance = getSpecialCardChance(config.specialCardFrequency || 'normal');
+      if (Math.random() < specialChance) {
+        const special = drawRandomSpecialCard();
+        setActiveSpecialCard(special);
+      }
+    } else if (config.enableMysteryCards && Math.random() < 0.15) {
       const randomCard = MYSTERY_CARDS[Math.floor(Math.random() * MYSTERY_CARDS.length)];
       setActiveMysteryCard(randomCard);
     }
   };
 
   const handleSkipPrompt = () => {
-    soundEffects.playClick();
-    const nextPrompt = pickPromptForGame(activeGameId);
+    soundEffects.playCardFlip();
+    const nextPrompt = pickPromptForGame(activeGameId, progressiveState.currentCategory);
     setCurrentPrompt(nextPrompt);
     setTimerLeft(config.timerSeconds);
   };
@@ -214,25 +292,36 @@ export const PartyModeGame: React.FC<PartyModeGameProps> = ({ config, onExit }) 
   }
 
   return (
-    <div className="w-full max-w-3xl mx-auto px-4 py-6 flex flex-col items-center gap-6 animate-fade-in select-none">
+    <div className="w-full min-h-[calc(100dvh-5rem)] px-4 sm:px-8 xl:px-12 2xl:px-16 py-6 flex flex-col justify-between items-center gap-6 animate-fade-in select-none">
       {/* Top Banner: Round Info & Game Mode */}
-      <div className="w-full flex items-center justify-between gap-3">
+      <div className="w-full flex items-center justify-between gap-3 pb-4 border-b border-white/[0.08]">
         {/* Round Badge */}
         <div className="flex items-center gap-2">
-          <span className="px-3.5 py-1.5 rounded-full text-xs font-black uppercase tracking-wider bg-white/5 border border-white/10 text-white shadow-sm">
+          <span className="px-4 py-2 rounded-full text-xs sm:text-sm font-black uppercase tracking-wider bg-white/5 border border-white/10 text-white shadow-sm">
             Round {currentRound} {config.roundCount !== 'endless' && `/ ${config.roundCount}`}
           </span>
           {multiplier > 1 && (
-            <span className="px-3 py-1 rounded-full text-xs font-black uppercase bg-amber-500/20 border border-amber-500/40 text-amber-300 animate-pulse">
-              ⚡ {multiplier}x Points
+            <span className="px-3.5 py-1.5 rounded-full text-xs font-black uppercase bg-amber-500/20 border border-amber-500/40 text-amber-300 animate-pulse">
+              ⚡ {multiplier}x Points Active
             </span>
+          )}
+
+          {/* Progressive Tier Indicator */}
+          {progressiveState.enabled && (
+            <div className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-black uppercase bg-gradient-to-r from-rose-950/50 to-pink-950/50 border border-rose-500/40 text-rose-300 shadow-sm">
+              <TrendingUp className="w-3.5 h-3.5 text-rose-400" />
+              <span>Tier: {progressiveState.currentCategory}</span>
+              <span className="text-[10px] text-zinc-400 font-semibold font-mono">
+                ({progressiveState.roundsCompletedAtTier}/{progressiveState.roundsPerLevel})
+              </span>
+            </div>
           )}
         </div>
 
         {/* Live Score Leader Snippet */}
         {config.enableScoring && (
-          <div className="hidden sm:flex items-center gap-2 px-3.5 py-1 rounded-full bg-black/50 border border-white/10 text-xs text-zinc-300">
-            <Trophy className="w-3.5 h-3.5 text-amber-400" />
+          <div className="hidden sm:flex items-center gap-2 px-4 py-2 rounded-full bg-black/60 border border-white/10 text-xs sm:text-sm text-zinc-300 shadow-md">
+            <Trophy className="w-4 h-4 text-amber-400" />
             <span className="font-semibold truncate max-w-[150px]">
               {Object.entries(scores).sort((a,b) => b[1] - a[1])[0]?.[0] || 'Nobody'}:
             </span>
@@ -245,7 +334,7 @@ export const PartyModeGame: React.FC<PartyModeGameProps> = ({ config, onExit }) 
         {/* End Party Button */}
         <button
           onClick={() => setShowPartyRecap(true)}
-          className="text-xs font-bold text-zinc-400 hover:text-white px-3 py-1.5 rounded-xl border border-white/10 transition-colors"
+          className="text-xs sm:text-sm font-bold text-zinc-400 hover:text-white px-4 py-2 rounded-2xl border border-white/10 hover:border-white/20 transition-all cursor-pointer"
         >
           End Party
         </button>
@@ -255,7 +344,7 @@ export const PartyModeGame: React.FC<PartyModeGameProps> = ({ config, onExit }) 
       <div className="w-full flex flex-col items-center text-center">
         {/* Game Title with Accent Color */}
         <div
-          className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-black uppercase tracking-widest border mb-3 transition-all"
+          className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-xs font-black uppercase tracking-widest border mb-3 transition-all"
           style={{
             borderColor: `${activeMetadata.themeColor}50`,
             backgroundColor: `${activeMetadata.themeColor}15`,
@@ -264,13 +353,27 @@ export const PartyModeGame: React.FC<PartyModeGameProps> = ({ config, onExit }) 
           }}
         >
           <Sparkles className="w-3.5 h-3.5" />
-          <span>{activeMetadata.title}</span>
+          <span>
+            {activeGameId === 'red-flag-green-flag' ? (
+              <>
+                <span className="text-red-500">Red Flag</span> / <span className="text-emerald-400">Green Flag</span>
+              </>
+            ) : (
+              activeMetadata.title
+            )}
+          </span>
         </div>
 
-        {/* Active Player Spotlight */}
-        <h2 className="text-2xl sm:text-4xl font-black uppercase tracking-tight text-white">
-          It's <span style={{ color: activeMetadata.themeColor }}>{activePlayer}'s</span> Turn
-        </h2>
+        {/* Active Player Spotlight or Group Challenge */}
+        {players.length > 0 && activePlayer ? (
+          <h2 className="text-3xl sm:text-5xl font-black uppercase tracking-tight text-white">
+            It's <span style={{ color: activeMetadata.themeColor }}>{activePlayer}'s</span> Turn
+          </h2>
+        ) : (
+          <h2 className="text-3xl sm:text-5xl font-black uppercase tracking-tight text-white">
+            <span style={{ color: activeMetadata.themeColor }}>Party</span> Challenge
+          </h2>
+        )}
       </div>
 
       {/* Timer Bar (if enabled) */}
@@ -302,23 +405,23 @@ export const PartyModeGame: React.FC<PartyModeGameProps> = ({ config, onExit }) 
 
       {/* Main Party Prompt Card */}
       <div
-        className="w-full min-h-[320px] p-8 sm:p-12 rounded-3xl glass-panel border flex flex-col justify-between items-center text-center relative overflow-hidden transition-all duration-300"
+        className="w-full max-w-5xl min-h-[360px] p-8 sm:p-14 lg:p-16 rounded-3xl glass-panel border flex flex-col justify-between items-center text-center relative overflow-hidden transition-all duration-300 my-auto"
         style={{
-          borderColor: `${activeMetadata.themeColor}40`,
-          boxShadow: `0 10px 40px -10px ${activeMetadata.themeColor}35`,
+          borderColor: `${activeMetadata.themeColor}50`,
+          boxShadow: `0 15px 50px -15px ${activeMetadata.themeColor}40`,
         }}
       >
         {/* Glow ambient background */}
         <div
-          className="absolute inset-0 rounded-3xl opacity-10 blur-2xl pointer-events-none"
+          className="absolute inset-0 rounded-3xl opacity-15 blur-3xl pointer-events-none"
           style={{ backgroundColor: activeMetadata.themeColor }}
         />
 
-        <span className="text-xs uppercase tracking-widest text-zinc-400 font-semibold">
+        <span className="text-xs sm:text-sm uppercase tracking-widest text-zinc-400 font-semibold">
           {activeMetadata.tagline}
         </span>
 
-        <p className="text-xl sm:text-2xl md:text-3xl font-black text-white leading-relaxed my-6 max-w-xl">
+        <p className="text-2xl sm:text-4xl md:text-5xl font-black text-white leading-relaxed my-8 max-w-3xl">
           "{currentPrompt?.text}"
         </p>
 
@@ -326,16 +429,16 @@ export const PartyModeGame: React.FC<PartyModeGameProps> = ({ config, onExit }) 
         {activeMission && (
           <div className="my-2">
             {isSecretMissionPeeking ? (
-              <div className="p-3.5 rounded-2xl bg-teal-950/60 border border-teal-500/40 text-left animate-scale-in max-w-md">
-                <span className="text-[10px] font-black uppercase tracking-wider text-teal-400 block mb-1">
+              <div className="p-4 rounded-2xl bg-teal-950/70 border border-teal-500/50 text-left animate-scale-in max-w-lg shadow-lg">
+                <span className="text-xs font-black uppercase tracking-wider text-teal-400 block mb-1">
                   🕵️ Your Private Secret Mission (+{activeMission.rewardPoints} pts):
                 </span>
-                <p className="text-xs text-zinc-200 font-medium">
+                <p className="text-xs sm:text-sm text-zinc-200 font-medium">
                   {activeMission.mission}
                 </p>
                 <button
                   onClick={() => setIsSecretMissionPeeking(false)}
-                  className="mt-2 text-[10px] font-bold text-teal-300 underline"
+                  className="mt-2 text-xs font-bold text-teal-300 underline cursor-pointer"
                 >
                   Hide Secret Mission
                 </button>
@@ -343,9 +446,9 @@ export const PartyModeGame: React.FC<PartyModeGameProps> = ({ config, onExit }) 
             ) : (
               <button
                 onClick={() => setIsSecretMissionPeeking(true)}
-                className="px-4 py-1.5 rounded-full border border-white/10 hover:border-teal-500/40 text-xs font-semibold text-zinc-400 hover:text-teal-300 flex items-center gap-1.5 transition-all"
+                className="px-5 py-2 rounded-full border border-white/10 hover:border-teal-500/50 text-xs sm:text-sm font-semibold text-zinc-400 hover:text-teal-300 flex items-center gap-2 transition-all cursor-pointer shadow-sm"
               >
-                <Eye className="w-3.5 h-3.5" />
+                <Eye className="w-4 h-4" />
                 <span>Peek My Secret Mission</span>
               </button>
             )}
@@ -361,12 +464,12 @@ export const PartyModeGame: React.FC<PartyModeGameProps> = ({ config, onExit }) 
       </div>
 
       {/* Main Party Gameplay Controls */}
-      <div className="w-full flex flex-col items-center gap-4">
-        <div className="flex flex-wrap items-center justify-center gap-3">
+      <div className="w-full max-w-5xl flex flex-col items-center gap-4">
+        <div className="flex flex-wrap items-center justify-center gap-4 w-full">
           {/* Skip / Reshuffle */}
           <button
             onClick={handleSkipPrompt}
-            className="px-5 py-3.5 rounded-2xl border border-white/10 text-zinc-300 hover:text-white font-semibold text-xs transition-colors flex items-center gap-2 active:scale-95"
+            className="px-6 py-4 rounded-2xl border border-white/15 text-zinc-300 hover:text-white font-bold text-xs sm:text-sm transition-all flex items-center gap-2 active:scale-95 cursor-pointer bg-white/[0.02] hover:bg-white/[0.08]"
           >
             <SkipForward className="w-4 h-4" />
             <span>Skip / Reshuffle</span>
@@ -376,7 +479,7 @@ export const PartyModeGame: React.FC<PartyModeGameProps> = ({ config, onExit }) 
           {config.enableChaosWheel && (
             <button
               onClick={handleChaosWheelTrigger}
-              className="px-6 py-3.5 rounded-2xl bg-purple-900/40 border border-purple-500/50 hover:bg-purple-900/60 text-purple-200 font-bold text-xs shadow-neon-violet flex items-center gap-2 transition-all active:scale-95"
+              className="px-7 py-4 rounded-2xl bg-purple-900/40 border border-purple-500/50 hover:bg-purple-900/60 text-purple-200 font-black text-xs sm:text-sm shadow-neon-violet flex items-center gap-2.5 transition-all active:scale-95 cursor-pointer"
             >
               <Disc3 className="w-4 h-4 text-purple-400" />
               <span>Spin Chaos Wheel</span>
@@ -387,19 +490,19 @@ export const PartyModeGame: React.FC<PartyModeGameProps> = ({ config, onExit }) 
           {config.enableScoring ? (
             <button
               onClick={() => handleNextRound(true)}
-              className="px-8 py-3.5 rounded-2xl bg-gradient-to-r from-brand-pink to-brand-violet hover:from-pink-500 hover:to-purple-500 text-white font-black text-sm shadow-neon-pink flex items-center gap-2 transition-all active:scale-95"
+              className="px-10 py-4 rounded-2xl bg-gradient-to-r from-brand-pink via-purple-600 to-brand-violet hover:from-pink-500 hover:to-purple-500 text-white font-black text-sm sm:text-base shadow-neon-pink flex items-center gap-2.5 transition-all active:scale-95 cursor-pointer"
             >
-              <Check className="w-4 h-4" />
+              <Check className="w-5 h-5" />
               <span>Complete (+{10 * multiplier} pts)</span>
-              <ArrowRight className="w-4 h-4 ml-1" />
+              <ArrowRight className="w-5 h-5 ml-1" />
             </button>
           ) : (
             <button
               onClick={() => handleNextRound(false)}
-              className="px-8 py-3.5 rounded-2xl bg-gradient-to-r from-brand-pink to-brand-violet hover:from-pink-500 hover:to-purple-500 text-white font-black text-sm shadow-neon-pink flex items-center gap-2 transition-all active:scale-95"
+              className="px-10 py-4 rounded-2xl bg-gradient-to-r from-brand-pink via-purple-600 to-brand-violet hover:from-pink-500 hover:to-purple-500 text-white font-black text-sm sm:text-base shadow-neon-pink flex items-center gap-2.5 transition-all active:scale-95 cursor-pointer"
             >
               <span>Next Round</span>
-              <ArrowRight className="w-4 h-4" />
+              <ArrowRight className="w-5 h-5" />
             </button>
           )}
         </div>
@@ -447,6 +550,33 @@ export const PartyModeGame: React.FC<PartyModeGameProps> = ({ config, onExit }) 
         <MysteryCardModal
           card={activeMysteryCard}
           onClose={() => setActiveMysteryCard(null)}
+        />
+      )}
+
+      {/* Special Card Overlay */}
+      {activeSpecialCard && (
+        <SpecialCardOverlay
+          card={activeSpecialCard}
+          activePlayerName={activePlayer}
+          onAccept={() => {
+            soundEffects.playSuccess();
+            setScores(prev => ({
+              ...prev,
+              [activePlayer]: (prev[activePlayer] || 0) + activeSpecialCard.pointsAwarded,
+            }));
+            setActiveSpecialCard(null);
+          }}
+          onSkip={() => setActiveSpecialCard(null)}
+        />
+      )}
+
+      {/* Progressive Level Up Modal */}
+      {levelUpInfo && (
+        <ProgressiveLevelUpModal
+          isOpen={showLevelUpModal}
+          onClose={() => setShowLevelUpModal(false)}
+          newCategory={levelUpInfo.newCat}
+          previousCategory={levelUpInfo.prevCat}
         />
       )}
     </div>

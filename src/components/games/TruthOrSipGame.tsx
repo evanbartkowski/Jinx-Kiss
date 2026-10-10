@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { PromptItem } from '../../types/game';
 import { useGameSettings } from '../../context/GameSettingsContext';
+import { CardRatingBar } from '../common/CardRatingBar';
+import { soundEffects } from '../../utils/audio';
 import { ArrowRight, Wine, Coffee, Sparkles, MessageCircleQuestion } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
@@ -23,6 +25,7 @@ export const TruthOrSipGame: React.FC<TruthOrSipGameProps> = ({ prompts, players
 
   const handleChoice = (selected: 'answer' | 'sip') => {
     setChoice(selected);
+    soundEffects.playVoteSubmit();
     confetti({
       particleCount: 25,
       spread: 50,
@@ -32,6 +35,7 @@ export const TruthOrSipGame: React.FC<TruthOrSipGameProps> = ({ prompts, players
   };
 
   const nextCard = () => {
+    soundEffects.playCardFlip();
     setChoice(null);
     setCurrentIndex(prev => (prev + 1) % prompts.length);
     if (players.length > 0) {
@@ -83,8 +87,13 @@ export const TruthOrSipGame: React.FC<TruthOrSipGameProps> = ({ prompts, players
           </div>
         )}
 
-        <div className="text-xs text-zinc-400 font-medium">
+        <div className="text-xs text-zinc-400 font-medium my-2">
           Answer 100% truthfully or take the sip penalty.
+        </div>
+
+        {/* Card Rating & Report Bar */}
+        <div className="w-full">
+          <CardRatingBar prompt={currentPrompt} />
         </div>
 
       </div>

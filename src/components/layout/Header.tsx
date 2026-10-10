@@ -1,13 +1,20 @@
 import React from 'react';
 import { useAuth } from '../../context/AuthContext';
-import { Sparkles, User, Layers, Shield, LogOut } from 'lucide-react';
+import { Sparkles, User, Layers, Shield, LogOut, Volume2, History } from 'lucide-react';
 
 interface HeaderProps {
   currentView: string;
   onNavigate: (view: string, param?: string) => void;
+  onOpenAudio?: () => void;
+  onOpenHistory?: () => void;
 }
 
-export const Header: React.FC<HeaderProps> = ({ currentView, onNavigate }) => {
+export const Header: React.FC<HeaderProps> = ({
+  currentView,
+  onNavigate,
+  onOpenAudio,
+  onOpenHistory,
+}) => {
   const { currentUser, isAuthenticated, isAdmin, openAuthModal, logout } = useAuth();
 
   return (
@@ -85,6 +92,30 @@ export const Header: React.FC<HeaderProps> = ({ currentView, onNavigate }) => {
             >
               <Shield className="w-4 h-4 text-purple-400" />
               <span className="hidden sm:inline">Admin</span>
+            </button>
+          )}
+
+          {/* Session History Modal Trigger */}
+          {onOpenHistory && (
+            <button
+              onClick={onOpenHistory}
+              title="Game History & Saved Sessions"
+              aria-label="Game History"
+              className="p-2 rounded-xl text-zinc-400 hover:text-white hover:bg-white/[0.06] border border-transparent hover:border-white/10 transition-all active:scale-95"
+            >
+              <History className="w-4 h-4 text-purple-400" />
+            </button>
+          )}
+
+          {/* Audio Settings Modal Trigger */}
+          {onOpenAudio && (
+            <button
+              onClick={onOpenAudio}
+              title="Audio & Ambient Music"
+              aria-label="Audio Settings"
+              className="p-2 rounded-xl text-zinc-400 hover:text-white hover:bg-white/[0.06] border border-transparent hover:border-white/10 transition-all active:scale-95"
+            >
+              <Volume2 className="w-4 h-4 text-pink-400" />
             </button>
           )}
 

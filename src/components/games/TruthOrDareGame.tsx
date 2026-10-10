@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { PromptItem } from '../../types/game';
+import { CardRatingBar } from '../common/CardRatingBar';
+import { soundEffects } from '../../utils/audio';
 import { ArrowRight, RotateCw, SkipForward, Flame, Sparkles } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
@@ -37,6 +39,7 @@ export const TruthOrDareGame: React.FC<TruthOrDareGameProps> = ({ prompts, playe
       chosen = pool[Math.floor(Math.random() * pool.length)] || prompts[0];
     }
 
+    soundEffects.playCardFlip();
     setTimeout(() => {
       setCurrentPrompt(chosen);
       setIsRevealed(true);
@@ -148,8 +151,13 @@ export const TruthOrDareGame: React.FC<TruthOrDareGameProps> = ({ prompts, playe
             </p>
 
             {/* Turn status */}
-            <div className="text-xs text-zinc-400 font-medium">
+            <div className="text-xs text-zinc-400 font-medium mb-3">
               {activePlayer ? `Target: ${activePlayer}` : 'Share your answer or complete the challenge!'}
+            </div>
+
+            {/* Rating, Favorite, Report Bar */}
+            <div className="w-full">
+              <CardRatingBar prompt={currentPrompt} />
             </div>
           </div>
 

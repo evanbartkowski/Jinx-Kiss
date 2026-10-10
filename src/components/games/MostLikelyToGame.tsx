@@ -17,7 +17,8 @@ export const MostLikelyToGame: React.FC<MostLikelyToGameProps> = ({ prompts, pla
   const [votes, setVotes] = useState<Record<string, number>>({});
   const [isRevealed, setIsRevealed] = useState(false);
 
-  const activePlayers = players.length >= 2 ? players : ['Sam', 'Alex', 'Jordan', 'Taylor'];
+  const hasPlayers = players.length >= 2;
+  const activePlayers = players;
   const currentPrompt = prompts[currentIndex] || prompts[0];
 
   const handleCastVote = (player: string) => {
@@ -87,9 +88,11 @@ export const MostLikelyToGame: React.FC<MostLikelyToGameProps> = ({ prompts, pla
         )}
 
         <div className="text-xs text-zinc-400 font-medium">
-          {totalVotes === 0
-            ? 'Tap any player below to cast fingers or votes!'
-            : `${totalVotes} votes cast so far`}
+          {hasPlayers
+            ? totalVotes === 0
+              ? 'Tap any player below to cast fingers or votes!'
+              : `${totalVotes} votes cast so far`
+            : 'Point or call out who in the room fits this prompt!'}
         </div>
 
         {/* Card Rating Bar */}
@@ -100,30 +103,32 @@ export const MostLikelyToGame: React.FC<MostLikelyToGameProps> = ({ prompts, pla
         )}
       </div>
 
-      {/* Player Voting Chips */}
+      {/* Controls and Player Voting Chips */}
       <div className="w-full flex flex-col items-center gap-4 animate-fade-in">
-        <div className="w-full grid grid-cols-2 sm:grid-cols-4 gap-3">
-          {activePlayers.map((player) => {
-            const count = votes[player] || 0;
-            const pct = totalVotes > 0 ? Math.round((count / totalVotes) * 100) : 0;
-            return (
-              <button
-                key={player}
-                onClick={() => handleCastVote(player)}
-                className="p-3.5 rounded-2xl glass-panel border border-white/10 hover:border-rose-500/60 hover:shadow-neon-pink/30 flex flex-col items-center justify-center gap-1.5 transition-all active:scale-95"
-              >
-                <span className="text-sm font-bold text-white truncate max-w-full">{player}</span>
-                <span className="text-xs font-black text-rose-400">
-                  {count} {count === 1 ? 'vote' : 'votes'} {totalVotes > 0 && `(${pct}%)`}
-                </span>
-              </button>
-            );
-          })}
-        </div>
+        {hasPlayers && (
+          <div className="w-full grid grid-cols-2 sm:grid-cols-4 gap-3">
+            {activePlayers.map((player) => {
+              const count = votes[player] || 0;
+              const pct = totalVotes > 0 ? Math.round((count / totalVotes) * 100) : 0;
+              return (
+                <button
+                  key={player}
+                  onClick={() => handleCastVote(player)}
+                  className="p-3.5 rounded-2xl glass-panel border border-white/10 hover:border-rose-500/60 hover:shadow-neon-pink/30 flex flex-col items-center justify-center gap-1.5 transition-all active:scale-95"
+                >
+                  <span className="text-sm font-bold text-white truncate max-w-full">{player}</span>
+                  <span className="text-xs font-black text-rose-400">
+                    {count} {count === 1 ? 'vote' : 'votes'} {totalVotes > 0 && `(${pct}%)`}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+        )}
 
         {/* Action Controls */}
         <div className="flex flex-wrap items-center justify-center gap-3 mt-2">
-          {totalVotes > 0 && !isRevealed && (
+          {hasPlayers && totalVotes > 0 && !isRevealed && (
             <button
               onClick={handleReveal}
               className="px-6 py-3 rounded-2xl bg-rose-600 hover:bg-rose-500 text-white font-black text-sm shadow-neon-pink transition-all active:scale-95"
@@ -132,7 +137,7 @@ export const MostLikelyToGame: React.FC<MostLikelyToGameProps> = ({ prompts, pla
             </button>
           )}
 
-          {totalVotes > 0 && (
+          {hasPlayers && totalVotes > 0 && (
             <button
               onClick={handleResetVotes}
               className="px-4 py-3 rounded-2xl border border-white/10 text-zinc-400 hover:text-white font-semibold text-xs transition-colors flex items-center gap-1.5"

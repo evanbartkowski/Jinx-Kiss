@@ -9,11 +9,11 @@ import { achievementsService } from '../services/achievementsService';
 import { favoritesService } from '../services/favoritesService';
 import { ratingService } from '../services/ratingService';
 
-describe('Twelve Playable Games & Category Filtering', () => {
+describe('Fourteen Playable Games & Category Filtering', () => {
   const allGameIds = Object.keys(GAMES_CONFIG) as (keyof typeof ALL_DEFAULT_PROMPTS)[];
 
-  it('provides all twelve games in configuration', () => {
-    expect(allGameIds).toHaveLength(12);
+  it('provides all fourteen games in configuration', () => {
+    expect(allGameIds).toHaveLength(14);
     // Original 8 games
     expect(allGameIds).toContain('truth-or-dare');
     expect(allGameIds).toContain('never-have-i-ever');
@@ -23,11 +23,13 @@ describe('Twelve Playable Games & Category Filtering', () => {
     expect(allGameIds).toContain('red-flag-green-flag');
     expect(allGameIds).toContain('truth-or-sip');
     expect(allGameIds).toContain('point-and-drink');
-    // 4 New games
+    // 6 Additional games
     expect(allGameIds).toContain('most-likely-to');
     expect(allGameIds).toContain('imposter');
     expect(allGameIds).toContain('whos-lying');
     expect(allGameIds).toContain('confessions');
+    expect(allGameIds).toContain('chaos-mix');
+    expect(allGameIds).toContain('hot-seat');
   });
 
   it('has substantial, valid prompts for every game', () => {

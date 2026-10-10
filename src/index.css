@@ -80,6 +80,54 @@
   100% { background-position: 0% 50%; }
 }
 
+@keyframes floatAmbient1 {
+  0%, 100% {
+    transform: translate(0px, 0px) scale(1);
+    opacity: 0.06;
+  }
+  50% {
+    transform: translate(40px, 30px) scale(1.12);
+    opacity: 0.12;
+  }
+}
+
+@keyframes floatAmbient2 {
+  0%, 100% {
+    transform: translate(0px, 0px) scale(1);
+    opacity: 0.05;
+  }
+  50% {
+    transform: translate(-45px, -25px) scale(1.1);
+    opacity: 0.10;
+  }
+}
+
+@keyframes floatAmbient3 {
+  0%, 100% {
+    transform: translate(0px, 0px) scale(1);
+    opacity: 0.05;
+  }
+  50% {
+    transform: translate(35px, -35px) scale(1.14);
+    opacity: 0.09;
+  }
+}
+
+.ambient-blob-1 {
+  animation: floatAmbient1 18s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
+.ambient-blob-2 {
+  animation: floatAmbient2 24s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
+.ambient-blob-3 {
+  animation: floatAmbient3 20s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
 /* Respect reduced motion */
 @media (prefers-reduced-motion: reduce) {
   *, ::before, ::after {

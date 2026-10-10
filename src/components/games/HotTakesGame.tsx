@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { PromptItem } from '../../types/game';
 import { votingService, VoteStats } from '../../services/votingService';
+import { CardRatingBar } from '../common/CardRatingBar';
+import { soundEffects } from '../../utils/audio';
 import { ArrowRight, ThumbsUp, ThumbsDown, MessageSquare } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
@@ -19,10 +21,12 @@ export const HotTakesGame: React.FC<HotTakesGameProps> = ({ prompts, players }) 
   const handleVote = async (choice: 'agree' | 'disagree') => {
     if (vote) return;
     setVote(choice);
+    soundEffects.playVoteSubmit();
 
     try {
       const result = await votingService.recordVote(currentPrompt.id, choice === 'agree' ? 'A' : 'B');
       setStats(result);
+      soundEffects.playVoteReveal();
     } catch {
       setStats(votingService.getStats(currentPrompt.id));
     }
@@ -36,6 +40,7 @@ export const HotTakesGame: React.FC<HotTakesGameProps> = ({ prompts, players }) 
   };
 
   const nextCard = () => {
+    soundEffects.playCardFlip();
     setVote(null);
     setStats(null);
     setCurrentIndex(prev => (prev + 1) % prompts.length);
@@ -85,8 +90,13 @@ export const HotTakesGame: React.FC<HotTakesGameProps> = ({ prompts, players }) 
           </div>
         )}
 
-        <div className="text-xs text-zinc-500 font-medium">
+        <div className="text-xs text-zinc-500 font-medium my-2">
           Argue with conviction. No fence-sitting allowed.
+        </div>
+
+        {/* Card Rating & Report Bar */}
+        <div className="w-full">
+          <CardRatingBar prompt={currentPrompt} />
         </div>
 
       </div>

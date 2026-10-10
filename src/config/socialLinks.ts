@@ -15,24 +15,23 @@ export interface AuthorConfig {
 }
 
 export const AUTHOR_CONFIG: AuthorConfig = {
-  displayName: 'Evan',
-  tagline: 'Created by Evan',
+  displayName: 'Evan Bartkowski',
+  tagline: 'Created by Evan Bartkowski',
   socials: [
     {
       name: 'LinkedIn',
-      url: 'https://www.linkedin.com/in/evanbartkowski', // Configurable LinkedIn profile
+      url: 'https://www.linkedin.com/in/evanbartkowski',
       icon: 'linkedin',
     },
     {
       name: 'GitHub',
-      url: 'https://github.com/evanbartkowski', // Configurable GitHub profile
+      url: 'https://github.com/evanbartkowski',
       icon: 'github',
     },
     {
       name: 'Email',
-      url: 'mailto:evanbartkowski1@gmail.com', // Configurable contact email
+      url: 'mailto:evanbartkowski1@gmail.com',
       icon: 'email',
     },
   ],
 };
-

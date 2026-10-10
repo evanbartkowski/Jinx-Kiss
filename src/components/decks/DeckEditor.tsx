@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { CustomDeck, DeckVisibility } from '../../types/deck';
-import { GameId, PromptItem } from '../../types/game';
-import { GAMES_CONFIG } from '../../data/gamesConfig';
+import { GameId, GameCategory, PromptItem } from '../../types/game';
+import { GAMES_CONFIG, CATEGORY_LABELS } from '../../data/gamesConfig';
 import { useAuth } from '../../context/AuthContext';
 import { useToast } from '../../context/ToastContext';
 import { Plus, Trash2, ArrowUp, ArrowDown, Eye, Save, Globe, Lock, Link2, Sparkles } from 'lucide-react';
@@ -23,6 +23,7 @@ export const DeckEditor: React.FC<DeckEditorProps> = ({
   const [title, setTitle] = useState(initialDeck?.title || '');
   const [description, setDescription] = useState(initialDeck?.description || '');
   const [gameId, setGameId] = useState<GameId>(initialDeck?.gameId || 'truth-or-dare');
+  const [gameMode, setGameMode] = useState<GameCategory>(initialDeck?.gameMode || 'medium');
   const [themeColor, setThemeColor] = useState(initialDeck?.themeColor || '#FF4DA6');
   const [visibility, setVisibility] = useState<DeckVisibility>(initialDeck?.visibility || 'private');
   const [cards, setCards] = useState<PromptItem[]>(initialDeck?.cards || []);
@@ -55,7 +56,7 @@ export const DeckEditor: React.FC<DeckEditorProps> = ({
     const newCard: PromptItem = {
       id: 'card_' + Math.random().toString(36).substring(2, 9),
       gameId,
-      category: 'medium',
+      category: gameMode,
       text: gameId === 'would-you-rather' ? 'Would You Rather...' : newCardText.trim(),
       type: gameId === 'truth-or-dare' ? newCardType : undefined,
       optionA: gameId === 'would-you-rather' ? newOptionA.trim() : undefined,
@@ -103,6 +104,7 @@ export const DeckEditor: React.FC<DeckEditorProps> = ({
         title: title.trim(),
         description: description.trim(),
         gameId,
+        gameMode,
         themeColor,
         visibility,
         cards,
@@ -199,6 +201,32 @@ export const DeckEditor: React.FC<DeckEditorProps> = ({
               </div>
             </div>
 
+            {/* Game Mode / Category Selection */}
+            <div>
+              <label className="block text-xs font-semibold text-zinc-300 uppercase tracking-wider mb-2">
+                Game Mode / Category
+              </label>
+              <div className="flex flex-wrap gap-2">
+                {(['easy', 'medium', 'extreme', 'couples', '18+', 'spicy', 'kids'] as GameCategory[]).map((mode) => {
+                  const isSelected = gameMode === mode;
+                  return (
+                    <button
+                      key={mode}
+                      type="button"
+                      onClick={() => setGameMode(mode)}
+                      className={`px-3.5 py-1.5 rounded-xl text-xs font-bold capitalize transition-all ${
+                        isSelected
+                          ? 'bg-gradient-to-r from-brand-pink to-brand-violet text-white shadow-neon-pink scale-105'
+                          : 'bg-zinc-900 border border-white/10 text-zinc-400 hover:text-white hover:border-white/20'
+                      }`}
+                    >
+                      {CATEGORY_LABELS[mode]?.label || mode}
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+
             <div>
               <label className="block text-xs font-semibold text-zinc-300 uppercase tracking-wider mb-1">
                 Description
@@ -257,13 +285,13 @@ export const DeckEditor: React.FC<DeckEditorProps> = ({
                 >
                   <Globe className="w-4 h-4" />
                   <span className="text-xs font-bold">Public</span>
-                  <span className="text-[10px] text-zinc-500 text-center">Community discovery</span>
+                  <span className="text-[10px] text-zinc-500 text-center">Community Discovery</span>
                 </button>
               </div>
 
               {visibility === 'public' && (
-                <p className="text-[11px] text-emerald-400/80 mt-2">
-                  ℹ️ Public decks undergo quick review by moderators before appearing in Community Discovery.
+                <p className="text-[11px] text-emerald-400 mt-2">
+                  ✨ Public decks appear immediately in the Community Decks section for everyone to explore and play!
                 </p>
               )}
             </div>

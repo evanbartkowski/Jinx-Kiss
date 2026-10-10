@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { CustomDeck } from '../../types/deck';
-import { GameId } from '../../types/game';
-import { GAMES_CONFIG } from '../../data/gamesConfig';
+import { GameId, GameCategory } from '../../types/game';
+import { GAMES_CONFIG, CATEGORY_LABELS } from '../../data/gamesConfig';
 import { deckService } from '../../services/deckService';
 import { DeckCard } from './DeckCard';
 import { Sparkles, Search, Filter } from 'lucide-react';
@@ -14,6 +14,7 @@ export const CommunityDecksSection: React.FC<CommunityDecksSectionProps> = ({ on
   const [decks, setDecks] = useState<CustomDeck[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedGameFilter, setSelectedGameFilter] = useState<GameId | 'all'>('all');
+  const [selectedCategoryFilter, setSelectedCategoryFilter] = useState<GameCategory | 'all'>('all');
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -36,42 +37,42 @@ export const CommunityDecksSection: React.FC<CommunityDecksSectionProps> = ({ on
       deck.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
       deck.creatorUsername.toLowerCase().includes(searchQuery.toLowerCase());
     const matchesGame = selectedGameFilter === 'all' || deck.gameId === selectedGameFilter;
-    return matchesSearch && matchesGame;
+    const matchesCategory = selectedCategoryFilter === 'all' || deck.gameMode === selectedCategoryFilter;
+    return matchesSearch && matchesGame && matchesCategory;
   });
 
   return (
-    <section className="w-full max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8 border-t border-white/[0.06] mt-16">
-      
+    <section className="w-full py-4">
       {/* Section Header */}
-      <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
+      <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-6">
         <div>
-          <div className="flex items-center gap-2 mb-2">
-            <span className="p-1.5 rounded-lg bg-brand-violet/20 text-brand-violet border border-brand-violet/30">
-              <Sparkles className="w-4 h-4" />
+          <div className="flex items-center gap-2 mb-1.5">
+            <span className="p-1 rounded-lg bg-brand-violet/20 text-brand-violet border border-brand-violet/30">
+              <Sparkles className="w-3.5 h-3.5" />
             </span>
-            <span className="text-xs font-bold uppercase tracking-widest text-brand-violet">
+            <span className="text-[11px] font-bold uppercase tracking-widest text-brand-violet">
               Created By The Community
             </span>
           </div>
-          <h2 className="text-2xl sm:text-3xl font-black text-white">
+          <h2 className="text-xl sm:text-2xl font-black text-white">
             Community Decks
           </h2>
-          <p className="text-xs sm:text-sm text-zinc-400 mt-1 max-w-lg">
-            Explore approved player-crafted decks. Open and play any deck instantly with your friends—no sign-in required.
+          <p className="text-xs text-zinc-400 mt-0.5 max-w-lg">
+            Explore player-crafted decks and custom creations. Open and play any deck instantly with your friends.
           </p>
         </div>
 
         {/* Search & Filter Bar */}
-        <div className="flex flex-col sm:flex-row items-center gap-3 w-full md:w-auto">
+        <div className="flex flex-wrap items-center gap-2.5 w-full md:w-auto">
           {/* Search Input */}
-          <div className="relative w-full sm:w-64">
-            <Search className="w-4 h-4 text-zinc-500 absolute left-3.5 top-1/2 -translate-y-1/2" />
+          <div className="relative flex-1 sm:w-56">
+            <Search className="w-3.5 h-3.5 text-zinc-500 absolute left-3 top-1/2 -translate-y-1/2" />
             <input
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search decks or creators..."
-              className="w-full bg-zinc-900/80 border border-white/10 rounded-xl pl-9 pr-4 py-2 text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-brand-pink"
+              className="w-full bg-zinc-900/80 border border-white/10 rounded-xl pl-8 pr-3 py-2 text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-brand-pink"
             />
           </div>
 
@@ -79,12 +80,26 @@ export const CommunityDecksSection: React.FC<CommunityDecksSectionProps> = ({ on
           <select
             value={selectedGameFilter}
             onChange={(e) => setSelectedGameFilter(e.target.value as any)}
-            className="w-full sm:w-auto bg-zinc-900/80 border border-white/10 rounded-xl px-3 py-2 text-xs text-zinc-300 focus:outline-none focus:border-brand-pink"
+            className="bg-zinc-900/80 border border-white/10 rounded-xl px-3 py-2 text-xs text-zinc-300 focus:outline-none focus:border-brand-pink"
           >
             <option value="all">All Games</option>
             {Object.values(GAMES_CONFIG).map((g) => (
               <option key={g.id} value={g.id}>
                 {g.title}
+              </option>
+            ))}
+          </select>
+
+          {/* Category / Game Mode filter */}
+          <select
+            value={selectedCategoryFilter}
+            onChange={(e) => setSelectedCategoryFilter(e.target.value as any)}
+            className="bg-zinc-900/80 border border-white/10 rounded-xl px-3 py-2 text-xs text-zinc-300 focus:outline-none focus:border-brand-pink"
+          >
+            <option value="all">All Modes</option>
+            {(['easy', 'medium', 'extreme', 'couples', '18+', 'spicy', 'kids'] as GameCategory[]).map((mode) => (
+              <option key={mode} value={mode}>
+                {CATEGORY_LABELS[mode]?.label || mode}
               </option>
             ))}
           </select>

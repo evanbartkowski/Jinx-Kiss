@@ -13,9 +13,12 @@ interface ImposterGameProps {
 type Phase = 'setup' | 'pass-and-play' | 'discussion' | 'voting' | 'reveal';
 
 export const ImposterGame: React.FC<ImposterGameProps> = ({ prompts, players }) => {
+  const [playerCount, setPlayerCount] = useState(4);
+
   const activePlayers = useMemo(() => {
-    return players.length >= 3 ? players : ['Sam', 'Alex', 'Jordan', 'Taylor'];
-  }, [players]);
+    if (players.length >= 3) return players;
+    return Array.from({ length: playerCount }, (_, i) => `Player ${i + 1}`);
+  }, [players, playerCount]);
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const [phase, setPhase] = useState<Phase>('setup');
@@ -109,6 +112,29 @@ export const ImposterGame: React.FC<ImposterGameProps> = ({ prompts, players }) 
           <p className="text-sm text-zinc-300 max-w-md mb-6 leading-relaxed">
             One of the <span className="font-bold text-emerald-400">{activePlayers.length} players</span> will be secretly assigned as the Imposter. Pass the phone around so everyone can privately peek at their role!
           </p>
+
+          {players.length < 3 && (
+            <div className="flex flex-col items-center gap-2 mb-6">
+              <span className="text-xs uppercase tracking-wider text-zinc-400 font-semibold">
+                Select Number of Players in the Room:
+              </span>
+              <div className="flex items-center gap-1.5">
+                {[3, 4, 5, 6, 7, 8].map((num) => (
+                  <button
+                    key={num}
+                    onClick={() => setPlayerCount(num)}
+                    className={`w-9 h-9 rounded-xl font-bold text-xs transition-all ${
+                      playerCount === num
+                        ? 'bg-emerald-500 text-black shadow-neon-green font-black scale-105'
+                        : 'bg-white/5 border border-white/10 text-zinc-300 hover:text-white'
+                    }`}
+                  >
+                    {num}
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
 
           <div className="flex flex-wrap justify-center gap-2 mb-8 max-w-md">
             {activePlayers.map((p) => (

@@ -18,7 +18,8 @@ interface SubmittedConfession {
 }
 
 export const ConfessionsGame: React.FC<ConfessionsGameProps> = ({ prompts, players }) => {
-  const activePlayers = players && players.length >= 2 ? players : ['Sam', 'Alex', 'Jordan', 'Taylor'];
+  const activePlayers = players && players.length >= 2 ? players : [];
+  const hasPlayers = activePlayers.length >= 2;
   const [currentIndex, setCurrentIndex] = useState(0);
   const [anonymousSubmissions, setAnonymousSubmissions] = useState<SubmittedConfession[]>([]);
   const [inputConfession, setInputConfession] = useState('');
@@ -125,28 +126,30 @@ export const ConfessionsGame: React.FC<ConfessionsGameProps> = ({ prompts, playe
               />
 
               <div className="flex gap-2">
-                <select
-                  value={selectedAuthor}
-                  onChange={(e) => setSelectedAuthor(e.target.value)}
-                  className="flex-1 bg-black/60 border border-white/10 rounded-xl px-3 py-2 text-xs text-zinc-300 focus:outline-none focus:border-purple-400/60"
-                >
-                  <option value="">(Select your name secretly)</option>
-                  {activePlayers.map(p => (
-                    <option key={p} value={p}>{p}</option>
-                  ))}
-                </select>
+                {hasPlayers && (
+                  <select
+                    value={selectedAuthor}
+                    onChange={(e) => setSelectedAuthor(e.target.value)}
+                    className="flex-1 bg-black/60 border border-white/10 rounded-xl px-3 py-2 text-xs text-zinc-300 focus:outline-none focus:border-purple-400/60"
+                  >
+                    <option value="">(Select your name)</option>
+                    {activePlayers.map(p => (
+                      <option key={p} value={p}>{p}</option>
+                    ))}
+                  </select>
+                )}
 
                 <button
                   type="submit"
                   disabled={!inputConfession.trim()}
-                  className={`px-5 py-2.5 rounded-xl text-xs font-black flex items-center gap-2 transition-all ${
+                  className={`px-5 py-2.5 rounded-xl text-xs font-black flex items-center justify-center gap-2 transition-all flex-1 ${
                     inputConfession.trim()
                       ? 'bg-purple-600 hover:bg-purple-500 text-white shadow-neon-violet active:scale-95'
                       : 'bg-zinc-800 text-zinc-500 cursor-not-allowed'
                   }`}
                 >
                   <Send className="w-3.5 h-3.5" />
-                  <span>Deposit</span>
+                  <span>Deposit Secret</span>
                 </button>
               </div>
             </form>
@@ -180,44 +183,52 @@ export const ConfessionsGame: React.FC<ConfessionsGameProps> = ({ prompts, playe
             </div>
 
             {/* Guessing Who Said It */}
-            <div className="w-full max-w-md my-4">
-              <span className="text-xs font-bold uppercase text-zinc-400 block mb-2">
-                Who in the room confessed this?
-              </span>
-
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
-                {activePlayers.map(player => (
-                  <button
-                    key={player}
-                    onClick={() => handleVoteGuessedAuthor(player)}
-                    className="p-2.5 rounded-xl glass-panel border border-white/10 hover:border-purple-400/50 flex flex-col items-center text-xs active:scale-95"
-                  >
-                    <span className="font-semibold text-white truncate max-w-full">{player}</span>
-                    <span className="text-[10px] text-purple-400 font-bold">
-                      {activeConfession?.votes[player] || 0} votes
-                    </span>
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            {/* Reveal Author */}
-            {isAuthorRevealed ? (
-              <div className="animate-scale-in p-4 rounded-2xl bg-purple-950/80 border border-purple-500/60 my-2 text-center w-full max-w-md">
-                <span className="text-xs uppercase tracking-widest text-purple-300 font-bold block mb-1">
-                  Confessed By:
+            {hasPlayers ? (
+              <div className="w-full max-w-md my-4">
+                <span className="text-xs font-bold uppercase text-zinc-400 block mb-2">
+                  Who in the room confessed this?
                 </span>
-                <span className="text-2xl font-black text-white">
-                  {activeConfession?.authorName}
-                </span>
+
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                  {activePlayers.map(player => (
+                    <button
+                      key={player}
+                      onClick={() => handleVoteGuessedAuthor(player)}
+                      className="p-2.5 rounded-xl glass-panel border border-white/10 hover:border-purple-400/50 flex flex-col items-center text-xs active:scale-95"
+                    >
+                      <span className="font-semibold text-white truncate max-w-full">{player}</span>
+                      <span className="text-[10px] text-purple-400 font-bold">
+                        {activeConfession?.votes[player] || 0} votes
+                      </span>
+                    </button>
+                  ))}
+                </div>
               </div>
             ) : (
-              <button
-                onClick={handleRevealAuthor}
-                className="mt-2 px-6 py-2.5 rounded-xl border border-purple-500/50 bg-purple-900/30 text-purple-300 hover:bg-purple-900/50 text-xs font-bold shadow-neon-violet transition-all active:scale-95"
-              >
-                Unmask The Author!
-              </button>
+              <div className="text-xs text-zinc-400 my-2">
+                Discuss as a group and guess who in the room wrote this confession!
+              </div>
+            )}
+
+            {/* Reveal Author */}
+            {hasPlayers && (
+              isAuthorRevealed ? (
+                <div className="animate-scale-in p-4 rounded-2xl bg-purple-950/80 border border-purple-500/60 my-2 text-center w-full max-w-md">
+                  <span className="text-xs uppercase tracking-widest text-purple-300 font-bold block mb-1">
+                    Confessed By:
+                  </span>
+                  <span className="text-2xl font-black text-white">
+                    {activeConfession?.authorName}
+                  </span>
+                </div>
+              ) : (
+                <button
+                  onClick={handleRevealAuthor}
+                  className="mt-2 px-6 py-2.5 rounded-xl border border-purple-500/50 bg-purple-900/30 text-purple-300 hover:bg-purple-900/50 text-xs font-bold shadow-neon-violet transition-all active:scale-95"
+                >
+                  Unmask The Author!
+                </button>
+              )
             )}
 
             <button

@@ -11,6 +11,29 @@ import { MOST_LIKELY_TO_PROMPTS } from './mostLikelyTo';
 import { IMPOSTER_PROMPTS } from './imposter';
 import { WHOS_LYING_PROMPTS } from './whosLying';
 import { CONFESSIONS_PROMPTS } from './confessions';
+import { HOT_SEAT_PROMPTS } from './hotSeat';
+
+const STANDALONE_PROMPTS: PromptItem[] = [
+  ...TRUTH_OR_DARE_PROMPTS,
+  ...NEVER_HAVE_I_EVER_PROMPTS,
+  ...WOULD_YOU_RATHER_PROMPTS,
+  ...HOT_TAKES_PROMPTS,
+  ...DARE_ROULETTE_PROMPTS,
+  ...RED_FLAG_GREEN_FLAG_PROMPTS,
+  ...TRUTH_OR_SIP_PROMPTS,
+  ...POINT_AND_DRINK_PROMPTS,
+  ...MOST_LIKELY_TO_PROMPTS,
+  ...IMPOSTER_PROMPTS,
+  ...WHOS_LYING_PROMPTS,
+  ...CONFESSIONS_PROMPTS,
+  ...HOT_SEAT_PROMPTS,
+];
+
+export const CHAOS_MIX_PROMPTS: PromptItem[] = STANDALONE_PROMPTS.map(p => ({
+  ...p,
+  originGameId: p.gameId,
+  gameId: 'chaos-mix',
+}));
 
 export const ALL_DEFAULT_PROMPTS: Record<GameId, PromptItem[]> = {
   'truth-or-dare': TRUTH_OR_DARE_PROMPTS,
@@ -25,25 +48,15 @@ export const ALL_DEFAULT_PROMPTS: Record<GameId, PromptItem[]> = {
   'imposter': IMPOSTER_PROMPTS,
   'whos-lying': WHOS_LYING_PROMPTS,
   'confessions': CONFESSIONS_PROMPTS,
+  'hot-seat': HOT_SEAT_PROMPTS,
+  'chaos-mix': CHAOS_MIX_PROMPTS,
 };
 
 /**
  * Filter default prompts by game and category.
- * If 18+ is selected, Kids prompts are strictly excluded.
- * If Kids is selected, 18+ and Spicy prompts are strictly excluded.
  */
 export function getDefaultPromptsForGame(gameId: GameId, category?: GameCategory): PromptItem[] {
   const allPrompts = ALL_DEFAULT_PROMPTS[gameId] || [];
   if (!category) return allPrompts;
-
-  return allPrompts.filter(p => {
-    if (category === 'kids') {
-      return p.category === 'kids';
-    }
-    if (category === '18+') {
-      return p.category === '18+';
-    }
-    return p.category === category;
-  });
+  return allPrompts.filter(p => p.category === category);
 }
-

@@ -73,7 +73,7 @@ describe('Custom Decks & Visibility Controls', () => {
     expect(sharedAccess?.title).toBe('Unlisted College Party');
   });
 
-  it('sets public decks to pending moderation status', async () => {
+  it('sets public decks to approved status so they are immediately visible in community decks', async () => {
     const deck = await deckService.createDeck({
       title: 'Epic Community Deck',
       description: 'Public fun',
@@ -85,7 +85,8 @@ describe('Custom Decks & Visibility Controls', () => {
       cards: [{ id: 'c1', gameId: 'would-you-rather', category: 'medium', text: 'Choice A or B', optionA: 'A', optionB: 'B' }],
     });
 
-    expect(deck.moderationStatus).toBe('pending');
+    expect(deck.visibility).toBe('public');
+    expect(deck.moderationStatus).toBe('approved');
   });
 
   it('allows guests to browse and play approved public decks without accounts', async () => {

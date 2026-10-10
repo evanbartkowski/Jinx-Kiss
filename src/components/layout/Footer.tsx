@@ -25,42 +25,34 @@ export const Footer: React.FC = () => {
   };
 
   return (
-    <footer className="w-full border-t border-white/[0.05] bg-[#050505]/90 py-10 mt-auto transition-all">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-6">
-        
-        {/* Created by Evan */}
-        <div className="flex items-center gap-2">
+    <footer className="w-full border-t border-white/[0.05] bg-[#050505]/90 py-6 mt-auto transition-all">
+      <div className="w-full px-4 sm:px-8 flex flex-col sm:flex-row items-center justify-center gap-4">
+        {/* Created by Evan Bartkowski with socials right next to it */}
+        <div className="flex flex-wrap items-center justify-center gap-3">
           <span className="text-zinc-400 text-sm font-medium tracking-wide">
             Created by
           </span>
           <span className="text-base font-extrabold tracking-wider text-creator-gradient drop-shadow-[0_0_10px_rgba(255,77,166,0.35)] select-none">
             {AUTHOR_CONFIG.displayName}
           </span>
-        </div>
 
-        {/* Brand copyright & vibe */}
-        <div className="text-xs text-zinc-500 text-center sm:text-left">
-          © {new Date().getFullYear()} Jinx Kiss. All cards and games designed for legendary game nights.
+          {/* Social icons inline next to name */}
+          <div className="flex items-center gap-2 ml-2">
+            {AUTHOR_CONFIG.socials.map((social) => (
+              <a
+                key={social.name}
+                href={social.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                title={social.name}
+                className="p-1.5 rounded-xl border border-white/[0.08] bg-zinc-900/60 text-zinc-400 hover:text-white hover:border-brand-pink/50 hover:shadow-neon-pink/30 hover:bg-zinc-800 transition-all active:scale-95"
+              >
+                {getIcon(social.icon)}
+              </a>
+            ))}
+          </div>
         </div>
-
-        {/* Minimalist glowing social icons */}
-        <div className="flex items-center gap-4">
-          {AUTHOR_CONFIG.socials.map((social) => (
-            <a
-              key={social.name}
-              href={social.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              title={social.name}
-              className="p-2 rounded-xl border border-white/[0.08] bg-zinc-900/40 text-zinc-400 hover:text-white hover:border-brand-pink/50 hover:shadow-neon-pink/30 hover:bg-zinc-800/60 transition-all active:scale-95"
-            >
-              {getIcon(social.icon)}
-            </a>
-          ))}
-        </div>
-
       </div>
     </footer>
   );
 };
-

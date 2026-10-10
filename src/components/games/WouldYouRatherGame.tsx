@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { PromptItem } from '../../types/game';
 import { votingService, VoteStats } from '../../services/votingService';
+import { CardRatingBar } from '../common/CardRatingBar';
+import { soundEffects } from '../../utils/audio';
 import { ArrowRight, CheckCircle2, SplitSquareVertical } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
@@ -21,10 +23,12 @@ export const WouldYouRatherGame: React.FC<WouldYouRatherGameProps> = ({ prompts,
     if (selectedChoice || isSubmitting) return;
     setSelectedChoice(choice);
     setIsSubmitting(true);
+    soundEffects.playVoteSubmit();
 
     try {
       const stats = await votingService.recordVote(currentPrompt.id, choice);
       setVoteStats(stats);
+      soundEffects.playVoteReveal();
       confetti({
         particleCount: 30,
         spread: 60,
@@ -40,6 +44,7 @@ export const WouldYouRatherGame: React.FC<WouldYouRatherGameProps> = ({ prompts,
   };
 
   const nextCard = () => {
+    soundEffects.playCardFlip();
     setSelectedChoice(null);
     setVoteStats(null);
     setCurrentIndex(prev => (prev + 1) % prompts.length);
@@ -153,6 +158,11 @@ export const WouldYouRatherGame: React.FC<WouldYouRatherGameProps> = ({ prompts,
           <ArrowRight className="w-5 h-5" />
         </button>
       )}
+
+      {/* Card Rating & Report Bar */}
+      <div className="w-full max-w-sm mt-2">
+        <CardRatingBar prompt={currentPrompt} />
+      </div>
 
     </div>
   );

@@ -10,12 +10,15 @@ export type GameId =
   | 'most-likely-to'
   | 'imposter'
   | 'whos-lying'
-  | 'confessions';
+  | 'confessions'
+  | 'chaos-mix'
+  | 'hot-seat';
 
 export type GameCategory = 
   | 'easy'
   | 'medium'
   | 'extreme'
+  | 'unhinged'
   | 'couples'
   | '18+'
   | 'spicy'
@@ -59,6 +62,7 @@ export interface PromptItem {
   isReal?: boolean;        // For single outrageous fact
   explanation?: string;    // Reveal explanation for Who's Lying
   confessionStarter?: string; // For Confessions prompt
+  originGameId?: GameId;   // For Chaos Mix cards
 }
 
 export interface PlayerScore {
@@ -116,6 +120,10 @@ export interface PartyModeConfig {
   timerSeconds: number; // 0 = off, or 15, 30, 45, 60
   contentBoundary: 'all' | 'clean' | 'adults-only' | 'kids-only';
   customDeckIds?: string[];
+  enableSpecialCards?: boolean;
+  specialCardFrequency?: 'off' | 'low' | 'normal' | 'high';
+  enableProgressiveDifficulty?: boolean;
+  roundsPerProgressiveLevel?: number;
 }
 
 export interface Achievement {

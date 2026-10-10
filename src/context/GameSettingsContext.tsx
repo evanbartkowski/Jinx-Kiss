@@ -23,7 +23,7 @@ const GameSettingsContext = createContext<GameSettingsContextType | undefined>(u
 
 export const GameSettingsProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [selectedCategory, setSelectedCategoryState] = useState<GameCategory>('medium');
-  const [savedPlayers, setSavedPlayersState] = useState<string[]>(['Alex', 'Jordan', 'Sam']);
+  const [savedPlayers, setSavedPlayersState] = useState<string[]>([]);
   const [isAgeConfirmed, setIsAgeConfirmed] = useState<boolean>(false);
   const [isNonAlcoholic, setIsNonAlcoholicState] = useState<boolean>(false);
 
@@ -34,13 +34,18 @@ export const GameSettingsProvider: React.FC<{ children: React.ReactNode }> = ({ 
       setSelectedCategoryState(storedCat);
     }
 
-    // Restore saved players
+    // Restore saved players (ignore legacy default ['Alex', 'Jordan', 'Sam'])
     const storedPlayers = localStorage.getItem(PLAYERS_STORAGE_KEY);
     if (storedPlayers) {
       try {
         const parsed = JSON.parse(storedPlayers);
         if (Array.isArray(parsed) && parsed.length > 0) {
-          setSavedPlayersState(parsed);
+          const isLegacyDefault = parsed.length === 3 && parsed[0] === 'Alex' && parsed[1] === 'Jordan' && parsed[2] === 'Sam';
+          if (!isLegacyDefault) {
+            setSavedPlayersState(parsed);
+          } else {
+            localStorage.removeItem(PLAYERS_STORAGE_KEY);
+          }
         }
       } catch (e) {
         // Ignore
