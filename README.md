@@ -4,7 +4,7 @@
 
 A modern, minimalist neon-dark social party game website where friends, couples, and groups can play interactive card games together on a single shared screen or across devices.
 
-Live Website: **[https://jinxkiss.web.app](https://jinxkiss.web.app)**
+Live Website: **jinxkiss.com**
 
 ---
 
