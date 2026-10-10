@@ -122,10 +122,11 @@ export const HomePage: React.FC<HomePageProps> = ({
 
             if (isRedFlag) {
               return (
-                <div
+                <button
+                  type="button"
                   key={game.id}
                   onClick={() => handleGameClick(game.id)}
-                  className="group relative rounded-2xl sm:rounded-3xl glass-panel p-3.5 sm:p-7 min-h-[170px] sm:min-h-[300px] flex flex-col justify-between cursor-pointer transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl active:scale-[0.98] select-none border border-red-500/40 hover:border-emerald-500/60 overflow-hidden"
+                  className="text-left w-full min-w-0 group relative rounded-2xl sm:rounded-3xl glass-panel p-3.5 sm:p-7 min-h-[170px] sm:min-h-[300px] flex flex-col justify-between cursor-pointer transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl active:scale-[0.98] select-none border border-red-500/40 hover:border-emerald-500/60 overflow-hidden"
                   style={{
                     background: 'linear-gradient(135deg, rgba(239, 68, 68, 0.14) 0%, rgba(10, 10, 10, 0.92) 50%, rgba(16, 185, 129, 0.14) 100%)',
                     boxShadow: '0 12px 35px -15px rgba(239, 68, 68, 0.35), 0 12px 35px -15px rgba(16, 185, 129, 0.35)',
@@ -134,7 +135,7 @@ export const HomePage: React.FC<HomePageProps> = ({
                   {/* Split Background Ambient Glow */}
                   <div className="absolute inset-0 rounded-2xl sm:rounded-3xl opacity-0 group-hover:opacity-25 blur-2xl transition-opacity duration-500 pointer-events-none -z-10 bg-gradient-to-r from-red-600 via-transparent to-emerald-500" />
 
-                  <div>
+                  <div className="w-full">
                     {/* Split Icon Container */}
                     <div className="w-12 h-9 sm:w-16 sm:h-16 rounded-xl sm:rounded-2xl flex items-center justify-between px-1.5 sm:px-2.5 mb-2.5 sm:mb-5 border border-white/20 transition-transform duration-300 group-hover:scale-110 shadow-lg bg-gradient-to-r from-red-950/80 via-zinc-900 to-emerald-950/80 shrink-0">
                       <Flag className="w-3.5 h-3.5 sm:w-5 sm:h-5 text-red-500 fill-red-500/40" />
@@ -155,7 +156,7 @@ export const HomePage: React.FC<HomePageProps> = ({
                   </div>
 
                   {/* Bottom Play Indicator with Dual Glow */}
-                  <div className="mt-3 sm:mt-6 pt-2 sm:pt-4 border-t border-white/[0.08] flex items-center justify-between text-[10px] sm:text-xs font-bold text-zinc-300 group-hover:text-white transition-colors">
+                  <div className="w-full mt-3 sm:mt-6 pt-2 sm:pt-4 border-t border-white/[0.08] flex items-center justify-between text-[10px] sm:text-xs font-bold text-zinc-300 group-hover:text-white transition-colors">
                     <span className="flex items-center gap-1 sm:gap-1.5 truncate">
                       <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-red-500 shrink-0" />
                       <span className="truncate">Vote Flags</span>
@@ -165,16 +166,17 @@ export const HomePage: React.FC<HomePageProps> = ({
                       <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4" />
                     </div>
                   </div>
-                </div>
+                </button>
               );
             }
 
             if (isChaosMix) {
               return (
-                <div
+                <button
+                  type="button"
                   key={game.id}
                   onClick={() => handleGameClick(game.id)}
-                  className="group relative rounded-2xl sm:rounded-3xl glass-panel p-3.5 sm:p-7 min-h-[170px] sm:min-h-[300px] flex flex-col justify-between cursor-pointer transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl active:scale-[0.98] select-none border border-pink-500/40 hover:border-cyan-400/70 overflow-hidden"
+                  className="text-left w-full min-w-0 group relative rounded-2xl sm:rounded-3xl glass-panel p-3.5 sm:p-7 min-h-[170px] sm:min-h-[300px] flex flex-col justify-between cursor-pointer transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl active:scale-[0.98] select-none border border-pink-500/40 hover:border-cyan-400/70 overflow-hidden"
                   style={{
                     boxShadow: '0 12px 35px -15px rgba(217, 70, 239, 0.4), 0 12px 35px -15px rgba(6, 182, 212, 0.3)',
                   }}
@@ -182,7 +184,7 @@ export const HomePage: React.FC<HomePageProps> = ({
                   {/* Multicolored Rainbow Ambient Glow */}
                   <div className="absolute inset-0 rounded-2xl sm:rounded-3xl opacity-0 group-hover:opacity-20 blur-2xl transition-opacity duration-500 pointer-events-none -z-10 bg-gradient-to-tr from-pink-500 via-purple-500 via-cyan-400 to-amber-300" />
 
-                  <div>
+                  <div className="w-full">
                     {/* Multicolored Icon Container */}
                     <div className="w-9 h-9 sm:w-16 sm:h-16 rounded-xl sm:rounded-2xl flex items-center justify-center mb-2.5 sm:mb-5 border border-pink-400/50 transition-transform duration-300 group-hover:scale-110 shadow-[0_0_20px_-3px_rgba(236,72,153,0.5)] bg-gradient-to-tr from-pink-950/60 via-purple-950/60 to-cyan-950/60 shrink-0">
                       <Shuffle className="w-4 h-4 sm:w-8 sm:h-8 text-pink-300" />
@@ -199,7 +201,7 @@ export const HomePage: React.FC<HomePageProps> = ({
                   </div>
 
                   {/* Bottom Play Indicator with Prismatic Accent */}
-                  <div className="mt-3 sm:mt-6 pt-2 sm:pt-4 border-t border-white/[0.08] flex items-center justify-between text-[10px] sm:text-xs font-bold text-zinc-300 group-hover:text-white transition-colors">
+                  <div className="w-full mt-3 sm:mt-6 pt-2 sm:pt-4 border-t border-white/[0.08] flex items-center justify-between text-[10px] sm:text-xs font-bold text-zinc-300 group-hover:text-white transition-colors">
                     <span className="bg-gradient-to-r from-pink-400 to-cyan-300 bg-clip-text text-transparent font-bold truncate">
                       All Games Mixed
                     </span>
@@ -207,15 +209,16 @@ export const HomePage: React.FC<HomePageProps> = ({
                       <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4" />
                     </div>
                   </div>
-                </div>
+                </button>
               );
             }
 
             return (
-              <div
+              <button
+                type="button"
                 key={game.id}
                 onClick={() => handleGameClick(game.id)}
-                className="group relative rounded-2xl sm:rounded-3xl glass-panel border border-white/[0.08] hover:border-white/30 p-3.5 sm:p-7 min-h-[170px] sm:min-h-[300px] flex flex-col justify-between cursor-pointer transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl active:scale-[0.98] select-none"
+                className="text-left w-full min-w-0 group relative rounded-2xl sm:rounded-3xl glass-panel border border-white/[0.08] hover:border-white/30 p-3.5 sm:p-7 min-h-[170px] sm:min-h-[300px] flex flex-col justify-between cursor-pointer transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl active:scale-[0.98] select-none"
                 style={{
                   boxShadow: `0 10px 30px -15px ${game.themeColor}33`,
                 }}
@@ -226,7 +229,7 @@ export const HomePage: React.FC<HomePageProps> = ({
                   style={{ backgroundColor: game.themeColor }}
                 />
 
-                <div>
+                <div className="w-full">
                   {/* Icon Container */}
                   <div
                     className="w-9 h-9 sm:w-16 sm:h-16 rounded-xl sm:rounded-2xl flex items-center justify-center mb-2.5 sm:mb-5 border transition-transform duration-300 group-hover:scale-110 shrink-0"
@@ -254,7 +257,7 @@ export const HomePage: React.FC<HomePageProps> = ({
                 </div>
 
                 {/* Bottom Play Indicator */}
-                <div className="mt-3 sm:mt-6 pt-2 sm:pt-4 border-t border-white/[0.06] flex items-center justify-between text-[10px] sm:text-xs font-bold text-zinc-300 group-hover:text-white transition-colors">
+                <div className="w-full mt-3 sm:mt-6 pt-2 sm:pt-4 border-t border-white/[0.06] flex items-center justify-between text-[10px] sm:text-xs font-bold text-zinc-300 group-hover:text-white transition-colors">
                   <span className="truncate">Play</span>
                   <div
                     className="w-5 h-5 sm:w-8 sm:h-8 rounded-full flex items-center justify-center transition-transform duration-300 group-hover:translate-x-1 shrink-0"
@@ -263,7 +266,7 @@ export const HomePage: React.FC<HomePageProps> = ({
                     <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4" />
                   </div>
                 </div>
-              </div>
+              </button>
             );
           })}
         </div>

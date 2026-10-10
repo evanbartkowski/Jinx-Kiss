@@ -246,7 +246,7 @@ export const ChaosWheel: React.FC<ChaosWheelProps> = ({
           ref={canvasRef}
           width={520}
           height={520}
-          className="w-[300px] h-[300px] sm:w-[400px] sm:h-[400px] md:w-[440px] md:h-[440px] select-none touch-none cursor-pointer transition-transform duration-300 hover:scale-[1.01]"
+          className="w-[280px] h-[280px] sm:w-[400px] sm:h-[400px] md:w-[440px] md:h-[440px] max-w-[82vw] max-h-[82vw] aspect-square select-none touch-none cursor-pointer transition-transform duration-300 hover:scale-[1.01]"
           onClick={spin}
         />
 

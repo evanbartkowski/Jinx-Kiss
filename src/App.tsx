@@ -152,7 +152,7 @@ function AppContent() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#050505] text-[#f3f4f6] relative">
+    <div className="min-h-screen flex flex-col bg-[#050505] text-[#f3f4f6] relative w-full max-w-full overflow-x-hidden">
       <AmbientBackground />
       <Header
         currentView={currentView}

@@ -332,7 +332,7 @@ export const DareRouletteGame: React.FC<DareRouletteGameProps> = ({
             ref={canvasRef}
             width={520}
             height={520}
-            className="rounded-full w-[310px] h-[310px] sm:w-[420px] sm:h-[420px] md:w-[460px] md:h-[460px] cursor-pointer transition-transform duration-300 hover:scale-[1.01]"
+            className="rounded-full w-[280px] h-[280px] sm:w-[420px] sm:h-[420px] md:w-[460px] md:h-[460px] max-w-[82vw] max-h-[82vw] aspect-square cursor-pointer transition-transform duration-300 hover:scale-[1.01]"
             onClick={spinWheel}
           />
         </div>

@@ -37,6 +37,19 @@ export const GameModeSelectScreen: React.FC<GameModeSelectScreenProps> = ({
   });
   const [isProgressive, setIsProgressive] = useState(false);
 
+  const [isMobile, setIsMobile] = useState(() => {
+    if (typeof window === 'undefined') return false;
+    return window.innerWidth < 768;
+  });
+
+  React.useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
   // 8 Total Difficulty Modes
   const categories: GameCategory[] = [
     'easy',
@@ -119,20 +132,40 @@ export const GameModeSelectScreen: React.FC<GameModeSelectScreenProps> = ({
     }
   };
 
+  const triggerGameLaunch = (categoryToStart: GameCategory) => {
+    soundEffects.playGameStart();
+    confetti({
+      particleCount: isMobile ? 22 : 35,
+      spread: 60,
+      origin: { y: 0.8 },
+      colors: ['#FF4DA6', '#A855F7', '#06B6D4', '#10B981'],
+    });
+    onSelectCategory(categoryToStart, isProgressive);
+  };
+
   const handleCategoryClick = (cat: GameCategory) => {
     soundEffects.playCardFlip();
-    if (cat === '18+' && !isAgeConfirmed) {
-      setPendingCategory('18+');
-      return;
-    }
     setSelectedCategory(cat);
+
+    // On mobile, tap to play directly without needing the bottom start button!
+    if (isMobile) {
+      if (cat === '18+' && !isAgeConfirmed) {
+        setPendingCategory('18+');
+        return;
+      }
+      triggerGameLaunch(cat);
+    }
   };
 
   const handleAgeConfirm = () => {
     confirmAge();
     if (pendingCategory) {
-      setSelectedCategory(pendingCategory);
+      const catToStart = pendingCategory;
+      setSelectedCategory(catToStart);
       setPendingCategory(null);
+      if (isMobile) {
+        triggerGameLaunch(catToStart);
+      }
     }
   };
 
@@ -141,14 +174,7 @@ export const GameModeSelectScreen: React.FC<GameModeSelectScreenProps> = ({
       setPendingCategory('18+');
       return;
     }
-    soundEffects.playGameStart();
-    confetti({
-      particleCount: 35,
-      spread: 60,
-      origin: { y: 0.8 },
-      colors: ['#FF4DA6', '#A855F7', '#06B6D4', '#10B981'],
-    });
-    onSelectCategory(selectedCategory, isProgressive);
+    triggerGameLaunch(selectedCategory);
   };
 
   const handleResumeSession = () => {
@@ -294,10 +320,11 @@ export const GameModeSelectScreen: React.FC<GameModeSelectScreenProps> = ({
           const isSavedSessionCategory = activeSession && activeSession.category === cat;
 
           return (
-            <div
+            <button
+              type="button"
               key={cat}
               onClick={() => handleCategoryClick(cat)}
-              className={`group relative rounded-2xl sm:rounded-3xl glass-panel p-3 sm:p-6 lg:p-7 min-h-[145px] sm:min-h-[220px] lg:min-h-[250px] flex flex-col justify-between cursor-pointer transition-all duration-300 hover:-translate-y-1.5 hover:shadow-2xl active:scale-[0.98] ${
+              className={`text-left w-full group relative rounded-2xl sm:rounded-3xl glass-panel p-3 sm:p-6 lg:p-7 min-h-[145px] sm:min-h-[220px] lg:min-h-[250px] flex flex-col justify-between cursor-pointer transition-all duration-300 hover:-translate-y-1.5 hover:shadow-2xl active:scale-[0.98] ${
                 isSelected
                   ? 'ring-2 ring-white/90 scale-[1.02] sm:scale-105 shadow-2xl bg-white/[0.08]'
                   : isSavedSessionCategory
@@ -319,10 +346,10 @@ export const GameModeSelectScreen: React.FC<GameModeSelectScreenProps> = ({
                 style={{ backgroundColor: info.color }}
               />
 
-              <div>
+              <div className="w-full">
                 <div className="flex items-center justify-between mb-1.5 sm:mb-4">
                   <span className="text-xl sm:text-3xl">{info.icon}</span>
-                  {isSelected ? (
+                  {isSelected && !isMobile ? (
                     <span
                       className="text-[9px] sm:text-[10px] font-black uppercase tracking-wider px-2 sm:px-3 py-0.5 sm:py-1 rounded-full text-white flex items-center gap-1 shadow-md"
                       style={{ backgroundColor: info.color }}
@@ -361,8 +388,8 @@ export const GameModeSelectScreen: React.FC<GameModeSelectScreenProps> = ({
               </div>
 
               {/* Bottom Card Action */}
-              <div className="mt-2.5 sm:mt-5 pt-2 sm:pt-3 border-t border-white/[0.06] flex items-center justify-between text-[10px] sm:text-xs font-bold text-zinc-300 group-hover:text-white transition-colors">
-                <span className="truncate">{isSelected ? 'Active Mode' : 'Select'}</span>
+              <div className="w-full mt-2.5 sm:mt-5 pt-2 sm:pt-3 border-t border-white/[0.06] flex items-center justify-between text-[10px] sm:text-xs font-bold text-zinc-300 group-hover:text-white transition-colors">
+                <span className="truncate">{isMobile ? 'Tap to Play' : isSelected ? 'Active Mode' : 'Select'}</span>
                 <div
                   className="w-5 h-5 sm:w-7 sm:h-7 rounded-full flex items-center justify-center transition-transform duration-300 group-hover:translate-x-1 shrink-0"
                   style={{
@@ -373,13 +400,13 @@ export const GameModeSelectScreen: React.FC<GameModeSelectScreenProps> = ({
                   <ArrowRight className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
                 </div>
               </div>
-            </div>
+            </button>
           );
         })}
       </div>
 
-      {/* Prominent Start Game Action Bar */}
-      <div className="w-full flex flex-col items-center gap-2 pt-5 sm:pt-8 pb-2">
+      {/* Prominent Start Game Action Bar (Shown on desktop; on mobile tapping a card directly launches) */}
+      <div className="w-full hidden md:flex flex-col items-center gap-2 pt-5 sm:pt-8 pb-2">
         <button
           onClick={handleStartGame}
           className="group relative px-10 sm:px-16 py-4 sm:py-5 rounded-3xl bg-gradient-to-r from-brand-pink via-purple-600 to-brand-violet hover:from-pink-500 hover:to-purple-500 text-white font-black text-base sm:text-xl shadow-[0_0_35px_rgba(255,77,166,0.6)] hover:shadow-[0_0_55px_rgba(168,85,247,0.85)] hover:scale-105 active:scale-95 transition-all cursor-pointer flex items-center gap-3"

@@ -47,7 +47,7 @@ export const PlayModeToggle: React.FC<PlayModeToggleProps> = ({ className = '', 
         }`}
       >
         <Users className={`w-3.5 h-3.5 sm:w-4 sm:h-4 transition-transform duration-300 ${isInPerson ? 'text-brand-pink scale-110 drop-shadow-[0_0_6px_rgba(255,77,166,0.8)]' : 'text-zinc-400'}`} />
-        <span className={compact ? 'hidden xs:inline' : 'inline'}>
+        <span className={compact ? 'hidden sm:inline' : 'inline'}>
           In Person
         </span>
       </button>
@@ -65,7 +65,7 @@ export const PlayModeToggle: React.FC<PlayModeToggleProps> = ({ className = '', 
         }`}
       >
         <Globe className={`w-3.5 h-3.5 sm:w-4 sm:h-4 transition-transform duration-300 ${!isInPerson ? 'text-cyan-400 scale-110 drop-shadow-[0_0_6px_rgba(6,182,212,0.8)] animate-pulse' : 'text-zinc-400'}`} />
-        <span className={compact ? 'hidden xs:inline' : 'inline'}>
+        <span className={compact ? 'hidden sm:inline' : 'inline'}>
           Online
         </span>
       </button>

@@ -3,6 +3,7 @@ import { GameCategory } from '../../types/game';
 import { CATEGORY_LABELS } from '../../data/gamesConfig';
 import { useGameSettings } from '../../context/GameSettingsContext';
 import { AgeConfirmationModal } from './AgeConfirmationModal';
+import { soundEffects } from '../../utils/audio';
 
 interface CategorySelectorProps {
   applicableCategories?: GameCategory[];
@@ -21,6 +22,7 @@ export const CategorySelector: React.FC<CategorySelectorProps> = ({
   const [pendingCategory, setPendingCategory] = useState<GameCategory | null>(null);
 
   const handleCategoryClick = (cat: GameCategory) => {
+    soundEffects.playClick();
     if (cat === '18+' && !isAgeConfirmed) {
       setPendingCategory('18+');
       return;
@@ -38,16 +40,17 @@ export const CategorySelector: React.FC<CategorySelectorProps> = ({
 
   return (
     <>
-      <div className={`flex items-center gap-2 overflow-x-auto py-2 no-scrollbar ${className}`}>
+      <div className={`flex items-center gap-2 overflow-x-auto py-2 no-scrollbar w-full max-w-full touch-pan-x ${className}`}>
         {applicableCategories.map((cat) => {
           const isSelected = currentCategory === cat;
           const meta = CATEGORY_LABELS[cat] || { label: cat, badgeColor: '' };
 
           return (
             <button
+              type="button"
               key={cat}
               onClick={() => handleCategoryClick(cat)}
-              className={`px-3.5 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all duration-200 border select-none ${
+              className={`px-3.5 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all duration-200 border select-none cursor-pointer active:scale-95 ${
                 isSelected
                   ? 'bg-gradient-to-r from-brand-pink/30 to-brand-violet/30 border-brand-pink text-white shadow-neon-pink scale-105'
                   : 'bg-zinc-900/60 border-white/[0.08] text-zinc-400 hover:text-zinc-200 hover:border-white/20 hover:bg-zinc-800/60'

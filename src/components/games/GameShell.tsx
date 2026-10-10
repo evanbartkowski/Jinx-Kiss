@@ -68,34 +68,92 @@ export const GameShell: React.FC<GameShellProps> = ({
       />
 
       {/* Top Bar Controls */}
-      <div className="w-full flex flex-col gap-3 pb-3 relative z-30">
-        <div className="flex items-center justify-between gap-2 p-2 rounded-2xl bg-zinc-950/60 border border-white/[0.07] backdrop-blur-md shadow-lg">
-          {/* Back button */}
-          <div className="flex items-center gap-2">
+      <div className="w-full flex flex-col gap-2.5 pb-2 relative z-30">
+        <div className="w-full p-2 rounded-2xl bg-zinc-950/70 border border-white/[0.07] backdrop-blur-md shadow-lg flex flex-col sm:flex-row items-center justify-between gap-2.5">
+          {/* Top Row on Mobile: Back button & Mobile Controls */}
+          <div className="w-full sm:w-auto flex items-center justify-between sm:justify-start gap-2">
             <button
               onClick={onExit}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-white/10 bg-zinc-900/80 text-zinc-300 hover:text-white hover:border-white/20 hover:bg-zinc-800 transition-all text-xs font-semibold active:scale-95 shadow-sm"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-white/10 bg-zinc-900/80 text-zinc-300 hover:text-white hover:border-white/20 hover:bg-zinc-800 transition-all text-xs font-semibold active:scale-95 shadow-sm cursor-pointer"
             >
               <ArrowLeft className="w-4 h-4" />
               <span>All Games</span>
             </button>
+
+            {/* Mobile Controls Right side */}
+            <div className="sm:hidden flex items-center gap-1.5">
+              {supportsNonalcoholic && (
+                <button
+                  onClick={() => setIsNonAlcoholic(!isNonAlcoholic)}
+                  title={isNonAlcoholic ? 'Non-alcoholic mode active' : 'Normal beverage mode'}
+                  className={`p-2 rounded-xl border text-xs font-medium transition-all ${
+                    isNonAlcoholic
+                      ? 'border-emerald-500/50 bg-emerald-950/40 text-emerald-300'
+                      : 'border-white/10 bg-zinc-900/60 text-zinc-400'
+                  }`}
+                >
+                  {isNonAlcoholic ? <Coffee className="w-3.5 h-3.5 text-emerald-400" /> : <Wine className="w-3.5 h-3.5" />}
+                </button>
+              )}
+
+              {onUpdatePlayers && (
+                <button
+                  onClick={() => {
+                    soundEffects.playClick();
+                    setIsPlayerModalOpen(true);
+                  }}
+                  className={`flex items-center gap-1 px-2.5 py-1.5 rounded-xl text-xs font-bold active:scale-95 cursor-pointer ${
+                    hasPlayers
+                      ? 'border border-white/10 bg-zinc-900/60 text-zinc-300'
+                      : 'border border-brand-pink/70 bg-brand-pink/20 text-pink-200'
+                  }`}
+                >
+                  <Users className="w-3.5 h-3.5 text-brand-pink" />
+                  <span>{hasPlayers ? `${players.length}` : '+ Players'}</span>
+                </button>
+              )}
+
+              {onShuffle && (
+                <button
+                  onClick={() => {
+                    soundEffects.playShuffle();
+                    onShuffle();
+                  }}
+                  title="Reshuffle"
+                  className="p-2 rounded-xl border border-white/10 bg-zinc-900/60 text-zinc-300 active:scale-95 cursor-pointer"
+                >
+                  <Shuffle className="w-3.5 h-3.5 text-brand-pink" />
+                </button>
+              )}
+
+              <button
+                onClick={() => {
+                  soundEffects.playClick();
+                  onRestart();
+                }}
+                title="Restart Deck"
+                className="p-2 rounded-xl border border-white/10 bg-zinc-900/60 text-zinc-400 active:scale-95 cursor-pointer"
+              >
+                <RotateCcw className="w-3.5 h-3.5" />
+              </button>
+            </div>
           </div>
 
-          {/* Game Title & Theme Badge */}
-          <div className="text-center">
+          {/* Game Title & Theme Badge (Perfect Center) */}
+          <div className="text-center w-full sm:w-auto">
             {metadata.id === 'red-flag-green-flag' ? (
-              <h2 className="text-lg sm:text-2xl font-black uppercase tracking-wider">
+              <h2 className="text-base sm:text-2xl font-black uppercase tracking-wider">
                 <span className="text-red-500 drop-shadow-[0_0_12px_rgba(239,68,68,0.5)]">Red Flag</span>
                 <span className="text-zinc-500 mx-1">/</span>
                 <span className="text-emerald-400 drop-shadow-[0_0_12px_rgba(16,185,129,0.5)]">Green Flag</span>
               </h2>
             ) : metadata.id === 'chaos-mix' ? (
-              <h2 className="text-lg sm:text-2xl font-black uppercase tracking-wider bg-gradient-to-r from-pink-400 via-purple-300 via-cyan-300 to-amber-300 bg-clip-text text-transparent">
+              <h2 className="text-base sm:text-2xl font-black uppercase tracking-wider bg-gradient-to-r from-pink-400 via-purple-300 via-cyan-300 to-amber-300 bg-clip-text text-transparent">
                 {displayTitle}
               </h2>
             ) : (
               <h2
-                className="text-lg sm:text-2xl font-black uppercase tracking-wider"
+                className="text-base sm:text-2xl font-black uppercase tracking-wider"
                 style={{ color: metadata.themeColor, textShadow: `0 0 15px ${metadata.themeColor}55` }}
               >
                 {displayTitle}
@@ -106,13 +164,13 @@ export const GameShell: React.FC<GameShellProps> = ({
             </p>
           </div>
 
-          {/* Controls: Players & Restart */}
-          <div className="flex items-center gap-1.5">
+          {/* Desktop Controls: Players & Restart */}
+          <div className="hidden sm:flex items-center gap-1.5">
             {supportsNonalcoholic && (
               <button
                 onClick={() => setIsNonAlcoholic(!isNonAlcoholic)}
                 title={isNonAlcoholic ? 'Non-alcoholic mode active' : 'Normal beverage mode'}
-                className={`p-2 rounded-xl border text-xs font-medium transition-all ${
+                className={`p-2 rounded-xl border text-xs font-medium transition-all cursor-pointer ${
                   isNonAlcoholic
                     ? 'border-emerald-500/50 bg-emerald-950/40 text-emerald-300 shadow-neon-green/20'
                     : 'border-white/10 bg-zinc-900/60 text-zinc-400 hover:text-zinc-200'
@@ -170,12 +228,14 @@ export const GameShell: React.FC<GameShellProps> = ({
         </div>
 
         {/* Category Selector Pills */}
-        <div className="flex items-center justify-between gap-4 border-t border-b border-white/[0.06] py-1.5">
-          <CategorySelector
-            applicableCategories={metadata.applicableCategories}
-            currentCategory={category}
-            onSelectCategory={onCategoryChange}
-          />
+        <div className="w-full flex items-center justify-between gap-2 border-t border-b border-white/[0.06] py-1.5 min-w-0 overflow-hidden">
+          <div className="flex-1 min-w-0">
+            <CategorySelector
+              applicableCategories={metadata.applicableCategories}
+              currentCategory={category}
+              onSelectCategory={onCategoryChange}
+            />
+          </div>
 
           {/* Active Player Turn Pill (Only if player names were entered) */}
           {hasPlayers && activePlayerName && (

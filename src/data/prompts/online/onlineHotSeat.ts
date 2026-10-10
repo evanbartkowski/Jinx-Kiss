@@ -143,3 +143,4 @@ export const ONLINE_HOT_SEAT_PROMPTS: PromptItem[] = [
   { id: 'on-hs-kids-12', gameId: 'hot-seat', category: 'kids', playMode: 'online', text: "Hot Seat: What magical creature do you wish was real: unicorns, dragons, or talking animals?" },
   { id: 'on-hs-kids-13', gameId: 'hot-seat', category: 'kids', playMode: 'online', text: "Hot Seat: What is the coolest secret fort you ever built inside your home?" }
 ];
+

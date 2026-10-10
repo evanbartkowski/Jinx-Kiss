@@ -43,17 +43,19 @@ export const AmbientBackground: React.FC = () => {
     const colors = isOnline
       ? ['#06B6D4', '#3B82F6', '#8B5CF6', '#38BDF8']
       : ['#FF4DA6', '#A855F7', '#06B6D4'];
-    const particleCount = Math.min(Math.floor((width * height) / 45000), 40);
+    const isMobileDevice = width < 768;
+    const maxParticles = isMobileDevice ? 12 : 40;
+    const particleCount = Math.min(Math.floor((width * height) / (isMobileDevice ? 80000 : 45000)), maxParticles);
     const particles: Particle[] = [];
 
     for (let i = 0; i < particleCount; i++) {
       particles.push({
         x: Math.random() * width,
         y: Math.random() * height,
-        radius: Math.random() * 2 + 1,
+        radius: Math.random() * (isMobileDevice ? 1.5 : 2) + 1,
         vx: (Math.random() - 0.5) * 0.35,
         vy: (Math.random() - 0.5) * 0.35,
-        alpha: Math.random() * 0.3 + 0.1,
+        alpha: Math.random() * 0.25 + 0.1,
         color: colors[Math.floor(Math.random() * colors.length)],
       });
     }
@@ -86,8 +88,10 @@ export const AmbientBackground: React.FC = () => {
         ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
         ctx.fillStyle = p.color;
         ctx.globalAlpha = p.alpha;
-        ctx.shadowBlur = 10;
-        ctx.shadowColor = p.color;
+        if (!isMobileDevice) {
+          ctx.shadowBlur = 8;
+          ctx.shadowColor = p.color;
+        }
         ctx.fill();
         ctx.restore();
       });
@@ -106,18 +110,18 @@ export const AmbientBackground: React.FC = () => {
 
   return (
     <div className="fixed inset-0 pointer-events-none -z-10 overflow-hidden bg-[#050505]">
-      {/* Soft blurred moving ambient radial gradients */}
-      <div className={`absolute top-[-10%] left-[20%] w-[550px] h-[550px] rounded-full blur-[130px] transform-gpu ambient-blob-1 transition-colors duration-700 ${
+      {/* Soft blurred ambient radial gradients */}
+      <div className={`absolute top-[-10%] left-[20%] w-[280px] sm:w-[550px] h-[280px] sm:h-[550px] rounded-full blur-[60px] sm:blur-[130px] transform-gpu ambient-blob-1 transition-colors duration-700 ${
         isOnline ? 'bg-cyan-500/15' : 'bg-brand-pink/15'
       }`} />
-      <div className={`absolute top-[35%] right-[-8%] w-[650px] h-[650px] rounded-full blur-[150px] transform-gpu ambient-blob-2 transition-colors duration-700 ${
+      <div className={`absolute top-[35%] right-[-8%] w-[300px] sm:w-[650px] h-[300px] sm:h-[650px] rounded-full blur-[70px] sm:blur-[150px] transform-gpu ambient-blob-2 transition-colors duration-700 ${
         isOnline ? 'bg-blue-600/15' : 'bg-brand-violet/15'
       }`} />
-      <div className="absolute bottom-[-10%] left-[-8%] w-[600px] h-[600px] rounded-full bg-cyan-500/15 blur-[140px] transform-gpu ambient-blob-3" />
-      <div className={`absolute top-[65%] left-[30%] w-[450px] h-[450px] rounded-full blur-[130px] transform-gpu ambient-blob-1 transition-colors duration-700 ${
+      <div className="absolute bottom-[-10%] left-[-8%] w-[280px] sm:w-[600px] h-[280px] sm:h-[600px] rounded-full bg-cyan-500/15 blur-[60px] sm:blur-[140px] transform-gpu ambient-blob-3" />
+      <div className={`absolute top-[65%] left-[30%] w-[220px] sm:w-[450px] h-[220px] sm:h-[450px] rounded-full blur-[60px] sm:blur-[130px] transform-gpu ambient-blob-1 transition-colors duration-700 ${
         isOnline ? 'bg-indigo-600/15' : 'bg-purple-900/10'
       }`} />
-      <canvas ref={canvasRef} className="absolute inset-0 w-full h-full opacity-60" />
+      <canvas ref={canvasRef} className="absolute inset-0 w-full h-full opacity-60 pointer-events-none" />
     </div>
   );
 };
