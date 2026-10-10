@@ -19,8 +19,6 @@ import { RedFlagGreenFlagGame } from '../components/games/RedFlagGreenFlagGame';
 import { TruthOrSipGame } from '../components/games/TruthOrSipGame';
 import { PointAndDrinkGame } from '../components/games/PointAndDrinkGame';
 import { MostLikelyToGame } from '../components/games/MostLikelyToGame';
-import { ImposterGame } from '../components/games/ImposterGame';
-import { WhosLyingGame } from '../components/games/WhosLyingGame';
 import { ConfessionsGame } from '../components/games/ConfessionsGame';
 import { ChaosMixGame } from '../components/games/ChaosMixGame';
 import { HotSeatGame } from '../components/games/HotSeatGame';
@@ -153,10 +151,6 @@ export const GamePage: React.FC<GamePageProps> = ({ gameId, customDeck, onExit }
         return <PointAndDrinkGame key={gameKey} prompts={prompts} players={savedPlayers} />;
       case 'most-likely-to':
         return <MostLikelyToGame key={gameKey} prompts={prompts} players={savedPlayers} />;
-      case 'imposter':
-        return <ImposterGame key={gameKey} prompts={prompts} players={savedPlayers} />;
-      case 'whos-lying':
-        return <WhosLyingGame key={gameKey} prompts={prompts} players={savedPlayers} />;
       case 'confessions':
         return <ConfessionsGame key={gameKey} prompts={prompts} players={savedPlayers} />;
       case 'chaos-mix':

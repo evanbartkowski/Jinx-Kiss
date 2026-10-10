@@ -1,6 +1,6 @@
 import React from 'react';
 import { AUTHOR_CONFIG } from '../../config/socialLinks';
-import { Mail } from 'lucide-react';
+import { Mail, ExternalLink, Gamepad2 } from 'lucide-react';
 
 export const Footer: React.FC = () => {
   const getIcon = (icon: string) => {
@@ -25,19 +25,30 @@ export const Footer: React.FC = () => {
   };
 
   return (
-    <footer className="w-full border-t border-white/[0.05] bg-[#050505]/90 py-6 mt-auto transition-all">
-      <div className="w-full px-4 sm:px-8 flex flex-col sm:flex-row items-center justify-center gap-4">
-        {/* Created by Evan Bartkowski with socials right next to it */}
-        <div className="flex flex-wrap items-center justify-center gap-3">
-          <span className="text-zinc-400 text-sm font-medium tracking-wide">
+    <footer className="w-full border-t border-white/[0.05] bg-[#050505]/90 py-5 mt-auto transition-all">
+      <div className="w-full px-4 sm:px-8 xl:px-12 flex flex-col md:flex-row items-center justify-between gap-4">
+        
+        {/* Bottom Left Corner: Mesachi Studios & Created by Evan Bartkowski with socials */}
+        <div className="flex flex-wrap items-center justify-center md:justify-start gap-2.5 sm:gap-3 text-xs sm:text-sm">
+          {/* Mesachi Studios badge */}
+          <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-xl bg-purple-950/40 border border-purple-500/30 shadow-neon-violet/10">
+            <span className="w-1.5 h-1.5 rounded-full bg-brand-violet animate-pulse" />
+            <span className="font-extrabold tracking-wider uppercase text-purple-200 text-[11px] sm:text-xs">
+              Mesachi Studios
+            </span>
+          </div>
+
+          <span className="text-zinc-600 hidden sm:inline">•</span>
+
+          <span className="text-zinc-400 font-medium tracking-wide">
             Created by
           </span>
-          <span className="text-base font-extrabold tracking-wider text-creator-gradient drop-shadow-[0_0_10px_rgba(255,77,166,0.35)] select-none">
+          <span className="font-extrabold tracking-wider text-creator-gradient drop-shadow-[0_0_10px_rgba(255,77,166,0.35)] select-none">
             {AUTHOR_CONFIG.displayName}
           </span>
 
           {/* Social icons inline next to name */}
-          <div className="flex items-center gap-2 ml-2">
+          <div className="flex items-center gap-1.5 ml-1">
             {AUTHOR_CONFIG.socials.map((social) => (
               <a
                 key={social.name}
@@ -52,6 +63,22 @@ export const Footer: React.FC = () => {
             ))}
           </div>
         </div>
+
+        {/* Bottom Right Corner: Other games by me (starlightfishing.com) */}
+        <div className="flex items-center justify-center md:justify-end gap-2 text-xs sm:text-sm">
+          <span className="text-zinc-400 font-medium">Other games by me:</span>
+          <a
+            href="https://starlightfishing.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-cyan-500/30 bg-cyan-950/30 text-cyan-300 hover:text-white hover:border-cyan-400 hover:bg-cyan-900/50 hover:shadow-neon-cyan/30 transition-all font-semibold active:scale-95"
+          >
+            <Gamepad2 className="w-3.5 h-3.5 text-cyan-400 group-hover:rotate-12 transition-transform" />
+            <span>Starlight Fishing</span>
+            <ExternalLink className="w-3 h-3 text-cyan-400/80 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+          </a>
+        </div>
+
       </div>
     </footer>
   );

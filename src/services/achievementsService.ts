@@ -27,9 +27,9 @@ export const ALL_ACHIEVEMENTS: Achievement[] = [
   {
     id: 'master-manipulator',
     title: 'Master Manipulator',
-    description: 'Successfully bluffed and escaped detection as the Imposter.',
-    icon: 'UserX',
-    badgeColor: 'border-emerald-500/50 text-emerald-300 bg-emerald-950/40',
+    description: 'Survived the Hot Seat without taking any forfeits.',
+    icon: 'Flame',
+    badgeColor: 'border-amber-500/50 text-amber-300 bg-amber-950/40',
   },
   {
     id: 'party-animal',

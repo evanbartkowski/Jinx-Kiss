@@ -8,8 +8,6 @@ export type GameId =
   | 'truth-or-sip'
   | 'point-and-drink'
   | 'most-likely-to'
-  | 'imposter'
-  | 'whos-lying'
   | 'confessions'
   | 'chaos-mix'
   | 'hot-seat';

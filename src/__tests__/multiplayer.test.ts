@@ -5,7 +5,7 @@ import { PartyModeConfig } from '../types/game';
 describe('Realtime Multiplayer Party Rooms', () => {
   const dummyConfig: PartyModeConfig = {
     playerNames: ['HostAlex'],
-    selectedGames: ['truth-or-dare', 'most-likely-to', 'whos-lying'],
+    selectedGames: ['truth-or-dare', 'most-likely-to', 'hot-takes'],
     categories: ['easy', 'medium'],
     roundCount: 10,
     enableChaosWheel: true,

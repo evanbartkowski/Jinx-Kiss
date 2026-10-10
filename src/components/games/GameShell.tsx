@@ -43,15 +43,34 @@ export const GameShell: React.FC<GameShellProps> = ({
   const hasPlayers = players && players.length > 0;
 
   return (
-    <div className="w-full min-h-[calc(100vh-5rem)] flex flex-col justify-between py-4 px-4 sm:px-8 xl:px-12">
+    <div 
+      className="relative w-full min-h-[calc(100vh-5rem)] flex flex-col justify-between py-4 px-4 sm:px-8 xl:px-12 overflow-hidden"
+      style={{
+        background: `radial-gradient(circle at 50% 10%, ${metadata.themeColor}22 0%, rgba(5,5,5,0) 60%), radial-gradient(circle at 80% 80%, ${metadata.themeColor}12 0%, rgba(5,5,5,0) 50%), #050505`,
+      }}
+    >
+      {/* Dynamic Animated Ambient Neon Orbs */}
+      <div 
+        className="absolute top-12 left-1/2 -translate-x-1/2 w-[38rem] h-[22rem] blur-[120px] rounded-full pointer-events-none transition-all duration-700 opacity-60 -z-10 animate-pulse-slow"
+        style={{ backgroundColor: `${metadata.themeColor}25` }}
+      />
+      <div 
+        className="absolute bottom-8 right-12 w-[24rem] h-[18rem] blur-[100px] rounded-full pointer-events-none -z-10 opacity-30"
+        style={{ backgroundColor: `${metadata.themeColor}18` }}
+      />
+      <div 
+        className="absolute top-1/3 left-8 w-[20rem] h-[16rem] blur-[90px] rounded-full pointer-events-none -z-10 opacity-25"
+        style={{ backgroundColor: '#A855F715' }}
+      />
+
       {/* Top Bar Controls */}
-      <div className="w-full flex flex-col gap-3 pb-4">
-        <div className="flex items-center justify-between gap-2">
+      <div className="w-full flex flex-col gap-3 pb-3 relative z-10">
+        <div className="flex items-center justify-between gap-2 p-2 rounded-2xl bg-zinc-950/60 border border-white/[0.07] backdrop-blur-md shadow-lg">
           {/* Back button */}
           <div className="flex items-center gap-2">
             <button
               onClick={onExit}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-white/10 bg-zinc-900/60 text-zinc-300 hover:text-white hover:border-white/20 hover:bg-zinc-800 transition-all text-xs font-semibold active:scale-95"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-white/10 bg-zinc-900/80 text-zinc-300 hover:text-white hover:border-white/20 hover:bg-zinc-800 transition-all text-xs font-semibold active:scale-95 shadow-sm"
             >
               <ArrowLeft className="w-4 h-4" />
               <span>All Games</span>
@@ -140,12 +159,12 @@ export const GameShell: React.FC<GameShellProps> = ({
       </div>
 
       {/* Main Game Playing Arena */}
-      <div className="flex-1 flex flex-col justify-center items-center py-4 sm:py-8 w-full">
+      <div className="flex-1 flex flex-col justify-center items-center py-4 sm:py-8 w-full relative z-10">
         {children}
       </div>
 
       {/* Bottom Request Card Button */}
-      <div className="w-full pt-4 flex items-center justify-center border-t border-white/[0.06]">
+      <div className="w-full pt-4 flex items-center justify-center border-t border-white/[0.06] relative z-10">
         <button
           onClick={() => setIsSuggestModalOpen(true)}
           className="flex items-center gap-2 px-4 py-2 rounded-xl border border-white/10 bg-zinc-900/40 text-xs font-medium text-zinc-400 hover:text-white hover:border-brand-pink/40 hover:bg-zinc-900/80 hover:shadow-neon-pink/20 transition-all active:scale-95"

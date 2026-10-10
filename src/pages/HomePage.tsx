@@ -14,8 +14,6 @@ import {
   Wine,
   Crosshair,
   Users,
-  UserX,
-  HelpCircle,
   EyeOff,
   ArrowRight,
   ChevronDown,
@@ -52,8 +50,6 @@ export const HomePage: React.FC<HomePageProps> = ({
       case 'Wine': return <Wine {...props} />;
       case 'Crosshair': return <Crosshair {...props} />;
       case 'Users': return <Users {...props} />;
-      case 'UserX': return <UserX {...props} />;
-      case 'HelpCircle': return <HelpCircle {...props} />;
       case 'EyeOff': return <EyeOff {...props} />;
       case 'Shuffle': return <Shuffle {...props} />;
       default: return <Sparkles {...props} />;
@@ -64,7 +60,7 @@ export const HomePage: React.FC<HomePageProps> = ({
 
   return (
     <div className="w-full flex flex-col items-center pb-12 pt-4 sm:pt-6">
-      {/* Responsive Grid of 14 Game Cards */}
+      {/* Responsive Grid of 12 Game Cards */}
       <div className="w-full px-4 sm:px-8 xl:px-12">
         <div className="flex items-center justify-between mb-4 sm:mb-6">
           <h2 className="text-xl sm:text-3xl font-black uppercase tracking-wide text-white">

@@ -21,7 +21,7 @@ export const Header: React.FC<HeaderProps> = ({
 
   return (
     <header className="sticky top-0 z-40 w-full backdrop-blur-xl bg-[#050505]/80 border-b border-white/[0.06] transition-all">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      <div className="w-full px-4 sm:px-8 xl:px-12 h-20 flex items-center justify-between">
         
         {/* Brand / Logo */}
         <div 

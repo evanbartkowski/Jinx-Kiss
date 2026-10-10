@@ -641,24 +641,6 @@ export const MASTER_COLLECTION_PROMPTS: PromptItem[] = [
     "text": "Rapid Fire: Name 5 pizza toppings that should be banned from Earth in 10 seconds!"
   },
   {
-    "id": "mk-kids-imp-1",
-    "gameId": "imposter",
-    "category": "kids",
-    "text": "Imposter Clue: The secret category is 'Super Mario Characters'. Everyone give one clue except the imposter!"
-  },
-  {
-    "id": "mk-kids-imp-2",
-    "gameId": "imposter",
-    "category": "kids",
-    "text": "Imposter Clue: The secret category is 'Breakfast Foods'. Describe your texture without naming the food!"
-  },
-  {
-    "id": "mk-kids-wl-1",
-    "gameId": "whos-lying",
-    "category": "kids",
-    "text": "Tell two true facts about your favorite school subject or hobby and one funny made-up lie!"
-  },
-  {
     "id": "mk-easy-t-1",
     "gameId": "truth-or-dare",
     "category": "easy",
@@ -1282,24 +1264,6 @@ export const MASTER_COLLECTION_PROMPTS: PromptItem[] = [
     "gameId": "hot-seat",
     "category": "easy",
     "text": "Hot Seat: Rank three people in the room based on who you'd trust to plan your birthday party!"
-  },
-  {
-    "id": "mk-easy-imp-1",
-    "gameId": "imposter",
-    "category": "easy",
-    "text": "Imposter Clue: The secret category is 'Comfort Foods'. Describe the temperature and feeling without the name!"
-  },
-  {
-    "id": "mk-easy-imp-2",
-    "gameId": "imposter",
-    "category": "easy",
-    "text": "Imposter Clue: The secret category is 'Vacation Destinations'. Describe the footwear required!"
-  },
-  {
-    "id": "mk-easy-wl-1",
-    "gameId": "whos-lying",
-    "category": "easy",
-    "text": "Tell two true facts about your first job or high school experience and one believable lie!"
   },
   {
     "id": "mk-med-t-1",
@@ -1927,24 +1891,6 @@ export const MASTER_COLLECTION_PROMPTS: PromptItem[] = [
     "text": "Hot Seat: You have 15 seconds to confess your biggest dating red flag or take two sips!"
   },
   {
-    "id": "mk-med-imp-1",
-    "gameId": "imposter",
-    "category": "medium",
-    "text": "Imposter Clue: The secret topic is 'Awkward First Date Locations'. Give a subtle clue without saying the venue!"
-  },
-  {
-    "id": "mk-med-imp-2",
-    "gameId": "imposter",
-    "category": "medium",
-    "text": "Imposter Clue: The secret topic is 'Guilty Pleasure TV Shows'. Describe the emotional vibe without the title!"
-  },
-  {
-    "id": "mk-med-wl-1",
-    "gameId": "whos-lying",
-    "category": "medium",
-    "text": "Share two true wild dating or nightlife stories and one convincingly fabricated lie!"
-  },
-  {
     "id": "mk-ext-t-1",
     "gameId": "truth-or-dare",
     "category": "extreme",
@@ -2568,24 +2514,6 @@ export const MASTER_COLLECTION_PROMPTS: PromptItem[] = [
     "gameId": "hot-seat",
     "category": "extreme",
     "text": "Hot Seat: Name the person in this room who you believe has the darkest personal secrets!"
-  },
-  {
-    "id": "mk-ext-imp-1",
-    "gameId": "imposter",
-    "category": "extreme",
-    "text": "Imposter Clue: The secret topic is 'White Collar Crimes'. Give a subtle clue without naming the statute!"
-  },
-  {
-    "id": "mk-ext-imp-2",
-    "gameId": "imposter",
-    "category": "extreme",
-    "text": "Imposter Clue: The secret topic is 'Near-Death Experiences'. Describe the bodily sensation!"
-  },
-  {
-    "id": "mk-ext-wl-1",
-    "gameId": "whos-lying",
-    "category": "extreme",
-    "text": "Reveal two high-stakes brush-with-the-law or near-catastrophe stories and one plausible lie!"
   },
   {
     "id": "mk-unh-t-1",
@@ -3213,24 +3141,6 @@ export const MASTER_COLLECTION_PROMPTS: PromptItem[] = [
     "text": "Hot Seat: Rank three players in the room by who would survive longest in a haunted Victorian mansion!"
   },
   {
-    "id": "mk-unh-imp-1",
-    "gameId": "imposter",
-    "category": "unhinged",
-    "text": "Imposter Clue: The secret topic is 'Cursed Kitchen Appliances'. Describe the sound it makes when exploding!"
-  },
-  {
-    "id": "mk-unh-imp-2",
-    "gameId": "imposter",
-    "category": "unhinged",
-    "text": "Imposter Clue: The secret topic is 'Cryptozoological Monsters'. Describe its favorite breakfast snack!"
-  },
-  {
-    "id": "mk-unh-wl-1",
-    "gameId": "whos-lying",
-    "category": "unhinged",
-    "text": "Tell two bizarre, totally unbelievable true stories about yourself and one equally absurd lie!"
-  },
-  {
     "id": "mk-cpl-t-1",
     "gameId": "truth-or-dare",
     "category": "couples",
@@ -3854,24 +3764,6 @@ export const MASTER_COLLECTION_PROMPTS: PromptItem[] = [
     "gameId": "hot-seat",
     "category": "couples",
     "text": "Hot Seat: Describe your dream future date night with your partner down to the venue and music!"
-  },
-  {
-    "id": "mk-cpl-imp-1",
-    "gameId": "imposter",
-    "category": "couples",
-    "text": "Imposter Clue: The secret category is 'Romantic First Date Ideas'. Describe the lighting and atmosphere!"
-  },
-  {
-    "id": "mk-cpl-imp-2",
-    "gameId": "imposter",
-    "category": "couples",
-    "text": "Imposter Clue: The secret category is 'Love Languages'. Describe the action without using the phrase!"
-  },
-  {
-    "id": "mk-cpl-wl-1",
-    "gameId": "whos-lying",
-    "category": "couples",
-    "text": "Share two true romantic memories with your partner and one convincingly sweet fabricated memory!"
   },
   {
     "id": "mk-spicy-t-1",
@@ -4499,24 +4391,6 @@ export const MASTER_COLLECTION_PROMPTS: PromptItem[] = [
     "text": "Hot Seat: You have 15 seconds to name your top 3 sexual kinks or take two full shots!"
   },
   {
-    "id": "mk-spicy-imp-1",
-    "gameId": "imposter",
-    "category": "spicy",
-    "text": "Imposter Clue: The secret topic is 'Kink & BDSM Toys'. Describe the physical sensation without naming the apparatus!"
-  },
-  {
-    "id": "mk-spicy-imp-2",
-    "gameId": "imposter",
-    "category": "spicy",
-    "text": "Imposter Clue: The secret topic is 'Erogenous Zones'. Describe the touch that electrifies it!"
-  },
-  {
-    "id": "mk-spicy-wl-1",
-    "gameId": "whos-lying",
-    "category": "spicy",
-    "text": "Share two true wild sexual encounters or hookup confessions and one convincingly erotic lie!"
-  },
-  {
     "id": "mk-18p-t-1",
     "gameId": "truth-or-dare",
     "category": "18+",
@@ -5140,23 +5014,5 @@ export const MASTER_COLLECTION_PROMPTS: PromptItem[] = [
     "gameId": "hot-seat",
     "category": "18+",
     "text": "Hot Seat: You have 15 seconds to confess your most taboo bedroom desire or take two full shots!"
-  },
-  {
-    "id": "mk-18p-imp-1",
-    "gameId": "imposter",
-    "category": "18+",
-    "text": "Imposter Clue: The secret topic is 'Wild Hookup Locations'. Describe the adrenaline rush without naming the spot!"
-  },
-  {
-    "id": "mk-18p-imp-2",
-    "gameId": "imposter",
-    "category": "18+",
-    "text": "Imposter Clue: The secret topic is 'Explicit Foreplay Techniques'. Describe the physical rhythm without the term!"
-  },
-  {
-    "id": "mk-18p-wl-1",
-    "gameId": "whos-lying",
-    "category": "18+",
-    "text": "Share two true explicit, crazy bedroom stories and one convincingly fabricated erotic lie!"
   }
 ];

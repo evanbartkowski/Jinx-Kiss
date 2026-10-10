@@ -141,7 +141,7 @@ export const soundEffects = {
   },
 
   /**
-   * Card flip swoosh
+   * Crisp, physical card flip with textured air swoosh & subtle felt snap
    */
   playCardFlip() {
     if (settings.isMuted) return;
@@ -150,35 +150,51 @@ export const soundEffects = {
 
     try {
       const now = ctx.currentTime;
+      
+      // Resonant air swoosh
       const osc = ctx.createOscillator();
       const gain = ctx.createGain();
       const filter = ctx.createBiquadFilter();
 
-      filter.type = 'lowpass';
-      filter.frequency.setValueAtTime(800, now);
-      filter.frequency.exponentialRampToValueAtTime(200, now + 0.12);
+      filter.type = 'bandpass';
+      filter.frequency.setValueAtTime(1200, now);
+      filter.frequency.exponentialRampToValueAtTime(350, now + 0.14);
+      filter.Q.setValueAtTime(1.8, now);
 
       osc.type = 'triangle';
-      osc.frequency.setValueAtTime(320, now);
-      osc.frequency.exponentialRampToValueAtTime(110, now + 0.12);
+      osc.frequency.setValueAtTime(420, now);
+      osc.frequency.exponentialRampToValueAtTime(140, now + 0.14);
 
       gain.gain.setValueAtTime(0.001, now);
-      gain.gain.linearRampToValueAtTime(0.2, now + 0.02);
-      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.12);
+      gain.gain.linearRampToValueAtTime(0.24, now + 0.02);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.14);
 
       osc.connect(filter);
       filter.connect(gain);
       gain.connect(sfxGainNode);
 
       osc.start(now);
-      osc.stop(now + 0.12);
+      osc.stop(now + 0.14);
+
+      // Micro card snap transient
+      const snapOsc = ctx.createOscillator();
+      const snapGain = ctx.createGain();
+      snapOsc.type = 'sine';
+      snapOsc.frequency.setValueAtTime(1800, now + 0.01);
+      snapOsc.frequency.exponentialRampToValueAtTime(220, now + 0.04);
+      snapGain.gain.setValueAtTime(0.12, now + 0.01);
+      snapGain.gain.exponentialRampToValueAtTime(0.001, now + 0.04);
+      snapOsc.connect(snapGain);
+      snapGain.connect(sfxGainNode);
+      snapOsc.start(now + 0.01);
+      snapOsc.stop(now + 0.04);
     } catch {
       // autoplay fallback
     }
   },
 
   /**
-   * UI Click
+   * High-tech neon tactile button click
    */
   playClick() {
     if (settings.isMuted) return;
@@ -191,24 +207,24 @@ export const soundEffects = {
       const gain = ctx.createGain();
 
       osc.type = 'sine';
-      osc.frequency.setValueAtTime(480, now);
-      osc.frequency.exponentialRampToValueAtTime(960, now + 0.05);
+      osc.frequency.setValueAtTime(620, now);
+      osc.frequency.exponentialRampToValueAtTime(1240, now + 0.045);
 
-      gain.gain.setValueAtTime(0.12, now);
-      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.05);
+      gain.gain.setValueAtTime(0.16, now);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.045);
 
       osc.connect(gain);
       gain.connect(sfxGainNode);
 
       osc.start(now);
-      osc.stop(now + 0.05);
+      osc.stop(now + 0.045);
     } catch {
       // ignore
     }
   },
 
   /**
-   * Mechanical or wheel tick
+   * Mechanical or casino wheel tick
    */
   playTick() {
     if (settings.isMuted) return;
@@ -221,17 +237,17 @@ export const soundEffects = {
       const gain = ctx.createGain();
 
       osc.type = 'triangle';
-      osc.frequency.setValueAtTime(650, now);
-      osc.frequency.exponentialRampToValueAtTime(140, now + 0.035);
+      osc.frequency.setValueAtTime(820, now);
+      osc.frequency.exponentialRampToValueAtTime(180, now + 0.028);
 
-      gain.gain.setValueAtTime(0.15, now);
-      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.035);
+      gain.gain.setValueAtTime(0.22, now);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.028);
 
       osc.connect(gain);
       gain.connect(sfxGainNode);
 
       osc.start(now);
-      osc.stop(now + 0.035);
+      osc.stop(now + 0.028);
     } catch {
       // ignore
     }
@@ -242,6 +258,71 @@ export const soundEffects = {
    */
   playWheelTick() {
     this.playTick();
+  },
+
+  /**
+   * Cinematic impact whoosh for intense/unhinged prompt reveals
+   */
+  playImpactWhoosh() {
+    if (settings.isMuted) return;
+    const ctx = getAudioContext();
+    if (!ctx || !sfxGainNode) return;
+
+    try {
+      const now = ctx.currentTime;
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      const filter = ctx.createBiquadFilter();
+
+      filter.type = 'lowpass';
+      filter.frequency.setValueAtTime(600, now);
+      filter.frequency.exponentialRampToValueAtTime(80, now + 0.35);
+
+      osc.type = 'sawtooth';
+      osc.frequency.setValueAtTime(180, now);
+      osc.frequency.exponentialRampToValueAtTime(45, now + 0.35);
+
+      gain.gain.setValueAtTime(0.2, now);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.35);
+
+      osc.connect(filter);
+      filter.connect(gain);
+      gain.connect(sfxGainNode);
+
+      osc.start(now);
+      osc.stop(now + 0.35);
+    } catch {
+      // ignore
+    }
+  },
+
+  /**
+   * Soft rhythmic timer warning chime
+   */
+  playTimerBeep() {
+    if (settings.isMuted) return;
+    const ctx = getAudioContext();
+    if (!ctx || !sfxGainNode) return;
+
+    try {
+      const now = ctx.currentTime;
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(880, now);
+
+      gain.gain.setValueAtTime(0.12, now);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.06);
+
+      osc.connect(gain);
+      gain.connect(sfxGainNode);
+
+      osc.start(now);
+      osc.stop(now + 0.06);
+    } catch {
+      // ignore
+    }
   },
 
   /**
