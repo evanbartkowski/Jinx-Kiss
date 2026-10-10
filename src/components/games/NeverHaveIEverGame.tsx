@@ -4,7 +4,7 @@ import { CardRatingBar } from '../common/CardRatingBar';
 import { soundEffects } from '../../utils/audio';
 import { isPromptLegendary, rollForLegendaryCard, triggerLegendaryCardEffects } from '../../utils/legendaryCards';
 import { LegendaryCardBadge } from '../common/LegendaryCardBadge';
-import { ArrowRight, Heart } from 'lucide-react';
+import { Heart, CheckCircle2 } from 'lucide-react';
 
 interface NeverHaveIEverGameProps {
   prompts: PromptItem[];
@@ -15,6 +15,7 @@ export const NeverHaveIEverGame: React.FC<NeverHaveIEverGameProps> = ({ prompts,
   const [currentIndex, setCurrentIndex] = useState(0);
   const [usedIndices, setUsedIndices] = useState<number[]>([]);
   const [playerLives, setPlayerLives] = useState<Record<string, number>>({});
+  const [isCompleting, setIsCompleting] = useState(false);
   const [activePrompt, setActivePrompt] = useState<PromptItem>(() => {
     const initial = prompts[0] || {
       id: 'init-nhie',
@@ -40,19 +41,27 @@ export const NeverHaveIEverGame: React.FC<NeverHaveIEverGameProps> = ({ prompts,
     }
   }, [activePrompt.id]);
 
-  const nextCard = () => {
-    soundEffects.playCardFlip();
-    let nextIdx = Math.floor(Math.random() * prompts.length);
-    if (usedIndices.length < prompts.length) {
-      while (usedIndices.includes(nextIdx) && usedIndices.length < prompts.length) {
-        nextIdx = (nextIdx + 1) % prompts.length;
+  const handleComplete = () => {
+    if (isCompleting) return;
+    setIsCompleting(true);
+    soundEffects.playVoteSubmit();
+
+    // Pulse card glow, then flip to next card
+    setTimeout(() => {
+      soundEffects.playCardFlip();
+      let nextIdx = Math.floor(Math.random() * prompts.length);
+      if (usedIndices.length < prompts.length) {
+        while (usedIndices.includes(nextIdx) && usedIndices.length < prompts.length) {
+          nextIdx = (nextIdx + 1) % prompts.length;
+        }
+        setUsedIndices(prev => [...prev, nextIdx]);
       }
-      setUsedIndices(prev => [...prev, nextIdx]);
-    }
-    setCurrentIndex(nextIdx);
-    const nextP = prompts[nextIdx] || prompts[0];
-    const rolled = rollForLegendaryCard(nextP, nextP.category || 'medium', 'never-have-i-ever');
-    setActivePrompt(rolled);
+      setCurrentIndex(nextIdx);
+      const nextP = prompts[nextIdx] || prompts[0];
+      const rolled = rollForLegendaryCard(nextP, nextP.category || 'medium', 'never-have-i-ever');
+      setActivePrompt(rolled);
+      setIsCompleting(false);
+    }, 550);
   };
 
   const deductLife = (playerName: string) => {
@@ -104,15 +113,19 @@ export const NeverHaveIEverGame: React.FC<NeverHaveIEverGameProps> = ({ prompts,
 
       {/* Main Statement Card (Significantly Bigger, Screen-Filling & Legendary) */}
       <div className={`w-full min-h-[340px] sm:min-h-[480px] md:min-h-[560px] p-6 sm:p-14 md:p-18 rounded-3xl sm:rounded-4xl glass-panel border flex flex-col justify-between items-center text-center relative overflow-hidden animate-scale-in transition-all duration-500 ${
-        isLegendary
+        isCompleting
+          ? 'border-2 border-emerald-400 shadow-[0_0_70px_rgba(52,211,153,0.85),inset_0_0_35px_rgba(52,211,153,0.3)] ring-4 ring-emerald-400/90 bg-gradient-to-b from-emerald-950/70 via-black/75 to-black/95 scale-[1.01]'
+          : isLegendary
           ? 'border-2 border-yellow-400 sm:border-yellow-300 shadow-[0_0_60px_rgba(250,204,21,0.65),inset_0_0_30px_rgba(250,204,21,0.2)] ring-2 ring-yellow-400/80 bg-gradient-to-b from-yellow-950/40 via-black/60 to-black/90'
           : 'border-brand-violet/50 shadow-[0_0_40px_rgba(168,85,247,0.3)]'
       }`}>
         
         {/* Glow ambient background */}
         <div
-          className={`absolute inset-0 pointer-events-none blur-3xl ${
-            isLegendary
+          className={`absolute inset-0 pointer-events-none blur-3xl transition-opacity duration-300 ${
+            isCompleting
+              ? 'bg-gradient-to-b from-emerald-400/40 via-teal-500/25 to-transparent opacity-70'
+              : isLegendary
               ? 'bg-gradient-to-b from-yellow-500/25 via-amber-500/15 to-transparent opacity-40'
               : 'bg-gradient-to-b from-purple-600 to-transparent opacity-20'
           }`}
@@ -132,7 +145,9 @@ export const NeverHaveIEverGame: React.FC<NeverHaveIEverGameProps> = ({ prompts,
         </div>
 
         <p className={`text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-black leading-snug sm:leading-tight my-6 sm:my-10 max-w-4xl z-10 ${
-          isLegendary
+          isCompleting
+            ? 'text-emerald-100 drop-shadow-[0_0_30px_rgba(52,211,153,0.6)]'
+            : isLegendary
             ? 'text-yellow-100 drop-shadow-[0_0_30px_rgba(250,204,21,0.5)]'
             : 'text-white drop-shadow-[0_0_20px_rgba(255,255,255,0.25)]'
         }`}>
@@ -153,14 +168,28 @@ export const NeverHaveIEverGame: React.FC<NeverHaveIEverGameProps> = ({ prompts,
 
       </div>
 
-      {/* Action Button: Next Card Only */}
+      {/* Action Button: Complete Button */}
       <div className="flex items-center justify-center w-full mt-2">
         <button
-          onClick={nextCard}
-          className="w-full sm:w-auto min-w-[200px] sm:min-w-[280px] px-8 sm:px-14 py-4 sm:py-5 rounded-2xl sm:rounded-3xl bg-gradient-to-r from-brand-violet to-purple-600 hover:from-purple-500 hover:to-violet-500 text-white font-black text-base sm:text-xl shadow-neon-violet flex items-center justify-center gap-3 transition-all active:scale-95 cursor-pointer"
+          onClick={handleComplete}
+          disabled={isCompleting}
+          className={`w-full sm:w-auto min-w-[200px] sm:min-w-[280px] px-8 sm:px-14 py-4 sm:py-5 rounded-2xl sm:rounded-3xl font-black text-base sm:text-xl flex items-center justify-center gap-3 transition-all active:scale-95 cursor-pointer shadow-lg ${
+            isCompleting
+              ? 'bg-gradient-to-r from-emerald-500 to-teal-400 text-white shadow-[0_0_35px_rgba(52,211,153,0.7)] scale-105'
+              : 'bg-gradient-to-r from-brand-violet to-purple-600 hover:from-purple-500 hover:to-violet-500 text-white shadow-neon-violet'
+          }`}
         >
-          <span>Next Card</span>
-          <ArrowRight className="w-5 h-5 sm:w-6 sm:h-6" />
+          {isCompleting ? (
+            <>
+              <CheckCircle2 className="w-5 h-5 sm:w-6 sm:h-6 text-white animate-bounce" />
+              <span>Completed!</span>
+            </>
+          ) : (
+            <>
+              <CheckCircle2 className="w-5 h-5 sm:w-6 sm:h-6 text-violet-200" />
+              <span>Complete</span>
+            </>
+          )}
         </button>
       </div>
 

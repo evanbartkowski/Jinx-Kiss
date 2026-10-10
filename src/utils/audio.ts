@@ -353,6 +353,66 @@ export const soundEffects = {
   },
 
   /**
+   * Dynamic, tactile sound effect played when clicking a game to play
+   */
+  playGameSelect(gameId?: string) {
+    if (settings.isMuted) return;
+    const ctx = getAudioContext();
+    if (!ctx || !sfxGainNode) return;
+    const outNode = sfxGainNode;
+
+    try {
+      const now = ctx.currentTime;
+
+      // 1. Tactile punch transient
+      const punchOsc = ctx.createOscillator();
+      const punchGain = ctx.createGain();
+      punchOsc.type = 'sine';
+      punchOsc.frequency.setValueAtTime(180, now);
+      punchOsc.frequency.exponentialRampToValueAtTime(420, now + 0.03);
+      punchGain.gain.setValueAtTime(0.22, now);
+      punchGain.gain.exponentialRampToValueAtTime(0.001, now + 0.06);
+      punchOsc.connect(punchGain);
+      punchGain.connect(outNode);
+      punchOsc.start(now);
+      punchOsc.stop(now + 0.06);
+
+      // 2. Game-customized harmonic chime frequencies
+      let freqs = [523.25, 659.25, 783.99]; // C5, E5, G5 default cheerful triad
+      if (gameId === 'chaos-mix') {
+        freqs = [440.00, 554.37, 659.25, 880.00]; // A4, C#5, E5, A5 vibrant chord
+      } else if (gameId === 'dare-roulette') {
+        freqs = [587.33, 739.99, 880.00]; // D5, F#5, A5 energetic high spin
+      } else if (gameId === 'truth-or-dare' || gameId === 'truth-or-sip') {
+        freqs = [493.88, 622.25, 739.99, 987.77]; // B4, D#5, F#5, B5 electric neon
+      } else if (gameId === 'red-flag-green-flag') {
+        freqs = [392.00, 523.25, 659.25]; // G4, C5, E5 dual tone balance
+      } else if (gameId === 'hot-takes' || gameId === 'hot-seat') {
+        freqs = [466.16, 587.33, 698.46]; // Bb4, D5, F5 fiery brass-like
+      }
+
+      freqs.forEach((freq, idx) => {
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = idx % 2 === 0 ? 'triangle' : 'sine';
+        osc.frequency.setValueAtTime(freq, now + 0.02 + idx * 0.04);
+
+        gain.gain.setValueAtTime(0.001, now + 0.02 + idx * 0.04);
+        gain.gain.linearRampToValueAtTime(0.18, now + 0.02 + idx * 0.04 + 0.015);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.02 + idx * 0.04 + 0.22);
+
+        osc.connect(gain);
+        gain.connect(outNode);
+
+        osc.start(now + 0.02 + idx * 0.04);
+        osc.stop(now + 0.02 + idx * 0.04 + 0.22);
+      });
+    } catch {
+      // ignore
+    }
+  },
+
+  /**
    * Cinematic impact whoosh for intense/unhinged prompt reveals
    */
   playImpactWhoosh() {

@@ -4,6 +4,7 @@ import { GAMES_CONFIG, CATEGORY_LABELS } from '../../data/gamesConfig';
 import { Play, Layers, Lock, Globe, Link2, Copy, Trash2, Edit, QrCode, X, Check } from 'lucide-react';
 import { generateQRCodeSVG } from '../../utils/qrCode';
 import { useToast } from '../../context/ToastContext';
+import { soundEffects } from '../../utils/audio';
 
 interface DeckCardProps {
   deck: CustomDeck;
@@ -116,7 +117,10 @@ export const DeckCard: React.FC<DeckCardProps> = ({
       {/* Action Buttons */}
       <div className="mt-6 pt-4 border-t border-white/[0.06] flex items-center justify-between gap-2">
         <button
-          onClick={() => onPlay(deck)}
+          onClick={() => {
+            soundEffects.playGameSelect(deck.gameId);
+            onPlay(deck);
+          }}
           className="flex-1 py-2.5 px-4 rounded-xl text-xs font-bold text-white flex items-center justify-center gap-2 shadow-lg transition-all active:scale-95"
           style={{
             background: `linear-gradient(135deg, ${themeColor}, #A855F7)`,

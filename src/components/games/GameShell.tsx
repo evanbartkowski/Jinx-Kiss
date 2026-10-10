@@ -5,7 +5,7 @@ import { PlayerSetupModal } from '../common/PlayerSetupModal';
 import { SuggestCardModal } from '../common/SuggestCardModal';
 import { useGameSettings } from '../../context/GameSettingsContext';
 import { soundEffects } from '../../utils/audio';
-import { ArrowLeft, RotateCcw, Users, PlusCircle, Coffee, Wine, Shuffle } from 'lucide-react';
+import { ArrowLeft, RotateCcw, Users, PlusCircle, Coffee, Wine, Shuffle, X } from 'lucide-react';
 
 interface GameShellProps {
   metadata: GameMetadata;
@@ -39,6 +39,7 @@ export const GameShell: React.FC<GameShellProps> = ({
   const { isNonAlcoholic, setIsNonAlcoholic } = useGameSettings();
   const [isPlayerModalOpen, setIsPlayerModalOpen] = useState(false);
   const [isSuggestModalOpen, setIsSuggestModalOpen] = useState(false);
+  const [showFirstPromptPlayerBanner, setShowFirstPromptPlayerBanner] = useState(true);
 
   const displayTitle = category === 'kids' && metadata.kidsAlternativeTitle ? metadata.kidsAlternativeTitle : metadata.title;
   const displayTagline = category === 'kids' && metadata.kidsAlternativeTagline ? metadata.kidsAlternativeTagline : metadata.tagline;
@@ -123,13 +124,20 @@ export const GameShell: React.FC<GameShellProps> = ({
 
             {onUpdatePlayers && (
               <button
-                onClick={() => setIsPlayerModalOpen(true)}
-                title="Manage Players"
-                className="flex items-center gap-1 px-2.5 py-1.5 rounded-xl border border-white/10 bg-zinc-900/60 text-zinc-300 hover:text-white hover:bg-zinc-800 transition-all text-xs font-medium"
+                onClick={() => {
+                  soundEffects.playClick();
+                  setIsPlayerModalOpen(true);
+                }}
+                title={hasPlayers ? 'Manage Players' : 'Add Player Names'}
+                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl transition-all text-xs font-bold active:scale-95 cursor-pointer ${
+                  hasPlayers
+                    ? 'border border-white/10 bg-zinc-900/60 text-zinc-300 hover:text-white hover:bg-zinc-800'
+                    : 'border border-brand-pink/70 bg-gradient-to-r from-brand-pink/30 via-purple-600/30 to-brand-pink/30 text-pink-200 shadow-[0_0_20px_rgba(255,77,166,0.45)] hover:shadow-neon-pink hover:border-brand-pink animate-pulse'
+                }`}
               >
-                <Users className="w-4 h-4 text-brand-pink" />
-                <span className="hidden sm:inline">
-                  {hasPlayers ? `${players.length} Players` : 'Add Players (Optional)'}
+                <Users className={`w-4 h-4 ${hasPlayers ? 'text-brand-pink' : 'text-pink-300 animate-bounce'}`} />
+                <span>
+                  {hasPlayers ? `${players.length} Players` : '+ Add Players'}
                 </span>
               </button>
             )}
@@ -176,6 +184,50 @@ export const GameShell: React.FC<GameShellProps> = ({
             </div>
           )}
         </div>
+
+        {/* Noticeable "Add Players" Callout Banner on First Prompt */}
+        {onUpdatePlayers && !hasPlayers && showFirstPromptPlayerBanner && (
+          <div className="w-full max-w-2xl mx-auto mt-2 animate-fade-in">
+            <div className="p-3 sm:p-4 rounded-2xl glass-panel border border-brand-pink/60 bg-gradient-to-r from-pink-950/70 via-zinc-900/90 to-purple-950/70 shadow-[0_0_25px_rgba(255,77,166,0.3)] flex items-center justify-between gap-3">
+              <div className="flex items-center gap-3">
+                <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-brand-pink/20 border border-brand-pink/50 flex items-center justify-center text-brand-pink shadow-neon-pink/30 shrink-0">
+                  <Users className="w-5 h-5 animate-pulse" />
+                </div>
+                <div>
+                  <div className="flex items-center gap-1.5">
+                    <span className="text-xs sm:text-sm font-black text-white tracking-wide">
+                      Playing with friends?
+                    </span>
+                    <span className="text-[10px] font-extrabold px-1.5 py-0.5 rounded-full bg-brand-pink/30 text-pink-300 border border-brand-pink/50">
+                      GROUP PLAY
+                    </span>
+                  </div>
+                  <p className="text-[11px] sm:text-xs text-zinc-300 font-medium">
+                    Add player names for turns, custom dares, and live counters!
+                  </p>
+                </div>
+              </div>
+              <div className="flex items-center gap-2 shrink-0">
+                <button
+                  onClick={() => {
+                    soundEffects.playClick();
+                    setIsPlayerModalOpen(true);
+                  }}
+                  className="px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-xl bg-gradient-to-r from-brand-pink to-brand-violet hover:from-pink-500 hover:to-violet-500 text-white font-extrabold text-xs shadow-neon-pink cursor-pointer active:scale-95 transition-all"
+                >
+                  Add Players
+                </button>
+                <button
+                  onClick={() => setShowFirstPromptPlayerBanner(false)}
+                  className="p-1.5 rounded-lg text-zinc-400 hover:text-white hover:bg-white/10 transition-colors"
+                  title="Dismiss banner"
+                >
+                  <X className="w-4 h-4" />
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
 
       {/* Main Game Playing Arena */}

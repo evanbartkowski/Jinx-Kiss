@@ -34,23 +34,13 @@ export const GameSettingsProvider: React.FC<{ children: React.ReactNode }> = ({ 
       setSelectedCategoryState(storedCat);
     }
 
-    // Restore saved players (ignore legacy default ['Alex', 'Jordan', 'Sam'])
-    const storedPlayers = localStorage.getItem(PLAYERS_STORAGE_KEY);
-    if (storedPlayers) {
-      try {
-        const parsed = JSON.parse(storedPlayers);
-        if (Array.isArray(parsed) && parsed.length > 0) {
-          const isLegacyDefault = parsed.length === 3 && parsed[0] === 'Alex' && parsed[1] === 'Jordan' && parsed[2] === 'Sam';
-          if (!isLegacyDefault) {
-            setSavedPlayersState(parsed);
-          } else {
-            localStorage.removeItem(PLAYERS_STORAGE_KEY);
-          }
-        }
-      } catch (e) {
-        // Ignore
-      }
+    // Do NOT persist players across sessions; clear any legacy storage so players are re-inputted
+    try {
+      localStorage.removeItem(PLAYERS_STORAGE_KEY);
+    } catch (e) {
+      // Ignore
     }
+    setSavedPlayersState([]);
 
     // Restore age confirmation
     const storedAge = localStorage.getItem(AGE_CONFIRMATION_KEY);
@@ -72,7 +62,6 @@ export const GameSettingsProvider: React.FC<{ children: React.ReactNode }> = ({ 
 
   const setSavedPlayers = (players: string[]) => {
     setSavedPlayersState(players);
-    localStorage.setItem(PLAYERS_STORAGE_KEY, JSON.stringify(players));
   };
 
   const addSavedPlayer = (name: string) => {

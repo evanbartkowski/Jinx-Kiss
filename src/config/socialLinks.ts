@@ -20,7 +20,7 @@ export const AUTHOR_CONFIG: AuthorConfig = {
   socials: [
     {
       name: 'LinkedIn',
-      url: 'https://www.linkedin.com/in/evanbartkowski',
+      url: 'https://www.linkedin.com/in/evan-bartkowski-31274b299',
       icon: 'linkedin',
     },
     {

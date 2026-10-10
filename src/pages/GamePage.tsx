@@ -35,6 +35,18 @@ export const GamePage: React.FC<GamePageProps> = ({ gameId, customDeck, onExit }
   const [gameKey, setGameKey] = useState(0); // For clean restart
   const [isSelectingMode, setIsSelectingMode] = useState<boolean>(!customDeck);
 
+  // Clear player list when navigating away or unmounting so players must be re-entered fresh
+  useEffect(() => {
+    return () => {
+      setSavedPlayers([]);
+    };
+  }, [setSavedPlayers]);
+
+  const handleExitGame = () => {
+    setSavedPlayers([]);
+    onExit();
+  };
+
   const baseMetadata = GAMES_CONFIG[gameId] || GAMES_CONFIG['truth-or-dare'];
   const metadata = customDeck
     ? {
@@ -116,7 +128,7 @@ export const GamePage: React.FC<GamePageProps> = ({ gameId, customDeck, onExit }
       <GameModeSelectScreen
         metadata={metadata}
         onSelectCategory={handleSelectMode}
-        onBack={onExit}
+        onBack={handleExitGame}
       />
     );
   }
@@ -173,7 +185,7 @@ export const GamePage: React.FC<GamePageProps> = ({ gameId, customDeck, onExit }
       category={selectedCategory}
       onCategoryChange={setSelectedCategory}
       onChangeMode={() => setIsSelectingMode(true)}
-      onExit={onExit}
+      onExit={handleExitGame}
       onRestart={handleRestart}
       onShuffle={handleShuffle}
       players={savedPlayers}

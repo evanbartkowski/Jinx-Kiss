@@ -40,7 +40,7 @@ export const HomePage: React.FC<HomePageProps> = ({
   const [showCommunityDecks, setShowCommunityDecks] = useState(false);
 
   const handleGameClick = (gameId: GameId) => {
-    soundEffects.playClick();
+    soundEffects.playGameSelect(gameId);
     onSelectGame(gameId);
   };
 
