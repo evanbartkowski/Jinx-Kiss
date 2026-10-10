@@ -19,6 +19,8 @@ import { PartyRecap } from './PartyRecap';
 import { CardRatingBar } from '../common/CardRatingBar';
 import { soundEffects } from '../../utils/audio';
 import { achievementsService } from '../../services/achievementsService';
+import { isPromptLegendary, rollForLegendaryCard, triggerLegendaryCardEffects } from '../../utils/legendaryCards';
+import { LegendaryCardBadge } from '../common/LegendaryCardBadge';
 import {
   Sparkles,
   Disc3,
@@ -98,8 +100,9 @@ export const PartyModeGame: React.FC<PartyModeGameProps> = ({ config, onExit }) 
 
     if (unseenPool.length > 0) {
       const chosen = unseenPool[Math.floor(Math.random() * unseenPool.length)];
-      sessionService.markCardSeen(gameId, chosen.id);
-      return chosen;
+      const rolled = rollForLegendaryCard(chosen, cat, gameId);
+      sessionService.markCardSeen(gameId, rolled.id);
+      return rolled;
     }
 
     const allForGame = ALL_DEFAULT_PROMPTS[gameId] || [];
@@ -109,9 +112,17 @@ export const PartyModeGame: React.FC<PartyModeGameProps> = ({ config, onExit }) 
       category: 'medium',
       text: 'Share something nobody in the room knows about you!',
     };
-    sessionService.markCardSeen(gameId, chosen.id);
-    return chosen;
+    const rolled = rollForLegendaryCard(chosen, cat, gameId);
+    sessionService.markCardSeen(gameId, rolled.id);
+    return rolled;
   };
+
+  // Trigger legendary effects when active party prompt is legendary
+  useEffect(() => {
+    if (currentPrompt && isPromptLegendary(currentPrompt)) {
+      triggerLegendaryCardEffects(currentPrompt);
+    }
+  }, [currentPrompt?.id, currentPrompt?.isLegendary]);
 
   // Initialize first prompt & auto-save session
   useEffect(() => {
@@ -270,6 +281,7 @@ export const PartyModeGame: React.FC<PartyModeGameProps> = ({ config, onExit }) 
 
   const activeMetadata = GAMES_CONFIG[activeGameId] || GAMES_CONFIG['truth-or-dare'];
   const activeMission = assignedMissions[activePlayer];
+  const isLegendary = isPromptLegendary(currentPrompt);
 
   if (showPartyRecap) {
     return (
@@ -405,23 +417,42 @@ export const PartyModeGame: React.FC<PartyModeGameProps> = ({ config, onExit }) 
 
       {/* Main Party Prompt Card */}
       <div
-        className="w-full max-w-5xl min-h-[360px] p-8 sm:p-14 lg:p-16 rounded-3xl glass-panel border flex flex-col justify-between items-center text-center relative overflow-hidden transition-all duration-300 my-auto"
-        style={{
-          borderColor: `${activeMetadata.themeColor}50`,
-          boxShadow: `0 15px 50px -15px ${activeMetadata.themeColor}40`,
-        }}
+        className={`w-full max-w-5xl xl:max-w-6xl min-h-[440px] sm:min-h-[560px] p-8 sm:p-14 lg:p-16 rounded-3xl flex flex-col justify-between items-center text-center relative overflow-hidden transition-all duration-300 my-auto ${
+          isLegendary
+            ? 'border-2 border-yellow-400 sm:border-yellow-300 shadow-[0_0_60px_rgba(250,204,21,0.65),inset_0_0_30px_rgba(250,204,21,0.2)] ring-2 ring-yellow-400/80 bg-gradient-to-b from-yellow-950/40 via-black/60 to-black/90'
+            : 'glass-panel border'
+        }`}
+        style={
+          isLegendary
+            ? undefined
+            : {
+                borderColor: `${activeMetadata.themeColor}50`,
+                boxShadow: `0 15px 50px -15px ${activeMetadata.themeColor}40`,
+              }
+        }
       >
         {/* Glow ambient background */}
         <div
-          className="absolute inset-0 rounded-3xl opacity-15 blur-3xl pointer-events-none"
-          style={{ backgroundColor: activeMetadata.themeColor }}
+          className={`absolute inset-0 rounded-3xl pointer-events-none ${
+            isLegendary
+              ? 'bg-gradient-to-b from-yellow-500/25 via-amber-500/15 to-transparent opacity-40'
+              : 'opacity-15 blur-3xl'
+          }`}
+          style={isLegendary ? undefined : { backgroundColor: activeMetadata.themeColor }}
         />
+
+        {/* Legendary Card Badge */}
+        {isLegendary && (
+          <div className="mb-4">
+            <LegendaryCardBadge title={currentPrompt?.legendaryTitle} />
+          </div>
+        )}
 
         <span className="text-xs sm:text-sm uppercase tracking-widest text-zinc-400 font-semibold">
           {activeMetadata.tagline}
         </span>
 
-        <p className="text-2xl sm:text-4xl md:text-5xl font-black text-white leading-relaxed my-8 max-w-3xl">
+        <p className="text-3xl sm:text-5xl md:text-6xl font-black text-white leading-tight my-8 max-w-4xl tracking-tight">
           "{currentPrompt?.text}"
         </p>
 

@@ -2,6 +2,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import { PromptItem } from '../../types/game';
 import { CardRatingBar } from '../common/CardRatingBar';
 import { soundEffects } from '../../utils/audio';
+import { isPromptLegendary, rollForLegendaryCard, triggerLegendaryCardEffects } from '../../utils/legendaryCards';
+import { LegendaryCardBadge } from '../common/LegendaryCardBadge';
 import { Disc3, RotateCcw, Flame, Sparkles } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
@@ -239,49 +241,55 @@ export const DareRouletteGame: React.FC<DareRouletteGameProps> = ({
         const winner = activeSegments[winnerIndex];
         setSelectedWinner(winner);
 
-        // Pick a dare from prompts
-        const randomDare =
+        // Pick a dare from prompts with legendary roll
+        let randomDare =
           prompts[Math.floor(Math.random() * prompts.length)] || {
             id: 'default_dare',
             gameId: 'dare-roulette',
             category: 'medium',
             text: 'Do your best celebration dance for 30 seconds!',
           };
+        randomDare = rollForLegendaryCard(randomDare, randomDare.category || 'medium', 'dare-roulette');
         setCurrentDare(randomDare);
 
-        soundEffects.playSuccess();
-
-        confetti({
-          particleCount: 50,
-          spread: 75,
-          origin: { y: 0.6 },
-          colors: ['#EF4444', '#FF4DA6', '#F59E0B', '#10B981'],
-        });
+        if (isPromptLegendary(randomDare)) {
+          triggerLegendaryCardEffects(randomDare);
+        } else {
+          soundEffects.playSuccess();
+          confetti({
+            particleCount: 50,
+            spread: 75,
+            origin: { y: 0.6 },
+            colors: ['#EF4444', '#FF4DA6', '#F59E0B', '#10B981'],
+          });
+        }
       }
     };
 
     requestAnimationFrame(animateSpin);
   };
 
+  const isLegendary = isPromptLegendary(currentDare);
+
   return (
-    <div className="w-full max-w-4xl flex flex-col items-center gap-6 animate-fade-in select-none">
+    <div className="w-full max-w-5xl xl:max-w-6xl flex flex-col items-center gap-6 animate-fade-in select-none">
       {/* Active turn or Winner Banner */}
       {selectedWinner ? (
         <div className="text-center animate-scale-in">
-          <span className="text-xs font-black uppercase tracking-widest text-red-400 bg-red-950/70 border border-red-500/50 px-4 py-1.5 rounded-full shadow-neon-red">
+          <span className="text-xs sm:text-sm font-black uppercase tracking-widest text-red-400 bg-red-950/70 border border-red-500/50 px-5 py-2 rounded-full shadow-neon-red">
             {isPlayerMode ? '🎯 Chosen by Fate' : '🔥 Selected Challenge Category'}
           </span>
-          <h3 className="text-3xl sm:text-5xl font-black text-white mt-3 drop-shadow-[0_0_20px_rgba(239,68,68,0.6)]">
+          <h3 className="text-3xl sm:text-5xl md:text-6xl font-black text-white mt-3 drop-shadow-[0_0_20px_rgba(239,68,68,0.6)]">
             {selectedWinner}!
           </h3>
         </div>
       ) : (
         <div className="text-center">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-red-950/40 border border-red-500/30 text-red-400 mb-1">
-            <Sparkles className="w-3.5 h-3.5" />
+          <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-xs sm:text-sm font-bold uppercase tracking-wider bg-red-950/40 border border-red-500/30 text-red-400 mb-1">
+            <Sparkles className="w-4 h-4" />
             <span>{isPlayerMode ? `${activeSegments.length} Players on Wheel` : 'Dare Roulette Wheel'}</span>
           </div>
-          <p className="text-xs sm:text-sm text-zinc-300 font-medium">
+          <p className="text-sm sm:text-base text-zinc-300 font-medium">
             {isPlayerMode ? 'Spin to select who faces the next dare' : 'Spin the neon roulette to determine your challenge'}
           </p>
         </div>
@@ -310,17 +318,31 @@ export const DareRouletteGame: React.FC<DareRouletteGameProps> = ({
         </div>
       </div>
 
-      {/* Dare Card for Selected Player or Dare Type (Significantly Bigger & Readable) */}
+      {/* Dare Card for Selected Player or Dare Type (Significantly Bigger, Screen-Fitting & Legendary-Aware) */}
       {currentDare && selectedWinner && (
-        <div className="w-full max-w-3xl p-8 sm:p-12 rounded-3xl sm:rounded-4xl glass-panel border border-red-500/60 shadow-[0_0_35px_rgba(239,68,68,0.3)] text-center animate-scale-in">
+        <div className={`w-full max-w-4xl p-8 sm:p-14 md:p-16 rounded-3xl sm:rounded-4xl glass-panel border text-center animate-scale-in transition-all duration-500 ${
+          isLegendary
+            ? 'border-2 border-yellow-400 sm:border-yellow-300 shadow-[0_0_60px_rgba(250,204,21,0.65),inset_0_0_30px_rgba(250,204,21,0.2)] ring-2 ring-yellow-400/80 bg-gradient-to-b from-yellow-950/40 via-black/60 to-black/90'
+            : 'border-red-500/60 shadow-[0_0_40px_rgba(239,68,68,0.35)]'
+        }`}>
           <div className="flex items-center justify-center gap-2 mb-4">
-            <Flame className="w-6 h-6 text-red-400" />
-            <span className="text-xs sm:text-sm font-black uppercase tracking-widest text-red-400 bg-red-950/60 border border-red-500/40 px-3 py-1 rounded-full">
-              {isPlayerMode ? `Dare for ${selectedWinner}` : `Challenge: ${selectedWinner}`}
-            </span>
+            {isLegendary ? (
+              <LegendaryCardBadge title={currentDare.legendaryTitle || '★ LEGENDARY SPINNER ★'} size="lg" />
+            ) : (
+              <>
+                <Flame className="w-6 h-6 text-red-400" />
+                <span className="text-xs sm:text-sm font-black uppercase tracking-widest text-red-400 bg-red-950/60 border border-red-500/40 px-4 py-1.5 rounded-full">
+                  {isPlayerMode ? `Dare for ${selectedWinner}` : `Challenge: ${selectedWinner}`}
+                </span>
+              </>
+            )}
           </div>
 
-          <p className="text-2xl sm:text-3xl md:text-4xl font-black text-white leading-snug sm:leading-tight max-w-2xl mx-auto my-6 drop-shadow-[0_0_15px_rgba(239,68,68,0.3)]">
+          <p className={`text-3xl sm:text-4xl md:text-5xl font-black leading-tight sm:leading-snug max-w-3xl mx-auto my-8 ${
+            isLegendary
+              ? 'text-yellow-100 drop-shadow-[0_0_30px_rgba(250,204,21,0.5)]'
+              : 'text-white drop-shadow-[0_0_20px_rgba(239,68,68,0.3)]'
+          }`}>
             "{currentDare.text}"
           </p>
 
@@ -331,11 +353,11 @@ export const DareRouletteGame: React.FC<DareRouletteGameProps> = ({
       )}
 
       {/* Controls */}
-      <div className="flex flex-wrap items-center justify-center gap-4 mt-2">
+      <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 mt-2">
         <button
           onClick={spinWheel}
           disabled={isSpinning || activeSegments.length < 2}
-          className="px-8 sm:px-10 py-4 sm:py-5 rounded-2xl sm:rounded-3xl bg-gradient-to-r from-red-600 via-pink-600 to-purple-600 hover:from-red-500 hover:to-pink-500 text-white font-black text-base sm:text-lg shadow-[0_0_25px_rgba(239,68,68,0.5)] flex items-center gap-3 transition-all active:scale-95 disabled:opacity-50 cursor-pointer"
+          className="px-8 sm:px-12 py-4 sm:py-5 rounded-2xl sm:rounded-3xl bg-gradient-to-r from-red-600 via-pink-600 to-purple-600 hover:from-red-500 hover:to-pink-500 text-white font-black text-base sm:text-lg shadow-[0_0_25px_rgba(239,68,68,0.5)] flex items-center gap-3 transition-all active:scale-95 disabled:opacity-50 cursor-pointer"
         >
           <Disc3 className={`w-6 h-6 ${isSpinning ? 'animate-spin' : ''}`} />
           <span>{isSpinning ? 'Spinning the Wheel...' : selectedWinner ? 'Spin Again' : 'Spin the Wheel!'}</span>
@@ -344,13 +366,18 @@ export const DareRouletteGame: React.FC<DareRouletteGameProps> = ({
         {selectedWinner && (
           <button
             onClick={() => {
-              const nextDare = prompts[Math.floor(Math.random() * prompts.length)];
+              let nextDare = prompts[Math.floor(Math.random() * prompts.length)];
+              nextDare = rollForLegendaryCard(nextDare, nextDare.category || 'medium', 'dare-roulette');
               setCurrentDare(nextDare);
-              soundEffects.playCardFlip();
+              if (isPromptLegendary(nextDare)) {
+                triggerLegendaryCardEffects(nextDare);
+              } else {
+                soundEffects.playCardFlip();
+              }
             }}
-            className="px-6 py-4 sm:py-5 rounded-2xl sm:rounded-3xl border border-white/15 bg-zinc-900/80 hover:bg-zinc-800 text-zinc-200 hover:text-white font-bold text-sm sm:text-base flex items-center gap-2 transition-all active:scale-95"
+            className="px-8 sm:px-10 py-4 sm:py-5 rounded-2xl sm:rounded-3xl border border-white/15 bg-zinc-900/80 hover:bg-zinc-800 text-zinc-200 hover:text-white font-black text-base sm:text-lg flex items-center gap-2.5 transition-all active:scale-95 cursor-pointer"
           >
-            <RotateCcw className="w-4 h-4" />
+            <RotateCcw className="w-5 h-5" />
             <span>Next Dare</span>
           </button>
         )}

@@ -61,6 +61,9 @@ export interface PromptItem {
   explanation?: string;    // Reveal explanation for Who's Lying
   confessionStarter?: string; // For Confessions prompt
   originGameId?: GameId;   // For Chaos Mix cards
+  isLegendary?: boolean;   // For rare legendary category cards
+  legendaryTitle?: string; // Banner title for legendary card (e.g. ★ LEGENDARY DARE ★)
+  rarity?: 'common' | 'rare' | 'epic' | 'legendary';
 }
 
 export interface PlayerScore {

@@ -649,3 +649,4 @@ export const SEED_COMMUNITY_DECKS: CustomDeck[] = [
     ]
   }
 ];
+

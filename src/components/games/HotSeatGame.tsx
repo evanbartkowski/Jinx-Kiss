@@ -4,6 +4,8 @@ import { CardRatingBar } from '../common/CardRatingBar';
 import { ArrowRight, Flame, Clock, Play, Pause, RotateCw, Users } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { soundEffects } from '../../utils/audio';
+import { isPromptLegendary, rollForLegendaryCard, triggerLegendaryCardEffects } from '../../utils/legendaryCards';
+import { LegendaryCardBadge } from '../common/LegendaryCardBadge';
 
 interface HotSeatGameProps {
   prompts: PromptItem[];
@@ -12,6 +14,10 @@ interface HotSeatGameProps {
 
 export const HotSeatGame: React.FC<HotSeatGameProps> = ({ prompts, players }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [activePrompt, setActivePrompt] = useState<PromptItem>(() => {
+    const first = prompts[0] || { id: 'hs-default', gameId: 'hot-seat', category: 'medium', text: 'Confess the most questionable thing currently in your search history.' };
+    return rollForLegendaryCard(first, first.category, 'hot-seat');
+  });
   const [playerIndex, setPlayerIndex] = useState(0);
   const [seenPromptIds, setSeenPromptIds] = useState<Set<string>>(new Set());
   const [timerSeconds, setTimerSeconds] = useState(30);
@@ -19,6 +25,13 @@ export const HotSeatGame: React.FC<HotSeatGameProps> = ({ prompts, players }) =>
   const [questionsAnsweredInSeat, setQuestionsAnsweredInSeat] = useState(0);
 
   const activePlayer = players.length > 0 ? players[playerIndex % players.length] : null;
+  const isLegendary = isPromptLegendary(activePrompt);
+
+  useEffect(() => {
+    if (activePrompt && isLegendary) {
+      triggerLegendaryCardEffects(activePrompt);
+    }
+  }, [activePrompt?.id, isLegendary]);
 
   // Next Question in the Hot Seat
   const nextQuestion = () => {
@@ -40,6 +53,8 @@ export const HotSeatGame: React.FC<HotSeatGameProps> = ({ prompts, players }) =>
     newSeen.add(chosen.id);
     setSeenPromptIds(newSeen);
     setCurrentIndex(prompts.findIndex(p => p.id === chosen.id));
+    const rolled = rollForLegendaryCard(chosen, chosen.category, 'hot-seat');
+    setActivePrompt(rolled);
     setQuestionsAnsweredInSeat(prev => prev + 1);
 
     confetti({
@@ -77,10 +92,8 @@ export const HotSeatGame: React.FC<HotSeatGameProps> = ({ prompts, players }) =>
     return () => clearInterval(interval);
   }, [isTimerRunning, timerSeconds]);
 
-  const currentPrompt = prompts[currentIndex] || prompts[0];
-
   return (
-    <div className="w-full max-w-4xl flex flex-col items-center gap-6 animate-fade-in select-none">
+    <div className="w-full max-w-5xl xl:max-w-6xl flex flex-col items-center gap-6 animate-fade-in select-none">
       {/* Hot Seat Header */}
       <div className="flex items-center gap-2 px-5 py-2 rounded-full text-xs font-black uppercase tracking-widest bg-rose-950/80 border border-rose-500/50 text-rose-300 shadow-neon-pink/30">
         <Flame className="w-4 h-4 text-rose-400 fill-rose-400/40" />
@@ -140,25 +153,44 @@ export const HotSeatGame: React.FC<HotSeatGameProps> = ({ prompts, players }) =>
       </div>
 
       {/* Main Hot Seat Question Card */}
-      <div className="w-full min-h-[340px] p-8 sm:p-14 rounded-3xl glass-panel border border-rose-500/40 shadow-[0_15px_45px_-12px_rgba(244,63,94,0.35)] flex flex-col justify-between items-center text-center relative overflow-hidden transition-all duration-300">
+      <div
+        className={`w-full min-h-[440px] sm:min-h-[540px] p-8 sm:p-14 lg:p-16 rounded-3xl flex flex-col justify-between items-center text-center relative overflow-hidden transition-all duration-300 ${
+          isLegendary
+            ? 'border-2 border-yellow-400 sm:border-yellow-300 shadow-[0_0_60px_rgba(250,204,21,0.65),inset_0_0_30px_rgba(250,204,21,0.2)] ring-2 ring-yellow-400/80 bg-gradient-to-b from-yellow-950/40 via-black/60 to-black/90'
+            : 'glass-panel border border-rose-500/40 shadow-[0_15px_45px_-12px_rgba(244,63,94,0.35)]'
+        }`}
+      >
         {/* Ambient Glow */}
-        <div className="absolute inset-0 rounded-3xl opacity-15 blur-2xl pointer-events-none bg-rose-600" />
+        <div
+          className={`absolute inset-0 rounded-3xl pointer-events-none ${
+            isLegendary
+              ? 'bg-gradient-to-b from-yellow-500/25 via-amber-500/15 to-transparent opacity-40'
+              : 'opacity-15 blur-2xl bg-rose-600'
+          }`}
+        />
+
+        {/* Legendary Badge */}
+        {isLegendary && (
+          <div className="mb-4">
+            <LegendaryCardBadge title={activePrompt?.legendaryTitle} />
+          </div>
+        )}
 
         <span className="text-xs uppercase tracking-widest text-zinc-400 font-semibold">
           Answer without hesitation or take a forfeit drink
         </span>
 
-        <p className="text-2xl sm:text-3xl md:text-4xl font-black text-white leading-relaxed my-6 max-w-2xl">
-          "{currentPrompt?.text}"
+        <p className="text-3xl sm:text-5xl md:text-6xl font-black text-white leading-tight my-8 max-w-4xl tracking-tight">
+          "{activePrompt?.text}"
         </p>
 
-        <div className="text-xs text-zinc-400 font-medium italic my-2">
+        <div className="text-sm text-zinc-400 font-medium italic my-2">
           If {activePlayer || 'the player in the seat'} refuses or hesitates, they drink!
         </div>
 
         {/* Card Rating & Report Bar */}
         <div className="w-full">
-          <CardRatingBar prompt={currentPrompt} />
+          <CardRatingBar prompt={activePrompt} />
         </div>
 
         {/* Action Controls */}
@@ -166,7 +198,7 @@ export const HotSeatGame: React.FC<HotSeatGameProps> = ({ prompts, players }) =>
           {players.length > 1 && (
             <button
               onClick={rotatePlayer}
-              className="px-5 py-3 rounded-2xl bg-white/5 border border-white/10 hover:border-white/20 text-zinc-300 text-xs font-bold flex items-center gap-2 transition-all active:scale-95 cursor-pointer"
+              className="px-6 py-3.5 rounded-2xl bg-white/5 border border-white/10 hover:border-white/20 text-zinc-300 text-xs sm:text-sm font-bold flex items-center gap-2 transition-all active:scale-95 cursor-pointer"
             >
               <RotateCw className="w-4 h-4 text-purple-400" />
               <span>Rotate Next Player</span>
@@ -175,7 +207,7 @@ export const HotSeatGame: React.FC<HotSeatGameProps> = ({ prompts, players }) =>
 
           <button
             onClick={nextQuestion}
-            className="ml-auto px-6 py-3.5 rounded-2xl bg-gradient-to-r from-rose-500 to-pink-600 hover:from-rose-400 hover:to-pink-500 text-white font-black text-sm shadow-neon-pink flex items-center gap-2 transition-all active:scale-95 cursor-pointer"
+            className="ml-auto px-8 py-4 rounded-2xl bg-gradient-to-r from-rose-500 to-pink-600 hover:from-rose-400 hover:to-pink-500 text-white font-black text-sm sm:text-base shadow-neon-pink flex items-center gap-2 transition-all active:scale-95 cursor-pointer"
           >
             <span>Next Grilling Question</span>
             <ArrowRight className="w-4 h-4" />

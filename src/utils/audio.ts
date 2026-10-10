@@ -399,7 +399,7 @@ export const soundEffects = {
   },
 
   /**
-   * Legendary card fanfare: deep sub rumble + soaring golden chord
+   * Legendary card fanfare: deep sub rumble + soaring golden chords + ascending sparkling celestial chimes
    */
   playLegendaryCard() {
     if (settings.isMuted) return;
@@ -409,37 +409,57 @@ export const soundEffects = {
     try {
       const now = ctx.currentTime;
 
-      // Sub rumble
+      // 1. Deep sub impact rumble
       const subOsc = ctx.createOscillator();
       const subGain = ctx.createGain();
       subOsc.type = 'sine';
-      subOsc.frequency.setValueAtTime(65, now);
-      subOsc.frequency.exponentialRampToValueAtTime(45, now + 0.8);
-      subGain.gain.setValueAtTime(0.35, now);
-      subGain.gain.exponentialRampToValueAtTime(0.001, now + 0.8);
+      subOsc.frequency.setValueAtTime(75, now);
+      subOsc.frequency.exponentialRampToValueAtTime(38, now + 0.9);
+      subGain.gain.setValueAtTime(0.4, now);
+      subGain.gain.exponentialRampToValueAtTime(0.001, now + 0.9);
       subOsc.connect(subGain);
       subGain.connect(sfxGainNode);
       subOsc.start(now);
-      subOsc.stop(now + 0.8);
+      subOsc.stop(now + 0.9);
 
-      // Golden major chord stack
-      const chord = [329.63, 440, 554.37, 659.25, 880, 1318.5]; // E4, A4, C#5, E5, A5, E6
+      // 2. Golden major power chords (E4, A4, C#5, E5, A5, C#6, E6)
+      const chord = [329.63, 440, 554.37, 659.25, 880, 1108.73, 1318.51];
       chord.forEach((freq, idx) => {
         const osc = ctx.createOscillator();
         const gain = ctx.createGain();
 
-        osc.type = 'sine';
-        osc.frequency.setValueAtTime(freq, now + idx * 0.05);
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(freq, now + idx * 0.04);
 
-        gain.gain.setValueAtTime(0.001, now + idx * 0.05);
-        gain.gain.linearRampToValueAtTime(0.2, now + idx * 0.05 + 0.04);
-        gain.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.05 + 1.2);
+        gain.gain.setValueAtTime(0.001, now + idx * 0.04);
+        gain.gain.linearRampToValueAtTime(0.22, now + idx * 0.04 + 0.05);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.04 + 1.4);
 
         osc.connect(gain);
         gain.connect(sfxGainNode!);
 
-        osc.start(now + idx * 0.05);
-        osc.stop(now + idx * 0.05 + 1.2);
+        osc.start(now + idx * 0.04);
+        osc.stop(now + idx * 0.04 + 1.4);
+      });
+
+      // 3. Ascending sparkling celestial chime sparkles (high crystalline harmonics)
+      const chimes = [1318.5, 1648.1, 1975.5, 2217.4, 2637.0, 3136.0, 3520.0];
+      chimes.forEach((freq, idx) => {
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(freq, now + 0.15 + idx * 0.05);
+
+        gain.gain.setValueAtTime(0.001, now + 0.15 + idx * 0.05);
+        gain.gain.linearRampToValueAtTime(0.12, now + 0.15 + idx * 0.05 + 0.02);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.15 + idx * 0.05 + 0.6);
+
+        osc.connect(gain);
+        gain.connect(sfxGainNode!);
+
+        osc.start(now + 0.15 + idx * 0.05);
+        osc.stop(now + 0.15 + idx * 0.05 + 0.6);
       });
     } catch {
       // ignore

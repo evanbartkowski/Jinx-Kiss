@@ -603,3 +603,4 @@ export const PREMIUM_EXPANSION_PROMPTS: PromptItem[] = [
     text: "You are on the Hot Seat: If you had to eat only one breakfast cereal for every meal for 3 months, what would it be?"
   }
 ];
+

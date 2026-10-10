@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { PromptItem } from '../../types/game';
 import { votingService, VoteStats } from '../../services/votingService';
 import { CardRatingBar } from '../common/CardRatingBar';
 import { soundEffects } from '../../utils/audio';
+import { isPromptLegendary, rollForLegendaryCard, triggerLegendaryCardEffects } from '../../utils/legendaryCards';
+import { LegendaryCardBadge } from '../common/LegendaryCardBadge';
 import { ArrowRight, ThumbsUp, ThumbsDown, MessageSquare } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
@@ -15,8 +17,23 @@ export const HotTakesGame: React.FC<HotTakesGameProps> = ({ prompts, players }) 
   const [currentIndex, setCurrentIndex] = useState(0);
   const [vote, setVote] = useState<'agree' | 'disagree' | null>(null);
   const [stats, setStats] = useState<VoteStats | null>(null);
+  const [activePrompt, setActivePrompt] = useState<PromptItem>(() => {
+    const initial = prompts[0] || {
+      id: 'init-ht',
+      gameId: 'hot-takes',
+      category: 'medium',
+      text: 'Hot take...',
+    };
+    return rollForLegendaryCard(initial, initial.category || 'medium', 'hot-takes');
+  });
 
-  const currentPrompt = prompts[currentIndex] || prompts[0];
+  const isLegendary = isPromptLegendary(activePrompt);
+
+  useEffect(() => {
+    if (isLegendary) {
+      triggerLegendaryCardEffects(activePrompt);
+    }
+  }, [activePrompt.id]);
 
   const handleVote = async (choice: 'agree' | 'disagree') => {
     if (vote) return;
@@ -24,11 +41,11 @@ export const HotTakesGame: React.FC<HotTakesGameProps> = ({ prompts, players }) 
     soundEffects.playVoteSubmit();
 
     try {
-      const result = await votingService.recordVote(currentPrompt.id, choice === 'agree' ? 'A' : 'B');
+      const result = await votingService.recordVote(activePrompt.id, choice === 'agree' ? 'A' : 'B');
       setStats(result);
       soundEffects.playVoteReveal();
     } catch {
-      setStats(votingService.getStats(currentPrompt.id));
+      setStats(votingService.getStats(activePrompt.id));
     }
 
     confetti({
@@ -43,99 +60,126 @@ export const HotTakesGame: React.FC<HotTakesGameProps> = ({ prompts, players }) 
     soundEffects.playCardFlip();
     setVote(null);
     setStats(null);
-    setCurrentIndex(prev => (prev + 1) % prompts.length);
+    const nextIdx = (currentIndex + 1) % prompts.length;
+    setCurrentIndex(nextIdx);
+    const nextP = prompts[nextIdx] || prompts[0];
+    const rolled = rollForLegendaryCard(nextP, nextP.category || 'medium', 'hot-takes');
+    setActivePrompt(rolled);
   };
 
   return (
-    <div className="w-full max-w-4xl flex flex-col items-center gap-6 animate-fade-in select-none">
+    <div className="w-full max-w-5xl xl:max-w-6xl flex flex-col items-center gap-6 animate-fade-in select-none">
       
-      {/* Category header */}
-      <span className="px-5 py-2 rounded-full text-xs sm:text-sm font-black uppercase tracking-widest bg-orange-950/60 border border-orange-500/50 text-orange-300 shadow-neon-amber/20">
-        🔥 Hot Take #{currentIndex + 1}
-      </span>
+      {/* Category header / Legendary Badge */}
+      <div className="flex flex-col items-center gap-2">
+        {isLegendary ? (
+          <LegendaryCardBadge title={activePrompt.legendaryTitle || '★ LEGENDARY HOT TAKE ★'} size="lg" />
+        ) : (
+          <span className="px-6 py-2.5 rounded-full text-xs sm:text-sm font-black uppercase tracking-widest bg-orange-950/60 border border-orange-500/50 text-orange-300 shadow-neon-amber/20">
+            🔥 Hot Take #{currentIndex + 1}
+          </span>
+        )}
+      </div>
 
-      {/* Main Hot Take Card */}
-      <div className="w-full min-h-[360px] sm:min-h-[440px] p-8 sm:p-14 rounded-3xl sm:rounded-4xl glass-panel border border-orange-500/40 shadow-[0_0_40px_rgba(249,115,22,0.3)] flex flex-col justify-between items-center text-center relative overflow-hidden animate-scale-in">
+      {/* Main Hot Take Card (Screen-Filling & Legendary-Aware) */}
+      <div className={`w-full min-h-[440px] sm:min-h-[520px] md:min-h-[560px] p-8 sm:p-16 md:p-20 rounded-3xl sm:rounded-4xl glass-panel border flex flex-col justify-between items-center text-center relative overflow-hidden animate-scale-in transition-all duration-500 ${
+        isLegendary
+          ? 'border-2 border-yellow-400 sm:border-yellow-300 shadow-[0_0_60px_rgba(250,204,21,0.65),inset_0_0_30px_rgba(250,204,21,0.2)] ring-2 ring-yellow-400/80 bg-gradient-to-b from-yellow-950/40 via-black/60 to-black/90'
+          : 'border-orange-500/40 shadow-[0_0_40px_rgba(249,115,22,0.3)]'
+      }`}>
         
-        <span className="text-xs uppercase tracking-widest text-zinc-400 font-bold">
+        {/* Glow ambient background */}
+        <div
+          className={`absolute inset-0 pointer-events-none blur-3xl ${
+            isLegendary
+              ? 'bg-gradient-to-b from-yellow-500/25 via-amber-500/15 to-transparent opacity-40'
+              : 'bg-gradient-to-b from-orange-600 to-transparent opacity-20'
+          }`}
+        />
+
+        <span className="text-xs sm:text-sm uppercase tracking-widest text-zinc-400 font-bold z-10">
           Unpopular Opinion
         </span>
 
-        <p className="text-2xl sm:text-4xl md:text-5xl font-black text-white leading-snug sm:leading-tight my-8 sm:my-10 max-w-3xl drop-shadow-[0_0_20px_rgba(255,255,255,0.2)]">
-          "{currentPrompt?.text}"
+        <p className={`text-3xl sm:text-5xl md:text-6xl font-black leading-tight sm:leading-snug my-8 sm:my-12 max-w-4xl z-10 ${
+          isLegendary
+            ? 'text-yellow-100 drop-shadow-[0_0_30px_rgba(250,204,21,0.5)]'
+            : 'text-white drop-shadow-[0_0_20px_rgba(255,255,255,0.2)]'
+        }`}>
+          "{activePrompt?.text}"
         </p>
 
         {/* Discussion prompt box if voted */}
-        {vote && currentPrompt?.discussionPrompt && (
-          <div className="w-full p-4 rounded-2xl bg-orange-950/40 border border-orange-500/30 flex items-start gap-3 text-left animate-fade-in my-2">
-            <MessageSquare className="w-5 h-5 text-orange-400 flex-shrink-0 mt-0.5" />
+        {vote && activePrompt?.discussionPrompt && (
+          <div className="w-full max-w-3xl p-5 rounded-2xl bg-orange-950/50 border border-orange-500/40 flex items-start gap-3.5 text-left animate-fade-in my-3 z-10 shadow-lg">
+            <MessageSquare className="w-6 h-6 text-orange-400 flex-shrink-0 mt-0.5" />
             <div>
-              <span className="text-xs font-bold text-orange-300 uppercase tracking-wider block">Group Discussion Prompt:</span>
-              <p className="text-sm text-zinc-200 mt-0.5">{currentPrompt.discussionPrompt}</p>
+              <span className="text-xs font-black text-orange-300 uppercase tracking-wider block">Group Discussion Prompt:</span>
+              <p className="text-sm sm:text-base text-zinc-200 mt-1 font-medium">{activePrompt.discussionPrompt}</p>
             </div>
           </div>
         )}
 
         {/* Vote Results */}
         {stats && (
-          <div className="w-full mt-4 flex items-center justify-around gap-4 animate-fade-in">
+          <div className="w-full max-w-md mt-4 flex items-center justify-around gap-6 animate-fade-in z-10">
             <div className="text-center">
-              <span className="text-xs font-semibold text-zinc-400">Agree</span>
-              <div className="text-2xl font-black text-emerald-400">{stats.optionAPercentage}%</div>
+              <span className="text-xs sm:text-sm font-bold text-zinc-400">Agree</span>
+              <div className="text-3xl font-black text-emerald-400">{stats.optionAPercentage}%</div>
             </div>
             <div className="text-center">
-              <span className="text-xs font-semibold text-zinc-400">Disagree</span>
-              <div className="text-2xl font-black text-red-400">{stats.optionBPercentage}%</div>
+              <span className="text-xs sm:text-sm font-bold text-zinc-400">Disagree</span>
+              <div className="text-3xl font-black text-red-400">{stats.optionBPercentage}%</div>
             </div>
           </div>
         )}
 
-        <div className="text-xs text-zinc-500 font-medium my-2">
+        <div className="text-sm sm:text-base text-zinc-300 font-semibold my-2 z-10">
           Argue with conviction. No fence-sitting allowed.
         </div>
 
         {/* Card Rating & Report Bar */}
-        <div className="w-full">
-          <CardRatingBar prompt={currentPrompt} />
+        <div className="w-full max-w-md z-10">
+          <CardRatingBar prompt={activePrompt} />
         </div>
 
       </div>
 
       {/* Voting Buttons */}
-      <div className="flex flex-wrap items-center justify-center gap-4 w-full">
+      <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 w-full mt-2">
         <button
           onClick={() => handleVote('agree')}
           disabled={!!vote}
-          className={`flex-1 min-w-[140px] max-w-[200px] py-4 rounded-2xl border font-black text-base flex items-center justify-center gap-2 transition-all active:scale-95 ${
+          className={`flex-1 min-w-[160px] sm:min-w-[220px] max-w-[260px] py-4 sm:py-5 rounded-2xl sm:rounded-3xl border font-black text-base sm:text-lg flex items-center justify-center gap-2.5 transition-all active:scale-95 cursor-pointer ${
             vote === 'agree'
               ? 'bg-emerald-600 border-emerald-400 text-white shadow-neon-green scale-105'
               : 'bg-emerald-950/40 border-emerald-500/40 text-emerald-300 hover:bg-emerald-900/60 hover:border-emerald-500 hover:shadow-neon-green'
           }`}
         >
-          <ThumbsUp className="w-5 h-5" />
+          <ThumbsUp className="w-6 h-6" />
           <span>Agree</span>
         </button>
 
         <button
           onClick={() => handleVote('disagree')}
           disabled={!!vote}
-          className={`flex-1 min-w-[140px] max-w-[200px] py-4 rounded-2xl border font-black text-base flex items-center justify-center gap-2 transition-all active:scale-95 ${
+          className={`flex-1 min-w-[160px] sm:min-w-[220px] max-w-[260px] py-4 sm:py-5 rounded-2xl sm:rounded-3xl border font-black text-base sm:text-lg flex items-center justify-center gap-2.5 transition-all active:scale-95 cursor-pointer ${
             vote === 'disagree'
               ? 'bg-red-600 border-red-400 text-white shadow-neon-red scale-105'
               : 'bg-red-950/40 border-red-500/40 text-red-300 hover:bg-red-900/60 hover:border-red-500 hover:shadow-neon-red'
           }`}
         >
-          <ThumbsDown className="w-5 h-5" />
+          <ThumbsDown className="w-6 h-6" />
           <span>Disagree</span>
         </button>
 
         {vote && (
           <button
             onClick={nextCard}
-            className="px-6 py-4 rounded-2xl bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-400 hover:to-red-400 text-white font-bold text-sm shadow-neon-amber flex items-center gap-2 transition-all active:scale-95 animate-scale-in"
+            className="px-8 sm:px-12 py-4 sm:py-5 rounded-2xl sm:rounded-3xl bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-400 hover:to-red-400 text-white font-black text-base sm:text-lg shadow-neon-amber flex items-center gap-3 transition-all active:scale-95 animate-scale-in cursor-pointer"
           >
             <span>Next Take</span>
-            <ArrowRight className="w-4 h-4" />
+            <ArrowRight className="w-5 h-5" />
           </button>
         )}
       </div>
