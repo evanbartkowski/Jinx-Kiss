@@ -1,4 +1,5 @@
-import { GameCategory, GameId, PromptItem } from '../../types/game';
+import { GameCategory, GameId, PlayMode, PromptItem } from '../../types/game';
+import { ALL_ONLINE_PROMPTS, getOnlinePromptsForGame } from './online';
 import { TRUTH_OR_DARE_PROMPTS } from './truthOrDare';
 import { NEVER_HAVE_I_EVER_PROMPTS } from './neverHaveIEver';
 import { WOULD_YOU_RATHER_PROMPTS } from './wouldYouRather';
@@ -94,7 +95,8 @@ export const ALL_DEFAULT_PROMPTS: Record<GameId, PromptItem[]> = {
 };
 
 /**
- * Filter default prompts by game and category.
+/**
+ * Filter default prompts by game and category (in-person).
  */
 export function getDefaultPromptsForGame(gameId: GameId, category?: GameCategory): PromptItem[] {
   const allPrompts = ALL_DEFAULT_PROMPTS[gameId] || [];
@@ -102,4 +104,20 @@ export function getDefaultPromptsForGame(gameId: GameId, category?: GameCategory
   return allPrompts.filter(p => p.category === category);
 }
 
-export { MASTER_COLLECTION_PROMPTS };
+/**
+ * Filter prompts by game, category, and playMode ('in-person' | 'online').
+ * Fully isolates in-person and remote prompts.
+ */
+export function getPromptsForGame(
+  gameId: GameId,
+  category?: GameCategory,
+  playMode: PlayMode = 'in-person'
+): PromptItem[] {
+  if (playMode === 'online') {
+    return getOnlinePromptsForGame(gameId, category);
+  }
+  return getDefaultPromptsForGame(gameId, category);
+}
+
+export { MASTER_COLLECTION_PROMPTS, ALL_ONLINE_PROMPTS, getOnlinePromptsForGame };
+

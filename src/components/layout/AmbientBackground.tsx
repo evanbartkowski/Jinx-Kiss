@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react';
+import { useGameSettings } from '../../context/GameSettingsContext';
 
 interface Particle {
   x: number;
@@ -12,6 +13,8 @@ interface Particle {
 
 export const AmbientBackground: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
+  const { playMode } = useGameSettings();
+  const isOnline = playMode === 'online';
 
   useEffect(() => {
     // Check reduced motion preference
@@ -37,7 +40,9 @@ export const AmbientBackground: React.FC = () => {
     window.addEventListener('resize', handleResize);
 
     // Particle setup
-    const colors = ['#FF4DA6', '#A855F7', '#06B6D4'];
+    const colors = isOnline
+      ? ['#06B6D4', '#3B82F6', '#8B5CF6', '#38BDF8']
+      : ['#FF4DA6', '#A855F7', '#06B6D4'];
     const particleCount = Math.min(Math.floor((width * height) / 45000), 40);
     const particles: Particle[] = [];
 
@@ -97,15 +102,21 @@ export const AmbientBackground: React.FC = () => {
       window.removeEventListener('resize', handleResize);
       document.removeEventListener('visibilitychange', handleVisibilityChange);
     };
-  }, []);
+  }, [isOnline]);
 
   return (
     <div className="fixed inset-0 pointer-events-none -z-10 overflow-hidden bg-[#050505]">
       {/* Soft blurred moving ambient radial gradients */}
-      <div className="absolute top-[-10%] left-[20%] w-[550px] h-[550px] rounded-full bg-brand-pink/15 blur-[130px] transform-gpu ambient-blob-1" />
-      <div className="absolute top-[35%] right-[-8%] w-[650px] h-[650px] rounded-full bg-brand-violet/15 blur-[150px] transform-gpu ambient-blob-2" />
-      <div className="absolute bottom-[-10%] left-[-8%] w-[600px] h-[600px] rounded-full bg-cyan-500/10 blur-[140px] transform-gpu ambient-blob-3" />
-      <div className="absolute top-[65%] left-[30%] w-[450px] h-[450px] rounded-full bg-purple-900/10 blur-[130px] transform-gpu ambient-blob-1" />
+      <div className={`absolute top-[-10%] left-[20%] w-[550px] h-[550px] rounded-full blur-[130px] transform-gpu ambient-blob-1 transition-colors duration-700 ${
+        isOnline ? 'bg-cyan-500/15' : 'bg-brand-pink/15'
+      }`} />
+      <div className={`absolute top-[35%] right-[-8%] w-[650px] h-[650px] rounded-full blur-[150px] transform-gpu ambient-blob-2 transition-colors duration-700 ${
+        isOnline ? 'bg-blue-600/15' : 'bg-brand-violet/15'
+      }`} />
+      <div className="absolute bottom-[-10%] left-[-8%] w-[600px] h-[600px] rounded-full bg-cyan-500/15 blur-[140px] transform-gpu ambient-blob-3" />
+      <div className={`absolute top-[65%] left-[30%] w-[450px] h-[450px] rounded-full blur-[130px] transform-gpu ambient-blob-1 transition-colors duration-700 ${
+        isOnline ? 'bg-indigo-600/15' : 'bg-purple-900/10'
+      }`} />
       <canvas ref={canvasRef} className="absolute inset-0 w-full h-full opacity-60" />
     </div>
   );

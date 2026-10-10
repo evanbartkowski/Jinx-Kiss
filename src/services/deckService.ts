@@ -1,4 +1,5 @@
 import { CustomDeck, DeckVisibility } from '../types/deck';
+import { PlayMode } from '../types/game';
 import { SEED_COMMUNITY_DECKS } from '../data/communityDecksSeed';
 import { db } from '../config/firebase';
 import { collection, doc, getDoc, getDocs, setDoc, updateDoc, deleteDoc, query, where, orderBy, limit } from 'firebase/firestore';
@@ -30,9 +31,9 @@ export class DeckService {
   }
 
   /**
-   * Get all approved public community decks
+   * Get all approved public community decks, optionally filtered by playMode
    */
-  async getPublicDecks(): Promise<CustomDeck[]> {
+  async getPublicDecks(playMode?: PlayMode): Promise<CustomDeck[]> {
     const localPublic = this.getLocalDecks().filter(d => d.visibility === 'public');
     const mergedMap = new Map<string, CustomDeck>();
 
@@ -58,7 +59,11 @@ export class DeckService {
     // Local user public decks take precedence and are immediately included
     localPublic.forEach(d => mergedMap.set(d.id, d));
 
-    return Array.from(mergedMap.values());
+    const allDecks = Array.from(mergedMap.values());
+    if (!playMode) return allDecks;
+
+    // Filter by playMode (treat undefined as in-person for full backward compatibility)
+    return allDecks.filter(d => (d.playMode || 'in-person') === playMode);
   }
 
   /**
@@ -105,6 +110,7 @@ export class DeckService {
       ...deckData,
       id,
       shareToken,
+      playMode: deckData.playMode || 'in-person',
       moderationStatus: 'approved',
       createdAt: now,
       updatedAt: now,

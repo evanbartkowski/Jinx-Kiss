@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { CustomDeck, DeckVisibility } from '../../types/deck';
-import { GameId, GameCategory, PromptItem } from '../../types/game';
+import { GameId, GameCategory, PromptItem, PlayMode } from '../../types/game';
 import { GAMES_CONFIG, CATEGORY_LABELS } from '../../data/gamesConfig';
 import { useAuth } from '../../context/AuthContext';
 import { useToast } from '../../context/ToastContext';
-import { Plus, Trash2, ArrowUp, ArrowDown, Eye, Save, Globe, Lock, Link2, Sparkles } from 'lucide-react';
+import { Plus, Trash2, ArrowUp, ArrowDown, Eye, Save, Globe, Lock, Link2, Sparkles, Users } from 'lucide-react';
 
 interface DeckEditorProps {
   initialDeck?: CustomDeck | null;
@@ -24,6 +24,7 @@ export const DeckEditor: React.FC<DeckEditorProps> = ({
   const [description, setDescription] = useState(initialDeck?.description || '');
   const [gameId, setGameId] = useState<GameId>(initialDeck?.gameId || 'truth-or-dare');
   const [gameMode, setGameMode] = useState<GameCategory>(initialDeck?.gameMode || 'medium');
+  const [deckPlayMode, setDeckPlayMode] = useState<PlayMode>(initialDeck?.playMode || 'in-person');
   const [themeColor, setThemeColor] = useState(initialDeck?.themeColor || '#FF4DA6');
   const [visibility, setVisibility] = useState<DeckVisibility>(initialDeck?.visibility || 'private');
   const [cards, setCards] = useState<PromptItem[]>(initialDeck?.cards || []);
@@ -105,6 +106,7 @@ export const DeckEditor: React.FC<DeckEditorProps> = ({
         description: description.trim(),
         gameId,
         gameMode,
+        playMode: deckPlayMode,
         themeColor,
         visibility,
         cards,
@@ -224,6 +226,46 @@ export const DeckEditor: React.FC<DeckEditorProps> = ({
                     </button>
                   );
                 })}
+              </div>
+            </div>
+
+            {/* Deck Play Format Selection: In-Person vs Online */}
+            <div>
+              <label className="block text-xs font-semibold text-zinc-300 uppercase tracking-wider mb-2">
+                Deck Format
+              </label>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <button
+                  type="button"
+                  onClick={() => setDeckPlayMode('in-person')}
+                  className={`p-3.5 rounded-2xl border text-left flex items-start gap-3 transition-all cursor-pointer ${
+                    deckPlayMode === 'in-person'
+                      ? 'border-brand-pink/60 bg-pink-950/40 text-pink-200 shadow-[0_0_15px_rgba(255,77,166,0.3)]'
+                      : 'border-white/10 bg-zinc-900/60 text-zinc-400 hover:text-white hover:border-white/20'
+                  }`}
+                >
+                  <Users className={`w-5 h-5 shrink-0 mt-0.5 ${deckPlayMode === 'in-person' ? 'text-brand-pink' : 'text-zinc-400'}`} />
+                  <div>
+                    <span className="text-xs font-bold block text-white">In-Person Deck</span>
+                    <span className="text-[11px] text-zinc-400">Designed for physical room parties & hangouts</span>
+                  </div>
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => setDeckPlayMode('online')}
+                  className={`p-3.5 rounded-2xl border text-left flex items-start gap-3 transition-all cursor-pointer ${
+                    deckPlayMode === 'online'
+                      ? 'border-cyan-400/60 bg-cyan-950/40 text-cyan-200 shadow-[0_0_15px_rgba(6,182,212,0.35)]'
+                      : 'border-white/10 bg-zinc-900/60 text-zinc-400 hover:text-white hover:border-white/20'
+                  }`}
+                >
+                  <Globe className={`w-5 h-5 shrink-0 mt-0.5 ${deckPlayMode === 'online' ? 'text-cyan-400' : 'text-zinc-400'}`} />
+                  <div>
+                    <span className="text-xs font-bold block text-white">Online Deck</span>
+                    <span className="text-[11px] text-zinc-400">Designed for Discord, webcams & remote voice calls</span>
+                  </div>
+                </button>
               </div>
             </div>
 

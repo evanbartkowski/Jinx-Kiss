@@ -1,4 +1,4 @@
-import { GameId, GameCategory, PromptItem } from './game';
+import { GameId, GameCategory, PromptItem, PlayMode } from './game';
 
 export type DeckVisibility = 'private' | 'unlisted' | 'public';
 export type DeckModerationStatus = 'pending' | 'approved' | 'rejected';
@@ -20,5 +20,6 @@ export interface CustomDeck {
   createdAt: number;
   updatedAt: number;
   playCount?: number;
+  playMode?: PlayMode; // 'in-person' | 'online' (defaults to in-person)
 }
 

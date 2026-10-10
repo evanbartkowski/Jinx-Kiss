@@ -1,4 +1,4 @@
-import { GameCategory, GameId, PartyModeConfig } from '../types/game';
+import { GameCategory, GameId, PartyModeConfig, PlayMode } from '../types/game';
 import { db } from '../config/firebase';
 import {
   collection,
@@ -16,6 +16,7 @@ export interface GameSession {
   id: string;
   name: string;
   mode: 'solo' | 'party' | 'multiplayer';
+  playMode?: PlayMode; // 'in-person' | 'online' (defaults to in-person)
   gameId: GameId;
   category: GameCategory;
   customDeckId?: string;

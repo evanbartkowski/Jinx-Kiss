@@ -1,5 +1,6 @@
-import { PromptItem, GameCategory, GameId } from '../types/game';
+import { PromptItem, GameCategory, GameId, PlayMode } from '../types/game';
 import { LEGENDARY_CARDS } from '../data/prompts/legendaryCards';
+import { ONLINE_LEGENDARY_CARDS } from '../data/prompts/online/onlineLegendaryCards';
 import { soundEffects } from './audio';
 import confetti from 'canvas-confetti';
 
@@ -15,10 +16,15 @@ export function isPromptLegendary(prompt?: PromptItem | null): boolean {
 }
 
 /**
- * Get an available legendary card for a category and game.
+ * Get an available legendary card for a category and game, respecting playMode.
  */
-export function getLegendaryCardForCategory(category: GameCategory, gameId?: GameId): PromptItem | null {
-  let candidates = LEGENDARY_CARDS.filter(c => c.category === category);
+export function getLegendaryCardForCategory(
+  category: GameCategory,
+  gameId?: GameId,
+  playMode: PlayMode = 'in-person'
+): PromptItem | null {
+  const sourceCards = playMode === 'online' ? ONLINE_LEGENDARY_CARDS : LEGENDARY_CARDS;
+  let candidates = sourceCards.filter(c => c.category === category);
   if (gameId && gameId !== 'chaos-mix') {
     const gameMatching = candidates.filter(c => c.gameId === gameId);
     if (gameMatching.length > 0) candidates = gameMatching;
@@ -55,16 +61,19 @@ export function rollForLegendaryCard(
   chosenPrompt: PromptItem,
   category: GameCategory,
   gameId: GameId,
-  chance: number = 0.02
+  chance: number = 0.02,
+  playMode?: PlayMode
 ): PromptItem {
   // If the prompt is already legendary, keep it
   if (isPromptLegendary(chosenPrompt)) {
     return chosenPrompt;
   }
 
+  const resolvedPlayMode: PlayMode = playMode || chosenPrompt.playMode || 'in-person';
+
   // Rare roll for a category-specific legendary card
   if (Math.random() < chance) {
-    const legendary = getLegendaryCardForCategory(category, gameId);
+    const legendary = getLegendaryCardForCategory(category, gameId, resolvedPlayMode);
     if (legendary) {
       return legendary;
     }

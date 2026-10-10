@@ -5,6 +5,7 @@ import { CustomDeck } from '../types/deck';
 import { CommunityDecksSection } from '../components/decks/CommunityDecksSection';
 import { GameSession } from '../services/sessionService';
 import { soundEffects } from '../utils/audio';
+import { useGameSettings } from '../context/GameSettingsContext';
 import {
   Flame,
   Sparkles,
@@ -20,6 +21,7 @@ import {
   ChevronDown,
   ChevronUp,
   Shuffle,
+  Globe,
 } from 'lucide-react';
 
 interface HomePageProps {
@@ -37,6 +39,8 @@ export const HomePage: React.FC<HomePageProps> = ({
   onPlayDeck,
   onStartPartyMode,
 }) => {
+  const { playMode } = useGameSettings();
+  const isOnline = playMode === 'online';
   const [showCommunityDecks, setShowCommunityDecks] = useState(false);
 
   const handleGameClick = (gameId: GameId) => {
@@ -71,19 +75,43 @@ export const HomePage: React.FC<HomePageProps> = ({
         {/* Cool High-Tech Arcade Header */}
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-5 sm:mb-8 pb-4 border-b border-white/[0.08] gap-3">
           <div className="flex items-center gap-3">
-            <div className="flex items-center justify-center w-11 h-11 sm:w-14 sm:h-14 rounded-2xl bg-gradient-to-tr from-brand-pink/20 via-purple-600/20 to-cyan-500/20 border border-brand-pink/40 shadow-neon-pink/30 shrink-0">
-              <Sparkles className="w-5 h-5 sm:w-7 sm:h-7 text-brand-pink animate-pulse" />
+            <div className={`flex items-center justify-center w-11 h-11 sm:w-14 sm:h-14 rounded-2xl border shrink-0 transition-all ${
+              isOnline
+                ? 'bg-gradient-to-tr from-cyan-500/25 via-blue-600/20 to-purple-600/20 border-cyan-400/50 shadow-[0_0_20px_rgba(6,182,212,0.4)]'
+                : 'bg-gradient-to-tr from-brand-pink/20 via-purple-600/20 to-cyan-500/20 border-brand-pink/40 shadow-neon-pink/30'
+            }`}>
+              {isOnline ? (
+                <Globe className="w-5 h-5 sm:w-7 sm:h-7 text-cyan-400 animate-pulse" />
+              ) : (
+                <Sparkles className="w-5 h-5 sm:w-7 sm:h-7 text-brand-pink animate-pulse" />
+              )}
             </div>
             <div>
-              <h2 className="text-2xl sm:text-4xl lg:text-5xl font-black uppercase tracking-tight text-white">
-                Browse All <span className="text-brand-gradient drop-shadow-[0_0_20px_rgba(255,77,166,0.35)]">Games</span>
+              <h2 className="text-2xl sm:text-4xl lg:text-5xl font-black uppercase tracking-tight text-white flex items-center gap-2 flex-wrap">
+                {isOnline ? (
+                  <>
+                    <span>Browse All Games</span>
+                    <span className="text-cyan-400 font-extrabold text-xl sm:text-3xl lg:text-4xl drop-shadow-[0_0_15px_rgba(6,182,212,0.6)]">
+                      (Online)
+                    </span>
+                  </>
+                ) : (
+                  <>
+                    <span>Browse All</span>
+                    <span className="text-brand-gradient drop-shadow-[0_0_20px_rgba(255,77,166,0.35)]">Games</span>
+                  </>
+                )}
               </h2>
             </div>
           </div>
 
-          <div className="hidden sm:flex items-center gap-2.5 px-4 py-2 rounded-2xl bg-white/[0.03] border border-white/10 text-xs text-zinc-300 font-semibold shadow-sm">
-            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-            <span>Multiplayer & Continuous Play</span>
+          <div className={`hidden sm:flex items-center gap-2.5 px-4 py-2 rounded-2xl border text-xs font-semibold shadow-sm transition-all ${
+            isOnline
+              ? 'bg-cyan-950/30 border-cyan-500/40 text-cyan-200 shadow-[0_0_15px_rgba(6,182,212,0.2)]'
+              : 'bg-white/[0.03] border-white/10 text-zinc-300'
+          }`}>
+            <span className={`w-2 h-2 rounded-full animate-pulse ${isOnline ? 'bg-cyan-400' : 'bg-emerald-400'}`} />
+            <span>{isOnline ? 'Discord, Webcams & Remote Voice' : 'In-Person Parties & Room Play'}</span>
           </div>
         </div>
 
@@ -246,33 +274,55 @@ export const HomePage: React.FC<HomePageProps> = ({
         <div className="w-full px-4 sm:px-8 xl:px-12 mt-10">
           <div
             onClick={onStartPartyMode}
-            className="w-full p-5 sm:p-8 rounded-2xl sm:rounded-3xl glass-panel border border-brand-pink/40 hover:border-brand-pink/70 shadow-neon-pink/30 cursor-pointer flex flex-col md:flex-row items-center justify-between gap-5 transition-all duration-300 hover:scale-[1.005] active:scale-[0.995] relative overflow-hidden"
+            className={`w-full p-5 sm:p-8 rounded-2xl sm:rounded-3xl glass-panel border cursor-pointer flex flex-col md:flex-row items-center justify-between gap-5 transition-all duration-300 hover:scale-[1.005] active:scale-[0.995] relative overflow-hidden ${
+              isOnline
+                ? 'border-cyan-500/40 hover:border-cyan-400/70 shadow-[0_0_25px_rgba(6,182,212,0.25)]'
+                : 'border-brand-pink/40 hover:border-brand-pink/70 shadow-neon-pink/30'
+            }`}
           >
             {/* Ambient Background */}
-            <div className="absolute inset-0 bg-gradient-to-r from-pink-950/40 via-purple-950/30 to-transparent pointer-events-none" />
+            <div className={`absolute inset-0 pointer-events-none ${
+              isOnline
+                ? 'bg-gradient-to-r from-cyan-950/40 via-blue-950/30 to-transparent'
+                : 'bg-gradient-to-r from-pink-950/40 via-purple-950/30 to-transparent'
+            }`} />
 
             <div className="flex items-center gap-4 sm:gap-5 z-10 w-full sm:w-auto">
-              <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-xl sm:rounded-2xl bg-brand-pink/20 border border-brand-pink/50 flex items-center justify-center text-brand-pink shadow-neon-pink shrink-0">
+              <div className={`w-12 h-12 sm:w-16 sm:h-16 rounded-xl sm:rounded-2xl border flex items-center justify-center shrink-0 ${
+                isOnline
+                  ? 'bg-cyan-500/20 border-cyan-400/50 text-cyan-300 shadow-[0_0_15px_rgba(6,182,212,0.4)]'
+                  : 'bg-brand-pink/20 border-brand-pink/50 text-brand-pink shadow-neon-pink'
+              }`}>
                 <Flame className="w-6 h-6 sm:w-8 sm:h-8" />
               </div>
               <div>
                 <div className="flex items-center gap-2 mb-1">
-                  <span className="px-2.5 py-0.5 rounded-full text-[9px] sm:text-[10px] font-black uppercase tracking-wider bg-brand-pink text-white">
-                    Featured Mode
+                  <span className={`px-2.5 py-0.5 rounded-full text-[9px] sm:text-[10px] font-black uppercase tracking-wider ${
+                    isOnline ? 'bg-cyan-400 text-black' : 'bg-brand-pink text-white'
+                  }`}>
+                    {isOnline ? 'Online Mode' : 'Featured Mode'}
                   </span>
-                  <span className="text-[11px] sm:text-xs text-zinc-400 font-semibold">Continuous multi-game engine</span>
+                  <span className="text-[11px] sm:text-xs text-zinc-400 font-semibold">
+                    {isOnline ? 'Optimized for Discord & voice calls' : 'Continuous multi-game engine'}
+                  </span>
                 </div>
                 <h3 className="text-lg sm:text-2xl font-black uppercase text-white tracking-wide">
-                  Party Mode with Chaos Wheel
+                  {isOnline ? 'Online Party Mode with Chaos Wheel' : 'Party Mode with Chaos Wheel'}
                 </h3>
                 <p className="text-xs sm:text-sm text-zinc-300 max-w-2xl mt-1 leading-snug">
-                  Seamlessly rotates games every round. Spin the interactive neon Chaos Wheel, trigger surprise Mystery Cards, and crown the Party MVP.
+                  {isOnline
+                    ? 'Seamlessly rotates games across Discord and video calls. Spin the interactive neon Chaos Wheel, trigger surprise Mystery Cards, and crown the Party MVP over webcam.'
+                    : 'Seamlessly rotates games every round. Spin the interactive neon Chaos Wheel, trigger surprise Mystery Cards, and crown the Party MVP.'}
                 </p>
               </div>
             </div>
 
             <div className="z-10 shrink-0 w-full sm:w-auto flex justify-end">
-              <span className="w-full sm:w-auto justify-center px-6 py-3 rounded-2xl bg-gradient-to-r from-brand-pink to-brand-violet text-white font-black text-xs sm:text-sm shadow-neon-pink flex items-center gap-2">
+              <span className={`w-full sm:w-auto justify-center px-6 py-3 rounded-2xl text-white font-black text-xs sm:text-sm flex items-center gap-2 ${
+                isOnline
+                  ? 'bg-gradient-to-r from-cyan-500 via-blue-600 to-indigo-600 shadow-[0_0_20px_rgba(6,182,212,0.35)]'
+                  : 'bg-gradient-to-r from-brand-pink to-brand-violet shadow-neon-pink'
+              }`}>
                 <span>Configure & Start</span>
                 <ArrowRight className="w-4 h-4" />
               </span>
@@ -285,19 +335,29 @@ export const HomePage: React.FC<HomePageProps> = ({
       <div className="w-full px-4 sm:px-8 xl:px-12 mt-8 sm:mt-12">
         <button
           onClick={() => setShowCommunityDecks(!showCommunityDecks)}
-          className="w-full py-5 px-6 sm:px-8 rounded-2xl sm:rounded-3xl glass-panel border border-white/10 hover:border-brand-violet/50 flex items-center justify-between transition-all duration-300 group shadow-lg cursor-pointer bg-white/[0.02] hover:bg-white/[0.05]"
+          className={`w-full py-5 px-6 sm:px-8 rounded-2xl sm:rounded-3xl glass-panel border flex items-center justify-between transition-all duration-300 group shadow-lg cursor-pointer bg-white/[0.02] hover:bg-white/[0.05] ${
+            isOnline ? 'border-cyan-500/30 hover:border-cyan-400/60' : 'border-white/10 hover:border-brand-violet/50'
+          }`}
         >
           <div className="flex items-center gap-4">
-            <div className="w-10 h-10 rounded-2xl bg-brand-violet/20 border border-brand-violet/40 flex items-center justify-center text-brand-violet group-hover:text-pink-400 transition-colors shadow-neon-violet/20">
-              <Sparkles className="w-5 h-5" />
+            <div className={`w-10 h-10 rounded-2xl border flex items-center justify-center transition-colors shadow-lg ${
+              isOnline
+                ? 'bg-cyan-500/20 border-cyan-400/40 text-cyan-300 shadow-[0_0_15px_rgba(6,182,212,0.25)]'
+                : 'bg-brand-violet/20 border-brand-violet/40 text-brand-violet group-hover:text-pink-400 shadow-neon-violet/20'
+            }`}>
+              {isOnline ? <Globe className="w-5 h-5" /> : <Sparkles className="w-5 h-5" />}
             </div>
             <div className="text-left">
-              <span className="text-base sm:text-lg font-black text-white group-hover:text-pink-300 transition-colors block">
-                Community Decks & Custom Creations
+              <span className={`text-base sm:text-lg font-black text-white transition-colors block ${
+                isOnline ? 'group-hover:text-cyan-300' : 'group-hover:text-pink-300'
+              }`}>
+                {isOnline ? 'Community Decks (Online) & Custom Creations' : 'Community Decks & Custom Creations'}
               </span>
               <span className="text-xs text-zinc-400 block mt-0.5">
                 {showCommunityDecks
                   ? 'Click to collapse community decks'
+                  : isOnline
+                  ? 'Click to expand and explore custom player-created decks designed for remote play'
                   : 'Click to expand and explore custom player-created decks'}
               </span>
             </div>

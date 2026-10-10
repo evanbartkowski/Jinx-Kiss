@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { CustomDeck } from '../../types/deck';
 import { GAMES_CONFIG, CATEGORY_LABELS } from '../../data/gamesConfig';
-import { Play, Layers, Lock, Globe, Link2, Copy, Trash2, Edit, QrCode, X, Check } from 'lucide-react';
+import { Play, Layers, Lock, Globe, Link2, Copy, Trash2, Edit, QrCode, X, Check, Users } from 'lucide-react';
 import { generateQRCodeSVG } from '../../utils/qrCode';
 import { useToast } from '../../context/ToastContext';
 import { soundEffects } from '../../utils/audio';
@@ -61,6 +61,25 @@ export const DeckCard: React.FC<DeckCardProps> = ({
               }}
             >
               {gameMeta.title}
+            </span>
+
+            {/* Play Mode Badge: Online vs In-Person */}
+            <span className={`text-[10px] font-extrabold uppercase tracking-wider px-2 py-0.5 rounded-full border flex items-center gap-1 ${
+              (deck.playMode || 'in-person') === 'online'
+                ? 'bg-cyan-950/60 text-cyan-300 border-cyan-500/40 shadow-[0_0_10px_rgba(6,182,212,0.2)]'
+                : 'bg-pink-950/40 text-pink-300 border-brand-pink/40 shadow-[0_0_10px_rgba(255,77,166,0.15)]'
+            }`}>
+              {(deck.playMode || 'in-person') === 'online' ? (
+                <>
+                  <Globe className="w-2.5 h-2.5 text-cyan-400" />
+                  <span>Online Deck</span>
+                </>
+              ) : (
+                <>
+                  <Users className="w-2.5 h-2.5 text-brand-pink" />
+                  <span>In-Person Deck</span>
+                </>
+              )}
             </span>
 
             {/* Game Mode / Category Badge */}

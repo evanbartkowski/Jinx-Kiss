@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { GameId, GameCategory, PromptItem } from '../types/game';
 import { CustomDeck } from '../types/deck';
 import { GAMES_CONFIG } from '../data/gamesConfig';
-import { getDefaultPromptsForGame } from '../data/prompts';
+import { getPromptsForGame } from '../data/prompts';
 import { adminService } from '../services/adminService';
 import { sessionService } from '../services/sessionService';
 import { useGameSettings } from '../context/GameSettingsContext';
@@ -30,7 +30,7 @@ interface GamePageProps {
 }
 
 export const GamePage: React.FC<GamePageProps> = ({ gameId, customDeck, onExit }) => {
-  const { selectedCategory, setSelectedCategory, savedPlayers, setSavedPlayers } = useGameSettings();
+  const { selectedCategory, setSelectedCategory, savedPlayers, setSavedPlayers, playMode } = useGameSettings();
   const [prompts, setPrompts] = useState<PromptItem[]>([]);
   const [gameKey, setGameKey] = useState(0); // For clean restart
   const [isSelectingMode, setIsSelectingMode] = useState<boolean>(!customDeck);
@@ -57,7 +57,7 @@ export const GamePage: React.FC<GamePageProps> = ({ gameId, customDeck, onExit }
       }
     : baseMetadata;
 
-  // Load prompts for current game & category
+  // Load prompts for current game, category, and playMode (In-Person vs Online)
   useEffect(() => {
     if (customDeck) {
       const unseen = sessionService.filterUnseenCards(customDeck.id, customDeck.cards);
@@ -65,6 +65,7 @@ export const GamePage: React.FC<GamePageProps> = ({ gameId, customDeck, onExit }
       setIsSelectingMode(false);
       sessionService.saveActiveSession({
         mode: 'solo',
+        playMode,
         gameId,
         category: selectedCategory,
         customDeckId: customDeck.id,
@@ -76,8 +77,8 @@ export const GamePage: React.FC<GamePageProps> = ({ gameId, customDeck, onExit }
     }
 
     const loadPrompts = async () => {
-      // 1. Get base curated prompts for category
-      const base = getDefaultPromptsForGame(gameId, selectedCategory);
+      // 1. Get base curated prompts for category and playMode (isolated between In-Person and Online)
+      const base = getPromptsForGame(gameId, selectedCategory, playMode);
 
       // 2. Merge any approved community/admin prompts
       let rawPool: PromptItem[] = base;
@@ -89,15 +90,17 @@ export const GamePage: React.FC<GamePageProps> = ({ gameId, customDeck, onExit }
         rawPool = base;
       }
 
-      // 3. Deduplicate: only show unseen cards until collection exhausted
-      const deduplicated = sessionService.filterUnseenCards(gameId, rawPool);
+      // 3. Deduplicate: only show unseen cards until collection exhausted (isolated by playMode)
+      const historyKey = `${playMode}_${gameId}`;
+      const deduplicated = sessionService.filterUnseenCards(historyKey, rawPool);
       setPrompts(deduplicated);
 
       // 4. Auto-save session (preserve round if resuming existing session for this game & category)
       const existing = sessionService.getActiveSession();
-      const isSameSession = existing && existing.gameId === gameId && existing.category === selectedCategory;
+      const isSameSession = existing && existing.gameId === gameId && existing.category === selectedCategory && existing.playMode === playMode;
       sessionService.saveActiveSession({
         mode: 'solo',
+        playMode,
         gameId,
         category: selectedCategory,
         players: isSameSession && existing.players && existing.players.length > 0 ? existing.players : savedPlayers,
@@ -106,14 +109,15 @@ export const GamePage: React.FC<GamePageProps> = ({ gameId, customDeck, onExit }
     };
 
     loadPrompts();
-  }, [gameId, selectedCategory, customDeck, gameKey]);
+  }, [gameId, selectedCategory, customDeck, gameKey, playMode]);
 
   const handleRestart = () => {
     setGameKey(prev => prev + 1);
   };
 
   const handleShuffle = () => {
-    sessionService.resetCardHistory(customDeck ? customDeck.id : gameId);
+    const historyKey = customDeck ? customDeck.id : `${playMode}_${gameId}`;
+    sessionService.resetCardHistory(historyKey);
     setGameKey(prev => prev + 1);
   };
 

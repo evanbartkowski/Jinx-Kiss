@@ -22,6 +22,8 @@ export type GameCategory =
   | 'spicy'
   | 'kids';
 
+export type PlayMode = 'in-person' | 'online';
+
 export interface GameMetadata {
   id: GameId;
   title: string;
@@ -64,6 +66,7 @@ export interface PromptItem {
   isLegendary?: boolean;   // For rare legendary category cards
   legendaryTitle?: string; // Banner title for legendary card (e.g. ★ LEGENDARY DARE ★)
   rarity?: 'common' | 'rare' | 'epic' | 'legendary';
+  playMode?: PlayMode;     // 'in-person' | 'online' (defaults to in-person)
 }
 
 export interface PlayerScore {
@@ -125,6 +128,7 @@ export interface PartyModeConfig {
   specialCardFrequency?: 'off' | 'low' | 'normal' | 'high';
   enableProgressiveDifficulty?: boolean;
   roundsPerProgressiveLevel?: number;
+  playMode?: PlayMode;
 }
 
 export interface Achievement {

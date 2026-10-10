@@ -1,7 +1,8 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import { GameCategory } from '../types/game';
+import { GameCategory, PlayMode } from '../types/game';
 
 const CATEGORY_STORAGE_KEY = 'jinxkiss_selected_category_v1';
+const PLAY_MODE_STORAGE_KEY = 'jinxkiss_selected_play_mode_v1';
 const PLAYERS_STORAGE_KEY = 'jinxkiss_saved_players_v1';
 const AGE_CONFIRMATION_KEY = 'jinxkiss_age_confirmed_v1';
 const NON_ALCOHOLIC_KEY = 'jinxkiss_non_alcoholic_v1';
@@ -9,6 +10,8 @@ const NON_ALCOHOLIC_KEY = 'jinxkiss_non_alcoholic_v1';
 interface GameSettingsContextType {
   selectedCategory: GameCategory;
   setSelectedCategory: (category: GameCategory) => void;
+  playMode: PlayMode;
+  setPlayMode: (mode: PlayMode) => void;
   savedPlayers: string[];
   setSavedPlayers: (players: string[]) => void;
   addSavedPlayer: (name: string) => void;
@@ -23,6 +26,7 @@ const GameSettingsContext = createContext<GameSettingsContextType | undefined>(u
 
 export const GameSettingsProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [selectedCategory, setSelectedCategoryState] = useState<GameCategory>('medium');
+  const [playMode, setPlayModeState] = useState<PlayMode>('in-person');
   const [savedPlayers, setSavedPlayersState] = useState<string[]>([]);
   const [isAgeConfirmed, setIsAgeConfirmed] = useState<boolean>(false);
   const [isNonAlcoholic, setIsNonAlcoholicState] = useState<boolean>(false);
@@ -32,6 +36,12 @@ export const GameSettingsProvider: React.FC<{ children: React.ReactNode }> = ({ 
     const storedCat = localStorage.getItem(CATEGORY_STORAGE_KEY) as GameCategory | null;
     if (storedCat) {
       setSelectedCategoryState(storedCat);
+    }
+
+    // Restore selected play mode (defaults to in-person)
+    const storedPlayMode = localStorage.getItem(PLAY_MODE_STORAGE_KEY) as PlayMode | null;
+    if (storedPlayMode === 'online' || storedPlayMode === 'in-person') {
+      setPlayModeState(storedPlayMode);
     }
 
     // Do NOT persist players across sessions; clear any legacy storage so players are re-inputted
@@ -58,6 +68,11 @@ export const GameSettingsProvider: React.FC<{ children: React.ReactNode }> = ({ 
   const setSelectedCategory = (category: GameCategory) => {
     setSelectedCategoryState(category);
     localStorage.setItem(CATEGORY_STORAGE_KEY, category);
+  };
+
+  const setPlayMode = (mode: PlayMode) => {
+    setPlayModeState(mode);
+    localStorage.setItem(PLAY_MODE_STORAGE_KEY, mode);
   };
 
   const setSavedPlayers = (players: string[]) => {
@@ -91,6 +106,8 @@ export const GameSettingsProvider: React.FC<{ children: React.ReactNode }> = ({ 
       value={{
         selectedCategory,
         setSelectedCategory,
+        playMode,
+        setPlayMode,
         savedPlayers,
         setSavedPlayers,
         addSavedPlayer,

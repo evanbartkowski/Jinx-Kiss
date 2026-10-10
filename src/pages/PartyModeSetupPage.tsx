@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { GameId, GameCategory, PartyModeConfig } from '../types/game';
 import { GAMES_CONFIG, CATEGORY_LABELS } from '../data/gamesConfig';
 import { soundEffects } from '../utils/audio';
+import { useGameSettings } from '../context/GameSettingsContext';
 import {
   Sparkles,
   Users,
@@ -24,6 +25,7 @@ interface PartyModeSetupPageProps {
 }
 
 export const PartyModeSetupPage: React.FC<PartyModeSetupPageProps> = ({ onStartParty, onCancel }) => {
+  const { playMode } = useGameSettings();
   // Players (optional)
   const [playerInput, setPlayerInput] = useState('');
   const [playerNames, setPlayerNames] = useState<string[]>([]);
@@ -92,6 +94,7 @@ export const PartyModeSetupPage: React.FC<PartyModeSetupPageProps> = ({ onStartP
   const handleLaunch = () => {
     soundEffects.playSuccess();
     const config: PartyModeConfig = {
+      playMode,
       playerNames,
       selectedGames,
       categories: selectedCategories,

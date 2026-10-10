@@ -4,9 +4,10 @@ import {
   MultiplayerRoom,
   MultiplayerPlayer,
 } from '../services/multiplayerService';
-import { GameId, PartyModeConfig, PromptItem } from '../types/game';
+import { GameId, PartyModeConfig, PlayMode, PromptItem } from '../types/game';
 import { GAMES_CONFIG } from '../data/gamesConfig';
-import { ALL_DEFAULT_PROMPTS, getDefaultPromptsForGame } from '../data/prompts';
+import { ALL_DEFAULT_PROMPTS, ALL_ONLINE_PROMPTS, getPromptsForGame } from '../data/prompts';
+import { useGameSettings } from '../context/GameSettingsContext';
 import { soundEffects } from '../utils/audio';
 import { useToast } from '../context/ToastContext';
 import { generateQRCodeSVG } from '../utils/qrCode';
@@ -25,6 +26,7 @@ import {
   Send,
   LogOut,
   Flame,
+  Globe,
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
@@ -38,6 +40,7 @@ export const MultiplayerRoomPage: React.FC<MultiplayerRoomPageProps> = ({
   onExit,
 }) => {
   const { showToast } = useToast();
+  const { playMode, setPlayMode } = useGameSettings();
 
   // Mode: 'menu' | 'in-room'
   const [roomCode, setRoomCode] = useState<string>(initialRoomCode || '');
@@ -59,6 +62,13 @@ export const MultiplayerRoomPage: React.FC<MultiplayerRoomPageProps> = ({
       setRoomCode(initialRoomCode.toUpperCase());
     }
   }, [initialRoomCode]);
+
+  // Synchronize room playMode with global playMode
+  useEffect(() => {
+    if (room?.playMode && room.playMode !== playMode) {
+      setPlayMode(room.playMode);
+    }
+  }, [room?.playMode, playMode, setPlayMode]);
 
   // Subscribe to real-time room updates
   useEffect(() => {
@@ -97,6 +107,7 @@ export const MultiplayerRoomPage: React.FC<MultiplayerRoomPageProps> = ({
 
     soundEffects.playClick();
     const defaultConfig: PartyModeConfig = {
+      playMode,
       playerNames: [playerName.trim()],
       selectedGames: Object.keys(GAMES_CONFIG) as GameId[],
       categories: ['easy', 'medium', 'spicy'],
@@ -108,7 +119,7 @@ export const MultiplayerRoomPage: React.FC<MultiplayerRoomPageProps> = ({
       contentBoundary: 'all',
     };
 
-    const res = await multiplayerService.createRoom(playerName.trim(), defaultConfig);
+    const res = await multiplayerService.createRoom(playerName.trim(), defaultConfig, playMode);
     setRoomCode(res.roomCode);
     setPlayerId(res.playerId);
     window.location.hash = `#/room/${res.roomCode}`;
@@ -142,11 +153,22 @@ export const MultiplayerRoomPage: React.FC<MultiplayerRoomPageProps> = ({
     });
   };
 
+  const handleToggleRoomPlayMode = async (newMode: PlayMode) => {
+    if (!isHost || !roomCode) return;
+    soundEffects.playClick();
+    await multiplayerService.updateRoomPlayMode(roomCode, newMode);
+    setPlayMode(newMode);
+    showToast(`Switched room to ${newMode === 'online' ? 'Online (Discord/Webcams)' : 'In Person'}!`, 'info');
+  };
+
   const handleStartGame = async () => {
     if (!isHost || !room) return;
     soundEffects.playSuccess();
+    const currentMode = room.playMode || playMode || 'in-person';
     const firstGameId = room.config.selectedGames[0] || 'truth-or-dare';
-    const firstPrompt = getDefaultPromptsForGame(firstGameId, 'medium')[0] || ALL_DEFAULT_PROMPTS[firstGameId][0];
+    const promptsPool = getPromptsForGame(firstGameId, 'medium', currentMode);
+    const fallbackPool = currentMode === 'online' ? ALL_ONLINE_PROMPTS[firstGameId] : ALL_DEFAULT_PROMPTS[firstGameId];
+    const firstPrompt = promptsPool[0] || fallbackPool[0];
     await multiplayerService.startRoomGame(roomCode, firstPrompt);
   };
 
@@ -154,9 +176,10 @@ export const MultiplayerRoomPage: React.FC<MultiplayerRoomPageProps> = ({
     if (!isHost || !room) return;
     soundEffects.playClick();
 
+    const currentMode = room.playMode || playMode || 'in-person';
     const games = room.config.selectedGames;
     const nextGame = games[Math.floor(Math.random() * games.length)];
-    const pool = ALL_DEFAULT_PROMPTS[nextGame] || [];
+    const pool = currentMode === 'online' ? ALL_ONLINE_PROMPTS[nextGame] : ALL_DEFAULT_PROMPTS[nextGame];
     const nextPrompt = pool[Math.floor(Math.random() * pool.length)];
 
     await multiplayerService.nextRound(roomCode, nextGame, nextPrompt, room.currentRound + 1);
@@ -367,12 +390,38 @@ export const MultiplayerRoomPage: React.FC<MultiplayerRoomPageProps> = ({
     return (
       <div className="w-full max-w-7xl mx-auto px-4 sm:px-8 xl:px-12 py-6 min-h-[calc(100dvh-5rem)] flex flex-col justify-between gap-6 animate-fade-in">
         {/* Top Navigation & Status Bar */}
-        <div className="w-full flex items-center justify-between">
-          <div className="flex items-center gap-3">
+        <div className="w-full flex items-center justify-between flex-wrap gap-3">
+          <div className="flex items-center gap-3 flex-wrap">
             <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-pink/15 border border-brand-pink/40 text-xs font-bold text-pink-300">
               <Users className="w-3.5 h-3.5 text-brand-pink" />
               <span>Party Lobby</span>
             </div>
+            {isHost ? (
+              <button
+                onClick={() => handleToggleRoomPlayMode(room.playMode === 'online' ? 'in-person' : 'online')}
+                className={`flex items-center gap-1.5 text-xs font-bold px-3.5 py-1.5 rounded-full border transition-all active:scale-95 cursor-pointer ${
+                  room.playMode === 'online'
+                    ? 'bg-cyan-500/15 border-cyan-400/40 text-cyan-300 shadow-neon-cyan/20'
+                    : 'bg-brand-pink/15 border-brand-pink/40 text-pink-300 shadow-neon-pink/20'
+                }`}
+                title="Click to toggle between In-Person and Online Discord mode"
+              >
+                <Globe className="w-3.5 h-3.5" />
+                <span>{room.playMode === 'online' ? 'Online Mode (Discord)' : 'In-Person Mode'}</span>
+                <span className="text-[10px] opacity-75 underline ml-1">Change</span>
+              </button>
+            ) : (
+              <span
+                className={`flex items-center gap-1.5 text-xs font-bold px-3.5 py-1.5 rounded-full border ${
+                  room.playMode === 'online'
+                    ? 'bg-cyan-500/15 border-cyan-400/40 text-cyan-300'
+                    : 'bg-brand-pink/15 border-brand-pink/40 text-pink-300'
+                }`}
+              >
+                <Globe className="w-3.5 h-3.5" />
+                <span>{room.playMode === 'online' ? 'Online Mode (Discord)' : 'In-Person Mode'}</span>
+              </span>
+            )}
             {isHost && (
               <span className="flex items-center gap-1.5 text-xs font-bold text-amber-300 bg-amber-500/10 border border-amber-500/30 px-3 py-1.5 rounded-full">
                 <Crown className="w-3.5 h-3.5" /> Host Controls Active

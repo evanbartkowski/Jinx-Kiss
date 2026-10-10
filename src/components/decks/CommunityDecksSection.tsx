@@ -3,14 +3,17 @@ import { CustomDeck } from '../../types/deck';
 import { GameId, GameCategory } from '../../types/game';
 import { GAMES_CONFIG, CATEGORY_LABELS } from '../../data/gamesConfig';
 import { deckService } from '../../services/deckService';
+import { useGameSettings } from '../../context/GameSettingsContext';
 import { DeckCard } from './DeckCard';
-import { Sparkles, Search, Filter } from 'lucide-react';
+import { Sparkles, Search, Filter, Globe, Users } from 'lucide-react';
 
 interface CommunityDecksSectionProps {
   onPlayDeck: (deck: CustomDeck) => void;
 }
 
 export const CommunityDecksSection: React.FC<CommunityDecksSectionProps> = ({ onPlayDeck }) => {
+  const { playMode } = useGameSettings();
+  const isOnline = playMode === 'online';
   const [decks, setDecks] = useState<CustomDeck[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedGameFilter, setSelectedGameFilter] = useState<GameId | 'all'>('all');
@@ -20,7 +23,8 @@ export const CommunityDecksSection: React.FC<CommunityDecksSectionProps> = ({ on
   useEffect(() => {
     const fetchDecks = async () => {
       try {
-        const publicDecks = await deckService.getPublicDecks();
+        setIsLoading(true);
+        const publicDecks = await deckService.getPublicDecks(playMode);
         setDecks(publicDecks);
       } catch (e) {
         console.warn('Failed to load community decks', e);
@@ -29,16 +33,17 @@ export const CommunityDecksSection: React.FC<CommunityDecksSectionProps> = ({ on
       }
     };
     fetchDecks();
-  }, []);
+  }, [playMode]);
 
   const filteredDecks = decks.filter(deck => {
+    const matchesPlayMode = (deck.playMode || 'in-person') === playMode;
     const matchesSearch =
       deck.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
       deck.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
       deck.creatorUsername.toLowerCase().includes(searchQuery.toLowerCase());
     const matchesGame = selectedGameFilter === 'all' || deck.gameId === selectedGameFilter;
     const matchesCategory = selectedCategoryFilter === 'all' || deck.gameMode === selectedCategoryFilter;
-    return matchesSearch && matchesGame && matchesCategory;
+    return matchesPlayMode && matchesSearch && matchesGame && matchesCategory;
   });
 
   return (
@@ -47,18 +52,26 @@ export const CommunityDecksSection: React.FC<CommunityDecksSectionProps> = ({ on
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-6">
         <div>
           <div className="flex items-center gap-2 mb-1.5">
-            <span className="p-1 rounded-lg bg-brand-violet/20 text-brand-violet border border-brand-violet/30">
-              <Sparkles className="w-3.5 h-3.5" />
+            <span className={`p-1 rounded-lg border ${
+              isOnline
+                ? 'bg-cyan-500/20 text-cyan-300 border-cyan-400/30'
+                : 'bg-brand-violet/20 text-brand-violet border-brand-violet/30'
+            }`}>
+              {isOnline ? <Globe className="w-3.5 h-3.5" /> : <Sparkles className="w-3.5 h-3.5" />}
             </span>
-            <span className="text-[11px] font-bold uppercase tracking-widest text-brand-violet">
-              Created By The Community
+            <span className={`text-[11px] font-bold uppercase tracking-widest ${
+              isOnline ? 'text-cyan-400' : 'text-brand-violet'
+            }`}>
+              {isOnline ? 'Online Community Decks' : 'Created By The Community'}
             </span>
           </div>
           <h2 className="text-xl sm:text-2xl font-black text-white">
-            Community Decks
+            {isOnline ? 'Community Decks (Online)' : 'Community Decks'}
           </h2>
           <p className="text-xs text-zinc-400 mt-0.5 max-w-lg">
-            Explore player-crafted decks and custom creations. Open and play any deck instantly with your friends.
+            {isOnline
+              ? 'Explore player-crafted decks designed specifically for remote voice calls, Discord, and webcam hangouts.'
+              : 'Explore player-crafted decks and custom creations. Open and play any deck instantly with your friends.'}
           </p>
         </div>
 

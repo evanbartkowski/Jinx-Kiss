@@ -10,7 +10,7 @@ import {
   serverTimestamp,
   Unsubscribe,
 } from 'firebase/firestore';
-import { GameId, PartyModeConfig, PromptItem } from '../types/game';
+import { GameId, PartyModeConfig, PromptItem, PlayMode } from '../types/game';
 
 export interface MultiplayerPlayer {
   id: string;
@@ -28,6 +28,7 @@ export interface MultiplayerRoom {
   hostId: string;
   hostName: string;
   status: 'lobby' | 'playing' | 'ended';
+  playMode?: PlayMode; // 'in-person' | 'online' (synchronized across room)
   currentGameId: GameId;
   currentPrompt: PromptItem | null;
   currentRound: number;
@@ -64,7 +65,7 @@ function generateRoomCode(): string {
 }
 
 export const multiplayerService = {
-  async createRoom(hostName: string, config: PartyModeConfig): Promise<{ roomCode: string; playerId: string }> {
+  async createRoom(hostName: string, config: PartyModeConfig, playMode: PlayMode = 'in-person'): Promise<{ roomCode: string; playerId: string }> {
     const roomCode = generateRoomCode();
     const playerId = `host_${Date.now()}_${Math.random().toString(36).substring(2, 7)}`;
 
@@ -73,6 +74,7 @@ export const multiplayerService = {
       hostId: playerId,
       hostName,
       status: 'lobby',
+      playMode: config.playMode || playMode || 'in-person',
       currentGameId: config.selectedGames[0] || 'truth-or-dare',
       currentPrompt: null,
       currentRound: 1,
@@ -397,6 +399,27 @@ export const multiplayerService = {
           const cur = snap.data().score || 0;
           await updateDoc(playerRef, { score: cur + points });
         }
+      }
+    } catch {
+      // fallback
+    }
+  },
+
+  async updateRoomPlayMode(roomCode: string, playMode: PlayMode): Promise<void> {
+    const cleanCode = roomCode.trim().toUpperCase();
+    if (fallbackRooms.has(cleanCode)) {
+      const room = fallbackRooms.get(cleanCode)!;
+      room.playMode = playMode;
+      room.updatedAt = Date.now();
+      notifyFallbackRoom(cleanCode);
+    }
+    try {
+      if (db) {
+        const roomRef = doc(db, 'rooms', cleanCode);
+        await updateDoc(roomRef, {
+          playMode,
+          updatedAt: Date.now(),
+        });
       }
     } catch {
       // fallback
