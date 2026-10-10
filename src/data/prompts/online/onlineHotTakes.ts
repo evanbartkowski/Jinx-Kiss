@@ -644,6 +644,287 @@ export const ONLINE_HOT_TAKES_PROMPTS: PromptItem[] = [
     playMode: 'online',
     text: "Video games where you can fly in the sky are always more fun than games where you only walk on the ground.",
     discussionPrompt: "Flying powers vs super speed: which is the coolest superpower?"
+  },
+
+  // --- ADDITIONAL ONLINE HOT TAKES EXPANSION (100+ PROMPTS) ---
+  // Easy:
+  {
+    id: 'on-ht-easy-12',
+    gameId: 'hot-takes',
+    category: 'easy',
+    playMode: 'online',
+    text: "Having more than 30 unread email or notification badges on your phone makes you completely chaotic.",
+    discussionPrompt: "Zero inbox vs 9,999 unread badges: which mindset is superior?"
+  },
+  {
+    id: 'on-ht-easy-13',
+    gameId: 'hot-takes',
+    category: 'easy',
+    playMode: 'online',
+    text: "Typing in all lowercase letters in chats is an aesthetic, not bad grammar.",
+    discussionPrompt: "All lowercase casual aesthetic: effortless cool or mildly pretentious?"
+  },
+  {
+    id: 'on-ht-easy-14',
+    gameId: 'hot-takes',
+    category: 'easy',
+    playMode: 'online',
+    text: "Leaving a call without saying goodbye ('the Irish exit') is the polite thing to do in large groups.",
+    discussionPrompt: "The digital Irish exit: efficient courtesy or rude disappearance?"
+  },
+  {
+    id: 'on-ht-easy-15',
+    gameId: 'hot-takes',
+    category: 'easy',
+    playMode: 'online',
+    text: "Using reaction GIFs from 2014 like dramatic chipmunk or mind blown is still peak comedy.",
+    discussionPrompt: "Vintage reaction GIFs vs modern ironic memes: what hits harder?"
+  },
+
+  // Medium:
+  {
+    id: 'on-ht-med-12',
+    gameId: 'hot-takes',
+    category: 'medium',
+    playMode: 'online',
+    text: "If you don't react to someone's message in a small group within 2 hours, you're intentionally ignoring them.",
+    discussionPrompt: "Online response etiquette: are people entitled to quick validation?"
+  },
+  {
+    id: 'on-ht-med-13',
+    gameId: 'hot-takes',
+    category: 'medium',
+    playMode: 'online',
+    text: "Posting on your Instagram story while leaving a friend on delivered is socially criminal behavior.",
+    discussionPrompt: "Story posting while ignoring DMs: harmless boundary or passive-aggressive insult?"
+  },
+  {
+    id: 'on-ht-med-14',
+    gameId: 'hot-takes',
+    category: 'medium',
+    playMode: 'online',
+    text: "Watching someone play a video game on stream is often more enjoyable than playing the game yourself.",
+    discussionPrompt: "Passive streaming entertainment vs active gaming: which is the better hobby?"
+  },
+  {
+    id: 'on-ht-med-15',
+    gameId: 'hot-takes',
+    category: 'medium',
+    playMode: 'online',
+    text: "Having a dedicated 'finsta' or private spam account is a red flag indicating you talk trash about friends.",
+    discussionPrompt: "Private spam accounts: safe emotional venting or toxic gossip dens?"
+  },
+
+  // Extreme:
+  {
+    id: 'on-ht-ext-11',
+    gameId: 'hot-takes',
+    category: 'extreme',
+    playMode: 'online',
+    text: "If your partner refuses to let you look through their phone's camera roll and DMs, they are 100% hiding something.",
+    discussionPrompt: "Digital open-device transparency vs healthy personal privacy: where is the line?"
+  },
+  {
+    id: 'on-ht-ext-12',
+    gameId: 'hot-takes',
+    category: 'extreme',
+    playMode: 'online',
+    text: "Ghosting someone after 3 months of daily texting is emotional cowardice that should be called out publicly.",
+    discussionPrompt: "Ghosting in the internet era: self-preservation or malicious disrespect?"
+  },
+  {
+    id: 'on-ht-ext-13',
+    gameId: 'hot-takes',
+    category: 'extreme',
+    playMode: 'online',
+    text: "People who put 'no drama' in their server or dating bio are guaranteed to be the main source of drama.",
+    discussionPrompt: "The 'no drama' paradox: why do people who say it cause the most chaos?"
+  },
+  {
+    id: 'on-ht-ext-14',
+    gameId: 'hot-takes',
+    category: 'extreme',
+    playMode: 'online',
+    text: "Reading an ex's public social media updates months after a breakup is emotional self-harm that everyone pretends is normal.",
+    discussionPrompt: "Post-breakup digital lurk: inevitable human curiosity or toxic obsession?"
+  },
+
+  // Unhinged:
+  {
+    id: 'on-ht-unh-9',
+    gameId: 'hot-takes',
+    category: 'unhinged',
+    playMode: 'online',
+    text: "People who eat loud crunchy snacks while their mic sensitivity is set to zero threshold should be banned from VoIP permanently.",
+    discussionPrompt: "Microphone mouth-breathing and chip crunching: capital digital offense or minor annoyance?"
+  },
+  {
+    id: 'on-ht-unh-10',
+    gameId: 'hot-takes',
+    category: 'unhinged',
+    playMode: 'online',
+    text: "Society peaked in 2008 when we had custom profile HTML and auto-playing background music on web pages.",
+    discussionPrompt: "Wild chaotic MySpace internet vs sterile sanitized modern apps: which had more soul?"
+  },
+  {
+    id: 'on-ht-unh-11',
+    gameId: 'hot-takes',
+    category: 'unhinged',
+    playMode: 'online',
+    text: "Anyone who uses voice changers to pretend to be an anime character in serious gaming lobbies is secretly a genius.",
+    discussionPrompt: "Trolling lobbies with voice filters: hilarious artform or unhinged nuisance?"
+  },
+  {
+    id: 'on-ht-unh-12',
+    gameId: 'hot-takes',
+    category: 'unhinged',
+    playMode: 'online',
+    text: "If you have more than 100 tabs open in your browser, your brain is operating in the 5th dimension.",
+    discussionPrompt: "Tab hoarders: visionary multitaskers or digital hoarders needing intervention?"
+  },
+
+  // Couples:
+  {
+    id: 'on-ht-cpl-9',
+    gameId: 'hot-takes',
+    category: 'couples',
+    playMode: 'online',
+    text: "Long-distance relationships built on deep late-night voice calls build stronger emotional bonds than couples who just hang out watching TV.",
+    discussionPrompt: "Voice-only vulnerability vs physical proximity: which creates deeper soul connection?"
+  },
+  {
+    id: 'on-ht-cpl-10',
+    gameId: 'hot-takes',
+    category: 'couples',
+    playMode: 'online',
+    text: "Having each other's live location shared 24/7 is pure romantic security, not toxic control.",
+    discussionPrompt: "Live GPS location sharing: ultimate intimacy or surveillance culture?"
+  },
+  {
+    id: 'on-ht-cpl-11',
+    gameId: 'hot-takes',
+    category: 'couples',
+    playMode: 'online',
+    text: "A 30-second unexpected audio voice note saying 'I miss you' is 10x more romantic than a bouquet of flowers.",
+    discussionPrompt: "Spontaneous heartfelt voice notes vs traditional gifts: which hits the heart harder?"
+  },
+  {
+    id: 'on-ht-cpl-12',
+    gameId: 'hot-takes',
+    category: 'couples',
+    playMode: 'online',
+    text: "Falling asleep together on call with microphones muted is the sweetest feeling in modern dating.",
+    discussionPrompt: "Digital sleep calls: comforting presence or unnecessary habit?"
+  },
+
+  // 18+:
+  {
+    id: 'on-ht-18-9',
+    gameId: 'hot-takes',
+    category: '18+',
+    playMode: 'online',
+    text: "If someone is incredible at dirty talk over text and call, they are almost guaranteed to be amazing in bed.",
+    discussionPrompt: "Does verbal sexual eloquence directly translate to physical bedroom chemistry?"
+  },
+  {
+    id: 'on-ht-18-10',
+    gameId: 'hot-takes',
+    category: '18+',
+    playMode: 'online',
+    text: "Watching your partner's face through a webcam while they get off is hotter than being in the same room with the lights off.",
+    discussionPrompt: "The intimacy of focused webcam facial expressions vs darkness in person: which is hotter?"
+  },
+  {
+    id: 'on-ht-18-11',
+    gameId: 'hot-takes',
+    category: '18+',
+    playMode: 'online',
+    text: "Everyone in their twenties has secretly thought about launching an anonymous spicy content page.",
+    discussionPrompt: "Is curiosity about monetizing spicy content a universal modern fantasy?"
+  },
+  {
+    id: 'on-ht-18-12',
+    gameId: 'hot-takes',
+    category: '18+',
+    playMode: 'online',
+    text: "Sharing a spicy photo or clip that disappears after 1 view creates 10x more sexual tension than permanent photos.",
+    discussionPrompt: "Disappearing ephemeral media vs saved galleries: what fuels desire faster?"
+  },
+
+  // Spicy:
+  {
+    id: 'on-ht-spicy-9',
+    gameId: 'hot-takes',
+    category: 'spicy',
+    playMode: 'online',
+    text: "Giving your partner full control of an app-controlled toy while in an everyday voice chat is the ultimate erotic thrill.",
+    discussionPrompt: "App-controlled public toys: thrilling surrender or too risky?"
+  },
+  {
+    id: 'on-ht-spicy-10',
+    gameId: 'hot-takes',
+    category: 'spicy',
+    playMode: 'online',
+    text: "Whispering filthy, degrading commands directly into an earbud mic hits harder than shouting them in a room.",
+    discussionPrompt: "Close-mic binaural dirty talk: why does headset intimacy feel so intense?"
+  },
+  {
+    id: 'on-ht-spicy-11',
+    gameId: 'hot-takes',
+    category: 'spicy',
+    playMode: 'online',
+    text: "Cybering and webcam sessions strip away physical self-consciousness and allow people to be their most sexually authentic selves.",
+    discussionPrompt: "Does remote digital intimacy liberate sexual fantasies better than physical dating?"
+  },
+  {
+    id: 'on-ht-spicy-12',
+    gameId: 'hot-takes',
+    category: 'spicy',
+    playMode: 'online',
+    text: "A 5-second video of someone unzipping their clothes without showing anything is sexier than full nudity.",
+    discussionPrompt: "The erotic power of anticipation and the tease vs explicit full revelation: which wins?"
+  },
+
+  // Kids:
+  {
+    id: 'on-ht-kids-9',
+    gameId: 'hot-takes',
+    category: 'kids',
+    playMode: 'online',
+    text: "Roblox minigames with friends on voice call are more exciting than going to a real arcade.",
+    discussionPrompt: "Virtual multiplayer gaming worlds vs real-world arcades: which is more epic?"
+  },
+  {
+    id: 'on-ht-kids-10',
+    gameId: 'hot-takes',
+    category: 'kids',
+    playMode: 'online',
+    text: "Having a pet penguin that wears a bow tie would be the coolest thing in the universe.",
+    discussionPrompt: "Penguin with a bow tie vs kitten with dragon wings: which pet is cooler?"
+  },
+  {
+    id: 'on-ht-kids-11',
+    gameId: 'hot-takes',
+    category: 'kids',
+    playMode: 'online',
+    text: "Eating dessert before dinner on a Friday night should be a worldwide law for everyone.",
+    discussionPrompt: "Dessert first vs dinner first: who decided the order anyway?"
+  },
+  {
+    id: 'on-ht-kids-12',
+    gameId: 'hot-takes',
+    category: 'kids',
+    playMode: 'online',
+    text: "Building an obstacle course in your hallway out of pillows and yarn is the best rainy day game ever.",
+    discussionPrompt: "Hallway spy obstacle courses: the greatest indoor game ever invented?"
+  },
+  {
+    id: 'on-ht-kids-13',
+    gameId: 'hot-takes',
+    category: 'kids',
+    playMode: 'online',
+    text: "Having the ability to breathe underwater like a dolphin is way cooler than being invisible.",
+    discussionPrompt: "Underwater breathing vs super invisibility: which power would you pick?"
   }
 ];
 

@@ -644,6 +644,287 @@ export const ONLINE_RED_FLAG_GREEN_FLAG_PROMPTS: PromptItem[] = [
     playMode: 'online',
     text: "They cheer loudly for you whenever you win a round in an online mini-game.",
     scenario: "Enthusiastic online hype-man"
+  },
+
+  // --- ADDITIONAL ONLINE RED FLAG / GREEN FLAG EXPANSION (100+ PROMPTS) ---
+  // Easy:
+  {
+    id: 'on-rf-easy-12',
+    gameId: 'red-flag-green-flag',
+    category: 'easy',
+    playMode: 'online',
+    text: "They mute their mic without being asked whenever their background gets noisy.",
+    scenario: "Proactive mic etiquette"
+  },
+  {
+    id: 'on-rf-easy-13',
+    gameId: 'red-flag-green-flag',
+    category: 'easy',
+    playMode: 'online',
+    text: "They send you custom memes they specifically made about inside jokes you shared.",
+    scenario: "Personalized meme creation"
+  },
+  {
+    id: 'on-rf-easy-14',
+    gameId: 'red-flag-green-flag',
+    category: 'easy',
+    playMode: 'online',
+    text: "Their Discord status has been set to 'Do Not Disturb' continuously for 3 consecutive months.",
+    scenario: "Perpetual DND status"
+  },
+  {
+    id: 'on-rf-easy-15',
+    gameId: 'red-flag-green-flag',
+    category: 'easy',
+    playMode: 'online',
+    text: "They drop funny reaction emojis on your messages within 10 seconds of you sending them.",
+    scenario: "Immediate reaction emoji reflex"
+  },
+
+  // Medium:
+  {
+    id: 'on-rf-med-12',
+    gameId: 'red-flag-green-flag',
+    category: 'medium',
+    playMode: 'online',
+    text: "They have their read receipts turned off on iMessage or WhatsApp for everyone except you.",
+    scenario: "Selective read receipts"
+  },
+  {
+    id: 'on-rf-med-13',
+    gameId: 'red-flag-green-flag',
+    category: 'medium',
+    playMode: 'online',
+    text: "They screen-share their gaming screen but instantly minimize windows whenever a DM notification pings.",
+    scenario: "Panicked DM minimization"
+  },
+  {
+    id: 'on-rf-med-14',
+    gameId: 'red-flag-green-flag',
+    category: 'medium',
+    playMode: 'online',
+    text: "They create a shared Spotify playlist and listen to your newly added songs within 1 hour.",
+    scenario: "Attentive playlist monitoring"
+  },
+  {
+    id: 'on-rf-med-15',
+    gameId: 'red-flag-green-flag',
+    category: 'medium',
+    playMode: 'online',
+    text: "They screenshot your tweets or posts and send them back to you saying 'this is so you'.",
+    scenario: "Digital observational humor"
+  },
+
+  // Extreme:
+  {
+    id: 'on-rf-ext-11',
+    gameId: 'red-flag-green-flag',
+    category: 'extreme',
+    playMode: 'online',
+    text: "They notice when you delete a message in chat and DM you asking 'why did you delete that?'.",
+    scenario: "Deleted message interrogation"
+  },
+  {
+    id: 'on-rf-ext-12',
+    gameId: 'red-flag-green-flag',
+    category: 'extreme',
+    playMode: 'online',
+    text: "They offer to let you log into their streaming accounts, Discord, and Spotify with zero hesitations.",
+    scenario: "Total open-door password trust"
+  },
+  {
+    id: 'on-rf-ext-13',
+    gameId: 'red-flag-green-flag',
+    category: 'extreme',
+    playMode: 'online',
+    text: "They check your online status every hour and bring up 'I saw you were playing games at 3 AM'.",
+    scenario: "Activity status surveillance"
+  },
+  {
+    id: 'on-rf-ext-14',
+    gameId: 'red-flag-green-flag',
+    category: 'extreme',
+    playMode: 'online',
+    text: "They unfriend or remove someone from their server the second they make you feel slightly uncomfortable.",
+    scenario: "Fierce digital loyalty"
+  },
+
+  // Unhinged:
+  {
+    id: 'on-rf-unh-9',
+    gameId: 'red-flag-green-flag',
+    category: 'unhinged',
+    playMode: 'online',
+    text: "They talk to their computer screen like a real person while they are muted in voice channels.",
+    scenario: "Solo monitor conversations"
+  },
+  {
+    id: 'on-rf-unh-10',
+    gameId: 'red-flag-green-flag',
+    category: 'unhinged',
+    playMode: 'online',
+    text: "They use a full soundboard with air horns and explosion sounds during casual serious conversations.",
+    scenario: "Soundboard terrorism"
+  },
+  {
+    id: 'on-rf-unh-11',
+    gameId: 'red-flag-green-flag',
+    category: 'unhinged',
+    playMode: 'online',
+    text: "They change their webcam background to a photo of the inside of your bedroom that you posted 2 years ago.",
+    scenario: "Cursed virtual background stunt"
+  },
+  {
+    id: 'on-rf-unh-12',
+    gameId: 'red-flag-green-flag',
+    category: 'unhinged',
+    playMode: 'online',
+    text: "They order identical takeout food as you and pretend you're eating at the same table across the country.",
+    scenario: "Synced delivery date mimicry"
+  },
+
+  // Couples:
+  {
+    id: 'on-rf-cpl-9',
+    gameId: 'red-flag-green-flag',
+    category: 'couples',
+    playMode: 'online',
+    text: "They leave their camera on while studying or working silently just so you have each other's quiet company.",
+    scenario: "Silent co-working camera session"
+  },
+  {
+    id: 'on-rf-cpl-10',
+    gameId: 'red-flag-green-flag',
+    category: 'couples',
+    playMode: 'online',
+    text: "They remember the exact date of the first late-night call where you talked until sunrise.",
+    scenario: "Milestone call memory"
+  },
+  {
+    id: 'on-rf-cpl-11',
+    gameId: 'red-flag-green-flag',
+    category: 'couples',
+    playMode: 'online',
+    text: "They send you a voice note recording of the rain outside their window because they know it helps you sleep.",
+    scenario: "Comfort audio gift"
+  },
+  {
+    id: 'on-rf-cpl-12',
+    gameId: 'red-flag-green-flag',
+    category: 'couples',
+    playMode: 'online',
+    text: "They write you handwritten digital notes on their tablet and send them as surprises throughout your workday.",
+    scenario: "Handwritten digital love letters"
+  },
+
+  // 18+:
+  {
+    id: 'on-rf-18-9',
+    gameId: 'red-flag-green-flag',
+    category: '18+',
+    playMode: 'online',
+    text: "They ask for explicit consent before saving any private media or turning on their webcam in bed.",
+    scenario: "Impeccable remote bedroom boundaries"
+  },
+  {
+    id: 'on-rf-18-10',
+    gameId: 'red-flag-green-flag',
+    category: '18+',
+    playMode: 'online',
+    text: "They whisper teasing comments into their headset during a group voice call that only you understand the secret meaning of.",
+    scenario: "Secret code in public call"
+  },
+  {
+    id: 'on-rf-18-11',
+    gameId: 'red-flag-green-flag',
+    category: '18+',
+    playMode: 'online',
+    text: "They know exactly how to adjust their bedroom lighting to look like an intoxicating renaissance painting on camera.",
+    scenario: "Masterclass ambient webcam lighting"
+  },
+  {
+    id: 'on-rf-18-12',
+    gameId: 'red-flag-green-flag',
+    category: '18+',
+    playMode: 'online',
+    text: "They send voice notes of their morning voice right when they wake up that make your knees weak.",
+    scenario: "Deep morning voice notes"
+  },
+
+  // Spicy:
+  {
+    id: 'on-rf-spicy-9',
+    gameId: 'red-flag-green-flag',
+    category: 'spicy',
+    playMode: 'online',
+    text: "They guide your breathing and tell you when you are allowed to touch yourself over an encrypted private call.",
+    scenario: "Remote vocal dominance"
+  },
+  {
+    id: 'on-rf-spicy-10',
+    gameId: 'red-flag-green-flag',
+    category: 'spicy',
+    playMode: 'online',
+    text: "They place their phone camera propped on their pillows and hold your gaze as they bite their lip in pleasure.",
+    scenario: "Unfiltered webcam intimacy"
+  },
+  {
+    id: 'on-rf-spicy-11',
+    gameId: 'red-flag-green-flag',
+    category: 'spicy',
+    playMode: 'online',
+    text: "They send an audio note describing everything they would do to you if there was no screen between you.",
+    scenario: "Sensory audio immersion"
+  },
+  {
+    id: 'on-rf-spicy-12',
+    gameId: 'red-flag-green-flag',
+    category: 'spicy',
+    playMode: 'online',
+    text: "They remember your exact turn-offs and kinks without you ever having to repeat them twice.",
+    scenario: "Flawless kink recall"
+  },
+
+  // Kids:
+  {
+    id: 'on-rf-kids-9',
+    gameId: 'red-flag-green-flag',
+    category: 'kids',
+    playMode: 'online',
+    text: "They revive you in Fortnite or Roblox when you get knocked down even with enemies nearby.",
+    scenario: "Heroic multiplayer rescue"
+  },
+  {
+    id: 'on-rf-kids-10',
+    gameId: 'red-flag-green-flag',
+    category: 'kids',
+    playMode: 'online',
+    text: "They show off their pet hamster or cat to the camera whenever the call gets quiet.",
+    scenario: "Webcam pet show-and-tell"
+  },
+  {
+    id: 'on-rf-kids-11',
+    gameId: 'red-flag-green-flag',
+    category: 'kids',
+    playMode: 'online',
+    text: "They make funny cartoon sound effects whenever their game character jumps.",
+    scenario: "Vocal cartoon soundboard"
+  },
+  {
+    id: 'on-rf-kids-12',
+    gameId: 'red-flag-green-flag',
+    category: 'kids',
+    playMode: 'online',
+    text: "They share secret cheat codes or tricks with you so you can both beat the hard game level.",
+    scenario: "Secret game guide sharing"
+  },
+  {
+    id: 'on-rf-kids-13',
+    gameId: 'red-flag-green-flag',
+    category: 'kids',
+    playMode: 'online',
+    text: "They wait for you at the spawn point so you can walk together into the adventure.",
+    scenario: "Spawn point waiting buddy"
   }
 ];
 

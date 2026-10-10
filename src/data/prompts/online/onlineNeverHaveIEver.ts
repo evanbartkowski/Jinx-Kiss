@@ -129,5 +129,33 @@ export const ONLINE_NEVER_HAVE_I_EVER_PROMPTS: PromptItem[] = [
   { id: 'on-nhie-kids-7', gameId: 'never-have-i-ever', category: 'kids', playMode: 'online', text: "Never have I ever shown everyone on call my coolest toy or drawing." },
   { id: 'on-nhie-kids-8', gameId: 'never-have-i-ever', category: 'kids', playMode: 'online', text: "Never have I ever sneaked a cookie or snack past bedtime to eat while watching YouTube." },
   { id: 'on-nhie-kids-9', gameId: 'never-have-i-ever', category: 'kids', playMode: 'online', text: "Never have I ever spun around in my computer chair until I got totally dizzy." },
-  { id: 'on-nhie-kids-10', gameId: 'never-have-i-ever', category: 'kids', playMode: 'online', text: "Never have I ever worn goofy funny sunglasses on a video call to make friends laugh." }
+  { id: 'on-nhie-kids-10', gameId: 'never-have-i-ever', category: 'kids', playMode: 'online', text: "Never have I ever worn goofy funny sunglasses on a video call to make friends laugh." },
+
+  // ADDITIONAL EXTREME
+  { id: 'on-nhie-ext-13', gameId: 'never-have-i-ever', category: 'extreme', playMode: 'online', text: "Never have I ever accidentally shared the wrong screen monitor during a group call and showed something personal." },
+  { id: 'on-nhie-ext-14', gameId: 'never-have-i-ever', category: 'extreme', playMode: 'online', text: "Never have I ever stayed up past 6 AM on call with someone while promising 'I am going to sleep in 5 minutes' every hour." },
+  { id: 'on-nhie-ext-15', gameId: 'never-have-i-ever', category: 'extreme', playMode: 'online', text: "Never have I ever stalked someone's location or live status so closely that I knew their exact schedule." },
+
+  // ADDITIONAL UNHINGED
+  { id: 'on-nhie-unh-11', gameId: 'never-have-i-ever', category: 'unhinged', playMode: 'online', text: "Never have I ever muted my headset specifically to scream into a pillow in pure gaming rage." },
+  { id: 'on-nhie-unh-12', gameId: 'never-have-i-ever', category: 'unhinged', playMode: 'online', text: "Never have I ever created an entire fake social media persona just to investigate online drama." },
+  { id: 'on-nhie-unh-13', gameId: 'never-have-i-ever', category: 'unhinged', playMode: 'online', text: "Never have I ever ordered midnight takeout for delivery while already in the middle of eating another meal on call." },
+
+  // ADDITIONAL COUPLES
+  { id: 'on-nhie-cpl-11', gameId: 'never-have-i-ever', category: 'couples', playMode: 'online', text: "Never have I ever kept a call connected for over 12 hours straight just to be in each other's presence." },
+  { id: 'on-nhie-cpl-12', gameId: 'never-have-i-ever', category: 'couples', playMode: 'online', text: "Never have I ever synced up our music or video stream so we could experience the exact same beat together." },
+
+  // ADDITIONAL 18+
+  { id: 'on-nhie-18-11', gameId: 'never-have-i-ever', category: '18+', playMode: 'online', text: "Never have I ever sent a risky photo with something recognizably identifiable in the background." },
+  { id: 'on-nhie-18-12', gameId: 'never-have-i-ever', category: '18+', playMode: 'online', text: "Never have I ever whispered into the mic to describe what I was imagining doing to someone on this call." },
+
+  // ADDITIONAL SPICY
+  { id: 'on-nhie-spicy-11', gameId: 'never-have-i-ever', category: 'spicy', playMode: 'online', text: "Never have I ever adjusted my camera angle intentionally so my body looked irresistibly seductive on screen." },
+  { id: 'on-nhie-spicy-12', gameId: 'never-have-i-ever', category: 'spicy', playMode: 'online', text: "Never have I ever given myself multiple orgasms while listening to someone's voice on speaker." },
+
+  // ADDITIONAL KIDS
+  { id: 'on-nhie-kids-11', gameId: 'never-have-i-ever', category: 'kids', playMode: 'online', text: "Never have I ever tried to talk backwards on a video call like an alien code!" },
+  { id: 'on-nhie-kids-12', gameId: 'never-have-i-ever', category: 'kids', playMode: 'online', text: "Never have I ever made my pet high-five the computer camera." },
+  { id: 'on-nhie-kids-13', gameId: 'never-have-i-ever', category: 'kids', playMode: 'online', text: "Never have I ever dressed up in a superhero costume while sitting at my computer." },
+  { id: 'on-nhie-kids-14', gameId: 'never-have-i-ever', category: 'kids', playMode: 'online', text: "Never have I ever tried to balance three markers or pens on my nose on camera!" }
 ];

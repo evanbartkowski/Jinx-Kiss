@@ -1,5 +1,5 @@
 import { GameCategory, GameId, PlayMode, PromptItem } from '../../types/game';
-import { ALL_ONLINE_PROMPTS, getOnlinePromptsForGame } from './online';
+import { ALL_ONLINE_PROMPTS, getOnlinePromptsForGame, ONLINE_STANDALONE_PROMPTS } from './online';
 import { TRUTH_OR_DARE_PROMPTS } from './truthOrDare';
 import { NEVER_HAVE_I_EVER_PROMPTS } from './neverHaveIEver';
 import { WOULD_YOU_RATHER_PROMPTS } from './wouldYouRather';
@@ -119,5 +119,5 @@ export function getPromptsForGame(
   return getDefaultPromptsForGame(gameId, category);
 }
 
-export { MASTER_COLLECTION_PROMPTS, ALL_ONLINE_PROMPTS, getOnlinePromptsForGame };
+export { MASTER_COLLECTION_PROMPTS, ALL_ONLINE_PROMPTS, getOnlinePromptsForGame, ONLINE_STANDALONE_PROMPTS };
 

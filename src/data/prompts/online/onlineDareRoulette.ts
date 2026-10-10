@@ -644,6 +644,287 @@ export const ONLINE_DARE_ROULETTE_PROMPTS: PromptItem[] = [
     playMode: 'online',
     text: "Draw a funny doodle on a piece of paper in 15 seconds and show it to the camera!",
     forfeit: "Give a big double thumbs-up to the camera"
+  },
+
+  // --- ADDITIONAL ONLINE DARE ROULETTE EXPANSION (100+ PROMPTS) ---
+  // Easy:
+  {
+    id: 'on-dr-easy-12',
+    gameId: 'dare-roulette',
+    category: 'easy',
+    playMode: 'online',
+    text: "Type 'I am the keyboard champion' using only your nose in the text chat right now.",
+    forfeit: "Take 1 penalty sip"
+  },
+  {
+    id: 'on-dr-easy-13',
+    gameId: 'dare-roulette',
+    category: 'easy',
+    playMode: 'online',
+    text: "Put a household object on top of your head and don't let it fall off for 2 full rounds.",
+    forfeit: "Take 1 penalty sip"
+  },
+  {
+    id: 'on-dr-easy-14',
+    gameId: 'dare-roulette',
+    category: 'easy',
+    playMode: 'online',
+    text: "Mute your mic and give a 30-second silent news broadcast using exaggerated mouth movements.",
+    forfeit: "Drink 2 sips of water"
+  },
+  {
+    id: 'on-dr-easy-15',
+    gameId: 'dare-roulette',
+    category: 'easy',
+    playMode: 'online',
+    text: "Change your Discord status or call bio to 'Proud member of the Potato Appreciation Club' for the rest of the game.",
+    forfeit: "Take 1 penalty sip"
+  },
+
+  // Medium:
+  {
+    id: 'on-dr-med-12',
+    gameId: 'dare-roulette',
+    category: 'medium',
+    playMode: 'online',
+    text: "Share your screen and let someone pick any Wikipedia article; you must read the first paragraph in an opera singer voice.",
+    forfeit: "Take 2 penalty sips"
+  },
+  {
+    id: 'on-dr-med-13',
+    gameId: 'dare-roulette',
+    category: 'medium',
+    playMode: 'online',
+    text: "Show the most chaotic corner of your room on webcam and explain why it's structured that way.",
+    forfeit: "Take 2 penalty sips"
+  },
+  {
+    id: 'on-dr-med-14',
+    gameId: 'dare-roulette',
+    category: 'medium',
+    playMode: 'online',
+    text: "Go to your camera roll and send the 7th most recent screenshot into the call text channel.",
+    forfeit: "Take 2 penalty sips"
+  },
+  {
+    id: 'on-dr-med-15',
+    gameId: 'dare-roulette',
+    category: 'medium',
+    playMode: 'online',
+    text: "Speak with your hands completely visible on webcam gesturing like an Italian chef for the next 2 rounds.",
+    forfeit: "Take 2 penalty sips"
+  },
+
+  // Extreme:
+  {
+    id: 'on-dr-ext-11',
+    gameId: 'dare-roulette',
+    category: 'extreme',
+    playMode: 'online',
+    text: "Screen-share your browser history search bar and type the letter 'h' without hitting backspace.",
+    forfeit: "Take 3 heavy penalty sips"
+  },
+  {
+    id: 'on-dr-ext-12',
+    gameId: 'dare-roulette',
+    category: 'extreme',
+    playMode: 'online',
+    text: "Send a voice note to your contact #3 saying 'Hey, I had a crazy dream about you last night' and do not elaborate.",
+    forfeit: "Finish your entire drink"
+  },
+  {
+    id: 'on-dr-ext-13',
+    gameId: 'dare-roulette',
+    category: 'extreme',
+    playMode: 'online',
+    text: "Let the group collectively choose one photo from your public social media that you must delete right now on screen share.",
+    forfeit: "Take 3 heavy penalty sips"
+  },
+  {
+    id: 'on-dr-ext-14',
+    gameId: 'dare-roulette',
+    category: 'extreme',
+    playMode: 'online',
+    text: "Call your best friend outside this call on speaker, say 'I need to hide a body, bring a shovel', and immediately hang up.",
+    forfeit: "Take 3 penalty drinks"
+  },
+
+  // Unhinged:
+  {
+    id: 'on-dr-unh-9',
+    gameId: 'dare-roulette',
+    category: 'unhinged',
+    playMode: 'online',
+    text: "Eat a slice of lemon or a pinch of salt on camera with an expression of pure, unbothered tranquility.",
+    forfeit: "Take 2 penalty sips"
+  },
+  {
+    id: 'on-dr-unh-10',
+    gameId: 'dare-roulette',
+    category: 'unhinged',
+    playMode: 'online',
+    text: "Turn your monitor brightness to 100%, hold a cold beverage against your forehead, and recite the alphabet backwards.",
+    forfeit: "Take 2 penalty sips"
+  },
+  {
+    id: 'on-dr-unh-11',
+    gameId: 'dare-roulette',
+    category: 'unhinged',
+    playMode: 'online',
+    text: "Wrap your head in a towel like a mystical fortune teller and deliver a 30-second psychic reading for someone on call.",
+    forfeit: "Take 2 penalty sips"
+  },
+  {
+    id: 'on-dr-unh-12',
+    gameId: 'dare-roulette',
+    category: 'unhinged',
+    playMode: 'online',
+    text: "Put on sunglasses, a jacket, and a hat indoors on webcam and speak only in secret agent code words for 2 rounds.",
+    forfeit: "Take 2 penalty sips"
+  },
+
+  // Couples:
+  {
+    id: 'on-dr-cpl-9',
+    gameId: 'dare-roulette',
+    category: 'couples',
+    playMode: 'online',
+    text: "Send me a 10-second video of your hands forming a heart with your eyes looking directly into the camera lens.",
+    forfeit: "Take 2 penalty sips of wine"
+  },
+  {
+    id: 'on-dr-cpl-10',
+    gameId: 'dare-roulette',
+    category: 'couples',
+    playMode: 'online',
+    text: "Change your Discord / phone profile wallpaper to my photo on screen-share right now.",
+    forfeit: "Take 2 penalty sips"
+  },
+  {
+    id: 'on-dr-cpl-11',
+    gameId: 'dare-roulette',
+    category: 'couples',
+    playMode: 'online',
+    text: "Mute other apps, lean in close to the microphone, and whisper 3 things you are going to do to me the next time we meet.",
+    forfeit: "Down your drink"
+  },
+  {
+    id: 'on-dr-cpl-12',
+    gameId: 'dare-roulette',
+    category: 'couples',
+    playMode: 'online',
+    text: "Sing our special song chorus directly into the mic while looking dead into the camera without breaking eye contact.",
+    forfeit: "Take 2 penalty sips"
+  },
+
+  // 18+:
+  {
+    id: 'on-dr-18-9',
+    gameId: 'dare-roulette',
+    category: '18+',
+    playMode: 'online',
+    text: "Unbutton the top two buttons of your shirt on camera and take a slow, deliberate sip while maintaining eye contact.",
+    forfeit: "Take 3 penalty drinks"
+  },
+  {
+    id: 'on-dr-18-10',
+    gameId: 'dare-roulette',
+    category: '18+',
+    playMode: 'online',
+    text: "Send a private DM to the person you find most attractive on this call with an eggplant or peach emoji and no explanation.",
+    forfeit: "Take 3 penalty drinks"
+  },
+  {
+    id: 'on-dr-18-11',
+    gameId: 'dare-roulette',
+    category: '18+',
+    playMode: 'online',
+    text: "Describe in vivid, sensual detail what outfit or lingerie makes you feel the most dangerous in bed.",
+    forfeit: "Take 2 penalty drinks"
+  },
+  {
+    id: 'on-dr-18-12',
+    gameId: 'dare-roulette',
+    category: '18+',
+    playMode: 'online',
+    text: "Let the group hear 3 seconds of a heavy breath into your microphone with the lights dimmed in your room.",
+    forfeit: "Take 3 penalty drinks"
+  },
+
+  // Spicy:
+  {
+    id: 'on-dr-spicy-9',
+    gameId: 'dare-roulette',
+    category: 'spicy',
+    playMode: 'online',
+    text: "Slowly bite your lower lip, run your hand through your hair, and whisper 'you have no idea what you do to me' into the mic.",
+    forfeit: "Take 3 heavy penalty sips"
+  },
+  {
+    id: 'on-dr-spicy-10',
+    gameId: 'dare-roulette',
+    category: 'spicy',
+    playMode: 'online',
+    text: "Show the camera your bare collarbones and whisper your favorite place on your body to be kissed.",
+    forfeit: "Down your glass"
+  },
+  {
+    id: 'on-dr-spicy-11',
+    gameId: 'dare-roulette',
+    category: 'spicy',
+    playMode: 'online',
+    text: "Send a 5-second video DM of your breathing to someone on this call with your eyes half-closed.",
+    forfeit: "Take 3 penalty sips"
+  },
+  {
+    id: 'on-dr-spicy-12',
+    gameId: 'dare-roulette',
+    category: 'spicy',
+    playMode: 'online',
+    text: "Tell the group your favorite time of day to be touched and the exact pace you like it.",
+    forfeit: "Take 3 penalty drinks"
+  },
+
+  // Kids:
+  {
+    id: 'on-dr-kids-9',
+    gameId: 'dare-roulette',
+    category: 'kids',
+    playMode: 'online',
+    text: "Do your best impression of a funny frog hopping on camera for 10 seconds with ribbit sounds!",
+    forfeit: "Make 5 funny duck quacks"
+  },
+  {
+    id: 'on-dr-kids-10',
+    gameId: 'dare-roulette',
+    category: 'kids',
+    playMode: 'online',
+    text: "Grab a stuffed animal and have it interview you like a world-famous television reporter!",
+    forfeit: "Do 3 giant jumping jacks"
+  },
+  {
+    id: 'on-dr-kids-11',
+    gameId: 'dare-roulette',
+    category: 'kids',
+    playMode: 'online',
+    text: "Make up a 10-second rap about peanut butter and jelly sandwiches right on the spot!",
+    forfeit: "Wiggle your ears or nose"
+  },
+  {
+    id: 'on-dr-kids-12',
+    gameId: 'dare-roulette',
+    category: 'kids',
+    playMode: 'online',
+    text: "Balance a clean sock or pillow on your foot while lifting it in front of the camera for 10 seconds!",
+    forfeit: "Spin around twice in your chair"
+  },
+  {
+    id: 'on-dr-kids-13',
+    gameId: 'dare-roulette',
+    category: 'kids',
+    playMode: 'online',
+    text: "Pretend your computer mouse is a magical spaceship and fly it through the air with spaceship sounds!",
+    forfeit: "Give the webcam a high-five"
   }
 ];
 

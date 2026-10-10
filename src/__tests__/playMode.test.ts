@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach } from 'vitest';
-import { getPromptsForGame, ALL_DEFAULT_PROMPTS, ALL_ONLINE_PROMPTS } from '../data/prompts';
+import { getPromptsForGame, ALL_DEFAULT_PROMPTS, ALL_ONLINE_PROMPTS, ONLINE_STANDALONE_PROMPTS } from '../data/prompts';
 import { getLegendaryCardForCategory, rollForLegendaryCard } from '../utils/legendaryCards';
 import { deckService } from '../services/deckService';
 import { adminService } from '../services/adminService';
@@ -32,6 +32,31 @@ describe('PlayMode (In-Person vs Online) Architecture', () => {
       expect(onlinePrompts.length).toBeGreaterThan(0);
       expect(onlinePrompts.every(p => p.playMode === 'online')).toBe(true);
     });
+  });
+
+  it('guarantees at least 100 prompts for each game in Online mode', () => {
+    coreGames.forEach(gameId => {
+      const onlinePrompts = getPromptsForGame(gameId, undefined, 'online');
+      expect(onlinePrompts.length).toBeGreaterThanOrEqual(100);
+      expect(onlinePrompts.every(p => p.playMode === 'online')).toBe(true);
+    });
+  });
+
+  it('guarantees at least 100 prompts for every gamemode category in Online mode', () => {
+    const categories: GameCategory[] = ['easy', 'medium', 'extreme', 'unhinged', 'couples', '18+', 'spicy', 'kids'];
+    categories.forEach(cat => {
+      const catPrompts = ONLINE_STANDALONE_PROMPTS.filter(p => p.category === cat);
+      expect(catPrompts.length).toBeGreaterThanOrEqual(100);
+    });
+  });
+
+  it('guarantees all online prompts have unique IDs', () => {
+    const ids = new Set<string>();
+    ONLINE_STANDALONE_PROMPTS.forEach(p => {
+      expect(ids.has(p.id)).toBe(false);
+      ids.add(p.id);
+    });
+    expect(ONLINE_STANDALONE_PROMPTS.length).toBeGreaterThanOrEqual(1000);
   });
 
   it('adminService.getAllPromptsForManager strictly isolates online prompts', async () => {

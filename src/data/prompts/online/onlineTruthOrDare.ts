@@ -122,6 +122,40 @@ export const ONLINE_TRUTH_OR_DARE_PROMPTS: PromptItem[] = [
   { id: 'on-tod-kids-d-2', gameId: 'truth-or-dare', category: 'kids', type: 'dare', playMode: 'online', text: "Make your funniest silliest face directly into the webcam and hold it for 10 seconds!" },
   { id: 'on-tod-kids-t-3', gameId: 'truth-or-dare', category: 'kids', type: 'truth', playMode: 'online', text: "If you had a robot pet, what trick would you teach it first?" },
   { id: 'on-tod-kids-d-3', gameId: 'truth-or-dare', category: 'kids', type: 'dare', playMode: 'online', text: "Spin around in your computer chair 3 times and say 'Beep boop robot activate!'" },
+  { id: 'on-tod-ext-t-7', gameId: 'truth-or-dare', category: 'extreme', type: 'truth', playMode: 'online', text: "What is a message you sent that you instantly regretted so much you considered faking your own death?" },
+  { id: 'on-tod-ext-d-7', gameId: 'truth-or-dare', category: 'extreme', type: 'dare', playMode: 'online', text: "Open your camera roll on screen share and let the group pick one photo that you must post as your profile banner." },
+  { id: 'on-tod-ext-t-8', gameId: 'truth-or-dare', category: 'extreme', type: 'truth', playMode: 'online', text: "Who on this call would you trust the least with your unlocked phone for 10 minutes?" },
+  { id: 'on-tod-ext-d-8', gameId: 'truth-or-dare', category: 'extreme', type: 'dare', playMode: 'online', text: "Call someone in your contacts on speaker right now and say 'I don't have much time, they're watching me' and hang up." },
+
+  // UNHINGED ADDITIONS
+  { id: 'on-tod-unh-t-5', gameId: 'truth-or-dare', category: 'unhinged', type: 'truth', playMode: 'online', text: "What is the most cursed thing you have ever purchased online during an insomnia-induced shopping spree?" },
+  { id: 'on-tod-unh-d-5', gameId: 'truth-or-dare', category: 'unhinged', type: 'dare', playMode: 'online', text: "Change your Discord / call display name to 'Local Cryptid' and speak only in guttural goblin noises for 60 seconds." },
+  { id: 'on-tod-unh-t-6', gameId: 'truth-or-dare', category: 'unhinged', type: 'truth', playMode: 'online', text: "If an alien civilization demanded one person from this call as a test subject, who are you sacrificing and why?" },
+  { id: 'on-tod-unh-d-6', gameId: 'truth-or-dare', category: 'unhinged', type: 'dare', playMode: 'online', text: "Eat a raw slice of onion, a clove of garlic, or a spoonful of plain mayonnaise on webcam with zero flinching." },
+
+  // COUPLES ADDITIONS
+  { id: 'on-tod-cpl-t-5', gameId: 'truth-or-dare', category: 'couples', type: 'truth', playMode: 'online', text: "What is a daydream you've had about us while sitting on a video call together?" },
+  { id: 'on-tod-cpl-d-5', gameId: 'truth-or-dare', category: 'couples', type: 'dare', playMode: 'online', text: "Take a screenshot of us right now, set it as your phone lock screen, and show it on webcam." },
+  { id: 'on-tod-cpl-t-6', gameId: 'truth-or-dare', category: 'couples', type: 'truth', playMode: 'online', text: "What is the sweetest voice message or late-night text I ever sent you that you still keep saved?" },
+  { id: 'on-tod-cpl-d-6', gameId: 'truth-or-dare', category: 'couples', type: 'dare', playMode: 'online', text: "Look straight into the lens, describe the exact moment you first knew you wanted to kiss me, and don't look away." },
+
+  // 18+ ADDITIONS
+  { id: 'on-tod-18-t-5', gameId: 'truth-or-dare', category: '18+', type: 'truth', playMode: 'online', text: "Have you ever taken a spicy photo or video specifically while sitting at the exact desk you're at right now?" },
+  { id: 'on-tod-18-d-5', gameId: 'truth-or-dare', category: '18+', type: 'dare', playMode: 'online', text: "Send a 5-second voice note to the group DM whispering your biggest turn-on in a low, husky voice." },
+  { id: 'on-tod-18-t-6', gameId: 'truth-or-dare', category: '18+', type: 'truth', playMode: 'online', text: "What is the most dangerous or risky place you have ever been intimate or engaged in sexual activity?" },
+  { id: 'on-tod-18-d-6', gameId: 'truth-or-dare', category: '18+', type: 'dare', playMode: 'online', text: "Slowly trace your neck down to your collarbone with an ice cube or cold glass while looking into the camera." },
+
+  // SPICY ADDITIONS
+  { id: 'on-tod-spicy-t-5', gameId: 'truth-or-dare', category: 'spicy', type: 'truth', playMode: 'online', text: "What type of dirty talk in voice messages or calls completely turns your brain to mush?" },
+  { id: 'on-tod-spicy-d-5', gameId: 'truth-or-dare', category: 'spicy', type: 'dare', playMode: 'online', text: "Unmute and let out your most realistic bedroom gasp into the mic, then take a deep breath." },
+  { id: 'on-tod-spicy-t-6', gameId: 'truth-or-dare', category: 'spicy', type: 'truth', playMode: 'online', text: "What is a sexual boundary you used to think was off-limits that you are now secretly curious to explore?" },
+  { id: 'on-tod-spicy-d-6', gameId: 'truth-or-dare', category: 'spicy', type: 'dare', playMode: 'online', text: "Show the group on camera the outfit or lingerie you feel the absolute sexiest wearing." },
+
+  // KIDS ADDITIONS
   { id: 'on-tod-kids-t-4', gameId: 'truth-or-dare', category: 'kids', type: 'truth', playMode: 'online', text: "What is your all-time favorite cartoon or superhero movie?" },
-  { id: 'on-tod-kids-d-4', gameId: 'truth-or-dare', category: 'kids', type: 'dare', playMode: 'online', text: "Hold up your coolest drawing or toy to the webcam and tell a 15-second story about it!" }
+  { id: 'on-tod-kids-d-4', gameId: 'truth-or-dare', category: 'kids', type: 'dare', playMode: 'online', text: "Hold up your coolest drawing or toy to the webcam and tell a 15-second story about it!" },
+  { id: 'on-tod-kids-t-5', gameId: 'truth-or-dare', category: 'kids', type: 'truth', playMode: 'online', text: "If you could invent a brand new ice cream flavor with three toppings, what would it be?" },
+  { id: 'on-tod-kids-d-5', gameId: 'truth-or-dare', category: 'kids', type: 'dare', playMode: 'online', text: "Do the funniest robot dance you can do sitting in your chair for 15 seconds!" },
+  { id: 'on-tod-kids-t-6', gameId: 'truth-or-dare', category: 'kids', type: 'truth', playMode: 'online', text: "What magical superpower would you want if you could only use it on video calls?" },
+  { id: 'on-tod-kids-d-6', gameId: 'truth-or-dare', category: 'kids', type: 'dare', playMode: 'online', text: "Balance a book or small notebook on your head while answering the next question!" }
 ];
