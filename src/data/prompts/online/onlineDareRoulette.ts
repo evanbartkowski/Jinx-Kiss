@@ -1,3 +1,4 @@
+import { ONLINE_DARE_ROULETTE_EXPANSION } from './expansions/onlineDareRouletteExpansion';
 import { PromptItem } from '../../../types/game';
 
 /**
@@ -5,7 +6,7 @@ import { PromptItem } from '../../../types/game';
  * Specifically crafted for remote sessions over Discord, webcam video calls, and voice chats.
  * Covers all 8 categories: easy, medium, extreme, unhinged, couples, 18+, spicy, kids.
  */
-export const ONLINE_DARE_ROULETTE_PROMPTS: PromptItem[] = [
+const BASE_ONLINE_DARE_ROULETTE_PROMPTS: PromptItem[] = [
   // ==========================================
   // EASY (Light, funny remote dares & harmless forfeits)
   // ==========================================
@@ -928,3 +929,5 @@ export const ONLINE_DARE_ROULETTE_PROMPTS: PromptItem[] = [
   }
 ];
 
+
+export const ONLINE_DARE_ROULETTE_PROMPTS: PromptItem[] = [...BASE_ONLINE_DARE_ROULETTE_PROMPTS, ...ONLINE_DARE_ROULETTE_EXPANSION];

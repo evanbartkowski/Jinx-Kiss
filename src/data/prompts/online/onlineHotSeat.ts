@@ -1,3 +1,4 @@
+import { ONLINE_HOT_SEAT_EXPANSION } from './expansions/onlineHotSeatExpansion';
 import { PromptItem } from '../../../types/game';
 
 /**
@@ -5,7 +6,7 @@ import { PromptItem } from '../../../types/game';
  * Specifically crafted for remote video and voice calls where one player is grilled with intense questions.
  * Covers all 8 categories: easy, medium, extreme, unhinged, couples, 18+, spicy, kids.
  */
-export const ONLINE_HOT_SEAT_PROMPTS: PromptItem[] = [
+const BASE_ONLINE_HOT_SEAT_PROMPTS: PromptItem[] = [
   // ==========================================
   // EASY (Light, funny, low-pressure remote spotlight)
   // ==========================================
@@ -144,3 +145,5 @@ export const ONLINE_HOT_SEAT_PROMPTS: PromptItem[] = [
   { id: 'on-hs-kids-13', gameId: 'hot-seat', category: 'kids', playMode: 'online', text: "Hot Seat: What is the coolest secret fort you ever built inside your home?" }
 ];
 
+
+export const ONLINE_HOT_SEAT_PROMPTS: PromptItem[] = [...BASE_ONLINE_HOT_SEAT_PROMPTS, ...ONLINE_HOT_SEAT_EXPANSION];

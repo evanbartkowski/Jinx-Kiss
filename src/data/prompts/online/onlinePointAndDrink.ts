@@ -1,3 +1,4 @@
+import { ONLINE_POINT_AND_DRINK_EXPANSION } from './expansions/onlinePointAndDrinkExpansion';
 import { PromptItem } from '../../../types/game';
 
 /**
@@ -6,7 +7,7 @@ import { PromptItem } from '../../../types/game';
  * Players point at webcam tiles on screen or ping names in text chat. Most targeted player drinks!
  * Covers all 8 categories: easy, medium, extreme, unhinged, couples, 18+, spicy, kids.
  */
-export const ONLINE_POINT_AND_DRINK_PROMPTS: PromptItem[] = [
+const BASE_ONLINE_POINT_AND_DRINK_PROMPTS: PromptItem[] = [
   // ==========================================
   // EASY (Fun, low-stakes remote pointing)
   // ==========================================
@@ -824,3 +825,5 @@ export const ONLINE_POINT_AND_DRINK_PROMPTS: PromptItem[] = [
   }
 ];
 
+
+export const ONLINE_POINT_AND_DRINK_PROMPTS: PromptItem[] = [...BASE_ONLINE_POINT_AND_DRINK_PROMPTS, ...ONLINE_POINT_AND_DRINK_EXPANSION];

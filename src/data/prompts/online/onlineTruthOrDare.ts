@@ -1,3 +1,4 @@
+import { ONLINE_TRUTH_OR_DARE_EXPANSION } from './expansions/onlineTruthOrDareExpansion';
 import { PromptItem } from '../../../types/game';
 
 /**
@@ -6,7 +7,7 @@ import { PromptItem } from '../../../types/game';
  * 100% remote: webcam dares, mic forfeits, screen shares, DMs, status changes, and digital truths.
  * Covers all 8 categories: easy, medium, extreme, unhinged, couples, 18+, spicy, kids.
  */
-export const ONLINE_TRUTH_OR_DARE_PROMPTS: PromptItem[] = [
+const BASE_ONLINE_TRUTH_OR_DARE_PROMPTS: PromptItem[] = [
   // ==========================================
   // EASY (Light, funny, low-pressure remote dares & truths)
   // ==========================================
@@ -159,3 +160,5 @@ export const ONLINE_TRUTH_OR_DARE_PROMPTS: PromptItem[] = [
   { id: 'on-tod-kids-t-6', gameId: 'truth-or-dare', category: 'kids', type: 'truth', playMode: 'online', text: "What magical superpower would you want if you could only use it on video calls?" },
   { id: 'on-tod-kids-d-6', gameId: 'truth-or-dare', category: 'kids', type: 'dare', playMode: 'online', text: "Balance a book or small notebook on your head while answering the next question!" }
 ];
+
+export const ONLINE_TRUTH_OR_DARE_PROMPTS: PromptItem[] = [...BASE_ONLINE_TRUTH_OR_DARE_PROMPTS, ...ONLINE_TRUTH_OR_DARE_EXPANSION];

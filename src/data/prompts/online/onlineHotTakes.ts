@@ -1,3 +1,4 @@
+import { ONLINE_HOT_TAKES_EXPANSION } from './expansions/onlineHotTakesExpansion';
 import { PromptItem } from '../../../types/game';
 
 /**
@@ -5,7 +6,7 @@ import { PromptItem } from '../../../types/game';
  * Specifically crafted for remote voice chats, Discord server debates, and video calls.
  * Covers all 8 categories: easy, medium, extreme, unhinged, couples, 18+, spicy, kids.
  */
-export const ONLINE_HOT_TAKES_PROMPTS: PromptItem[] = [
+const BASE_ONLINE_HOT_TAKES_PROMPTS: PromptItem[] = [
   // ==========================================
   // EASY (Fun, low-stakes digital & internet takes)
   // ==========================================
@@ -928,3 +929,5 @@ export const ONLINE_HOT_TAKES_PROMPTS: PromptItem[] = [
   }
 ];
 
+
+export const ONLINE_HOT_TAKES_PROMPTS: PromptItem[] = [...BASE_ONLINE_HOT_TAKES_PROMPTS, ...ONLINE_HOT_TAKES_EXPANSION];

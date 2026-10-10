@@ -87,6 +87,22 @@ function getAudioContext(): AudioContext | null {
   return audioCtx;
 }
 
+function cleanupNode(osc: OscillatorNode, ...extraNodes: (AudioNode | null | undefined)[]) {
+  const cleanup = () => {
+    try {
+      osc.disconnect();
+    } catch {}
+    for (const node of extraNodes) {
+      if (node) {
+        try {
+          node.disconnect();
+        } catch {}
+      }
+    }
+  };
+  osc.onended = cleanup;
+}
+
 export const soundEffects = {
   getSettings(): AudioSettings {
     return { ...settings };
@@ -842,6 +858,7 @@ export const soundEffects = {
 
           osc.start(now);
           osc.stop(now + 4.2);
+          cleanupNode(osc, filter, gain);
 
           activeMusicOscillators.push(osc);
           setTimeout(() => {

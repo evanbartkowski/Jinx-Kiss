@@ -1,3 +1,4 @@
+import { ONLINE_RED_FLAG_GREEN_FLAG_EXPANSION } from './expansions/onlineRedFlagGreenFlagExpansion';
 import { PromptItem } from '../../../types/game';
 
 /**
@@ -5,7 +6,7 @@ import { PromptItem } from '../../../types/game';
  * Specifically crafted for remote sessions, online dating, digital habits, and Discord culture.
  * Covers all 8 categories: easy, medium, extreme, unhinged, couples, 18+, spicy, kids.
  */
-export const ONLINE_RED_FLAG_GREEN_FLAG_PROMPTS: PromptItem[] = [
+const BASE_ONLINE_RED_FLAG_GREEN_FLAG_PROMPTS: PromptItem[] = [
   // ==========================================
   // EASY (Light, funny digital habits & quirks)
   // ==========================================
@@ -928,3 +929,5 @@ export const ONLINE_RED_FLAG_GREEN_FLAG_PROMPTS: PromptItem[] = [
   }
 ];
 
+
+export const ONLINE_RED_FLAG_GREEN_FLAG_PROMPTS: PromptItem[] = [...BASE_ONLINE_RED_FLAG_GREEN_FLAG_PROMPTS, ...ONLINE_RED_FLAG_GREEN_FLAG_EXPANSION];

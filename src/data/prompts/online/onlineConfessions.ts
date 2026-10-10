@@ -1,3 +1,4 @@
+import { ONLINE_CONFESSIONS_EXPANSION } from './expansions/onlineConfessionsExpansion';
 import { PromptItem } from '../../../types/game';
 
 /**
@@ -6,7 +7,7 @@ import { PromptItem } from '../../../types/game';
  * Every card features an engaging remote dilemma and a confession starter.
  * Covers all 8 categories: easy, medium, extreme, unhinged, couples, 18+, spicy, kids.
  */
-export const ONLINE_CONFESSIONS_PROMPTS: PromptItem[] = [
+const BASE_ONLINE_CONFESSIONS_PROMPTS: PromptItem[] = [
   // ==========================================
   // EASY (Light, funny, low-stakes digital secrets)
   // ==========================================
@@ -145,3 +146,5 @@ export const ONLINE_CONFESSIONS_PROMPTS: PromptItem[] = [
   { id: 'on-cnf-kids-13', gameId: 'confessions', category: 'kids', playMode: 'online', text: "If you had a robot butler, what silly chore would you order it to do every single morning?", confessionStarter: "I would make my robot butler..." }
 ];
 
+
+export const ONLINE_CONFESSIONS_PROMPTS: PromptItem[] = [...BASE_ONLINE_CONFESSIONS_PROMPTS, ...ONLINE_CONFESSIONS_EXPANSION];

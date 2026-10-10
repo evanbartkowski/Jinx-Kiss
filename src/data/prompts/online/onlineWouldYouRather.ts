@@ -1,3 +1,4 @@
+import { ONLINE_WOULD_YOU_RATHER_EXPANSION } from './expansions/onlineWouldYouRatherExpansion';
 import { PromptItem } from '../../../types/game';
 
 /**
@@ -5,7 +6,7 @@ import { PromptItem } from '../../../types/game';
  * Specifically crafted for remote sessions over Discord, FaceTime, Zoom, and webcam hangouts.
  * Covers all 8 categories: easy, medium, extreme, unhinged, couples, 18+, spicy, kids.
  */
-export const ONLINE_WOULD_YOU_RATHER_PROMPTS: PromptItem[] = [
+const BASE_ONLINE_WOULD_YOU_RATHER_PROMPTS: PromptItem[] = [
   // ==========================================
   // EASY (Silly, casual, light digital dilemmas)
   // ==========================================
@@ -1050,3 +1051,5 @@ export const ONLINE_WOULD_YOU_RATHER_PROMPTS: PromptItem[] = [
   }
 ];
 
+
+export const ONLINE_WOULD_YOU_RATHER_PROMPTS: PromptItem[] = [...BASE_ONLINE_WOULD_YOU_RATHER_PROMPTS, ...ONLINE_WOULD_YOU_RATHER_EXPANSION];

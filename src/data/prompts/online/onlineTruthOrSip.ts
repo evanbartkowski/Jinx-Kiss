@@ -1,3 +1,4 @@
+import { ONLINE_TRUTH_OR_SIP_EXPANSION } from './expansions/onlineTruthOrSipExpansion';
 import { PromptItem } from '../../../types/game';
 
 /**
@@ -5,7 +6,7 @@ import { PromptItem } from '../../../types/game';
  * Specifically crafted for remote drinking games and beverage hangouts over Discord and webcams.
  * Covers all 8 categories: easy, medium, extreme, unhinged, couples, 18+, spicy, kids.
  */
-export const ONLINE_TRUTH_OR_SIP_PROMPTS: PromptItem[] = [
+const BASE_ONLINE_TRUTH_OR_SIP_PROMPTS: PromptItem[] = [
   // ==========================================
   // EASY (Light, funny truths or take a casual sip)
   // ==========================================
@@ -928,3 +929,5 @@ export const ONLINE_TRUTH_OR_SIP_PROMPTS: PromptItem[] = [
   }
 ];
 
+
+export const ONLINE_TRUTH_OR_SIP_PROMPTS: PromptItem[] = [...BASE_ONLINE_TRUTH_OR_SIP_PROMPTS, ...ONLINE_TRUTH_OR_SIP_EXPANSION];

@@ -55,6 +55,8 @@ export const NeverHaveIEverGame: React.FC<NeverHaveIEverGameProps> = ({ prompts,
           nextIdx = (nextIdx + 1) % prompts.length;
         }
         setUsedIndices(prev => [...prev, nextIdx]);
+      } else {
+        setUsedIndices([nextIdx]);
       }
       setCurrentIndex(nextIdx);
       const nextP = prompts[nextIdx] || prompts[0];

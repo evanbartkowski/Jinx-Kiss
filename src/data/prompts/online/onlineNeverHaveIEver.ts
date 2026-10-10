@@ -1,3 +1,4 @@
+import { ONLINE_NEVER_HAVE_I_EVER_EXPANSION } from './expansions/onlineNeverHaveIEverExpansion';
 import { PromptItem } from '../../../types/game';
 
 /**
@@ -6,7 +7,7 @@ import { PromptItem } from '../../../types/game';
  * Covers all 8 categories: easy, medium, extreme, unhinged, couples, 18+, spicy, kids.
  * 100% remote-friendly: webcams, microphones, chat, DMs, screen shares, and digital habits.
  */
-export const ONLINE_NEVER_HAVE_I_EVER_PROMPTS: PromptItem[] = [
+const BASE_ONLINE_NEVER_HAVE_I_EVER_PROMPTS: PromptItem[] = [
   // ==========================================
   // EASY (Light, funny, relatable digital moments)
   // ==========================================
@@ -159,3 +160,5 @@ export const ONLINE_NEVER_HAVE_I_EVER_PROMPTS: PromptItem[] = [
   { id: 'on-nhie-kids-13', gameId: 'never-have-i-ever', category: 'kids', playMode: 'online', text: "Never have I ever dressed up in a superhero costume while sitting at my computer." },
   { id: 'on-nhie-kids-14', gameId: 'never-have-i-ever', category: 'kids', playMode: 'online', text: "Never have I ever tried to balance three markers or pens on my nose on camera!" }
 ];
+
+export const ONLINE_NEVER_HAVE_I_EVER_PROMPTS: PromptItem[] = [...BASE_ONLINE_NEVER_HAVE_I_EVER_PROMPTS, ...ONLINE_NEVER_HAVE_I_EVER_EXPANSION];

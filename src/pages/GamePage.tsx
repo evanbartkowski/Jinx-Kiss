@@ -97,8 +97,8 @@ export const GamePage: React.FC<GamePageProps> = ({ gameId, customDeck, onExit }
         rawPool = rawPool.filter(p => p.playMode !== 'online');
       }
 
-      // 3. Deduplicate: only show unseen cards until collection exhausted (isolated by playMode)
-      const historyKey = `${playMode}_${gameId}`;
+      // 3. Deduplicate: only show unseen cards until collection exhausted (isolated by playMode and category)
+      const historyKey = `${playMode}_${gameId}_${selectedCategory}`;
       const deduplicated = sessionService.filterUnseenCards(historyKey, rawPool);
       setPrompts(deduplicated);
 
@@ -123,7 +123,7 @@ export const GamePage: React.FC<GamePageProps> = ({ gameId, customDeck, onExit }
   };
 
   const handleShuffle = () => {
-    const historyKey = customDeck ? customDeck.id : `${playMode}_${gameId}`;
+    const historyKey = customDeck ? customDeck.id : `${playMode}_${gameId}_${selectedCategory}`;
     sessionService.resetCardHistory(historyKey);
     setGameKey(prev => prev + 1);
   };
@@ -160,33 +160,35 @@ export const GamePage: React.FC<GamePageProps> = ({ gameId, customDeck, onExit }
       );
     }
 
+    const compKey = `${gameKey}_${selectedCategory}_${playMode}`;
+
     switch (gameId) {
       case 'truth-or-dare':
-        return <TruthOrDareGame key={gameKey} prompts={prompts} players={savedPlayers} />;
+        return <TruthOrDareGame key={compKey} prompts={prompts} players={savedPlayers} />;
       case 'never-have-i-ever':
-        return <NeverHaveIEverGame key={gameKey} prompts={prompts} players={savedPlayers} />;
+        return <NeverHaveIEverGame key={compKey} prompts={prompts} players={savedPlayers} />;
       case 'would-you-rather':
-        return <WouldYouRatherGame key={gameKey} prompts={prompts} players={savedPlayers} />;
+        return <WouldYouRatherGame key={compKey} prompts={prompts} players={savedPlayers} />;
       case 'hot-takes':
-        return <HotTakesGame key={gameKey} prompts={prompts} players={savedPlayers} />;
+        return <HotTakesGame key={compKey} prompts={prompts} players={savedPlayers} />;
       case 'dare-roulette':
-        return <DareRouletteGame key={gameKey} prompts={prompts} players={savedPlayers} />;
+        return <DareRouletteGame key={compKey} prompts={prompts} players={savedPlayers} />;
       case 'red-flag-green-flag':
-        return <RedFlagGreenFlagGame key={gameKey} prompts={prompts} players={savedPlayers} />;
+        return <RedFlagGreenFlagGame key={compKey} prompts={prompts} players={savedPlayers} />;
       case 'truth-or-sip':
-        return <TruthOrSipGame key={gameKey} prompts={prompts} players={savedPlayers} />;
+        return <TruthOrSipGame key={compKey} prompts={prompts} players={savedPlayers} />;
       case 'point-and-drink':
-        return <PointAndDrinkGame key={gameKey} prompts={prompts} players={savedPlayers} />;
+        return <PointAndDrinkGame key={compKey} prompts={prompts} players={savedPlayers} />;
       case 'most-likely-to':
-        return <MostLikelyToGame key={gameKey} prompts={prompts} players={savedPlayers} />;
+        return <MostLikelyToGame key={compKey} prompts={prompts} players={savedPlayers} />;
       case 'confessions':
-        return <ConfessionsGame key={gameKey} prompts={prompts} players={savedPlayers} />;
+        return <ConfessionsGame key={compKey} prompts={prompts} players={savedPlayers} />;
       case 'chaos-mix':
-        return <ChaosMixGame key={gameKey} prompts={prompts} players={savedPlayers} />;
+        return <ChaosMixGame key={compKey} prompts={prompts} players={savedPlayers} />;
       case 'hot-seat':
-        return <HotSeatGame key={gameKey} prompts={prompts} players={savedPlayers} />;
+        return <HotSeatGame key={compKey} prompts={prompts} players={savedPlayers} />;
       default:
-        return <TruthOrDareGame key={gameKey} prompts={prompts} players={savedPlayers} />;
+        return <TruthOrDareGame key={compKey} prompts={prompts} players={savedPlayers} />;
     }
   };
 

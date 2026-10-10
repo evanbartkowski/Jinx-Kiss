@@ -1,3 +1,4 @@
+import { ONLINE_MOST_LIKELY_TO_EXPANSION } from './expansions/onlineMostLikelyToExpansion';
 import { PromptItem } from '../../../types/game';
 
 /**
@@ -5,7 +6,7 @@ import { PromptItem } from '../../../types/game';
  * Specifically crafted for Discord calls, voice chats, webcams, and group hangouts.
  * Covers all 8 categories: easy, medium, extreme, unhinged, couples, 18+, spicy, kids.
  */
-export const ONLINE_MOST_LIKELY_TO_PROMPTS: PromptItem[] = [
+const BASE_ONLINE_MOST_LIKELY_TO_PROMPTS: PromptItem[] = [
   // ==========================================
   // EASY (Light, funny, low-pressure remote quirks)
   // ==========================================
@@ -144,3 +145,5 @@ export const ONLINE_MOST_LIKELY_TO_PROMPTS: PromptItem[] = [
   { id: 'on-mlt-kids-13', gameId: 'most-likely-to', category: 'kids', playMode: 'online', text: "Who is most likely to eat pancakes with chocolate chips and whipped cream for dinner?" }
 ];
 
+
+export const ONLINE_MOST_LIKELY_TO_PROMPTS: PromptItem[] = [...BASE_ONLINE_MOST_LIKELY_TO_PROMPTS, ...ONLINE_MOST_LIKELY_TO_EXPANSION];

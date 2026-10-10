@@ -60,17 +60,21 @@ export const AmbientBackground: React.FC = () => {
       });
     }
 
-    let isVisible = true;
+    let isVisible = !document.hidden;
     const handleVisibilityChange = () => {
-      isVisible = !document.hidden;
+      const nowVisible = !document.hidden;
+      if (nowVisible && !isVisible) {
+        isVisible = true;
+        cancelAnimationFrame(animationFrameId);
+        animationFrameId = requestAnimationFrame(render);
+      } else {
+        isVisible = nowVisible;
+      }
     };
     document.addEventListener('visibilitychange', handleVisibilityChange);
 
     const render = () => {
-      if (!isVisible) {
-        animationFrameId = requestAnimationFrame(render);
-        return;
-      }
+      if (!isVisible) return;
 
       ctx.clearRect(0, 0, width, height);
 

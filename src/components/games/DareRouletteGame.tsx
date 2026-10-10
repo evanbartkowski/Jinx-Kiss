@@ -73,8 +73,10 @@ export const DareRouletteGame: React.FC<DareRouletteGameProps> = ({
     { start: '#F43F5E', end: '#BE123C' }, // Rose
   ];
 
+  const rotationAngleRef = useRef(0);
+
   // Draw the roulette wheel on canvas with premium casino neon aesthetics
-  useEffect(() => {
+  const drawWheel = React.useCallback((angle: number) => {
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
@@ -104,12 +106,12 @@ export const DareRouletteGame: React.FC<DareRouletteGameProps> = ({
     // 2. Draw rotating wheel body
     ctx.save();
     ctx.translate(center, center);
-    ctx.rotate(rotationAngle);
+    ctx.rotate(angle);
     ctx.translate(-center, -center);
 
     // Draw wheel segments with radial gradients
     activeSegments.forEach((segment, i) => {
-      const angle = i * arc;
+      const segAngle = i * arc;
       const gradConfig = wheelGradients[i % wheelGradients.length];
 
       ctx.beginPath();
@@ -120,7 +122,7 @@ export const DareRouletteGame: React.FC<DareRouletteGameProps> = ({
 
       ctx.fillStyle = grad;
       ctx.moveTo(center, center);
-      ctx.arc(center, center, radius, angle, angle + arc);
+      ctx.arc(center, center, radius, segAngle, segAngle + arc);
       ctx.lineTo(center, center);
       ctx.fill();
 
@@ -131,7 +133,7 @@ export const DareRouletteGame: React.FC<DareRouletteGameProps> = ({
 
       // Inner subtle edge highlight
       ctx.beginPath();
-      ctx.arc(center, center, radius - 2, angle, angle + arc);
+      ctx.arc(center, center, radius - 2, segAngle, segAngle + arc);
       ctx.strokeStyle = 'rgba(255, 255, 255, 0.25)';
       ctx.lineWidth = 1.5;
       ctx.stroke();
@@ -139,7 +141,7 @@ export const DareRouletteGame: React.FC<DareRouletteGameProps> = ({
       // Segment text with drop shadow
       ctx.save();
       ctx.translate(center, center);
-      ctx.rotate(angle + arc / 2);
+      ctx.rotate(segAngle + arc / 2);
       ctx.textAlign = 'right';
       ctx.fillStyle = '#FFFFFF';
       ctx.font = '900 14px system-ui, -apple-system, sans-serif';
@@ -212,7 +214,11 @@ export const DareRouletteGame: React.FC<DareRouletteGameProps> = ({
       ctx.fill();
       ctx.restore();
     }
-  }, [activeSegments, rotationAngle]);
+  }, [activeSegments]);
+
+  useEffect(() => {
+    drawWheel(rotationAngle);
+  }, [drawWheel, rotationAngle]);
 
   const spinWheel = () => {
     if (isSpinning || activeSegments.length < 2) return;
@@ -232,13 +238,13 @@ export const DareRouletteGame: React.FC<DareRouletteGameProps> = ({
     const targetSectorAngle = (3 * Math.PI) / 2 - (winnerIndex * arc + arc / 2);
     const fullSpins = (6 + Math.floor(Math.random() * 4)) * (Math.PI * 2);
     const totalRotation =
-      rotationAngle +
+      rotationAngleRef.current +
       fullSpins +
-      (((targetSectorAngle - (rotationAngle % (Math.PI * 2))) + Math.PI * 4) % (Math.PI * 2));
+      (((targetSectorAngle - (rotationAngleRef.current % (Math.PI * 2))) + Math.PI * 4) % (Math.PI * 2));
 
     const duration = 4200;
     const startTime = performance.now();
-    const initialAngle = rotationAngle;
+    const initialAngle = rotationAngleRef.current;
 
     const animateSpin = (now: number) => {
       const elapsed = now - startTime;
@@ -247,11 +253,13 @@ export const DareRouletteGame: React.FC<DareRouletteGameProps> = ({
       // Realistic cubic ease-out deceleration
       const easeOut = 1 - Math.pow(1 - progress, 3.5);
       const currentAngle = initialAngle + (totalRotation - initialAngle) * easeOut;
-      setRotationAngle(currentAngle);
+      rotationAngleRef.current = currentAngle;
+      drawWheel(currentAngle);
 
       if (progress < 1) {
         requestAnimationFrame(animateSpin);
       } else {
+        setRotationAngle(currentAngle);
         setIsSpinning(false);
         const winner = activeSegments[winnerIndex];
         setSelectedWinner(winner);
