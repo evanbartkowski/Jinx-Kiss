@@ -12,6 +12,13 @@ import { IMPOSTER_PROMPTS } from './imposter';
 import { WHOS_LYING_PROMPTS } from './whosLying';
 import { CONFESSIONS_PROMPTS } from './confessions';
 import { HOT_SEAT_PROMPTS } from './hotSeat';
+import { MASTER_COLLECTION_PROMPTS } from './masterCollection';
+
+const MASTER_PROMPTS_BY_GAME = MASTER_COLLECTION_PROMPTS.reduce((acc, p) => {
+  if (!acc[p.gameId]) acc[p.gameId] = [];
+  acc[p.gameId].push(p);
+  return acc;
+}, {} as Record<GameId, PromptItem[]>);
 
 const STANDALONE_PROMPTS: PromptItem[] = [
   ...TRUTH_OR_DARE_PROMPTS,
@@ -27,6 +34,7 @@ const STANDALONE_PROMPTS: PromptItem[] = [
   ...WHOS_LYING_PROMPTS,
   ...CONFESSIONS_PROMPTS,
   ...HOT_SEAT_PROMPTS,
+  ...MASTER_COLLECTION_PROMPTS,
 ];
 
 export const CHAOS_MIX_PROMPTS: PromptItem[] = STANDALONE_PROMPTS.map(p => ({
@@ -36,19 +44,19 @@ export const CHAOS_MIX_PROMPTS: PromptItem[] = STANDALONE_PROMPTS.map(p => ({
 }));
 
 export const ALL_DEFAULT_PROMPTS: Record<GameId, PromptItem[]> = {
-  'truth-or-dare': TRUTH_OR_DARE_PROMPTS,
-  'never-have-i-ever': NEVER_HAVE_I_EVER_PROMPTS,
-  'would-you-rather': WOULD_YOU_RATHER_PROMPTS,
-  'hot-takes': HOT_TAKES_PROMPTS,
-  'dare-roulette': DARE_ROULETTE_PROMPTS,
-  'red-flag-green-flag': RED_FLAG_GREEN_FLAG_PROMPTS,
-  'truth-or-sip': TRUTH_OR_SIP_PROMPTS,
-  'point-and-drink': POINT_AND_DRINK_PROMPTS,
-  'most-likely-to': MOST_LIKELY_TO_PROMPTS,
-  'imposter': IMPOSTER_PROMPTS,
-  'whos-lying': WHOS_LYING_PROMPTS,
-  'confessions': CONFESSIONS_PROMPTS,
-  'hot-seat': HOT_SEAT_PROMPTS,
+  'truth-or-dare': [...TRUTH_OR_DARE_PROMPTS, ...(MASTER_PROMPTS_BY_GAME['truth-or-dare'] || [])],
+  'never-have-i-ever': [...NEVER_HAVE_I_EVER_PROMPTS, ...(MASTER_PROMPTS_BY_GAME['never-have-i-ever'] || [])],
+  'would-you-rather': [...WOULD_YOU_RATHER_PROMPTS, ...(MASTER_PROMPTS_BY_GAME['would-you-rather'] || [])],
+  'hot-takes': [...HOT_TAKES_PROMPTS, ...(MASTER_PROMPTS_BY_GAME['hot-takes'] || [])],
+  'dare-roulette': [...DARE_ROULETTE_PROMPTS, ...(MASTER_PROMPTS_BY_GAME['dare-roulette'] || [])],
+  'red-flag-green-flag': [...RED_FLAG_GREEN_FLAG_PROMPTS, ...(MASTER_PROMPTS_BY_GAME['red-flag-green-flag'] || [])],
+  'truth-or-sip': [...TRUTH_OR_SIP_PROMPTS, ...(MASTER_PROMPTS_BY_GAME['truth-or-sip'] || [])],
+  'point-and-drink': [...POINT_AND_DRINK_PROMPTS, ...(MASTER_PROMPTS_BY_GAME['point-and-drink'] || [])],
+  'most-likely-to': [...MOST_LIKELY_TO_PROMPTS, ...(MASTER_PROMPTS_BY_GAME['most-likely-to'] || [])],
+  'imposter': [...IMPOSTER_PROMPTS, ...(MASTER_PROMPTS_BY_GAME['imposter'] || [])],
+  'whos-lying': [...WHOS_LYING_PROMPTS, ...(MASTER_PROMPTS_BY_GAME['whos-lying'] || [])],
+  'confessions': [...CONFESSIONS_PROMPTS, ...(MASTER_PROMPTS_BY_GAME['confessions'] || [])],
+  'hot-seat': [...HOT_SEAT_PROMPTS, ...(MASTER_PROMPTS_BY_GAME['hot-seat'] || [])],
   'chaos-mix': CHAOS_MIX_PROMPTS,
 };
 
@@ -60,3 +68,5 @@ export function getDefaultPromptsForGame(gameId: GameId, category?: GameCategory
   if (!category) return allPrompts;
   return allPrompts.filter(p => p.category === category);
 }
+
+export { MASTER_COLLECTION_PROMPTS };
