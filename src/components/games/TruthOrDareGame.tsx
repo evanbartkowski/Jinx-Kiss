@@ -95,22 +95,22 @@ export const TruthOrDareGame: React.FC<TruthOrDareGameProps> = ({ prompts, playe
           {/* Truth Option Card */}
           <button
             onClick={() => pickNextPrompt('truth')}
-            className="group relative p-10 sm:p-16 min-h-[320px] sm:min-h-[440px] rounded-3xl sm:rounded-4xl glass-panel border border-brand-pink/40 hover:border-brand-pink hover:shadow-neon-pink flex flex-col items-center justify-between text-center transition-all duration-300 hover:scale-[1.02] active:scale-95 cursor-pointer bg-gradient-to-b from-pink-950/25 via-black/50 to-black/90"
+            className="group relative p-6 sm:p-14 md:p-16 min-h-[220px] sm:min-h-[420px] rounded-3xl sm:rounded-4xl glass-panel border border-brand-pink/40 hover:border-brand-pink hover:shadow-neon-pink flex flex-col items-center justify-between text-center transition-all duration-300 hover:scale-[1.02] active:scale-95 cursor-pointer bg-gradient-to-b from-pink-950/25 via-black/50 to-black/90"
           >
-            <div className="w-24 h-24 sm:w-32 sm:h-32 rounded-3xl sm:rounded-4xl bg-brand-pink/20 border border-brand-pink/50 flex items-center justify-center text-brand-pink group-hover:scale-110 transition-transform shadow-neon-pink/40">
-              <Sparkles className="w-12 h-12 sm:w-16 sm:h-16" />
+            <div className="w-16 h-16 sm:w-28 sm:h-28 rounded-2xl sm:rounded-4xl bg-brand-pink/20 border border-brand-pink/50 flex items-center justify-center text-brand-pink group-hover:scale-110 transition-transform shadow-neon-pink/40">
+              <Sparkles className="w-8 h-8 sm:w-14 sm:h-14" />
             </div>
 
-            <div>
-              <h3 className="text-4xl sm:text-6xl font-black uppercase text-white tracking-widest drop-shadow-[0_0_20px_rgba(255,77,166,0.6)]">
+            <div className="my-2 sm:my-0">
+              <h3 className="text-3xl sm:text-5xl md:text-6xl font-black uppercase text-white tracking-widest drop-shadow-[0_0_20px_rgba(255,77,166,0.6)]">
                 Truth
               </h3>
-              <p className="text-sm sm:text-base text-zinc-300 font-medium mt-3 max-w-sm leading-relaxed">
+              <p className="text-xs sm:text-base text-zinc-300 font-medium mt-1.5 sm:mt-3 max-w-sm leading-relaxed">
                 Confess unfiltered secrets, embarrassing memories, and unspoken truths
               </p>
             </div>
 
-            <span className="text-xs sm:text-sm font-black text-pink-300 bg-pink-950/80 border border-pink-500/50 px-5 py-2 rounded-full shadow-neon-pink/30">
+            <span className="text-[10px] sm:text-sm font-black text-pink-300 bg-pink-950/80 border border-pink-500/50 px-3.5 sm:px-5 py-1.5 sm:py-2 rounded-full shadow-neon-pink/30">
               {truths.length} Curated Truths
             </span>
           </button>
@@ -118,22 +118,22 @@ export const TruthOrDareGame: React.FC<TruthOrDareGameProps> = ({ prompts, playe
           {/* Dare Option Card */}
           <button
             onClick={() => pickNextPrompt('dare')}
-            className="group relative p-10 sm:p-16 min-h-[320px] sm:min-h-[440px] rounded-3xl sm:rounded-4xl glass-panel border border-brand-violet/40 hover:border-brand-violet hover:shadow-neon-violet flex flex-col items-center justify-between text-center transition-all duration-300 hover:scale-[1.02] active:scale-95 cursor-pointer bg-gradient-to-b from-purple-950/25 via-black/50 to-black/90"
+            className="group relative p-6 sm:p-14 md:p-16 min-h-[220px] sm:min-h-[420px] rounded-3xl sm:rounded-4xl glass-panel border border-brand-violet/40 hover:border-brand-violet hover:shadow-neon-violet flex flex-col items-center justify-between text-center transition-all duration-300 hover:scale-[1.02] active:scale-95 cursor-pointer bg-gradient-to-b from-purple-950/25 via-black/50 to-black/90"
           >
-            <div className="w-24 h-24 sm:w-32 sm:h-32 rounded-3xl sm:rounded-4xl bg-brand-violet/20 border border-brand-violet/50 flex items-center justify-center text-brand-violet group-hover:scale-110 transition-transform shadow-neon-violet/40">
-              <Flame className="w-12 h-12 sm:w-16 sm:h-16" />
+            <div className="w-16 h-16 sm:w-28 sm:h-28 rounded-2xl sm:rounded-4xl bg-brand-violet/20 border border-brand-violet/50 flex items-center justify-center text-brand-violet group-hover:scale-110 transition-transform shadow-neon-violet/40">
+              <Flame className="w-8 h-8 sm:w-14 sm:h-14" />
             </div>
 
-            <div>
-              <h3 className="text-4xl sm:text-6xl font-black uppercase text-white tracking-widest drop-shadow-[0_0_20px_rgba(168,85,247,0.6)]">
+            <div className="my-2 sm:my-0">
+              <h3 className="text-3xl sm:text-5xl md:text-6xl font-black uppercase text-white tracking-widest drop-shadow-[0_0_20px_rgba(168,85,247,0.6)]">
                 Dare
               </h3>
-              <p className="text-sm sm:text-base text-zinc-300 font-medium mt-3 max-w-sm leading-relaxed">
+              <p className="text-xs sm:text-base text-zinc-300 font-medium mt-1.5 sm:mt-3 max-w-sm leading-relaxed">
                 Take on wild, bold challenges and unpredictable group dares
               </p>
             </div>
 
-            <span className="text-xs sm:text-sm font-black text-purple-300 bg-purple-950/80 border border-purple-500/50 px-5 py-2 rounded-full shadow-neon-violet/30">
+            <span className="text-[10px] sm:text-sm font-black text-purple-300 bg-purple-950/80 border border-purple-500/50 px-3.5 sm:px-5 py-1.5 sm:py-2 rounded-full shadow-neon-violet/30">
               {dares.length} Curated Dares
             </span>
           </button>
@@ -141,10 +141,10 @@ export const TruthOrDareGame: React.FC<TruthOrDareGameProps> = ({ prompts, playe
         </div>
       ) : (
         /* Prompt Reveal Card (Substantially Bigger, Screen-Filling & Legendary-Aware) */
-        <div className="w-full flex flex-col items-center gap-6 animate-scale-in">
+        <div className="w-full flex flex-col items-center gap-4 sm:gap-6 animate-scale-in">
           
           <div
-            className={`w-full min-h-[440px] sm:min-h-[520px] md:min-h-[560px] p-8 sm:p-16 md:p-20 rounded-3xl sm:rounded-4xl glass-panel border flex flex-col justify-between items-center text-center relative overflow-hidden transition-all duration-500 ${
+            className={`w-full min-h-[340px] sm:min-h-[480px] md:min-h-[560px] p-6 sm:p-12 md:p-16 rounded-3xl sm:rounded-4xl glass-panel border flex flex-col justify-between items-center text-center relative overflow-hidden transition-all duration-500 ${
               isLegendary
                 ? 'border-2 border-yellow-400 sm:border-yellow-300 shadow-[0_0_60px_rgba(250,204,21,0.65),inset_0_0_30px_rgba(250,204,21,0.2)] ring-2 ring-yellow-400/80 bg-gradient-to-b from-yellow-950/40 via-black/60 to-black/90'
                 : selectedType === 'truth'
@@ -169,7 +169,7 @@ export const TruthOrDareGame: React.FC<TruthOrDareGameProps> = ({ prompts, playe
                 <LegendaryCardBadge title={currentPrompt.legendaryTitle || `★ LEGENDARY ${selectedType.toUpperCase()} ★`} size="lg" />
               ) : (
                 <span
-                  className={`px-6 py-2.5 rounded-full text-xs sm:text-sm font-black uppercase tracking-widest border ${
+                  className={`px-5 sm:px-6 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm font-black uppercase tracking-widest border ${
                     selectedType === 'truth'
                       ? 'bg-brand-pink/20 border-brand-pink text-pink-300 shadow-neon-pink/40'
                       : 'bg-brand-violet/20 border-brand-violet text-violet-300 shadow-neon-violet/40'
@@ -186,7 +186,7 @@ export const TruthOrDareGame: React.FC<TruthOrDareGameProps> = ({ prompts, playe
             </div>
 
             {/* Prompt Text (Big, Crisp, High-Impact, Screen-Fitting) */}
-            <p className={`text-3xl sm:text-5xl md:text-6xl font-black leading-tight sm:leading-snug my-8 sm:my-12 max-w-4xl z-10 ${
+            <p className={`text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-black leading-snug sm:leading-tight my-6 sm:my-10 max-w-4xl z-10 ${
               isLegendary
                 ? 'text-yellow-100 drop-shadow-[0_0_30px_rgba(250,204,21,0.5)]'
                 : 'text-white drop-shadow-[0_0_20px_rgba(255,255,255,0.25)]'
@@ -195,7 +195,7 @@ export const TruthOrDareGame: React.FC<TruthOrDareGameProps> = ({ prompts, playe
             </p>
 
             {/* Turn status */}
-            <div className="text-sm sm:text-base text-zinc-300 font-semibold mb-4 z-10">
+            <div className="text-xs sm:text-base text-zinc-300 font-semibold mb-3 sm:mb-4 z-10">
               {activePlayer ? `Target Player: ${activePlayer}` : 'Share your answer or complete the challenge with the group!'}
             </div>
 
@@ -206,28 +206,28 @@ export const TruthOrDareGame: React.FC<TruthOrDareGameProps> = ({ prompts, playe
           </div>
 
           {/* Action buttons */}
-          <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 mt-3">
+          <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-5 mt-2 sm:mt-3">
             <button
               onClick={triggerCelebration}
-              className="px-8 sm:px-12 py-4 sm:py-5 rounded-2xl bg-gradient-to-r from-brand-pink to-brand-violet hover:from-pink-500 hover:to-purple-500 text-white font-black text-base sm:text-lg shadow-neon-pink flex items-center gap-3 transition-all active:scale-95 cursor-pointer"
+              className="px-6 sm:px-10 py-3.5 sm:py-4 rounded-2xl bg-gradient-to-r from-brand-pink to-brand-violet hover:from-pink-500 hover:to-purple-500 text-white font-black text-sm sm:text-base shadow-neon-pink flex items-center gap-2.5 transition-all active:scale-95 cursor-pointer"
             >
               <span>Done! Next Turn</span>
-              <ArrowRight className="w-5 h-5" />
+              <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
             </button>
 
             <button
               onClick={() => pickNextPrompt(selectedType)}
-              className="px-7 sm:px-10 py-4 sm:py-5 rounded-2xl border border-white/15 bg-zinc-900/80 hover:bg-zinc-800 text-zinc-200 hover:text-white font-bold text-base sm:text-lg flex items-center gap-2.5 transition-all active:scale-95 cursor-pointer"
+              className="px-5 sm:px-8 py-3.5 sm:py-4 rounded-2xl border border-white/15 bg-zinc-900/80 hover:bg-zinc-800 text-zinc-200 hover:text-white font-bold text-sm sm:text-base flex items-center gap-2 transition-all active:scale-95 cursor-pointer"
             >
-              <RotateCw className="w-5 h-5" />
+              <RotateCw className="w-4 h-4 sm:w-5 sm:h-5" />
               <span>Another {selectedType}</span>
             </button>
 
             <button
               onClick={advanceTurn}
-              className="px-7 sm:px-10 py-4 sm:py-5 rounded-2xl border border-white/10 bg-zinc-900/60 hover:bg-zinc-800 text-zinc-400 hover:text-white font-semibold text-base sm:text-lg flex items-center gap-2.5 transition-all active:scale-95 cursor-pointer"
+              className="px-5 sm:px-8 py-3.5 sm:py-4 rounded-2xl border border-white/10 bg-zinc-900/60 hover:bg-zinc-800 text-zinc-400 hover:text-white font-semibold text-sm sm:text-base flex items-center gap-2 transition-all active:scale-95 cursor-pointer"
             >
-              <SkipForward className="w-5 h-5" />
+              <SkipForward className="w-4 h-4 sm:w-5 sm:h-5" />
               <span>Skip</span>
             </button>
           </div>

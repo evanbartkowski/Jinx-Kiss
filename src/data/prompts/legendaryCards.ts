@@ -942,3 +942,4 @@ export const LEGENDARY_CARDS: PromptItem[] = [
     text: '18+ Bedroom Interrogation: 60 seconds of raw bedroom truth! The group can ask you anything about your anatomy, kinks, stamina, and wildest fantasies!'
   },
 ];
+

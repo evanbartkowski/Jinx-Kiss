@@ -2,7 +2,9 @@ import React, { useState } from 'react';
 import { GameMetadata, GameCategory } from '../../types/game';
 import { CATEGORY_LABELS } from '../../data/gamesConfig';
 import { sessionService, GameSession } from '../../services/sessionService';
-import { ArrowLeft, Sparkles, ArrowRight, TrendingUp, History, Play } from 'lucide-react';
+import { soundEffects } from '../../utils/audio';
+import { ArrowLeft, Sparkles, ArrowRight, TrendingUp, History, Play, CheckCircle2 } from 'lucide-react';
+import confetti from 'canvas-confetti';
 
 interface GameModeSelectScreenProps {
   metadata: GameMetadata;
@@ -15,7 +17,6 @@ export const GameModeSelectScreen: React.FC<GameModeSelectScreenProps> = ({
   onSelectCategory,
   onBack,
 }) => {
-  const [isProgressive, setIsProgressive] = useState(false);
   const [activeSession, setActiveSession] = useState<GameSession | null>(() => {
     const current = sessionService.getActiveSession();
     if (current && current.gameId === metadata.id) {
@@ -23,6 +24,13 @@ export const GameModeSelectScreen: React.FC<GameModeSelectScreenProps> = ({
     }
     return null;
   });
+
+  const [selectedCategory, setSelectedCategory] = useState<GameCategory>(() => {
+    if (activeSession) return activeSession.category;
+    return 'medium';
+  });
+  const [isProgressive, setIsProgressive] = useState(false);
+
   // 8 Total Difficulty Modes
   const categories: GameCategory[] = [
     'easy',
@@ -103,24 +111,46 @@ export const GameModeSelectScreen: React.FC<GameModeSelectScreenProps> = ({
     }
   };
 
+  const handleCategoryClick = (cat: GameCategory) => {
+    soundEffects.playCardFlip();
+    setSelectedCategory(cat);
+  };
+
+  const handleStartGame = () => {
+    soundEffects.playGameStart();
+    confetti({
+      particleCount: 35,
+      spread: 60,
+      origin: { y: 0.8 },
+      colors: ['#FF4DA6', '#A855F7', '#06B6D4', '#10B981'],
+    });
+    onSelectCategory(selectedCategory, isProgressive);
+  };
+
+  const handleResumeSession = () => {
+    if (!activeSession) return;
+    soundEffects.playGameStart();
+    onSelectCategory(activeSession.category, isProgressive);
+  };
+
   const renderGameTitle = () => {
     if (metadata.id === 'red-flag-green-flag') {
       return (
-        <span className="text-lg sm:text-2xl font-black uppercase tracking-wide">
+        <span className="text-base sm:text-2xl font-black uppercase tracking-wide">
           <span className="text-red-500">Red Flag</span> <span className="text-zinc-500">/</span> <span className="text-emerald-400">Green Flag</span>
         </span>
       );
     }
     if (metadata.id === 'chaos-mix') {
       return (
-        <span className="text-lg sm:text-2xl font-black uppercase tracking-wide bg-gradient-to-r from-pink-400 via-purple-300 via-cyan-300 to-amber-300 bg-clip-text text-transparent">
+        <span className="text-base sm:text-2xl font-black uppercase tracking-wide bg-gradient-to-r from-pink-400 via-purple-300 via-cyan-300 to-amber-300 bg-clip-text text-transparent">
           {metadata.title}
         </span>
       );
     }
     return (
       <span
-        className="text-lg sm:text-2xl font-black uppercase tracking-wide"
+        className="text-base sm:text-2xl font-black uppercase tracking-wide"
         style={{ color: metadata.themeColor }}
       >
         {metadata.title}
@@ -128,30 +158,35 @@ export const GameModeSelectScreen: React.FC<GameModeSelectScreenProps> = ({
     );
   };
 
+  const selectedDetails = getCategoryDetails(selectedCategory);
+
   return (
-    <div className="w-full min-h-[calc(100dvh-5rem)] flex flex-col justify-between px-4 sm:px-8 xl:px-12 2xl:px-16 py-6 animate-fade-in select-none">
+    <div className="w-full min-h-[calc(100dvh-5rem)] flex flex-col justify-between px-3 sm:px-8 xl:px-12 2xl:px-16 py-4 sm:py-6 animate-fade-in select-none">
       {/* Top Header */}
-      <div className="w-full flex items-center justify-between mb-6 pb-4 border-b border-white/[0.06]">
+      <div className="w-full flex items-center justify-between mb-4 sm:mb-6 pb-3 sm:pb-4 border-b border-white/[0.06]">
         <button
-          onClick={onBack}
-          className="flex items-center gap-2 px-5 py-3 rounded-2xl border border-white/10 bg-zinc-900/80 text-zinc-300 hover:text-white hover:border-white/20 hover:bg-zinc-800 transition-all text-xs sm:text-sm font-bold active:scale-95 shadow-md"
+          onClick={() => {
+            soundEffects.playClick();
+            onBack();
+          }}
+          className="flex items-center gap-1.5 sm:gap-2 px-3.5 sm:px-5 py-2 sm:py-3 rounded-2xl border border-white/10 bg-zinc-900/80 text-zinc-300 hover:text-white hover:border-white/20 hover:bg-zinc-800 transition-all text-xs sm:text-sm font-bold active:scale-95 shadow-md cursor-pointer"
         >
-          <ArrowLeft className="w-4 h-4" />
-          <span>Back to All Games</span>
+          <ArrowLeft className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+          <span>All Games</span>
         </button>
 
         <div className="text-right">
-          <span className="text-[11px] uppercase tracking-widest text-zinc-400 font-semibold block">
+          <span className="text-[10px] sm:text-[11px] uppercase tracking-widest text-zinc-400 font-semibold block">
             Selected Game:
           </span>
           {renderGameTitle()}
         </div>
       </div>
 
-      {/* Main Title Banner without description underneath */}
-      <div className="text-center w-full mb-8">
+      {/* Main Title & Controls Banner */}
+      <div className="text-center w-full mb-4 sm:mb-8">
         <div
-          className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-black uppercase tracking-widest border mb-3 shadow-lg"
+          className="inline-flex items-center gap-2 px-3.5 sm:px-4 py-1 sm:py-1.5 rounded-full text-[10px] sm:text-xs font-black uppercase tracking-widest border mb-2 sm:mb-3 shadow-lg"
           style={{
             borderColor: `${metadata.themeColor}50`,
             backgroundColor: `${metadata.themeColor}15`,
@@ -159,109 +194,125 @@ export const GameModeSelectScreen: React.FC<GameModeSelectScreenProps> = ({
             boxShadow: `0 0 25px ${metadata.themeColor}30`,
           }}
         >
-          <Sparkles className="w-4 h-4" />
-          <span>Step 1: Choose Difficulty & Intensity</span>
+          <Sparkles className="w-3.5 h-3.5" />
+          <span>Step 1: Choose Intensity</span>
         </div>
 
-        <h2 className="text-3xl sm:text-5xl lg:text-6xl font-black uppercase tracking-tight text-white">
+        {/* Bigger, Punchier "Select Game Mode" Title */}
+        <h2 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-black uppercase tracking-tight text-white drop-shadow-[0_0_25px_rgba(255,255,255,0.15)] leading-tight">
           Select Game <span className="text-brand-gradient">Mode</span>
         </h2>
 
-        {/* Optional Progressive Difficulty Switch */}
-        <div className="flex items-center justify-center gap-3 mt-4">
+        {/* Clean, Balanced Control Toolbar for Progressive Difficulty & Saved Session */}
+        <div className="flex flex-wrap items-center justify-center gap-2.5 sm:gap-4 mt-3 sm:mt-5 max-w-3xl mx-auto px-1">
+          {/* Progressive Difficulty Switch */}
           <button
             type="button"
-            onClick={() => setIsProgressive(!isProgressive)}
-            className={`flex items-center gap-2 px-5 py-2.5 rounded-2xl border text-xs font-bold transition-all cursor-pointer ${
+            onClick={() => {
+              soundEffects.playClick();
+              setIsProgressive(!isProgressive);
+            }}
+            className={`flex items-center gap-2 px-4 sm:px-5 py-2 sm:py-2.5 rounded-2xl border text-xs font-bold transition-all cursor-pointer ${
               isProgressive
-                ? 'bg-gradient-to-r from-rose-950/70 to-pink-950/70 border-rose-500 text-rose-300 shadow-neon-pink/30 scale-105'
-                : 'bg-white/[0.03] border-white/10 text-zinc-400 hover:text-white'
+                ? 'bg-rose-950/80 border-rose-500 text-rose-200 shadow-neon-pink/40 scale-105'
+                : 'bg-white/[0.04] border-white/10 text-zinc-400 hover:text-white hover:border-white/20'
             }`}
           >
-            <TrendingUp className="w-4 h-4 text-rose-400" />
-            <span>Progressive Difficulty: {isProgressive ? 'ENABLED (Ramps every 5 rounds)' : 'OFF (Fixed tier)'}</span>
+            <TrendingUp className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-rose-400" />
+            <span>Progressive Difficulty:</span>
+            <span
+              className={`px-2 py-0.5 rounded-full text-[9px] sm:text-[10px] font-black uppercase ${
+                isProgressive ? 'bg-rose-500 text-white' : 'bg-white/10 text-zinc-400'
+              }`}
+            >
+              {isProgressive ? 'ON (Ramps every 5 rounds)' : 'OFF (Fixed Tier)'}
+            </span>
           </button>
-        </div>
 
-        {/* Saved Session Resume Alert (Shown only inside this specific game when session exists) */}
-        {activeSession && (
-          <div className="w-full max-w-2xl mx-auto mt-4 p-4 rounded-2xl glass-panel border border-brand-violet/50 bg-gradient-to-r from-purple-950/40 via-pink-950/20 to-black/80 flex flex-col sm:flex-row items-center justify-between gap-3 animate-fade-in shadow-neon-violet/30">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-brand-violet/20 border border-brand-violet/40 flex items-center justify-center text-brand-violet shrink-0">
-                <History className="w-5 h-5" />
-              </div>
-              <div className="text-left">
-                <div className="flex items-center gap-2">
-                  <span className="text-[10px] font-black uppercase px-2 py-0.5 rounded-full bg-brand-violet text-white">
-                    Saved Session
-                  </span>
-                  <span className="text-xs text-purple-300 font-bold">
-                    Mode: {CATEGORY_LABELS[activeSession.category]?.label || activeSession.category} • Round {activeSession.currentRound}
-                  </span>
-                </div>
-                <span className="text-xs text-zinc-300 font-medium">
-                  {activeSession.players && activeSession.players.length > 0 ? `Players: ${activeSession.players.join(', ')}` : 'Game in progress'}
+          {/* Saved Session Inline Pill */}
+          {activeSession && (
+            <div className="flex items-center gap-2 p-1.5 sm:p-2 rounded-2xl bg-gradient-to-r from-purple-950/60 to-black/80 border border-brand-violet/50 shadow-neon-violet/20 animate-fade-in text-xs">
+              <div className="flex items-center gap-1.5 pl-2 text-purple-300 font-bold">
+                <History className="w-3.5 h-3.5 text-brand-violet shrink-0" />
+                <span className="truncate max-w-[140px] sm:max-w-none">
+                  Saved: {CATEGORY_LABELS[activeSession.category]?.label || activeSession.category} (R{activeSession.currentRound})
                 </span>
               </div>
-            </div>
-
-            <div className="flex items-center gap-2 shrink-0">
               <button
-                onClick={() => onSelectCategory(activeSession.category, isProgressive)}
-                className="px-4 py-2 rounded-xl bg-gradient-to-r from-brand-violet to-brand-pink text-white text-xs font-bold flex items-center gap-1.5 shadow-neon-violet hover:scale-105 active:scale-95 transition-all"
+                onClick={handleResumeSession}
+                className="px-3 py-1 rounded-xl bg-gradient-to-r from-brand-violet to-brand-pink text-white font-bold text-[11px] shadow-sm hover:scale-105 active:scale-95 transition-all cursor-pointer flex items-center gap-1"
               >
-                <Play className="w-3.5 h-3.5 fill-white" />
-                <span>Resume Round {activeSession.currentRound}</span>
+                <Play className="w-3 h-3 fill-white" />
+                <span>Resume</span>
               </button>
               <button
                 onClick={() => {
+                  soundEffects.playClick();
                   sessionService.clearActiveSession();
                   setActiveSession(null);
                 }}
-                className="px-3 py-2 rounded-xl border border-white/10 text-zinc-400 hover:text-white text-xs font-semibold hover:bg-zinc-800 transition-all active:scale-95"
-                title="Start fresh"
+                className="px-2 py-1 rounded-xl text-zinc-400 hover:text-white text-[10px] hover:bg-zinc-800 transition-all cursor-pointer"
+                title="Discard saved session"
               >
-                Start Fresh
+                ✕
               </button>
             </div>
-          </div>
-        )}
+          )}
+        </div>
       </div>
 
-      {/* Responsive Grid of 8 Category Cards filling full screen naturally (2 columns on mobile) */}
-      <div className="w-full grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6 xl:gap-8 my-auto">
+      {/* Responsive Grid of 8 Category Cards (2 columns on mobile, 4 columns on desktop) */}
+      <div className="w-full grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-6 xl:gap-8 my-auto">
         {categories.map((cat) => {
           const info = getCategoryDetails(cat);
           const meta = CATEGORY_LABELS[cat] || { label: cat };
+          const isSelected = selectedCategory === cat;
           const isSavedSessionCategory = activeSession && activeSession.category === cat;
 
           return (
             <div
               key={cat}
-              onClick={() => onSelectCategory(cat, isProgressive)}
-              className={`group relative rounded-2xl sm:rounded-3xl glass-panel p-3.5 sm:p-7 min-h-[170px] sm:min-h-[250px] flex flex-col justify-between cursor-pointer transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl active:scale-[0.98] ${
-                isSavedSessionCategory ? 'border-brand-violet shadow-neon-violet/40 ring-1 ring-brand-violet/50' : 'border border-white/[0.08] hover:border-white/30'
+              onClick={() => handleCategoryClick(cat)}
+              className={`group relative rounded-2xl sm:rounded-3xl glass-panel p-3 sm:p-6 lg:p-7 min-h-[145px] sm:min-h-[220px] lg:min-h-[250px] flex flex-col justify-between cursor-pointer transition-all duration-300 hover:-translate-y-1.5 hover:shadow-2xl active:scale-[0.98] ${
+                isSelected
+                  ? 'ring-2 ring-white/90 scale-[1.02] sm:scale-105 shadow-2xl bg-white/[0.08]'
+                  : isSavedSessionCategory
+                  ? 'border-brand-violet/70 shadow-neon-violet/30 ring-1 ring-brand-violet/40'
+                  : 'border border-white/[0.08] hover:border-white/30'
               }`}
               style={{
-                boxShadow: `0 12px 35px -15px ${info.color}35`,
+                borderColor: isSelected ? info.color : undefined,
+                boxShadow: isSelected
+                  ? `0 15px 40px -10px ${info.color}60, 0 0 25px ${info.color}40`
+                  : `0 10px 30px -15px ${info.color}30`,
               }}
             >
               {/* Subtle Ambient Glow behind card */}
               <div
-                className="absolute inset-0 rounded-2xl sm:rounded-3xl opacity-0 group-hover:opacity-15 blur-xl transition-opacity duration-500 pointer-events-none -z-10"
+                className={`absolute inset-0 rounded-2xl sm:rounded-3xl blur-xl transition-opacity duration-500 pointer-events-none -z-10 ${
+                  isSelected ? 'opacity-30' : 'opacity-0 group-hover:opacity-15'
+                }`}
                 style={{ backgroundColor: info.color }}
               />
 
               <div>
-                <div className="flex items-center justify-between mb-2 sm:mb-4">
-                  <span className="text-2xl sm:text-3xl">{info.icon}</span>
-                  {isSavedSessionCategory ? (
-                    <span className="text-[9px] sm:text-[10px] font-black uppercase tracking-wider px-2 sm:px-3 py-0.5 sm:py-1 rounded-full bg-brand-violet text-white shadow-neon-violet animate-pulse">
-                      Round {activeSession.currentRound}
+                <div className="flex items-center justify-between mb-1.5 sm:mb-4">
+                  <span className="text-xl sm:text-3xl">{info.icon}</span>
+                  {isSelected ? (
+                    <span
+                      className="text-[9px] sm:text-[10px] font-black uppercase tracking-wider px-2 sm:px-3 py-0.5 sm:py-1 rounded-full text-white flex items-center gap-1 shadow-md"
+                      style={{ backgroundColor: info.color }}
+                    >
+                      <CheckCircle2 className="w-3 h-3" />
+                      <span>Selected</span>
+                    </span>
+                  ) : isSavedSessionCategory ? (
+                    <span className="text-[9px] sm:text-[10px] font-black uppercase tracking-wider px-2 sm:px-2.5 py-0.5 rounded-full bg-brand-violet text-white shadow-neon-violet">
+                      R{activeSession.currentRound} Saved
                     </span>
                   ) : (
                     <span
-                      className="text-[9px] sm:text-[10px] font-black uppercase tracking-wider px-2 sm:px-3 py-0.5 sm:py-1 rounded-full border shadow-sm truncate max-w-[100px] sm:max-w-none"
+                      className="text-[9px] sm:text-[10px] font-black uppercase tracking-wider px-2 sm:px-2.5 py-0.5 rounded-full border shadow-sm truncate max-w-[95px] sm:max-w-none"
                       style={{
                         color: info.color,
                         backgroundColor: `${info.color}15`,
@@ -274,28 +325,28 @@ export const GameModeSelectScreen: React.FC<GameModeSelectScreenProps> = ({
                 </div>
 
                 <h3
-                  className="text-sm sm:text-2xl font-black uppercase tracking-wide mb-1 sm:mb-2 transition-colors truncate"
+                  className="text-xs sm:text-xl lg:text-2xl font-black uppercase tracking-wide mb-1 sm:mb-2 transition-colors truncate"
                   style={{ color: info.color }}
                 >
                   {meta.label}
                 </h3>
 
-                <p className="text-[10px] sm:text-sm text-zinc-400 font-medium leading-tight sm:leading-relaxed line-clamp-2 sm:line-clamp-none">
+                <p className="text-[10px] sm:text-xs lg:text-sm text-zinc-400 font-medium leading-tight sm:leading-relaxed line-clamp-2 sm:line-clamp-none">
                   {info.desc}
                 </p>
               </div>
 
-              {/* Bottom Play Action */}
-              <div className="mt-3 sm:mt-6 pt-2 sm:pt-4 border-t border-white/[0.06] flex items-center justify-between text-[10px] sm:text-xs font-bold text-zinc-300 group-hover:text-white transition-colors">
-                <span className="truncate">{isSavedSessionCategory ? 'Resume' : 'Play'}</span>
+              {/* Bottom Card Action */}
+              <div className="mt-2.5 sm:mt-5 pt-2 sm:pt-3 border-t border-white/[0.06] flex items-center justify-between text-[10px] sm:text-xs font-bold text-zinc-300 group-hover:text-white transition-colors">
+                <span className="truncate">{isSelected ? 'Active Mode' : 'Select'}</span>
                 <div
-                  className="w-5 h-5 sm:w-8 sm:h-8 rounded-full flex items-center justify-center transition-transform duration-300 group-hover:translate-x-1 shrink-0"
+                  className="w-5 h-5 sm:w-7 sm:h-7 rounded-full flex items-center justify-center transition-transform duration-300 group-hover:translate-x-1 shrink-0"
                   style={{
                     backgroundColor: `${info.color}25`,
                     color: info.color,
                   }}
                 >
-                  <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4" />
+                  <ArrowRight className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
                 </div>
               </div>
             </div>
@@ -303,9 +354,21 @@ export const GameModeSelectScreen: React.FC<GameModeSelectScreenProps> = ({
         })}
       </div>
 
-      {/* Subtle Bottom Note */}
-      <div className="text-center pt-8 text-[11px] text-zinc-500 font-medium uppercase tracking-widest">
-        100+ Unique Prompts Per Mode • Zero Repeats Guaranteed
+      {/* Prominent Start Game Action Bar */}
+      <div className="w-full flex flex-col items-center gap-2 pt-5 sm:pt-8 pb-2">
+        <button
+          onClick={handleStartGame}
+          className="group relative px-10 sm:px-16 py-4 sm:py-5 rounded-3xl bg-gradient-to-r from-brand-pink via-purple-600 to-brand-violet hover:from-pink-500 hover:to-purple-500 text-white font-black text-base sm:text-xl shadow-[0_0_35px_rgba(255,77,166,0.6)] hover:shadow-[0_0_55px_rgba(168,85,247,0.85)] hover:scale-105 active:scale-95 transition-all cursor-pointer flex items-center gap-3"
+        >
+          <Play className="w-5 h-5 sm:w-6 sm:h-6 fill-white" />
+          <span>START GAME</span>
+          <ArrowRight className="w-5 h-5 sm:w-6 sm:h-6 group-hover:translate-x-1.5 transition-transform" />
+        </button>
+
+        <span className="text-[11px] sm:text-xs text-zinc-400 font-semibold tracking-wide text-center">
+          Starting with <span className="font-bold text-white uppercase">{CATEGORY_LABELS[selectedCategory]?.label || selectedCategory}</span> Mode
+          {isProgressive && <span className="text-rose-400 ml-1.5 font-bold">• Progressive Ramping Active</span>}
+        </span>
       </div>
     </div>
   );

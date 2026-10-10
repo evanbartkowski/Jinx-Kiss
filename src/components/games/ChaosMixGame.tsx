@@ -164,7 +164,7 @@ export const ChaosMixGame: React.FC<ChaosMixGameProps> = ({ prompts, players }) 
 
       {/* Main Multicolored Chaos Prompt Card */}
       <div
-        className={`w-full min-h-[440px] sm:min-h-[560px] p-8 sm:p-14 lg:p-16 rounded-3xl flex flex-col justify-between items-center text-center relative overflow-hidden transition-all duration-300 ${
+        className={`w-full min-h-[340px] sm:min-h-[480px] md:min-h-[560px] p-5 sm:p-12 md:p-16 lg:p-20 rounded-2xl sm:rounded-3xl flex flex-col justify-between items-center text-center relative overflow-hidden transition-all duration-300 ${
           isLegendary
             ? 'border-2 border-yellow-400 sm:border-yellow-300 shadow-[0_0_60px_rgba(250,204,21,0.65),inset_0_0_30px_rgba(250,204,21,0.2)] ring-2 ring-yellow-400/80 bg-gradient-to-b from-yellow-950/40 via-black/60 to-black/90'
             : 'glass-panel border'
@@ -180,7 +180,7 @@ export const ChaosMixGame: React.FC<ChaosMixGameProps> = ({ prompts, players }) 
       >
         {/* Ambient Halo */}
         <div
-          className={`absolute inset-0 rounded-3xl pointer-events-none ${
+          className={`absolute inset-0 rounded-2xl sm:rounded-3xl pointer-events-none ${
             isLegendary
               ? 'bg-gradient-to-b from-yellow-500/25 via-amber-500/15 to-transparent opacity-40'
               : 'opacity-15 blur-2xl'
@@ -190,7 +190,7 @@ export const ChaosMixGame: React.FC<ChaosMixGameProps> = ({ prompts, players }) 
 
         {/* Legendary Badge */}
         {isLegendary && (
-          <div className="mb-4">
+          <div className="mb-3 sm:mb-4">
             <LegendaryCardBadge title={currentPrompt.legendaryTitle} />
           </div>
         )}
@@ -199,7 +199,7 @@ export const ChaosMixGame: React.FC<ChaosMixGameProps> = ({ prompts, players }) 
         <div className="flex items-center gap-2">
           {currentPrompt.type && (
             <span
-              className={`px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest border ${
+              className={`px-2.5 sm:px-3 py-0.5 sm:py-1 rounded-full text-[10px] font-black uppercase tracking-widest border ${
                 currentPrompt.type === 'truth'
                   ? 'bg-pink-950/60 border-pink-500/50 text-pink-300'
                   : 'bg-red-950/60 border-red-500/50 text-red-300'
@@ -208,13 +208,13 @@ export const ChaosMixGame: React.FC<ChaosMixGameProps> = ({ prompts, players }) 
               {currentPrompt.type}
             </span>
           )}
-          <span className="text-xs uppercase tracking-widest text-zinc-400 font-semibold">
+          <span className="text-[11px] sm:text-xs uppercase tracking-widest text-zinc-400 font-semibold">
             {originMeta.tagline}
           </span>
         </div>
 
         {/* Prompt Text */}
-        <p className="text-3xl sm:text-5xl md:text-6xl font-black text-white leading-tight my-8 sm:my-10 max-w-4xl tracking-tight drop-shadow-[0_0_20px_rgba(255,255,255,0.2)]">
+        <p className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white leading-tight my-5 sm:my-10 max-w-4xl tracking-tight drop-shadow-[0_0_20px_rgba(255,255,255,0.2)]">
           "{currentPrompt.text}"
         </p>
 
@@ -222,12 +222,12 @@ export const ChaosMixGame: React.FC<ChaosMixGameProps> = ({ prompts, players }) 
         <div className="w-full max-w-2xl">
           {/* Would You Rather Choices */}
           {currentPrompt.optionA && currentPrompt.optionB && (
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 my-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-4 my-3 sm:my-4">
               <button
                 onClick={() => handleVote('A')}
-                className={`p-5 sm:p-6 rounded-2xl border text-sm sm:text-base font-bold transition-all ${
+                className={`p-3.5 sm:p-6 rounded-xl sm:rounded-2xl border text-xs sm:text-base font-bold transition-all ${
                   selectedChoice === 'A'
-                    ? 'border-cyan-400 bg-cyan-950/60 text-cyan-200 shadow-neon-cyan/40 scale-105'
+                    ? 'border-cyan-400 bg-cyan-950/60 text-cyan-200 shadow-neon-cyan/40 scale-102 sm:scale-105'
                     : 'border-white/10 bg-black/40 text-zinc-200 hover:border-cyan-400/50'
                 }`}
               >
@@ -235,9 +235,9 @@ export const ChaosMixGame: React.FC<ChaosMixGameProps> = ({ prompts, players }) 
               </button>
               <button
                 onClick={() => handleVote('B')}
-                className={`p-5 sm:p-6 rounded-2xl border text-sm sm:text-base font-bold transition-all ${
+                className={`p-3.5 sm:p-6 rounded-xl sm:rounded-2xl border text-xs sm:text-base font-bold transition-all ${
                   selectedChoice === 'B'
-                    ? 'border-purple-400 bg-purple-950/60 text-purple-200 shadow-neon-violet/40 scale-105'
+                    ? 'border-purple-400 bg-purple-950/60 text-purple-200 shadow-neon-violet/40 scale-102 sm:scale-105'
                     : 'border-white/10 bg-black/40 text-zinc-200 hover:border-purple-400/50'
                 }`}
               >
@@ -248,10 +248,10 @@ export const ChaosMixGame: React.FC<ChaosMixGameProps> = ({ prompts, players }) 
 
           {/* Red Flag Green Flag Choices */}
           {originId === 'red-flag-green-flag' && (
-            <div className="flex items-center justify-center gap-4 my-4 flex-wrap">
+            <div className="flex items-center justify-center gap-2.5 sm:gap-4 my-3 sm:my-4 flex-wrap">
               <button
                 onClick={() => handleVote('red')}
-                className={`px-8 py-4 rounded-2xl border text-sm sm:text-base font-black uppercase tracking-wider transition-all ${
+                className={`flex-1 sm:flex-initial px-6 sm:px-8 py-3 sm:py-4 rounded-xl sm:rounded-2xl border text-xs sm:text-base font-black uppercase tracking-wider transition-all ${
                   selectedChoice === 'red'
                     ? 'border-red-500 bg-red-950/60 text-red-300 shadow-neon-red/40 scale-105'
                     : 'border-white/10 bg-black/40 text-red-400 hover:border-red-500/50'
@@ -261,7 +261,7 @@ export const ChaosMixGame: React.FC<ChaosMixGameProps> = ({ prompts, players }) 
               </button>
               <button
                 onClick={() => handleVote('green')}
-                className={`px-8 py-4 rounded-2xl border text-sm sm:text-base font-black uppercase tracking-wider transition-all ${
+                className={`flex-1 sm:flex-initial px-6 sm:px-8 py-3 sm:py-4 rounded-xl sm:rounded-2xl border text-xs sm:text-base font-black uppercase tracking-wider transition-all ${
                   selectedChoice === 'green'
                     ? 'border-emerald-500 bg-emerald-950/60 text-emerald-300 shadow-neon-green/40 scale-105'
                     : 'border-white/10 bg-black/40 text-emerald-400 hover:border-emerald-500/50'
@@ -274,33 +274,33 @@ export const ChaosMixGame: React.FC<ChaosMixGameProps> = ({ prompts, players }) 
 
           {/* Forfeits / Drink Penalty */}
           {currentPrompt.forfeit && (
-            <div className="p-4 rounded-2xl bg-amber-950/40 border border-amber-500/30 text-xs sm:text-sm text-amber-200 font-semibold my-2">
+            <div className="p-3 sm:p-4 rounded-xl sm:rounded-2xl bg-amber-950/40 border border-amber-500/30 text-xs sm:text-sm text-amber-200 font-semibold my-2">
               🍺 Forfeit: {currentPrompt.forfeit}
             </div>
           )}
 
           {/* Discussion prompt */}
           {currentPrompt.discussionPrompt && (
-            <div className="p-4 rounded-2xl bg-white/5 border border-white/10 text-xs sm:text-sm text-zinc-300 font-medium my-2">
+            <div className="p-3 sm:p-4 rounded-xl sm:rounded-2xl bg-white/5 border border-white/10 text-xs sm:text-sm text-zinc-300 font-medium my-2">
               💬 Discuss: {currentPrompt.discussionPrompt}
             </div>
           )}
 
           {/* Rating, Favorite & Report */}
-          <div className="w-full mt-4">
+          <div className="w-full mt-3 sm:mt-4">
             <CardRatingBar prompt={currentPrompt} />
           </div>
         </div>
 
         {/* Action Bar */}
-        <div className="w-full pt-6 mt-4 border-t border-white/[0.08] flex items-center justify-between">
+        <div className="w-full pt-4 sm:pt-6 mt-3 sm:mt-4 border-t border-white/[0.08] flex items-center justify-between flex-wrap gap-3">
           <span className="text-xs sm:text-sm text-zinc-400 font-semibold">
             {activePlayer ? `Passed to ${activePlayer}` : 'Party Challenge'}
           </span>
 
           <button
             onClick={nextCard}
-            className="px-8 py-4 rounded-2xl bg-gradient-to-r from-pink-500 via-purple-600 to-cyan-500 hover:from-pink-400 hover:to-cyan-400 text-white font-black text-sm sm:text-base shadow-lg flex items-center gap-2 transition-all active:scale-95 cursor-pointer"
+            className="w-full sm:w-auto px-6 sm:px-8 py-3.5 sm:py-4 rounded-xl sm:rounded-2xl bg-gradient-to-r from-pink-500 via-purple-600 to-cyan-500 hover:from-pink-400 hover:to-cyan-400 text-white font-black text-xs sm:text-base shadow-lg flex items-center justify-center gap-2 transition-all active:scale-95 cursor-pointer"
           >
             <span>Next Chaos Card</span>
             <ArrowRight className="w-4 h-4" />

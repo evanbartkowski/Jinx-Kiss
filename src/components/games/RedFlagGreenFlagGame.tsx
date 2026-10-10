@@ -75,7 +75,7 @@ export const RedFlagGreenFlagGame: React.FC<RedFlagGreenFlagGameProps> = ({ prom
       </div>
 
       {/* Main Situation Card (Screen-Filling & Legendary-Aware) */}
-      <div className={`w-full min-h-[440px] sm:min-h-[520px] md:min-h-[560px] p-8 sm:p-16 md:p-20 rounded-3xl sm:rounded-4xl glass-panel border flex flex-col justify-between items-center text-center relative overflow-hidden transition-all duration-500 ${
+      <div className={`w-full min-h-[340px] sm:min-h-[480px] md:min-h-[560px] p-5 sm:p-12 md:p-16 lg:p-20 rounded-2xl sm:rounded-4xl glass-panel border flex flex-col justify-between items-center text-center relative overflow-hidden transition-all duration-500 ${
         isLegendary
           ? 'border-2 border-yellow-400 sm:border-yellow-300 shadow-[0_0_60px_rgba(250,204,21,0.65),inset_0_0_30px_rgba(250,204,21,0.2)] ring-2 ring-yellow-400/80 bg-gradient-to-b from-yellow-950/40 via-black/60 to-black/90'
           : selectedFlag === 'red'
@@ -100,11 +100,11 @@ export const RedFlagGreenFlagGame: React.FC<RedFlagGreenFlagGameProps> = ({ prom
           }`}
         />
 
-        <span className="text-xs sm:text-sm uppercase tracking-widest text-zinc-400 font-semibold z-10">
+        <span className="text-[11px] sm:text-sm uppercase tracking-widest text-zinc-400 font-semibold z-10">
           Scenario #{currentIndex + 1}
         </span>
 
-        <p className={`text-3xl sm:text-5xl md:text-6xl font-black leading-tight sm:leading-snug my-8 sm:my-12 max-w-4xl z-10 ${
+        <p className={`text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-black leading-tight sm:leading-snug my-5 sm:my-10 max-w-4xl z-10 ${
           isLegendary
             ? 'text-yellow-100 drop-shadow-[0_0_30px_rgba(250,204,21,0.5)]'
             : 'text-white drop-shadow-[0_0_20px_rgba(255,255,255,0.2)]'
@@ -114,26 +114,26 @@ export const RedFlagGreenFlagGame: React.FC<RedFlagGreenFlagGameProps> = ({ prom
 
         {/* Choice Reveal Indicator */}
         {selectedFlag && (
-          <div className="animate-fade-in flex items-center gap-2 text-sm sm:text-base font-black z-10">
+          <div className="animate-fade-in flex items-center gap-2 text-xs sm:text-base font-black z-10">
             {selectedFlag === 'red' && (
-              <span className="text-red-300 bg-red-950/80 border border-red-500/50 px-5 py-2 rounded-full shadow-neon-red">
+              <span className="text-red-300 bg-red-950/80 border border-red-500/50 px-4 sm:px-5 py-1.5 sm:py-2 rounded-full shadow-neon-red">
                 🚩 Major Red Flag — Run!
               </span>
             )}
             {selectedFlag === 'green' && (
-              <span className="text-emerald-300 bg-emerald-950/80 border border-emerald-500/50 px-5 py-2 rounded-full shadow-neon-green">
+              <span className="text-emerald-300 bg-emerald-950/80 border border-emerald-500/50 px-4 sm:px-5 py-1.5 sm:py-2 rounded-full shadow-neon-green">
                 🟢 Certified Green Flag — Keeper!
               </span>
             )}
             {selectedFlag === 'depends' && (
-              <span className="text-amber-300 bg-amber-950/80 border border-amber-500/50 px-5 py-2 rounded-full shadow-neon-amber">
+              <span className="text-amber-300 bg-amber-950/80 border border-amber-500/50 px-4 sm:px-5 py-1.5 sm:py-2 rounded-full shadow-neon-amber">
                 🟡 It Depends — Needs Context!
               </span>
             )}
           </div>
         )}
 
-        <div className="text-sm sm:text-base text-zinc-300 font-semibold my-2 z-10">
+        <div className="text-xs sm:text-base text-zinc-300 font-semibold my-2 z-10">
           Cast your judgment and defend your standard to the group.
         </div>
 
@@ -145,19 +145,19 @@ export const RedFlagGreenFlagGame: React.FC<RedFlagGreenFlagGameProps> = ({ prom
       </div>
 
       {/* Voting Buttons (Massive & Tactile) */}
-      <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 w-full mt-2">
+      <div className="flex flex-wrap items-center justify-center gap-2.5 sm:gap-6 w-full mt-1 sm:mt-2">
         
         {/* Red Flag */}
         <button
           onClick={() => handleVote('red')}
           disabled={!!selectedFlag}
-          className={`flex-1 min-w-[140px] sm:min-w-[190px] max-w-[240px] py-4 sm:py-5 rounded-2xl sm:rounded-3xl border font-black text-base sm:text-lg flex items-center justify-center gap-2.5 transition-all active:scale-95 cursor-pointer ${
+          className={`flex-1 min-w-[100px] sm:min-w-[190px] max-w-[240px] py-3.5 sm:py-5 rounded-xl sm:rounded-3xl border font-black text-xs sm:text-lg flex items-center justify-center gap-1.5 sm:gap-2.5 transition-all active:scale-95 cursor-pointer ${
             selectedFlag === 'red'
               ? 'bg-red-600 border-red-400 text-white shadow-neon-red scale-105'
               : 'bg-red-950/40 border-red-500/40 text-red-300 hover:bg-red-900/60 hover:border-red-500'
           }`}
         >
-          <Flag className="w-5 h-5 fill-red-400 text-red-400" />
+          <Flag className="w-4 h-4 sm:w-5 sm:h-5 fill-red-400 text-red-400" />
           <span>Red Flag</span>
         </button>
 
@@ -165,13 +165,13 @@ export const RedFlagGreenFlagGame: React.FC<RedFlagGreenFlagGameProps> = ({ prom
         <button
           onClick={() => handleVote('green')}
           disabled={!!selectedFlag}
-          className={`flex-1 min-w-[140px] sm:min-w-[190px] max-w-[240px] py-4 sm:py-5 rounded-2xl sm:rounded-3xl border font-black text-base sm:text-lg flex items-center justify-center gap-2.5 transition-all active:scale-95 cursor-pointer ${
+          className={`flex-1 min-w-[100px] sm:min-w-[190px] max-w-[240px] py-3.5 sm:py-5 rounded-xl sm:rounded-3xl border font-black text-xs sm:text-lg flex items-center justify-center gap-1.5 sm:gap-2.5 transition-all active:scale-95 cursor-pointer ${
             selectedFlag === 'green'
               ? 'bg-emerald-600 border-emerald-400 text-white shadow-neon-green scale-105'
               : 'bg-emerald-950/40 border-emerald-500/40 text-emerald-300 hover:bg-emerald-900/60 hover:border-emerald-500'
           }`}
         >
-          <Flag className="w-5 h-5 fill-emerald-400 text-emerald-400" />
+          <Flag className="w-4 h-4 sm:w-5 sm:h-5 fill-emerald-400 text-emerald-400" />
           <span>Green Flag</span>
         </button>
 
@@ -179,20 +179,20 @@ export const RedFlagGreenFlagGame: React.FC<RedFlagGreenFlagGameProps> = ({ prom
         <button
           onClick={() => handleVote('depends')}
           disabled={!!selectedFlag}
-          className={`flex-1 min-w-[140px] sm:min-w-[190px] max-w-[240px] py-4 sm:py-5 rounded-2xl sm:rounded-3xl border font-black text-base sm:text-lg flex items-center justify-center gap-2.5 transition-all active:scale-95 cursor-pointer ${
+          className={`flex-1 min-w-[100px] sm:min-w-[190px] max-w-[240px] py-3.5 sm:py-5 rounded-xl sm:rounded-3xl border font-black text-xs sm:text-lg flex items-center justify-center gap-1.5 sm:gap-2.5 transition-all active:scale-95 cursor-pointer ${
             selectedFlag === 'depends'
               ? 'bg-amber-600 border-amber-400 text-white shadow-neon-amber scale-105'
               : 'bg-amber-950/40 border-amber-500/40 text-amber-300 hover:bg-amber-900/60 hover:border-amber-500'
           }`}
         >
-          <HelpCircle className="w-5 h-5 text-amber-400" />
+          <HelpCircle className="w-4 h-4 sm:w-5 sm:h-5 text-amber-400" />
           <span>It Depends</span>
         </button>
 
         {selectedFlag && (
           <button
             onClick={nextCard}
-            className="px-8 sm:px-12 py-4 sm:py-5 rounded-2xl sm:rounded-3xl bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-white font-black text-base sm:text-lg shadow-neon-green flex items-center gap-3 transition-all active:scale-95 animate-scale-in cursor-pointer"
+            className="w-full sm:w-auto px-8 sm:px-12 py-3.5 sm:py-5 rounded-xl sm:rounded-3xl bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-white font-black text-sm sm:text-lg shadow-neon-green flex items-center justify-center gap-2.5 sm:gap-3 transition-all active:scale-95 animate-scale-in cursor-pointer"
           >
             <span>Next Scenario</span>
             <ArrowRight className="w-5 h-5" />

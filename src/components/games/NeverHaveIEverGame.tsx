@@ -109,7 +109,7 @@ export const NeverHaveIEverGame: React.FC<NeverHaveIEverGameProps> = ({ prompts,
       )}
 
       {/* Main Statement Card (Significantly Bigger, Screen-Filling & Legendary) */}
-      <div className={`w-full min-h-[440px] sm:min-h-[520px] md:min-h-[560px] p-8 sm:p-16 md:p-20 rounded-3xl sm:rounded-4xl glass-panel border flex flex-col justify-between items-center text-center relative overflow-hidden animate-scale-in transition-all duration-500 ${
+      <div className={`w-full min-h-[340px] sm:min-h-[480px] md:min-h-[560px] p-6 sm:p-14 md:p-18 rounded-3xl sm:rounded-4xl glass-panel border flex flex-col justify-between items-center text-center relative overflow-hidden animate-scale-in transition-all duration-500 ${
         isLegendary
           ? 'border-2 border-yellow-400 sm:border-yellow-300 shadow-[0_0_60px_rgba(250,204,21,0.65),inset_0_0_30px_rgba(250,204,21,0.2)] ring-2 ring-yellow-400/80 bg-gradient-to-b from-yellow-950/40 via-black/60 to-black/90'
           : 'border-brand-violet/50 shadow-[0_0_40px_rgba(168,85,247,0.3)]'
@@ -128,7 +128,7 @@ export const NeverHaveIEverGame: React.FC<NeverHaveIEverGameProps> = ({ prompts,
           {isLegendary ? (
             <LegendaryCardBadge title={activePrompt.legendaryTitle || '★ LEGENDARY CONFESSION ★'} size="lg" />
           ) : (
-            <span className="px-6 py-2.5 rounded-full text-xs sm:text-sm font-black uppercase tracking-widest bg-brand-violet/20 border border-brand-violet text-violet-300 shadow-neon-violet/30">
+            <span className="px-5 sm:px-6 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm font-black uppercase tracking-widest bg-brand-violet/20 border border-brand-violet text-violet-300 shadow-neon-violet/30">
               Never Have I Ever
             </span>
           )}
@@ -137,7 +137,7 @@ export const NeverHaveIEverGame: React.FC<NeverHaveIEverGameProps> = ({ prompts,
           </span>
         </div>
 
-        <p className={`text-3xl sm:text-5xl md:text-6xl font-black leading-tight sm:leading-snug my-8 sm:my-12 max-w-4xl z-10 ${
+        <p className={`text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-black leading-snug sm:leading-tight my-6 sm:my-10 max-w-4xl z-10 ${
           isLegendary
             ? 'text-yellow-100 drop-shadow-[0_0_30px_rgba(250,204,21,0.5)]'
             : 'text-white drop-shadow-[0_0_20px_rgba(255,255,255,0.25)]'
@@ -172,37 +172,37 @@ export const NeverHaveIEverGame: React.FC<NeverHaveIEverGameProps> = ({ prompts,
       </div>
 
       {/* Choice Buttons (Massive & Tactile) */}
-      <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 w-full mt-2">
+      <div className="flex flex-wrap items-center justify-center gap-2.5 sm:gap-6 w-full mt-2">
         <button
           onClick={() => handleChoice('have')}
-          className={`flex-1 min-w-[160px] sm:min-w-[220px] max-w-[260px] py-4 sm:py-5 rounded-2xl sm:rounded-3xl border font-black text-base sm:text-lg flex items-center justify-center gap-2.5 transition-all active:scale-95 cursor-pointer ${
+          className={`flex-1 min-w-[130px] sm:min-w-[220px] max-w-[260px] py-3.5 sm:py-5 rounded-2xl sm:rounded-3xl border font-black text-sm sm:text-lg flex items-center justify-center gap-2 transition-all active:scale-95 cursor-pointer ${
             lastChoice === 'have'
               ? 'bg-pink-600 border-pink-400 text-white shadow-neon-pink'
               : 'bg-pink-950/40 border-pink-500/40 text-pink-300 hover:bg-pink-900/60 hover:border-pink-500 hover:shadow-neon-pink'
           }`}
         >
-          <Check className="w-6 h-6" />
+          <Check className="w-5 h-5 sm:w-6 sm:h-6" />
           <span>I Have</span>
         </button>
 
         <button
           onClick={() => handleChoice('havent')}
-          className={`flex-1 min-w-[160px] sm:min-w-[220px] max-w-[260px] py-4 sm:py-5 rounded-2xl sm:rounded-3xl border font-black text-base sm:text-lg flex items-center justify-center gap-2.5 transition-all active:scale-95 cursor-pointer ${
+          className={`flex-1 min-w-[130px] sm:min-w-[220px] max-w-[260px] py-3.5 sm:py-5 rounded-2xl sm:rounded-3xl border font-black text-sm sm:text-lg flex items-center justify-center gap-2 transition-all active:scale-95 cursor-pointer ${
             lastChoice === 'havent'
               ? 'bg-emerald-600 border-emerald-400 text-white shadow-neon-green'
               : 'bg-emerald-950/40 border-emerald-500/40 text-emerald-300 hover:bg-emerald-900/60 hover:border-emerald-500 hover:shadow-neon-green'
           }`}
         >
-          <X className="w-6 h-6" />
+          <X className="w-5 h-5 sm:w-6 sm:h-6" />
           <span>I Haven't</span>
         </button>
 
         <button
           onClick={nextCard}
-          className="px-8 sm:px-12 py-4 sm:py-5 rounded-2xl sm:rounded-3xl bg-gradient-to-r from-brand-violet to-purple-600 hover:from-purple-500 hover:to-violet-500 text-white font-black text-base sm:text-lg shadow-neon-violet flex items-center gap-3 transition-all active:scale-95 cursor-pointer"
+          className="w-full sm:w-auto px-6 sm:px-12 py-3.5 sm:py-5 rounded-2xl sm:rounded-3xl bg-gradient-to-r from-brand-violet to-purple-600 hover:from-purple-500 hover:to-violet-500 text-white font-black text-sm sm:text-lg shadow-neon-violet flex items-center justify-center gap-2.5 transition-all active:scale-95 cursor-pointer"
         >
           <span>Next Card</span>
-          <ArrowRight className="w-5 h-5" />
+          <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
         </button>
       </div>
 

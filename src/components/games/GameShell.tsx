@@ -4,7 +4,8 @@ import { CategorySelector } from '../common/CategorySelector';
 import { PlayerSetupModal } from '../common/PlayerSetupModal';
 import { SuggestCardModal } from '../common/SuggestCardModal';
 import { useGameSettings } from '../../context/GameSettingsContext';
-import { ArrowLeft, RotateCcw, Users, PlusCircle, Coffee, Wine } from 'lucide-react';
+import { soundEffects } from '../../utils/audio';
+import { ArrowLeft, RotateCcw, Users, PlusCircle, Coffee, Wine, Shuffle } from 'lucide-react';
 
 interface GameShellProps {
   metadata: GameMetadata;
@@ -12,6 +13,7 @@ interface GameShellProps {
   onCategoryChange: (cat: GameCategory) => void;
   onExit: () => void;
   onRestart: () => void;
+  onShuffle?: () => void;
   onChangeMode?: () => void;
   activePlayerName?: string;
   players?: string[];
@@ -26,6 +28,7 @@ export const GameShell: React.FC<GameShellProps> = ({
   onCategoryChange,
   onExit,
   onRestart,
+  onShuffle,
   onChangeMode,
   activePlayerName,
   players = [],
@@ -131,10 +134,27 @@ export const GameShell: React.FC<GameShellProps> = ({
               </button>
             )}
 
+            {onShuffle && (
+              <button
+                onClick={() => {
+                  soundEffects.playShuffle();
+                  onShuffle();
+                }}
+                title="Reshuffle All Cards"
+                className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-white/10 bg-zinc-900/60 text-zinc-300 hover:text-white hover:bg-zinc-800 hover:border-brand-pink/50 hover:shadow-neon-pink/20 transition-all text-xs font-bold active:scale-95 shadow-sm cursor-pointer"
+              >
+                <Shuffle className="w-3.5 h-3.5 text-brand-pink" />
+                <span className="hidden sm:inline">Shuffle</span>
+              </button>
+            )}
+
             <button
-              onClick={onRestart}
+              onClick={() => {
+                soundEffects.playClick();
+                onRestart();
+              }}
               title="Restart Deck"
-              className="p-2 rounded-xl border border-white/10 bg-zinc-900/60 text-zinc-400 hover:text-white hover:bg-zinc-800 transition-all"
+              className="p-2 rounded-xl border border-white/10 bg-zinc-900/60 text-zinc-400 hover:text-white hover:bg-zinc-800 transition-all cursor-pointer active:scale-95"
             >
               <RotateCcw className="w-4 h-4" />
             </button>

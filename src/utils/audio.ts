@@ -261,6 +261,98 @@ export const soundEffects = {
   },
 
   /**
+   * Rich physical deck shuffle sound: multi-stage card flutter and felt riffle
+   */
+  playShuffle() {
+    if (settings.isMuted) return;
+    const ctx = getAudioContext();
+    if (!ctx || !sfxGainNode) return;
+    const outNode = sfxGainNode;
+
+    try {
+      const now = ctx.currentTime;
+
+      // 4 quick flutter ripples to simulate riffle shuffle
+      [0, 0.045, 0.09, 0.135].forEach((offset, idx) => {
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        const filter = ctx.createBiquadFilter();
+
+        filter.type = 'bandpass';
+        filter.frequency.setValueAtTime(900 + idx * 120, now + offset);
+        filter.frequency.exponentialRampToValueAtTime(320, now + offset + 0.06);
+        filter.Q.setValueAtTime(2.2, now + offset);
+
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(380 + idx * 40, now + offset);
+        osc.frequency.exponentialRampToValueAtTime(140, now + offset + 0.06);
+
+        gain.gain.setValueAtTime(0.001, now + offset);
+        gain.gain.linearRampToValueAtTime(0.18, now + offset + 0.012);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + offset + 0.06);
+
+        osc.connect(filter);
+        filter.connect(gain);
+        gain.connect(outNode);
+
+        osc.start(now + offset);
+        osc.stop(now + offset + 0.06);
+      });
+
+      // Concluding deck tap
+      const tapOsc = ctx.createOscillator();
+      const tapGain = ctx.createGain();
+      tapOsc.type = 'sine';
+      tapOsc.frequency.setValueAtTime(220, now + 0.19);
+      tapOsc.frequency.exponentialRampToValueAtTime(80, now + 0.26);
+      tapGain.gain.setValueAtTime(0.2, now + 0.19);
+      tapGain.gain.exponentialRampToValueAtTime(0.001, now + 0.26);
+      tapOsc.connect(tapGain);
+      tapGain.connect(outNode);
+      tapOsc.start(now + 0.19);
+      tapOsc.stop(now + 0.26);
+    } catch {
+      // ignore
+    }
+  },
+
+  /**
+   * Energetic, celebratory game launch chime
+   */
+  playGameStart() {
+    if (settings.isMuted) return;
+    const ctx = getAudioContext();
+    if (!ctx || !sfxGainNode) return;
+    const outNode = sfxGainNode;
+
+    try {
+      const now = ctx.currentTime;
+      // Ascending major arpeggio: C4, E4, G4, C5, E5
+      const notes = [261.63, 329.63, 392.00, 523.25, 659.25];
+
+      notes.forEach((freq, idx) => {
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(freq, now + idx * 0.055);
+
+        gain.gain.setValueAtTime(0.001, now + idx * 0.055);
+        gain.gain.linearRampToValueAtTime(0.22, now + idx * 0.055 + 0.02);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.055 + 0.28);
+
+        osc.connect(gain);
+        gain.connect(outNode);
+
+        osc.start(now + idx * 0.055);
+        osc.stop(now + idx * 0.055 + 0.28);
+      });
+    } catch {
+      // ignore
+    }
+  },
+
+  /**
    * Cinematic impact whoosh for intense/unhinged prompt reveals
    */
   playImpactWhoosh() {

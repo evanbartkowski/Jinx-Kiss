@@ -90,3 +90,4 @@ export function triggerLegendaryCardEffects(prompt?: PromptItem | null) {
     colors: ['#FACC15', '#F59E0B', '#FEF08A', '#FFFBEB', '#D97706'],
   });
 }
+

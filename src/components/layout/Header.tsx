@@ -1,6 +1,7 @@
 import React from 'react';
 import { useAuth } from '../../context/AuthContext';
-import { Sparkles, User, Layers, Shield, LogOut, Volume2, History, Play } from 'lucide-react';
+import { Sparkles, User, Layers, Shield, LogOut, Volume2, History, Play, Heart } from 'lucide-react';
+import { soundEffects } from '../../utils/audio';
 
 interface HeaderProps {
   currentView: string;
@@ -25,14 +26,17 @@ export const Header: React.FC<HeaderProps> = ({
         
         {/* Brand / Logo */}
         <div 
-          onClick={() => onNavigate('home')}
+          onClick={() => {
+            soundEffects.playClick();
+            onNavigate('home');
+          }}
           className="cursor-pointer group flex flex-col justify-center select-none"
         >
           <div className="flex items-center gap-2">
             <h1 className="text-2xl sm:text-3xl font-extrabold tracking-wider uppercase text-brand-gradient drop-shadow-[0_0_12px_rgba(255,77,166,0.35)] group-hover:drop-shadow-[0_0_20px_rgba(168,85,247,0.55)] transition-all">
               JINX KISS
             </h1>
-            <span className="w-1.5 h-1.5 rounded-full bg-brand-pink animate-ping hidden sm:inline-block" />
+            <Heart className="w-4 h-4 sm:w-5 sm:h-5 text-brand-pink fill-brand-pink drop-shadow-[0_0_14px_rgba(255,77,166,0.9)] animate-pulse transition-transform group-hover:scale-125" />
           </div>
           <span className="text-[11px] sm:text-xs text-zinc-400 font-medium tracking-wide">
             Good friends. Bad decisions.
@@ -45,7 +49,10 @@ export const Header: React.FC<HeaderProps> = ({
           {/* Quick Play link */}
           {onQuickPlay && (
             <button
-              onClick={onQuickPlay}
+              onClick={() => {
+                soundEffects.playClick();
+                onQuickPlay();
+              }}
               className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs sm:text-sm font-bold bg-gradient-to-r from-brand-pink via-purple-600 to-brand-violet hover:from-pink-500 hover:to-purple-500 text-white shadow-neon-pink/30 hover:shadow-neon-pink/50 transition-all active:scale-95"
             >
               <Play className="w-3.5 h-3.5 fill-white" />
@@ -56,7 +63,10 @@ export const Header: React.FC<HeaderProps> = ({
 
           {/* Party Mode link */}
           <button
-            onClick={() => onNavigate('party-setup')}
+            onClick={() => {
+              soundEffects.playClick();
+              onNavigate('party-setup');
+            }}
             className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs sm:text-sm font-bold transition-all ${
               currentView === 'party-setup' || currentView === 'party-game'
                 ? 'bg-brand-pink/20 text-pink-300 border border-brand-pink/50 shadow-neon-pink/30'
@@ -69,7 +79,10 @@ export const Header: React.FC<HeaderProps> = ({
 
           {/* Multiplayer Rooms link */}
           <button
-            onClick={() => onNavigate('multiplayer')}
+            onClick={() => {
+              soundEffects.playClick();
+              onNavigate('multiplayer');
+            }}
             className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs sm:text-sm font-bold transition-all ${
               currentView === 'multiplayer'
                 ? 'bg-purple-950/60 text-purple-300 border border-purple-500/50 shadow-neon-violet/30'
@@ -82,7 +95,10 @@ export const Header: React.FC<HeaderProps> = ({
           {/* Custom Decks link for logged-in users */}
           {isAuthenticated && (
             <button
-              onClick={() => onNavigate('my-decks')}
+              onClick={() => {
+                soundEffects.playClick();
+                onNavigate('my-decks');
+              }}
               className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs sm:text-sm font-medium transition-all ${
                 currentView === 'my-decks'
                   ? 'bg-brand-pink/15 text-pink-300 border border-brand-pink/30 shadow-neon-pink/20'
@@ -97,7 +113,10 @@ export const Header: React.FC<HeaderProps> = ({
           {/* Admin link for admin users */}
           {isAdmin && (
             <button
-              onClick={() => onNavigate('admin')}
+              onClick={() => {
+                soundEffects.playClick();
+                onNavigate('admin');
+              }}
               className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs sm:text-sm font-medium transition-all ${
                 currentView === 'admin'
                   ? 'bg-purple-950/60 text-purple-300 border border-purple-500/40 shadow-neon-violet/30'
@@ -112,7 +131,10 @@ export const Header: React.FC<HeaderProps> = ({
           {/* Session History Modal Trigger */}
           {onOpenHistory && (
             <button
-              onClick={onOpenHistory}
+              onClick={() => {
+                soundEffects.playClick();
+                onOpenHistory();
+              }}
               title="Game History & Saved Sessions"
               aria-label="Game History"
               className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl text-xs sm:text-sm font-medium text-zinc-300 hover:text-white hover:bg-white/[0.06] border border-transparent hover:border-white/10 transition-all active:scale-95"
@@ -125,7 +147,10 @@ export const Header: React.FC<HeaderProps> = ({
           {/* Audio Settings Modal Trigger */}
           {onOpenAudio && (
             <button
-              onClick={onOpenAudio}
+              onClick={() => {
+                soundEffects.playClick();
+                onOpenAudio();
+              }}
               title="Audio & Ambient Music"
               aria-label="Audio Settings"
               className="p-2 rounded-xl text-zinc-400 hover:text-white hover:bg-white/[0.06] border border-transparent hover:border-white/10 transition-all active:scale-95"

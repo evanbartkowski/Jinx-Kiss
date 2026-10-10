@@ -25,21 +25,21 @@ export const Footer: React.FC = () => {
   };
 
   return (
-    <footer className="w-full border-t border-white/[0.05] bg-[#050505]/90 py-5 mt-auto transition-all">
+    <footer className="w-full border-t border-white/[0.05] bg-[#050505]/90 py-5 mt-auto transition-all select-none">
       <div className="w-full px-4 sm:px-8 xl:px-12 flex flex-col md:flex-row items-center justify-between gap-4">
         
-        {/* Bottom Left Corner: Mesachi Studios & Created by Evan Bartkowski with socials */}
-        <div className="flex flex-wrap items-center justify-center md:justify-start gap-2.5 sm:gap-3 text-xs sm:text-sm">
-          {/* Mesachi Studios badge */}
-          <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-xl bg-purple-950/40 border border-purple-500/30 shadow-neon-violet/10">
+        {/* Left Side: Mesachi Studios */}
+        <div className="flex items-center justify-center md:justify-start">
+          <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-purple-950/40 border border-purple-500/30 shadow-neon-violet/10">
             <span className="w-1.5 h-1.5 rounded-full bg-brand-violet animate-pulse" />
-            <span className="font-extrabold tracking-wider uppercase text-purple-200 text-[11px] sm:text-xs">
+            <span className="font-extrabold tracking-wider uppercase text-purple-200 text-xs">
               Mesachi Studios
             </span>
           </div>
+        </div>
 
-          <span className="text-zinc-600 hidden sm:inline">•</span>
-
+        {/* Middle / Center: Created by Evan Bartkowski + Socials */}
+        <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-2.5 text-xs sm:text-sm">
           <span className="text-zinc-400 font-medium tracking-wide">
             Created by
           </span>
@@ -64,7 +64,7 @@ export const Footer: React.FC = () => {
           </div>
         </div>
 
-        {/* Bottom Right Corner: Other games by me (starlightfishing.com) */}
+        {/* Right Side: Other games by me (starlightfishing.com) */}
         <div className="flex items-center justify-center md:justify-end gap-2 text-xs sm:text-sm">
           <span className="text-zinc-400 font-medium">Other games by me:</span>
           <a

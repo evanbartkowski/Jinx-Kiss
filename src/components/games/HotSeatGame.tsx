@@ -154,7 +154,7 @@ export const HotSeatGame: React.FC<HotSeatGameProps> = ({ prompts, players }) =>
 
       {/* Main Hot Seat Question Card */}
       <div
-        className={`w-full min-h-[440px] sm:min-h-[540px] p-8 sm:p-14 lg:p-16 rounded-3xl flex flex-col justify-between items-center text-center relative overflow-hidden transition-all duration-300 ${
+        className={`w-full min-h-[340px] sm:min-h-[480px] md:min-h-[560px] p-5 sm:p-12 md:p-16 lg:p-20 rounded-2xl sm:rounded-3xl flex flex-col justify-between items-center text-center relative overflow-hidden transition-all duration-300 ${
           isLegendary
             ? 'border-2 border-yellow-400 sm:border-yellow-300 shadow-[0_0_60px_rgba(250,204,21,0.65),inset_0_0_30px_rgba(250,204,21,0.2)] ring-2 ring-yellow-400/80 bg-gradient-to-b from-yellow-950/40 via-black/60 to-black/90'
             : 'glass-panel border border-rose-500/40 shadow-[0_15px_45px_-12px_rgba(244,63,94,0.35)]'
@@ -162,7 +162,7 @@ export const HotSeatGame: React.FC<HotSeatGameProps> = ({ prompts, players }) =>
       >
         {/* Ambient Glow */}
         <div
-          className={`absolute inset-0 rounded-3xl pointer-events-none ${
+          className={`absolute inset-0 rounded-2xl sm:rounded-3xl pointer-events-none ${
             isLegendary
               ? 'bg-gradient-to-b from-yellow-500/25 via-amber-500/15 to-transparent opacity-40'
               : 'opacity-15 blur-2xl bg-rose-600'
@@ -171,20 +171,20 @@ export const HotSeatGame: React.FC<HotSeatGameProps> = ({ prompts, players }) =>
 
         {/* Legendary Badge */}
         {isLegendary && (
-          <div className="mb-4">
+          <div className="mb-3 sm:mb-4">
             <LegendaryCardBadge title={activePrompt?.legendaryTitle} />
           </div>
         )}
 
-        <span className="text-xs uppercase tracking-widest text-zinc-400 font-semibold">
+        <span className="text-[11px] sm:text-xs uppercase tracking-widest text-zinc-400 font-semibold">
           Answer without hesitation or take a forfeit drink
         </span>
 
-        <p className="text-3xl sm:text-5xl md:text-6xl font-black text-white leading-tight my-8 max-w-4xl tracking-tight">
+        <p className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white leading-tight my-5 sm:my-8 max-w-4xl tracking-tight">
           "{activePrompt?.text}"
         </p>
 
-        <div className="text-sm text-zinc-400 font-medium italic my-2">
+        <div className="text-xs sm:text-sm text-zinc-400 font-medium italic my-2">
           If {activePlayer || 'the player in the seat'} refuses or hesitates, they drink!
         </div>
 
@@ -194,20 +194,20 @@ export const HotSeatGame: React.FC<HotSeatGameProps> = ({ prompts, players }) =>
         </div>
 
         {/* Action Controls */}
-        <div className="w-full pt-6 mt-4 border-t border-white/[0.08] flex items-center justify-between flex-wrap gap-4">
+        <div className="w-full pt-4 sm:pt-6 mt-3 sm:mt-4 border-t border-white/[0.08] flex items-center justify-between flex-wrap gap-3 sm:gap-4">
           {players.length > 1 && (
             <button
               onClick={rotatePlayer}
-              className="px-6 py-3.5 rounded-2xl bg-white/5 border border-white/10 hover:border-white/20 text-zinc-300 text-xs sm:text-sm font-bold flex items-center gap-2 transition-all active:scale-95 cursor-pointer"
+              className="px-4 sm:px-6 py-2.5 sm:py-3.5 rounded-xl sm:rounded-2xl bg-white/5 border border-white/10 hover:border-white/20 text-zinc-300 text-xs sm:text-sm font-bold flex items-center gap-1.5 sm:gap-2 transition-all active:scale-95 cursor-pointer"
             >
-              <RotateCw className="w-4 h-4 text-purple-400" />
+              <RotateCw className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-purple-400" />
               <span>Rotate Next Player</span>
             </button>
           )}
 
           <button
             onClick={nextQuestion}
-            className="ml-auto px-8 py-4 rounded-2xl bg-gradient-to-r from-rose-500 to-pink-600 hover:from-rose-400 hover:to-pink-500 text-white font-black text-sm sm:text-base shadow-neon-pink flex items-center gap-2 transition-all active:scale-95 cursor-pointer"
+            className="w-full sm:w-auto sm:ml-auto px-6 sm:px-8 py-3 sm:py-4 rounded-xl sm:rounded-2xl bg-gradient-to-r from-rose-500 to-pink-600 hover:from-rose-400 hover:to-pink-500 text-white font-black text-xs sm:text-base shadow-neon-pink flex items-center justify-center gap-2 transition-all active:scale-95 cursor-pointer"
           >
             <span>Next Grilling Question</span>
             <ArrowRight className="w-4 h-4" />

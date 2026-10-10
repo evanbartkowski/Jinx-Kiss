@@ -49,12 +49,15 @@ export const PointAndDrinkGame: React.FC<PointAndDrinkGameProps> = ({ prompts, p
     setTallies({});
 
     let count = 3;
+    soundEffects.playTick();
     const interval = setInterval(() => {
       count -= 1;
       if (count > 0) {
+        soundEffects.playTick();
         setCountdown(count);
       } else {
         clearInterval(interval);
+        soundEffects.playSuccess();
         setCountdown(0);
         setIsCountingDown(false);
         setIsRevealed(true);
@@ -69,6 +72,7 @@ export const PointAndDrinkGame: React.FC<PointAndDrinkGameProps> = ({ prompts, p
   };
 
   const addVote = (player: string) => {
+    soundEffects.playClick();
     setTallies(prev => ({
       ...prev,
       [player]: (prev[player] || 0) + 1,
@@ -106,7 +110,7 @@ export const PointAndDrinkGame: React.FC<PointAndDrinkGameProps> = ({ prompts, p
       </div>
 
       {/* Main Prompt Card (Screen-Filling & Legendary-Aware) */}
-      <div className={`w-full min-h-[440px] sm:min-h-[520px] md:min-h-[560px] p-8 sm:p-16 md:p-20 rounded-3xl sm:rounded-4xl glass-panel border flex flex-col justify-between items-center text-center relative overflow-hidden animate-scale-in transition-all duration-500 ${
+      <div className={`w-full min-h-[340px] sm:min-h-[480px] md:min-h-[560px] p-5 sm:p-12 md:p-16 lg:p-20 rounded-2xl sm:rounded-4xl glass-panel border flex flex-col justify-between items-center text-center relative overflow-hidden animate-scale-in transition-all duration-500 ${
         isLegendary
           ? 'border-2 border-yellow-400 sm:border-yellow-300 shadow-[0_0_60px_rgba(250,204,21,0.65),inset_0_0_30px_rgba(250,204,21,0.2)] ring-2 ring-yellow-400/80 bg-gradient-to-b from-yellow-950/40 via-black/60 to-black/90'
           : 'border-pink-500/40 shadow-neon-pink/30'
@@ -121,11 +125,11 @@ export const PointAndDrinkGame: React.FC<PointAndDrinkGameProps> = ({ prompts, p
           }`}
         />
 
-        <span className="text-xs sm:text-sm uppercase tracking-widest text-zinc-400 font-semibold z-10">
+        <span className="text-[11px] sm:text-sm uppercase tracking-widest text-zinc-400 font-semibold z-10">
           Who Is Most Likely To...
         </span>
 
-        <p className={`text-3xl sm:text-5xl md:text-6xl font-black leading-tight sm:leading-snug my-8 sm:my-12 max-w-4xl z-10 ${
+        <p className={`text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-black leading-tight sm:leading-snug my-5 sm:my-10 max-w-4xl z-10 ${
           isLegendary
             ? 'text-yellow-100 drop-shadow-[0_0_30px_rgba(250,204,21,0.5)]'
             : 'text-white drop-shadow-[0_0_20px_rgba(255,255,255,0.2)]'
@@ -135,29 +139,29 @@ export const PointAndDrinkGame: React.FC<PointAndDrinkGameProps> = ({ prompts, p
 
         {/* Countdown Overlay or Winner Announcement */}
         {countdown !== null && countdown > 0 && (
-          <div className="text-7xl sm:text-8xl font-black text-pink-400 animate-ping z-10 my-4">
+          <div className="text-5xl sm:text-8xl font-black text-pink-400 animate-ping z-10 my-3 sm:my-4">
             {countdown}
           </div>
         )}
 
         {countdown === 0 && (
           hasPlayers && leader ? (
-            <div className="animate-scale-in p-5 rounded-2xl bg-pink-950/80 border border-pink-500/50 flex items-center gap-4 z-10 shadow-lg">
-              <Trophy className="w-8 h-8 text-pink-400" />
+            <div className="animate-scale-in p-4 sm:p-5 rounded-xl sm:rounded-2xl bg-pink-950/80 border border-pink-500/50 flex items-center gap-3 sm:gap-4 z-10 shadow-lg">
+              <Trophy className="w-6 h-6 sm:w-8 sm:h-8 text-pink-400" />
               <div className="text-left">
-                <span className="text-xs font-bold text-pink-300 uppercase tracking-wider block">Most Fingers Pointed At:</span>
-                <span className="text-xl sm:text-2xl font-black text-white">{leader[0]} ({leader[1]} votes)</span>
+                <span className="text-[11px] sm:text-xs font-bold text-pink-300 uppercase tracking-wider block">Most Fingers Pointed At:</span>
+                <span className="text-lg sm:text-2xl font-black text-white">{leader[0]} ({leader[1]} votes)</span>
               </div>
             </div>
           ) : (
-            <div className="animate-scale-in p-5 rounded-2xl bg-pink-950/80 border border-pink-500/50 text-center z-10 shadow-lg">
-              <span className="text-2xl font-black text-white block mb-1">👉 POINT AT SOMEONE!</span>
-              <span className="text-sm text-pink-300 font-semibold">Whoever has the most fingers pointed at them takes a penalty!</span>
+            <div className="animate-scale-in p-4 sm:p-5 rounded-xl sm:rounded-2xl bg-pink-950/80 border border-pink-500/50 text-center z-10 shadow-lg">
+              <span className="text-xl sm:text-2xl font-black text-white block mb-1">👉 POINT AT SOMEONE!</span>
+              <span className="text-xs sm:text-sm text-pink-300 font-semibold">Whoever has the most fingers pointed at them takes a penalty!</span>
             </div>
           )
         )}
 
-        <div className="text-sm sm:text-base text-zinc-300 font-semibold my-2 z-10">
+        <div className="text-xs sm:text-base text-zinc-300 font-semibold my-2 z-10">
           {countdown === null
             ? 'Tap Start, then on "POINT!" point your finger at someone!'
             : hasPlayers
@@ -176,25 +180,25 @@ export const PointAndDrinkGame: React.FC<PointAndDrinkGameProps> = ({ prompts, p
       {countdown === null && (
         <button
           onClick={startCountdown}
-          className="px-10 sm:px-14 py-4 sm:py-5 rounded-2xl sm:rounded-3xl bg-gradient-to-r from-pink-600 to-purple-600 hover:from-pink-500 hover:to-purple-500 text-white font-black text-base sm:text-lg shadow-neon-pink flex items-center gap-3 transition-all active:scale-95 cursor-pointer"
+          className="w-full sm:w-auto px-8 sm:px-14 py-3.5 sm:py-5 rounded-xl sm:rounded-3xl bg-gradient-to-r from-pink-600 to-purple-600 hover:from-pink-500 hover:to-purple-500 text-white font-black text-sm sm:text-lg shadow-neon-pink flex items-center justify-center gap-2.5 sm:gap-3 transition-all active:scale-95 cursor-pointer"
         >
-          <Crosshair className="w-6 h-6" />
+          <Crosshair className="w-5 h-5 sm:w-6 sm:h-6" />
           <span>Start 3-Second Countdown!</span>
         </button>
       )}
 
       {/* Voting Tally Buttons for Players (if players exist) or Next Prompt */}
       {isRevealed && (
-        <div className="w-full flex flex-col items-center gap-5 animate-fade-in">
+        <div className="w-full flex flex-col items-center gap-4 sm:gap-5 animate-fade-in">
           {hasPlayers && (
-            <div className="w-full grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 max-w-4xl">
+            <div className="w-full grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-4 max-w-4xl">
               {activePlayers.map((player) => (
                 <button
                   key={player}
                   onClick={() => addVote(player)}
-                  className="p-4 rounded-2xl sm:rounded-3xl glass-panel border border-white/10 hover:border-pink-500/60 hover:shadow-neon-pink/30 flex flex-col items-center justify-center gap-1.5 transition-all active:scale-95 cursor-pointer bg-white/[0.03]"
+                  className="p-3 sm:p-4 rounded-xl sm:rounded-3xl glass-panel border border-white/10 hover:border-pink-500/60 hover:shadow-neon-pink/30 flex flex-col items-center justify-center gap-1 sm:gap-1.5 transition-all active:scale-95 cursor-pointer bg-white/[0.03]"
                 >
-                  <span className="text-base font-bold text-white truncate max-w-full">{player}</span>
+                  <span className="text-sm sm:text-base font-bold text-white truncate max-w-full">{player}</span>
                   <span className="text-xs sm:text-sm font-black text-pink-400">
                     {tallies[player] || 0} votes
                   </span>
@@ -205,7 +209,7 @@ export const PointAndDrinkGame: React.FC<PointAndDrinkGameProps> = ({ prompts, p
 
           <button
             onClick={nextCard}
-            className="px-10 sm:px-14 py-4 sm:py-5 rounded-2xl sm:rounded-3xl bg-gradient-to-r from-pink-600 to-purple-600 hover:from-pink-500 hover:to-purple-500 text-white font-black text-base sm:text-lg shadow-neon-pink flex items-center gap-3 transition-all active:scale-95 mt-2 cursor-pointer"
+            className="w-full sm:w-auto px-8 sm:px-14 py-3.5 sm:py-5 rounded-xl sm:rounded-3xl bg-gradient-to-r from-pink-600 to-purple-600 hover:from-pink-500 hover:to-purple-500 text-white font-black text-sm sm:text-lg shadow-neon-pink flex items-center justify-center gap-2.5 sm:gap-3 transition-all active:scale-95 mt-1 sm:mt-2 cursor-pointer"
           >
             <span>Next Prompt</span>
             <ArrowRight className="w-5 h-5" />

@@ -95,7 +95,7 @@ export const WouldYouRatherGame: React.FC<WouldYouRatherGameProps> = ({ prompts,
         <button
           onClick={() => handleVote('A')}
           disabled={!!selectedChoice}
-          className={`group relative p-8 sm:p-14 md:p-16 min-h-[320px] sm:min-h-[440px] rounded-3xl sm:rounded-4xl glass-panel border flex flex-col justify-between items-center text-center transition-all duration-300 active:scale-[0.98] cursor-pointer ${
+          className={`group relative p-5 sm:p-12 md:p-16 min-h-[190px] sm:min-h-[360px] md:min-h-[440px] rounded-3xl sm:rounded-4xl glass-panel border flex flex-col justify-between items-center text-center transition-all duration-300 active:scale-[0.98] cursor-pointer ${
             isLegendary
               ? selectedChoice === 'A'
                 ? 'border-2 border-yellow-400 bg-yellow-950/60 shadow-[0_0_50px_rgba(250,204,21,0.7)] ring-2 ring-yellow-400 scale-[1.02]'
@@ -105,8 +105,8 @@ export const WouldYouRatherGame: React.FC<WouldYouRatherGameProps> = ({ prompts,
               : 'border-cyan-500/30 hover:border-cyan-400/70 hover:shadow-neon-cyan/40 bg-cyan-950/15'
           }`}
         >
-          <div className="w-full flex items-center justify-between mb-4">
-            <span className={`text-xs sm:text-sm font-black uppercase tracking-widest px-4 py-1.5 rounded-full border ${
+          <div className="w-full flex items-center justify-between mb-3 sm:mb-4">
+            <span className={`text-[10px] sm:text-sm font-black uppercase tracking-widest px-3 sm:px-4 py-1 sm:py-1.5 rounded-full border ${
               isLegendary
                 ? 'text-yellow-300 bg-yellow-950 border-yellow-400/50 shadow-[0_0_12px_rgba(250,204,21,0.4)]'
                 : 'text-cyan-300 bg-cyan-950 border-cyan-500/40'
@@ -114,11 +114,11 @@ export const WouldYouRatherGame: React.FC<WouldYouRatherGameProps> = ({ prompts,
               Option A
             </span>
             {selectedChoice === 'A' && (
-              <CheckCircle2 className={`w-6 h-6 animate-scale-in ${isLegendary ? 'text-yellow-400' : 'text-cyan-400'}`} />
+              <CheckCircle2 className={`w-5 h-5 sm:w-6 sm:h-6 animate-scale-in ${isLegendary ? 'text-yellow-400' : 'text-cyan-400'}`} />
             )}
           </div>
 
-          <p className={`text-2xl sm:text-3xl md:text-4xl font-black leading-snug sm:leading-tight my-6 flex-1 flex items-center justify-center ${
+          <p className={`text-lg sm:text-2xl md:text-3xl lg:text-4xl font-black leading-snug sm:leading-tight my-4 sm:my-6 flex-1 flex items-center justify-center ${
             isLegendary ? 'text-yellow-100 drop-shadow-[0_0_20px_rgba(250,204,21,0.4)]' : 'text-white'
           }`}>
             {activePrompt?.optionA || activePrompt?.text}
@@ -126,12 +126,12 @@ export const WouldYouRatherGame: React.FC<WouldYouRatherGameProps> = ({ prompts,
 
           {/* Voting percentage bar */}
           {voteStats && (
-            <div className="w-full mt-4 animate-fade-in">
-              <div className="flex justify-between items-center text-sm sm:text-base font-black text-cyan-300 mb-2">
+            <div className="w-full mt-3 sm:mt-4 animate-fade-in">
+              <div className="flex justify-between items-center text-xs sm:text-base font-black text-cyan-300 mb-1.5 sm:mb-2">
                 <span>Voted Option A</span>
-                <span className="text-3xl font-black">{voteStats.optionAPercentage}%</span>
+                <span className="text-xl sm:text-3xl font-black">{voteStats.optionAPercentage}%</span>
               </div>
-              <div className="w-full h-4 rounded-full bg-black/70 overflow-hidden border border-white/15">
+              <div className="w-full h-3 sm:h-4 rounded-full bg-black/70 overflow-hidden border border-white/15">
                 <div
                   className={`h-full rounded-full transition-all duration-1000 ease-out ${
                     isLegendary ? 'bg-gradient-to-r from-yellow-500 to-amber-500' : 'bg-gradient-to-r from-cyan-500 to-blue-500'
@@ -147,7 +147,7 @@ export const WouldYouRatherGame: React.FC<WouldYouRatherGameProps> = ({ prompts,
         <button
           onClick={() => handleVote('B')}
           disabled={!!selectedChoice}
-          className={`group relative p-8 sm:p-14 md:p-16 min-h-[320px] sm:min-h-[440px] rounded-3xl sm:rounded-4xl glass-panel border flex flex-col justify-between items-center text-center transition-all duration-300 active:scale-[0.98] cursor-pointer ${
+          className={`group relative p-5 sm:p-12 md:p-16 min-h-[190px] sm:min-h-[360px] md:min-h-[440px] rounded-3xl sm:rounded-4xl glass-panel border flex flex-col justify-between items-center text-center transition-all duration-300 active:scale-[0.98] cursor-pointer ${
             isLegendary
               ? selectedChoice === 'B'
                 ? 'border-2 border-yellow-400 bg-yellow-950/60 shadow-[0_0_50px_rgba(250,204,21,0.7)] ring-2 ring-yellow-400 scale-[1.02]'
@@ -157,8 +157,8 @@ export const WouldYouRatherGame: React.FC<WouldYouRatherGameProps> = ({ prompts,
               : 'border-pink-500/30 hover:border-pink-400/70 hover:shadow-neon-pink/40 bg-pink-950/15'
           }`}
         >
-          <div className="w-full flex items-center justify-between mb-4">
-            <span className={`text-xs sm:text-sm font-black uppercase tracking-widest px-4 py-1.5 rounded-full border ${
+          <div className="w-full flex items-center justify-between mb-3 sm:mb-4">
+            <span className={`text-[10px] sm:text-sm font-black uppercase tracking-widest px-3 sm:px-4 py-1 sm:py-1.5 rounded-full border ${
               isLegendary
                 ? 'text-yellow-300 bg-yellow-950 border-yellow-400/50 shadow-[0_0_12px_rgba(250,204,21,0.4)]'
                 : 'text-pink-300 bg-pink-950 border-pink-500/40'
@@ -166,11 +166,11 @@ export const WouldYouRatherGame: React.FC<WouldYouRatherGameProps> = ({ prompts,
               Option B
             </span>
             {selectedChoice === 'B' && (
-              <CheckCircle2 className={`w-6 h-6 animate-scale-in ${isLegendary ? 'text-yellow-400' : 'text-pink-400'}`} />
+              <CheckCircle2 className={`w-5 h-5 sm:w-6 sm:h-6 animate-scale-in ${isLegendary ? 'text-yellow-400' : 'text-pink-400'}`} />
             )}
           </div>
 
-          <p className={`text-2xl sm:text-3xl md:text-4xl font-black leading-snug sm:leading-tight my-6 flex-1 flex items-center justify-center ${
+          <p className={`text-lg sm:text-2xl md:text-3xl lg:text-4xl font-black leading-snug sm:leading-tight my-4 sm:my-6 flex-1 flex items-center justify-center ${
             isLegendary ? 'text-yellow-100 drop-shadow-[0_0_20px_rgba(250,204,21,0.4)]' : 'text-white'
           }`}>
             {activePrompt?.optionB || 'Live with the consequences of Option A'}

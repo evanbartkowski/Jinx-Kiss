@@ -31,3 +31,4 @@ export const LegendaryCardBadge: React.FC<LegendaryCardBadgeProps> = ({
     </div>
   );
 };
+

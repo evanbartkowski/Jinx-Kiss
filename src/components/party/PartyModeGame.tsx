@@ -378,11 +378,11 @@ export const PartyModeGame: React.FC<PartyModeGameProps> = ({ config, onExit }) 
 
         {/* Active Player Spotlight or Group Challenge */}
         {players.length > 0 && activePlayer ? (
-          <h2 className="text-3xl sm:text-5xl font-black uppercase tracking-tight text-white">
+          <h2 className="text-2xl sm:text-4xl md:text-5xl font-black uppercase tracking-tight text-white">
             It's <span style={{ color: activeMetadata.themeColor }}>{activePlayer}'s</span> Turn
           </h2>
         ) : (
-          <h2 className="text-3xl sm:text-5xl font-black uppercase tracking-tight text-white">
+          <h2 className="text-2xl sm:text-4xl md:text-5xl font-black uppercase tracking-tight text-white">
             <span style={{ color: activeMetadata.themeColor }}>Party</span> Challenge
           </h2>
         )}
@@ -417,7 +417,7 @@ export const PartyModeGame: React.FC<PartyModeGameProps> = ({ config, onExit }) 
 
       {/* Main Party Prompt Card */}
       <div
-        className={`w-full max-w-5xl xl:max-w-6xl min-h-[440px] sm:min-h-[560px] p-8 sm:p-14 lg:p-16 rounded-3xl flex flex-col justify-between items-center text-center relative overflow-hidden transition-all duration-300 my-auto ${
+        className={`w-full max-w-5xl xl:max-w-6xl min-h-[340px] sm:min-h-[480px] md:min-h-[560px] p-5 sm:p-12 md:p-16 lg:p-20 rounded-2xl sm:rounded-3xl flex flex-col justify-between items-center text-center relative overflow-hidden transition-all duration-300 my-auto ${
           isLegendary
             ? 'border-2 border-yellow-400 sm:border-yellow-300 shadow-[0_0_60px_rgba(250,204,21,0.65),inset_0_0_30px_rgba(250,204,21,0.2)] ring-2 ring-yellow-400/80 bg-gradient-to-b from-yellow-950/40 via-black/60 to-black/90'
             : 'glass-panel border'
@@ -433,7 +433,7 @@ export const PartyModeGame: React.FC<PartyModeGameProps> = ({ config, onExit }) 
       >
         {/* Glow ambient background */}
         <div
-          className={`absolute inset-0 rounded-3xl pointer-events-none ${
+          className={`absolute inset-0 rounded-2xl sm:rounded-3xl pointer-events-none ${
             isLegendary
               ? 'bg-gradient-to-b from-yellow-500/25 via-amber-500/15 to-transparent opacity-40'
               : 'opacity-15 blur-3xl'
@@ -443,16 +443,16 @@ export const PartyModeGame: React.FC<PartyModeGameProps> = ({ config, onExit }) 
 
         {/* Legendary Card Badge */}
         {isLegendary && (
-          <div className="mb-4">
+          <div className="mb-3 sm:mb-4">
             <LegendaryCardBadge title={currentPrompt?.legendaryTitle} />
           </div>
         )}
 
-        <span className="text-xs sm:text-sm uppercase tracking-widest text-zinc-400 font-semibold">
+        <span className="text-[11px] sm:text-sm uppercase tracking-widest text-zinc-400 font-semibold">
           {activeMetadata.tagline}
         </span>
 
-        <p className="text-3xl sm:text-5xl md:text-6xl font-black text-white leading-tight my-8 max-w-4xl tracking-tight">
+        <p className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white leading-tight my-5 sm:my-8 max-w-4xl tracking-tight">
           "{currentPrompt?.text}"
         </p>
 
@@ -460,8 +460,8 @@ export const PartyModeGame: React.FC<PartyModeGameProps> = ({ config, onExit }) 
         {activeMission && (
           <div className="my-2">
             {isSecretMissionPeeking ? (
-              <div className="p-4 rounded-2xl bg-teal-950/70 border border-teal-500/50 text-left animate-scale-in max-w-lg shadow-lg">
-                <span className="text-xs font-black uppercase tracking-wider text-teal-400 block mb-1">
+              <div className="p-3.5 sm:p-4 rounded-xl sm:rounded-2xl bg-teal-950/70 border border-teal-500/50 text-left animate-scale-in max-w-lg shadow-lg">
+                <span className="text-[11px] sm:text-xs font-black uppercase tracking-wider text-teal-400 block mb-1">
                   🕵️ Your Private Secret Mission (+{activeMission.rewardPoints} pts):
                 </span>
                 <p className="text-xs sm:text-sm text-zinc-200 font-medium">
@@ -469,7 +469,7 @@ export const PartyModeGame: React.FC<PartyModeGameProps> = ({ config, onExit }) 
                 </p>
                 <button
                   onClick={() => setIsSecretMissionPeeking(false)}
-                  className="mt-2 text-xs font-bold text-teal-300 underline cursor-pointer"
+                  className="mt-1.5 sm:mt-2 text-xs font-bold text-teal-300 underline cursor-pointer"
                 >
                   Hide Secret Mission
                 </button>
@@ -477,9 +477,9 @@ export const PartyModeGame: React.FC<PartyModeGameProps> = ({ config, onExit }) 
             ) : (
               <button
                 onClick={() => setIsSecretMissionPeeking(true)}
-                className="px-5 py-2 rounded-full border border-white/10 hover:border-teal-500/50 text-xs sm:text-sm font-semibold text-zinc-400 hover:text-teal-300 flex items-center gap-2 transition-all cursor-pointer shadow-sm"
+                className="px-4 sm:px-5 py-1.5 sm:py-2 rounded-full border border-white/10 hover:border-teal-500/50 text-xs sm:text-sm font-semibold text-zinc-400 hover:text-teal-300 flex items-center gap-2 transition-all cursor-pointer shadow-sm"
               >
-                <Eye className="w-4 h-4" />
+                <Eye className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                 <span>Peek My Secret Mission</span>
               </button>
             )}
@@ -488,32 +488,32 @@ export const PartyModeGame: React.FC<PartyModeGameProps> = ({ config, onExit }) 
 
         {/* Card Rating Bar */}
         {currentPrompt && (
-          <div className="w-full mt-4">
+          <div className="w-full mt-3 sm:mt-4">
             <CardRatingBar prompt={currentPrompt} />
           </div>
         )}
       </div>
 
       {/* Main Party Gameplay Controls */}
-      <div className="w-full max-w-5xl flex flex-col items-center gap-4">
-        <div className="flex flex-wrap items-center justify-center gap-4 w-full">
+      <div className="w-full max-w-5xl flex flex-col items-center gap-3 sm:gap-4">
+        <div className="flex flex-wrap items-center justify-center gap-2.5 sm:gap-4 w-full">
           {/* Skip / Reshuffle */}
           <button
             onClick={handleSkipPrompt}
-            className="px-6 py-4 rounded-2xl border border-white/15 text-zinc-300 hover:text-white font-bold text-xs sm:text-sm transition-all flex items-center gap-2 active:scale-95 cursor-pointer bg-white/[0.02] hover:bg-white/[0.08]"
+            className="flex-1 sm:flex-initial px-4 sm:px-6 py-3 sm:py-4 rounded-xl sm:rounded-2xl border border-white/15 text-zinc-300 hover:text-white font-bold text-xs sm:text-sm transition-all flex items-center justify-center gap-1.5 sm:gap-2 active:scale-95 cursor-pointer bg-white/[0.02] hover:bg-white/[0.08]"
           >
             <SkipForward className="w-4 h-4" />
-            <span>Skip / Reshuffle</span>
+            <span>Skip</span>
           </button>
 
           {/* Chaos Wheel Trigger */}
           {config.enableChaosWheel && (
             <button
               onClick={handleChaosWheelTrigger}
-              className="px-7 py-4 rounded-2xl bg-purple-900/40 border border-purple-500/50 hover:bg-purple-900/60 text-purple-200 font-black text-xs sm:text-sm shadow-neon-violet flex items-center gap-2.5 transition-all active:scale-95 cursor-pointer"
+              className="flex-1 sm:flex-initial px-4 sm:px-7 py-3 sm:py-4 rounded-xl sm:rounded-2xl bg-purple-900/40 border border-purple-500/50 hover:bg-purple-900/60 text-purple-200 font-black text-xs sm:text-sm shadow-neon-violet flex items-center justify-center gap-1.5 sm:gap-2.5 transition-all active:scale-95 cursor-pointer"
             >
               <Disc3 className="w-4 h-4 text-purple-400" />
-              <span>Spin Chaos Wheel</span>
+              <span>Chaos Wheel</span>
             </button>
           )}
 
@@ -521,19 +521,19 @@ export const PartyModeGame: React.FC<PartyModeGameProps> = ({ config, onExit }) 
           {config.enableScoring ? (
             <button
               onClick={() => handleNextRound(true)}
-              className="px-10 py-4 rounded-2xl bg-gradient-to-r from-brand-pink via-purple-600 to-brand-violet hover:from-pink-500 hover:to-purple-500 text-white font-black text-sm sm:text-base shadow-neon-pink flex items-center gap-2.5 transition-all active:scale-95 cursor-pointer"
+              className="w-full sm:w-auto px-6 sm:px-10 py-3.5 sm:py-4 rounded-xl sm:rounded-2xl bg-gradient-to-r from-brand-pink via-purple-600 to-brand-violet hover:from-pink-500 hover:to-purple-500 text-white font-black text-xs sm:text-base shadow-neon-pink flex items-center justify-center gap-2 sm:gap-2.5 transition-all active:scale-95 cursor-pointer"
             >
-              <Check className="w-5 h-5" />
+              <Check className="w-4 h-4 sm:w-5 sm:h-5" />
               <span>Complete (+{10 * multiplier} pts)</span>
-              <ArrowRight className="w-5 h-5 ml-1" />
+              <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 ml-1" />
             </button>
           ) : (
             <button
               onClick={() => handleNextRound(false)}
-              className="px-10 py-4 rounded-2xl bg-gradient-to-r from-brand-pink via-purple-600 to-brand-violet hover:from-pink-500 hover:to-purple-500 text-white font-black text-sm sm:text-base shadow-neon-pink flex items-center gap-2.5 transition-all active:scale-95 cursor-pointer"
+              className="w-full sm:w-auto px-6 sm:px-10 py-3.5 sm:py-4 rounded-xl sm:rounded-2xl bg-gradient-to-r from-brand-pink via-purple-600 to-brand-violet hover:from-pink-500 hover:to-purple-500 text-white font-black text-xs sm:text-base shadow-neon-pink flex items-center justify-center gap-2 sm:gap-2.5 transition-all active:scale-95 cursor-pointer"
             >
               <span>Next Round</span>
-              <ArrowRight className="w-5 h-5" />
+              <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
             </button>
           )}
         </div>

@@ -94,7 +94,7 @@ export const MostLikelyToGame: React.FC<MostLikelyToGameProps> = ({ prompts, pla
       </div>
 
       {/* Main Prompt Card (Screen-Filling & Legendary-Aware) */}
-      <div className={`w-full min-h-[440px] sm:min-h-[520px] md:min-h-[560px] p-8 sm:p-16 md:p-20 rounded-3xl sm:rounded-4xl glass-panel border flex flex-col justify-between items-center text-center relative overflow-hidden animate-scale-in transition-all duration-500 ${
+      <div className={`w-full min-h-[340px] sm:min-h-[480px] md:min-h-[560px] p-5 sm:p-12 md:p-16 lg:p-20 rounded-2xl sm:rounded-4xl glass-panel border flex flex-col justify-between items-center text-center relative overflow-hidden animate-scale-in transition-all duration-500 ${
         isLegendary
           ? 'border-2 border-yellow-400 sm:border-yellow-300 shadow-[0_0_60px_rgba(250,204,21,0.65),inset_0_0_30px_rgba(250,204,21,0.2)] ring-2 ring-yellow-400/80 bg-gradient-to-b from-yellow-950/40 via-black/60 to-black/90'
           : 'border-rose-500/40 shadow-neon-pink/30'
@@ -108,11 +108,11 @@ export const MostLikelyToGame: React.FC<MostLikelyToGameProps> = ({ prompts, pla
           }`}
         />
 
-        <span className="text-xs sm:text-sm uppercase tracking-widest text-zinc-400 font-semibold z-10">
+        <span className="text-[11px] sm:text-sm uppercase tracking-widest text-zinc-400 font-semibold z-10">
           Who In The Room Is...
         </span>
 
-        <p className={`text-3xl sm:text-5xl md:text-6xl font-black leading-tight sm:leading-snug my-8 sm:my-12 max-w-4xl z-10 ${
+        <p className={`text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-black leading-tight sm:leading-snug my-5 sm:my-10 max-w-4xl z-10 ${
           isLegendary
             ? 'text-yellow-100 drop-shadow-[0_0_30px_rgba(250,204,21,0.5)]'
             : 'text-white drop-shadow-[0_0_20px_rgba(255,255,255,0.25)]'
@@ -122,17 +122,17 @@ export const MostLikelyToGame: React.FC<MostLikelyToGameProps> = ({ prompts, pla
 
         {/* Winner Reveal Card */}
         {isRevealed && leader && leader[1] > 0 && (
-          <div className="animate-scale-in p-5 rounded-2xl bg-rose-950/80 border border-rose-500/50 flex items-center gap-4 my-2 w-full max-w-md z-10 shadow-lg">
-            <Trophy className="w-8 h-8 text-rose-400 shrink-0" />
+          <div className="animate-scale-in p-4 sm:p-5 rounded-xl sm:rounded-2xl bg-rose-950/80 border border-rose-500/50 flex items-center gap-3 sm:gap-4 my-2 w-full max-w-md z-10 shadow-lg">
+            <Trophy className="w-6 h-6 sm:w-8 sm:h-8 text-rose-400 shrink-0" />
             <div className="text-left flex-1 min-w-0">
-              <span className="text-xs font-bold text-rose-300 uppercase tracking-wider block">Consensus Winner:</span>
-              <span className="text-xl sm:text-2xl font-black text-white truncate block">{leader[0]}</span>
+              <span className="text-[11px] sm:text-xs font-bold text-rose-300 uppercase tracking-wider block">Consensus Winner:</span>
+              <span className="text-lg sm:text-2xl font-black text-white truncate block">{leader[0]}</span>
               <span className="text-xs sm:text-sm text-rose-400 font-bold">{leader[1]} votes ({Math.round((leader[1] / totalVotes) * 100)}%)</span>
             </div>
           </div>
         )}
 
-        <div className="text-sm sm:text-base text-zinc-300 font-semibold my-2 z-10">
+        <div className="text-xs sm:text-base text-zinc-300 font-semibold my-2 z-10">
           {hasPlayers
             ? totalVotes === 0
               ? 'Tap any player below to cast fingers or votes!'
@@ -147,9 +147,9 @@ export const MostLikelyToGame: React.FC<MostLikelyToGameProps> = ({ prompts, pla
       </div>
 
       {/* Controls and Player Voting Chips */}
-      <div className="w-full flex flex-col items-center gap-5 animate-fade-in">
+      <div className="w-full flex flex-col items-center gap-4 sm:gap-5 animate-fade-in">
         {hasPlayers && (
-          <div className="w-full grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 max-w-4xl">
+          <div className="w-full grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-4 max-w-4xl">
             {activePlayers.map((player) => {
               const count = votes[player] || 0;
               const pct = totalVotes > 0 ? Math.round((count / totalVotes) * 100) : 0;
@@ -157,9 +157,9 @@ export const MostLikelyToGame: React.FC<MostLikelyToGameProps> = ({ prompts, pla
                 <button
                   key={player}
                   onClick={() => handleCastVote(player)}
-                  className="p-4 rounded-2xl sm:rounded-3xl glass-panel border border-white/10 hover:border-rose-500/60 hover:shadow-neon-pink/30 flex flex-col items-center justify-center gap-1.5 transition-all active:scale-95 cursor-pointer bg-white/[0.03]"
+                  className="p-3 sm:p-4 rounded-xl sm:rounded-3xl glass-panel border border-white/10 hover:border-rose-500/60 hover:shadow-neon-pink/30 flex flex-col items-center justify-center gap-1 sm:gap-1.5 transition-all active:scale-95 cursor-pointer bg-white/[0.03]"
                 >
-                  <span className="text-base font-bold text-white truncate max-w-full">{player}</span>
+                  <span className="text-sm sm:text-base font-bold text-white truncate max-w-full">{player}</span>
                   <span className="text-xs sm:text-sm font-black text-rose-400">
                     {count} {count === 1 ? 'vote' : 'votes'} {totalVotes > 0 && `(${pct}%)`}
                   </span>
@@ -170,11 +170,11 @@ export const MostLikelyToGame: React.FC<MostLikelyToGameProps> = ({ prompts, pla
         )}
 
         {/* Action Controls */}
-        <div className="flex flex-wrap items-center justify-center gap-4 mt-2">
+        <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 w-full mt-1 sm:mt-2">
           {hasPlayers && totalVotes > 0 && !isRevealed && (
             <button
               onClick={handleReveal}
-              className="px-8 sm:px-12 py-4 sm:py-5 rounded-2xl sm:rounded-3xl bg-rose-600 hover:bg-rose-500 text-white font-black text-base sm:text-lg shadow-neon-pink transition-all active:scale-95 cursor-pointer"
+              className="flex-1 sm:flex-initial px-6 sm:px-12 py-3.5 sm:py-5 rounded-xl sm:rounded-3xl bg-rose-600 hover:bg-rose-500 text-white font-black text-sm sm:text-lg shadow-neon-pink transition-all active:scale-95 cursor-pointer"
             >
               Reveal Winner!
             </button>
@@ -183,7 +183,7 @@ export const MostLikelyToGame: React.FC<MostLikelyToGameProps> = ({ prompts, pla
           {hasPlayers && totalVotes > 0 && (
             <button
               onClick={handleResetVotes}
-              className="px-6 py-4 sm:py-5 rounded-2xl sm:rounded-3xl border border-white/15 text-zinc-300 hover:text-white font-bold text-sm sm:text-base transition-colors flex items-center gap-2 cursor-pointer bg-zinc-900/60"
+              className="px-5 sm:px-6 py-3.5 sm:py-5 rounded-xl sm:rounded-3xl border border-white/15 text-zinc-300 hover:text-white font-bold text-xs sm:text-base transition-colors flex items-center gap-2 cursor-pointer bg-zinc-900/60"
             >
               <RotateCcw className="w-4 h-4" />
               <span>Reset Votes</span>
@@ -192,7 +192,7 @@ export const MostLikelyToGame: React.FC<MostLikelyToGameProps> = ({ prompts, pla
 
           <button
             onClick={handleNext}
-            className="px-10 sm:px-14 py-4 sm:py-5 rounded-2xl sm:rounded-3xl bg-gradient-to-r from-rose-600 to-purple-600 hover:from-rose-500 hover:to-purple-500 text-white font-black text-base sm:text-lg shadow-neon-pink flex items-center gap-3 transition-all active:scale-95 cursor-pointer"
+            className="w-full sm:w-auto px-8 sm:px-14 py-3.5 sm:py-5 rounded-xl sm:rounded-3xl bg-gradient-to-r from-rose-600 to-purple-600 hover:from-rose-500 hover:to-purple-500 text-white font-black text-sm sm:text-lg shadow-neon-pink flex items-center justify-center gap-2.5 sm:gap-3 transition-all active:scale-95 cursor-pointer"
           >
             <span>Next Card</span>
             <ArrowRight className="w-5 h-5" />

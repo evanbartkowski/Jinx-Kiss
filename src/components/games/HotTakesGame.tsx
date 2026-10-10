@@ -82,7 +82,7 @@ export const HotTakesGame: React.FC<HotTakesGameProps> = ({ prompts, players }) 
       </div>
 
       {/* Main Hot Take Card (Screen-Filling & Legendary-Aware) */}
-      <div className={`w-full min-h-[440px] sm:min-h-[520px] md:min-h-[560px] p-8 sm:p-16 md:p-20 rounded-3xl sm:rounded-4xl glass-panel border flex flex-col justify-between items-center text-center relative overflow-hidden animate-scale-in transition-all duration-500 ${
+      <div className={`w-full min-h-[340px] sm:min-h-[480px] md:min-h-[560px] p-5 sm:p-12 md:p-16 lg:p-20 rounded-2xl sm:rounded-4xl glass-panel border flex flex-col justify-between items-center text-center relative overflow-hidden animate-scale-in transition-all duration-500 ${
         isLegendary
           ? 'border-2 border-yellow-400 sm:border-yellow-300 shadow-[0_0_60px_rgba(250,204,21,0.65),inset_0_0_30px_rgba(250,204,21,0.2)] ring-2 ring-yellow-400/80 bg-gradient-to-b from-yellow-950/40 via-black/60 to-black/90'
           : 'border-orange-500/40 shadow-[0_0_40px_rgba(249,115,22,0.3)]'
@@ -97,11 +97,11 @@ export const HotTakesGame: React.FC<HotTakesGameProps> = ({ prompts, players }) 
           }`}
         />
 
-        <span className="text-xs sm:text-sm uppercase tracking-widest text-zinc-400 font-bold z-10">
+        <span className="text-[11px] sm:text-sm uppercase tracking-widest text-zinc-400 font-bold z-10">
           Unpopular Opinion
         </span>
 
-        <p className={`text-3xl sm:text-5xl md:text-6xl font-black leading-tight sm:leading-snug my-8 sm:my-12 max-w-4xl z-10 ${
+        <p className={`text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-black leading-tight sm:leading-snug my-5 sm:my-10 max-w-4xl z-10 ${
           isLegendary
             ? 'text-yellow-100 drop-shadow-[0_0_30px_rgba(250,204,21,0.5)]'
             : 'text-white drop-shadow-[0_0_20px_rgba(255,255,255,0.2)]'
@@ -111,30 +111,30 @@ export const HotTakesGame: React.FC<HotTakesGameProps> = ({ prompts, players }) 
 
         {/* Discussion prompt box if voted */}
         {vote && activePrompt?.discussionPrompt && (
-          <div className="w-full max-w-3xl p-5 rounded-2xl bg-orange-950/50 border border-orange-500/40 flex items-start gap-3.5 text-left animate-fade-in my-3 z-10 shadow-lg">
-            <MessageSquare className="w-6 h-6 text-orange-400 flex-shrink-0 mt-0.5" />
+          <div className="w-full max-w-3xl p-4 sm:p-5 rounded-xl sm:rounded-2xl bg-orange-950/50 border border-orange-500/40 flex items-start gap-3 sm:gap-3.5 text-left animate-fade-in my-2 sm:my-3 z-10 shadow-lg">
+            <MessageSquare className="w-5 h-5 sm:w-6 sm:h-6 text-orange-400 flex-shrink-0 mt-0.5" />
             <div>
-              <span className="text-xs font-black text-orange-300 uppercase tracking-wider block">Group Discussion Prompt:</span>
-              <p className="text-sm sm:text-base text-zinc-200 mt-1 font-medium">{activePrompt.discussionPrompt}</p>
+              <span className="text-[11px] sm:text-xs font-black text-orange-300 uppercase tracking-wider block">Group Discussion Prompt:</span>
+              <p className="text-xs sm:text-base text-zinc-200 mt-0.5 sm:mt-1 font-medium">{activePrompt.discussionPrompt}</p>
             </div>
           </div>
         )}
 
         {/* Vote Results */}
         {stats && (
-          <div className="w-full max-w-md mt-4 flex items-center justify-around gap-6 animate-fade-in z-10">
+          <div className="w-full max-w-md mt-2 sm:mt-4 flex items-center justify-around gap-6 animate-fade-in z-10">
             <div className="text-center">
               <span className="text-xs sm:text-sm font-bold text-zinc-400">Agree</span>
-              <div className="text-3xl font-black text-emerald-400">{stats.optionAPercentage}%</div>
+              <div className="text-2xl sm:text-3xl font-black text-emerald-400">{stats.optionAPercentage}%</div>
             </div>
             <div className="text-center">
               <span className="text-xs sm:text-sm font-bold text-zinc-400">Disagree</span>
-              <div className="text-3xl font-black text-red-400">{stats.optionBPercentage}%</div>
+              <div className="text-2xl sm:text-3xl font-black text-red-400">{stats.optionBPercentage}%</div>
             </div>
           </div>
         )}
 
-        <div className="text-sm sm:text-base text-zinc-300 font-semibold my-2 z-10">
+        <div className="text-xs sm:text-base text-zinc-300 font-semibold my-2 z-10">
           Argue with conviction. No fence-sitting allowed.
         </div>
 
@@ -146,37 +146,37 @@ export const HotTakesGame: React.FC<HotTakesGameProps> = ({ prompts, players }) 
       </div>
 
       {/* Voting Buttons */}
-      <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 w-full mt-2">
+      <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-6 w-full mt-1 sm:mt-2">
         <button
           onClick={() => handleVote('agree')}
           disabled={!!vote}
-          className={`flex-1 min-w-[160px] sm:min-w-[220px] max-w-[260px] py-4 sm:py-5 rounded-2xl sm:rounded-3xl border font-black text-base sm:text-lg flex items-center justify-center gap-2.5 transition-all active:scale-95 cursor-pointer ${
+          className={`flex-1 min-w-[130px] sm:min-w-[220px] max-w-[260px] py-3.5 sm:py-5 rounded-xl sm:rounded-3xl border font-black text-sm sm:text-lg flex items-center justify-center gap-2 sm:gap-2.5 transition-all active:scale-95 cursor-pointer ${
             vote === 'agree'
               ? 'bg-emerald-600 border-emerald-400 text-white shadow-neon-green scale-105'
               : 'bg-emerald-950/40 border-emerald-500/40 text-emerald-300 hover:bg-emerald-900/60 hover:border-emerald-500 hover:shadow-neon-green'
           }`}
         >
-          <ThumbsUp className="w-6 h-6" />
+          <ThumbsUp className="w-5 h-5 sm:w-6 sm:h-6" />
           <span>Agree</span>
         </button>
 
         <button
           onClick={() => handleVote('disagree')}
           disabled={!!vote}
-          className={`flex-1 min-w-[160px] sm:min-w-[220px] max-w-[260px] py-4 sm:py-5 rounded-2xl sm:rounded-3xl border font-black text-base sm:text-lg flex items-center justify-center gap-2.5 transition-all active:scale-95 cursor-pointer ${
+          className={`flex-1 min-w-[130px] sm:min-w-[220px] max-w-[260px] py-3.5 sm:py-5 rounded-xl sm:rounded-3xl border font-black text-sm sm:text-lg flex items-center justify-center gap-2 sm:gap-2.5 transition-all active:scale-95 cursor-pointer ${
             vote === 'disagree'
               ? 'bg-red-600 border-red-400 text-white shadow-neon-red scale-105'
               : 'bg-red-950/40 border-red-500/40 text-red-300 hover:bg-red-900/60 hover:border-red-500 hover:shadow-neon-red'
           }`}
         >
-          <ThumbsDown className="w-6 h-6" />
+          <ThumbsDown className="w-5 h-5 sm:w-6 sm:h-6" />
           <span>Disagree</span>
         </button>
 
         {vote && (
           <button
             onClick={nextCard}
-            className="px-8 sm:px-12 py-4 sm:py-5 rounded-2xl sm:rounded-3xl bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-400 hover:to-red-400 text-white font-black text-base sm:text-lg shadow-neon-amber flex items-center gap-3 transition-all active:scale-95 animate-scale-in cursor-pointer"
+            className="w-full sm:w-auto px-8 sm:px-12 py-3.5 sm:py-5 rounded-xl sm:rounded-3xl bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-400 hover:to-red-400 text-white font-black text-sm sm:text-lg shadow-neon-amber flex items-center justify-center gap-2.5 sm:gap-3 transition-all active:scale-95 animate-scale-in cursor-pointer"
           >
             <span>Next Take</span>
             <ArrowRight className="w-5 h-5" />

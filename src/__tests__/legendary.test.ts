@@ -84,3 +84,4 @@ describe('Rare Legendary Cards System', () => {
     expect(isPromptLegendary(rolled)).toBe(false);
   });
 });
+

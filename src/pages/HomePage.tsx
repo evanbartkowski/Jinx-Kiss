@@ -4,6 +4,7 @@ import { GameId } from '../types/game';
 import { CustomDeck } from '../types/deck';
 import { CommunityDecksSection } from '../components/decks/CommunityDecksSection';
 import { GameSession } from '../services/sessionService';
+import { soundEffects } from '../utils/audio';
 import {
   Flame,
   Sparkles,
@@ -38,6 +39,11 @@ export const HomePage: React.FC<HomePageProps> = ({
 }) => {
   const [showCommunityDecks, setShowCommunityDecks] = useState(false);
 
+  const handleGameClick = (gameId: GameId) => {
+    soundEffects.playClick();
+    onSelectGame(gameId);
+  };
+
   const getIcon = (name: string, color: string) => {
     const props = { className: 'w-5 h-5 sm:w-8 sm:h-8', style: { color } };
     switch (name) {
@@ -62,10 +68,29 @@ export const HomePage: React.FC<HomePageProps> = ({
     <div className="w-full flex flex-col items-center pb-12 pt-4 sm:pt-6">
       {/* Responsive Grid of 12 Game Cards */}
       <div className="w-full px-4 sm:px-8 xl:px-12">
-        <div className="flex items-center justify-between mb-4 sm:mb-6">
-          <h2 className="text-xl sm:text-3xl font-black uppercase tracking-wide text-white">
-            Browse All Games
-          </h2>
+        {/* Cool High-Tech Arcade Header */}
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-5 sm:mb-8 pb-4 border-b border-white/[0.08] gap-3">
+          <div className="flex items-center gap-3">
+            <div className="flex items-center justify-center w-11 h-11 sm:w-14 sm:h-14 rounded-2xl bg-gradient-to-tr from-brand-pink/20 via-purple-600/20 to-cyan-500/20 border border-brand-pink/40 shadow-neon-pink/30 shrink-0">
+              <Sparkles className="w-5 h-5 sm:w-7 sm:h-7 text-brand-pink animate-pulse" />
+            </div>
+            <div>
+              <div className="flex items-center gap-2">
+                <span className="text-[10px] sm:text-xs font-black uppercase tracking-widest text-brand-pink px-2.5 py-0.5 rounded-full bg-brand-pink/15 border border-brand-pink/30 shadow-sm">
+                  ⚡ 12 Party Game Modes
+                </span>
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping hidden sm:inline-block" />
+              </div>
+              <h2 className="text-2xl sm:text-4xl lg:text-5xl font-black uppercase tracking-tight text-white mt-1">
+                Browse All <span className="text-brand-gradient drop-shadow-[0_0_20px_rgba(255,77,166,0.35)]">Games</span>
+              </h2>
+            </div>
+          </div>
+
+          <div className="hidden sm:flex items-center gap-2.5 px-4 py-2 rounded-2xl bg-white/[0.03] border border-white/10 text-xs text-zinc-300 font-semibold shadow-sm">
+            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+            <span>Multiplayer & Continuous Play</span>
+          </div>
         </div>
 
         <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2.5 sm:gap-6 xl:gap-8">
@@ -77,12 +102,11 @@ export const HomePage: React.FC<HomePageProps> = ({
               return (
                 <div
                   key={game.id}
-                  onClick={() => onSelectGame(game.id)}
-                  className="group relative rounded-2xl sm:rounded-3xl glass-panel p-3.5 sm:p-7 min-h-[160px] sm:min-h-[290px] flex flex-col justify-between cursor-pointer transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl active:scale-[0.98] select-none border border-transparent overflow-hidden"
+                  onClick={() => handleGameClick(game.id)}
+                  className="group relative rounded-2xl sm:rounded-3xl glass-panel p-3.5 sm:p-7 min-h-[160px] sm:min-h-[290px] flex flex-col justify-between cursor-pointer transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl active:scale-[0.98] select-none border border-red-500/40 hover:border-emerald-500/60 overflow-hidden"
                   style={{
-                    background: 'linear-gradient(135deg, rgba(239, 68, 68, 0.12) 0%, rgba(10, 10, 10, 0.9) 50%, rgba(16, 185, 129, 0.12) 100%)',
+                    background: 'linear-gradient(135deg, rgba(239, 68, 68, 0.14) 0%, rgba(10, 10, 10, 0.92) 50%, rgba(16, 185, 129, 0.14) 100%)',
                     boxShadow: '0 12px 35px -15px rgba(239, 68, 68, 0.35), 0 12px 35px -15px rgba(16, 185, 129, 0.35)',
-                    borderImage: 'linear-gradient(135deg, rgba(239, 68, 68, 0.8) 0%, rgba(255, 255, 255, 0.1) 50%, rgba(16, 185, 129, 0.8) 100%) 1',
                   }}
                 >
                   {/* Split Background Ambient Glow */}
@@ -127,7 +151,7 @@ export const HomePage: React.FC<HomePageProps> = ({
               return (
                 <div
                   key={game.id}
-                  onClick={() => onSelectGame(game.id)}
+                  onClick={() => handleGameClick(game.id)}
                   className="group relative rounded-2xl sm:rounded-3xl glass-panel p-3.5 sm:p-7 min-h-[160px] sm:min-h-[290px] flex flex-col justify-between cursor-pointer transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl active:scale-[0.98] select-none border border-pink-500/40 hover:border-cyan-400/70 overflow-hidden"
                   style={{
                     boxShadow: '0 12px 35px -15px rgba(217, 70, 239, 0.4), 0 12px 35px -15px rgba(6, 182, 212, 0.3)',
@@ -168,7 +192,7 @@ export const HomePage: React.FC<HomePageProps> = ({
             return (
               <div
                 key={game.id}
-                onClick={() => onSelectGame(game.id)}
+                onClick={() => handleGameClick(game.id)}
                 className="group relative rounded-2xl sm:rounded-3xl glass-panel border border-white/[0.08] hover:border-white/30 p-3.5 sm:p-7 min-h-[160px] sm:min-h-[290px] flex flex-col justify-between cursor-pointer transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl active:scale-[0.98] select-none"
                 style={{
                   boxShadow: `0 10px 30px -15px ${game.themeColor}33`,

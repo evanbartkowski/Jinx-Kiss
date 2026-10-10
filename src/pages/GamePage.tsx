@@ -100,6 +100,11 @@ export const GamePage: React.FC<GamePageProps> = ({ gameId, customDeck, onExit }
     setGameKey(prev => prev + 1);
   };
 
+  const handleShuffle = () => {
+    sessionService.resetCardHistory(customDeck ? customDeck.id : gameId);
+    setGameKey(prev => prev + 1);
+  };
+
   const handleSelectMode = (cat: GameCategory, progressive?: boolean) => {
     setSelectedCategory(cat);
     setIsSelectingMode(false);
@@ -170,6 +175,7 @@ export const GamePage: React.FC<GamePageProps> = ({ gameId, customDeck, onExit }
       onChangeMode={() => setIsSelectingMode(true)}
       onExit={onExit}
       onRestart={handleRestart}
+      onShuffle={handleShuffle}
       players={savedPlayers}
       onUpdatePlayers={setSavedPlayers}
       supportsNonalcoholic={gameId === 'truth-or-sip' || gameId === 'point-and-drink'}
