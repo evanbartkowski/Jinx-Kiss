@@ -4,8 +4,7 @@ import { CardRatingBar } from '../common/CardRatingBar';
 import { soundEffects } from '../../utils/audio';
 import { isPromptLegendary, rollForLegendaryCard, triggerLegendaryCardEffects } from '../../utils/legendaryCards';
 import { LegendaryCardBadge } from '../common/LegendaryCardBadge';
-import { ArrowRight, RotateCcw, Heart, Check, X } from 'lucide-react';
-import confetti from 'canvas-confetti';
+import { ArrowRight, Heart } from 'lucide-react';
 
 interface NeverHaveIEverGameProps {
   prompts: PromptItem[];
@@ -15,7 +14,6 @@ interface NeverHaveIEverGameProps {
 export const NeverHaveIEverGame: React.FC<NeverHaveIEverGameProps> = ({ prompts, players }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [usedIndices, setUsedIndices] = useState<number[]>([]);
-  const [lastChoice, setLastChoice] = useState<'have' | 'havent' | null>(null);
   const [playerLives, setPlayerLives] = useState<Record<string, number>>({});
   const [activePrompt, setActivePrompt] = useState<PromptItem>(() => {
     const initial = prompts[0] || {
@@ -44,7 +42,6 @@ export const NeverHaveIEverGame: React.FC<NeverHaveIEverGameProps> = ({ prompts,
 
   const nextCard = () => {
     soundEffects.playCardFlip();
-    setLastChoice(null);
     let nextIdx = Math.floor(Math.random() * prompts.length);
     if (usedIndices.length < prompts.length) {
       while (usedIndices.includes(nextIdx) && usedIndices.length < prompts.length) {
@@ -56,18 +53,6 @@ export const NeverHaveIEverGame: React.FC<NeverHaveIEverGameProps> = ({ prompts,
     const nextP = prompts[nextIdx] || prompts[0];
     const rolled = rollForLegendaryCard(nextP, nextP.category || 'medium', 'never-have-i-ever');
     setActivePrompt(rolled);
-  };
-
-  const handleChoice = (choice: 'have' | 'havent') => {
-    setLastChoice(choice);
-    if (choice === 'have') {
-      confetti({
-        particleCount: 25,
-        spread: 50,
-        origin: { y: 0.7 },
-        colors: ['#A855F7', '#FF4DA6'],
-      });
-    }
   };
 
   const deductLife = (playerName: string) => {
@@ -82,29 +67,38 @@ export const NeverHaveIEverGame: React.FC<NeverHaveIEverGameProps> = ({ prompts,
       
       {/* Group Scoring Bar if players exist */}
       {players.length > 0 && (
-        <div className="w-full flex items-center justify-center gap-3 flex-wrap py-2.5 px-6 rounded-2xl bg-zinc-900/60 border border-white/[0.08]">
-          <span className="text-xs uppercase tracking-wider text-purple-400 font-bold">Lives:</span>
-          {players.map((p) => {
-            const lives = playerLives[p] ?? 5;
-            return (
-              <div
-                key={p}
-                onClick={() => deductLife(p)}
-                title="Tap to lose a life if you have done it!"
-                className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-black/40 border border-white/10 hover:border-purple-500/50 cursor-pointer transition-all select-none"
-              >
-                <span className="text-xs font-semibold text-zinc-300">{p}:</span>
-                <div className="flex text-pink-400">
-                  {Array.from({ length: lives }).map((_, i) => (
-                    <Heart key={i} className="w-3.5 h-3.5 fill-pink-500 text-pink-500" />
-                  ))}
-                  {Array.from({ length: Math.max(0, 5 - lives) }).map((_, i) => (
-                    <Heart key={i} className="w-3.5 h-3.5 text-zinc-600" />
-                  ))}
+        <div className="w-full flex flex-col items-center gap-1.5 animate-fade-in">
+          <div className="w-full flex items-center justify-center gap-3 sm:gap-4 flex-wrap py-3 px-5 sm:px-8 rounded-2xl bg-zinc-900/80 border border-white/[0.08] shadow-md">
+            <span className="text-xs sm:text-sm uppercase tracking-wider text-purple-300 font-black">Lives:</span>
+            {players.map((p) => {
+              const lives = playerLives[p] ?? 5;
+              return (
+                <div
+                  key={p}
+                  onClick={() => deductLife(p)}
+                  title="Tap to remove a life!"
+                  className="flex items-center gap-2 px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-xl bg-black/50 border border-white/10 hover:border-pink-500/60 hover:shadow-neon-pink/20 cursor-pointer transition-all select-none active:scale-95"
+                >
+                  <span className="text-xs sm:text-sm font-bold text-zinc-200">{p}:</span>
+                  <div className="flex gap-1 text-pink-400">
+                    {Array.from({ length: lives }).map((_, i) => (
+                      <Heart key={i} className="w-4 h-4 sm:w-5 sm:h-5 fill-pink-500 text-pink-500 filter drop-shadow-[0_0_6px_rgba(236,72,153,0.6)]" />
+                    ))}
+                    {Array.from({ length: Math.max(0, 5 - lives) }).map((_, i) => (
+                      <Heart key={i} className="w-4 h-4 sm:w-5 sm:h-5 text-zinc-600/70" />
+                    ))}
+                  </div>
                 </div>
-              </div>
-            );
-          })}
+              );
+            })}
+          </div>
+
+          {/* Indicator that you can click to remove lives - ONLY on first card */}
+          {usedIndices.length === 0 && (
+            <span className="text-[11px] sm:text-xs text-purple-300/80 font-medium tracking-wide animate-fade-in">
+              💡 Tap any player's badge to remove a life when they have done it
+            </span>
+          )}
         </div>
       )}
 
@@ -145,24 +139,12 @@ export const NeverHaveIEverGame: React.FC<NeverHaveIEverGameProps> = ({ prompts,
           "{activePrompt?.text}"
         </p>
 
-        {/* Choice Reveal Indicator */}
-        {lastChoice && (
-          <div className="animate-fade-in flex items-center gap-2 text-sm sm:text-base font-black z-10">
-            {lastChoice === 'have' ? (
-              <span className="text-pink-300 bg-pink-950/80 border border-pink-500/50 px-5 py-2 rounded-full shadow-neon-pink">
-                💥 You Confessed: I Have!
-              </span>
-            ) : (
-              <span className="text-emerald-300 bg-emerald-950/80 border border-emerald-500/50 px-5 py-2 rounded-full shadow-neon-green">
-                🛡️ Pure & Innocent: I Haven't!
-              </span>
-            )}
+        {/* Helper description - ONLY on first card */}
+        {usedIndices.length === 0 && (
+          <div className="text-sm sm:text-base text-zinc-300 font-semibold my-2 z-10 animate-fade-in">
+            Drink, drop a finger, or confess with your crew!
           </div>
         )}
-
-        <div className="text-sm sm:text-base text-zinc-300 font-semibold my-2 z-10">
-          Drink, drop a finger, or confess with your crew!
-        </div>
 
         {/* Rating & Reporting */}
         <div className="w-full max-w-md z-10">
@@ -171,38 +153,14 @@ export const NeverHaveIEverGame: React.FC<NeverHaveIEverGameProps> = ({ prompts,
 
       </div>
 
-      {/* Choice Buttons (Massive & Tactile) */}
-      <div className="flex flex-wrap items-center justify-center gap-2.5 sm:gap-6 w-full mt-2">
-        <button
-          onClick={() => handleChoice('have')}
-          className={`flex-1 min-w-[130px] sm:min-w-[220px] max-w-[260px] py-3.5 sm:py-5 rounded-2xl sm:rounded-3xl border font-black text-sm sm:text-lg flex items-center justify-center gap-2 transition-all active:scale-95 cursor-pointer ${
-            lastChoice === 'have'
-              ? 'bg-pink-600 border-pink-400 text-white shadow-neon-pink'
-              : 'bg-pink-950/40 border-pink-500/40 text-pink-300 hover:bg-pink-900/60 hover:border-pink-500 hover:shadow-neon-pink'
-          }`}
-        >
-          <Check className="w-5 h-5 sm:w-6 sm:h-6" />
-          <span>I Have</span>
-        </button>
-
-        <button
-          onClick={() => handleChoice('havent')}
-          className={`flex-1 min-w-[130px] sm:min-w-[220px] max-w-[260px] py-3.5 sm:py-5 rounded-2xl sm:rounded-3xl border font-black text-sm sm:text-lg flex items-center justify-center gap-2 transition-all active:scale-95 cursor-pointer ${
-            lastChoice === 'havent'
-              ? 'bg-emerald-600 border-emerald-400 text-white shadow-neon-green'
-              : 'bg-emerald-950/40 border-emerald-500/40 text-emerald-300 hover:bg-emerald-900/60 hover:border-emerald-500 hover:shadow-neon-green'
-          }`}
-        >
-          <X className="w-5 h-5 sm:w-6 sm:h-6" />
-          <span>I Haven't</span>
-        </button>
-
+      {/* Action Button: Next Card Only */}
+      <div className="flex items-center justify-center w-full mt-2">
         <button
           onClick={nextCard}
-          className="w-full sm:w-auto px-6 sm:px-12 py-3.5 sm:py-5 rounded-2xl sm:rounded-3xl bg-gradient-to-r from-brand-violet to-purple-600 hover:from-purple-500 hover:to-violet-500 text-white font-black text-sm sm:text-lg shadow-neon-violet flex items-center justify-center gap-2.5 transition-all active:scale-95 cursor-pointer"
+          className="w-full sm:w-auto min-w-[200px] sm:min-w-[280px] px-8 sm:px-14 py-4 sm:py-5 rounded-2xl sm:rounded-3xl bg-gradient-to-r from-brand-violet to-purple-600 hover:from-purple-500 hover:to-violet-500 text-white font-black text-base sm:text-xl shadow-neon-violet flex items-center justify-center gap-3 transition-all active:scale-95 cursor-pointer"
         >
           <span>Next Card</span>
-          <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
+          <ArrowRight className="w-5 h-5 sm:w-6 sm:h-6" />
         </button>
       </div>
 

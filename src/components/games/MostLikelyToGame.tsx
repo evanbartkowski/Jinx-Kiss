@@ -132,13 +132,15 @@ export const MostLikelyToGame: React.FC<MostLikelyToGameProps> = ({ prompts, pla
           </div>
         )}
 
-        <div className="text-xs sm:text-base text-zinc-300 font-semibold my-2 z-10">
-          {hasPlayers
-            ? totalVotes === 0
-              ? 'Tap any player below to cast fingers or votes!'
-              : `${totalVotes} votes cast so far`
-            : 'Point or call out who in the room fits this prompt!'}
-        </div>
+        {((currentIndex === 0 && (!hasPlayers || totalVotes === 0)) || (hasPlayers && totalVotes > 0)) && (
+          <div className="text-xs sm:text-base text-zinc-300 font-semibold my-2 z-10">
+            {hasPlayers && totalVotes > 0
+              ? `${totalVotes} votes cast so far`
+              : hasPlayers
+                ? 'Tap any player below to cast fingers or votes!'
+                : 'Point or call out who in the room fits this prompt!'}
+          </div>
+        )}
 
         {/* Card Rating Bar */}
         <div className="w-full max-w-md z-10">

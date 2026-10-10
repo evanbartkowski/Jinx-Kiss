@@ -208,9 +208,11 @@ export const ChaosMixGame: React.FC<ChaosMixGameProps> = ({ prompts, players }) 
               {currentPrompt.type}
             </span>
           )}
-          <span className="text-[11px] sm:text-xs uppercase tracking-widest text-zinc-400 font-semibold">
-            {originMeta.tagline}
-          </span>
+          {roundNumber === 1 && (
+            <span className="text-[11px] sm:text-xs uppercase tracking-widest text-zinc-400 font-semibold">
+              {originMeta.tagline}
+            </span>
+          )}
         </div>
 
         {/* Prompt Text */}

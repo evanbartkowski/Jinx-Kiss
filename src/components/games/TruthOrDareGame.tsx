@@ -195,9 +195,11 @@ export const TruthOrDareGame: React.FC<TruthOrDareGameProps> = ({ prompts, playe
             </p>
 
             {/* Turn status */}
-            <div className="text-xs sm:text-base text-zinc-300 font-semibold mb-3 sm:mb-4 z-10">
-              {activePlayer ? `Target Player: ${activePlayer}` : 'Share your answer or complete the challenge with the group!'}
-            </div>
+            {(activePlayer || usedPromptIds.size <= 1) && (
+              <div className="text-xs sm:text-base text-zinc-300 font-semibold mb-3 sm:mb-4 z-10 animate-fade-in">
+                {activePlayer ? `Target Player: ${activePlayer}` : 'Share your answer or complete the challenge with the group!'}
+              </div>
+            )}
 
             {/* Rating, Favorite, Report Bar */}
             <div className="w-full max-w-md z-10">

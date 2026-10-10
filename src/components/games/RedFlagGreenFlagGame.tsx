@@ -133,9 +133,11 @@ export const RedFlagGreenFlagGame: React.FC<RedFlagGreenFlagGameProps> = ({ prom
           </div>
         )}
 
-        <div className="text-xs sm:text-base text-zinc-300 font-semibold my-2 z-10">
-          Cast your judgment and defend your standard to the group.
-        </div>
+        {currentIndex === 0 && (
+          <div className="text-xs sm:text-base text-zinc-300 font-semibold my-2 z-10">
+            Cast your judgment and defend your standard to the group.
+          </div>
+        )}
 
         {/* Card Rating & Report Bar */}
         <div className="w-full max-w-md z-10">

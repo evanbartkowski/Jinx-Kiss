@@ -134,9 +134,11 @@ export const HotTakesGame: React.FC<HotTakesGameProps> = ({ prompts, players }) 
           </div>
         )}
 
-        <div className="text-xs sm:text-base text-zinc-300 font-semibold my-2 z-10">
-          Argue with conviction. No fence-sitting allowed.
-        </div>
+        {currentIndex === 0 && (
+          <div className="text-xs sm:text-base text-zinc-300 font-semibold my-2 z-10 animate-fade-in">
+            Argue with conviction. No fence-sitting allowed.
+          </div>
+        )}
 
         {/* Card Rating & Report Bar */}
         <div className="w-full max-w-md z-10">

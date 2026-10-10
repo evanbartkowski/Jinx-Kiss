@@ -176,17 +176,21 @@ export const HotSeatGame: React.FC<HotSeatGameProps> = ({ prompts, players }) =>
           </div>
         )}
 
-        <span className="text-[11px] sm:text-xs uppercase tracking-widest text-zinc-400 font-semibold">
-          Answer without hesitation or take a forfeit drink
-        </span>
+        {currentIndex === 0 && (
+          <span className="text-[11px] sm:text-xs uppercase tracking-widest text-zinc-400 font-semibold">
+            Answer without hesitation or take a forfeit drink
+          </span>
+        )}
 
         <p className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white leading-tight my-5 sm:my-8 max-w-4xl tracking-tight">
           "{activePrompt?.text}"
         </p>
 
-        <div className="text-xs sm:text-sm text-zinc-400 font-medium italic my-2">
-          If {activePlayer || 'the player in the seat'} refuses or hesitates, they drink!
-        </div>
+        {currentIndex === 0 && (
+          <div className="text-xs sm:text-sm text-zinc-400 font-medium italic my-2">
+            If {activePlayer || 'the player in the seat'} refuses or hesitates, they drink!
+          </div>
+        )}
 
         {/* Card Rating & Report Bar */}
         <div className="w-full">

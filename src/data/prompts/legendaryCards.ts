@@ -27,7 +27,7 @@ export const LEGENDARY_CARDS: PromptItem[] = [
     isLegendary: true,
     rarity: 'legendary',
     legendaryTitle: '★ LEGENDARY TRUTH ★',
-    text: 'If you were forced to eat only one bizarre food combination for every meal for a whole year (like ketchup on ice cream or broccoli dipped in chocolate), what would you choose and why?'
+    text: 'The Bizarre Feast: If you had to eat only one weird food combo for every meal for a whole year (ketchup on pancakes, chocolate milk with pickles, or mustard on watermelon), what are you choosing and what does your breakfast look like?'
   },
   {
     id: 'leg-kids-3',
@@ -47,7 +47,7 @@ export const LEGENDARY_CARDS: PromptItem[] = [
     isLegendary: true,
     rarity: 'legendary',
     legendaryTitle: '★ LEGENDARY CONFESSION ★',
-    text: 'Never have I ever tried a bite of dog biscuit or cat treats just to see what it tasted like.'
+    text: 'Never have I ever tried a bite of a dog biscuit or pet treat on a dare just to see what it tasted like.'
   },
   {
     id: 'leg-kids-5',
@@ -66,7 +66,7 @@ export const LEGENDARY_CARDS: PromptItem[] = [
     isLegendary: true,
     rarity: 'legendary',
     legendaryTitle: '★ LEGENDARY SPINNER ★',
-    text: 'The Sloth Challenge: You must perform every single movement and speech in super slow motion (1/10th speed) for the next 2 full rounds! If you speed up or break character, do 5 frog hops!'
+    text: 'The Sloth Curse: You must perform every single movement and word in super slow motion (1/10th speed) for the next 2 full rounds! If you break character, do 10 frog hops!'
   },
   {
     id: 'leg-kids-7',
@@ -84,7 +84,7 @@ export const LEGENDARY_CARDS: PromptItem[] = [
     isLegendary: true,
     rarity: 'legendary',
     legendaryTitle: '★ LEGENDARY FORFEIT ★',
-    text: 'Name the one rule at home or school you break almost every single day, or do the Chicken Dance for 30 seconds!'
+    text: 'The Master Rulebreaker: Confess the funniest rule you broke at home or school without getting caught, or perform the Chicken Dance with full rooster sounds for 30 seconds!'
   },
   {
     id: 'leg-kids-9',
@@ -93,7 +93,7 @@ export const LEGENDARY_CARDS: PromptItem[] = [
     isLegendary: true,
     rarity: 'legendary',
     legendaryTitle: '★ LEGENDARY POINT ★',
-    text: 'On the count of 3, point to the player who would accidentally set off the fire alarm while trying to microwave popcorn!'
+    text: 'On the count of 3, point to the player who would accidentally set off the fire alarm while trying to toast a Pop-Tart!'
   },
   {
     id: 'leg-kids-10',
@@ -102,7 +102,7 @@ export const LEGENDARY_CARDS: PromptItem[] = [
     isLegendary: true,
     rarity: 'legendary',
     legendaryTitle: '★ LEGENDARY CONSENSUS ★',
-    text: 'Who is most likely to build a secret cardboard fort in their backyard and successfully hide in it for 3 days without getting caught?'
+    text: 'Who is most likely to build a secret cardboard fort in the living room and successfully live in it for an entire weekend without being found?'
   },
   {
     id: 'leg-kids-11',
@@ -111,7 +111,7 @@ export const LEGENDARY_CARDS: PromptItem[] = [
     isLegendary: true,
     rarity: 'legendary',
     legendaryTitle: '★ LEGENDARY CONFESSION ★',
-    text: 'Confess the most ridiculous made-up story you told on the playground that other kids actually believed 100%!'
+    text: 'Confess the most ridiculous made-up story you told on the playground that other kids actually believed was 100% scientific fact!'
   },
   {
     id: 'leg-kids-12',
@@ -120,7 +120,7 @@ export const LEGENDARY_CARDS: PromptItem[] = [
     isLegendary: true,
     rarity: 'legendary',
     legendaryTitle: '★ LEGENDARY HOT SEAT ★',
-    text: 'The 45-Second Silly Blitz: You have 45 seconds to answer 5 lightning-fast silly questions from the group without laughing or saying "um" once!'
+    text: 'The 45-Second Silly Blitz: You have 45 seconds to answer 5 lightning-fast silly questions from the group without laughing or cracking a smile once!'
   },
 
   // ==========================================
@@ -134,7 +134,7 @@ export const LEGENDARY_CARDS: PromptItem[] = [
     isLegendary: true,
     rarity: 'legendary',
     legendaryTitle: '★ LEGENDARY TRUTH ★',
-    text: 'Unlock your phone right now, open your photo gallery, and show the group the 7th most recent photo or screenshot without explaining why you have it.'
+    text: 'The Camera Roll Lottery: Unlock your phone right now, open your photo gallery, scroll with your eyes closed for 5 seconds, and show the photo your finger lands on to the entire room!'
   },
   {
     id: 'leg-easy-2',
@@ -144,7 +144,7 @@ export const LEGENDARY_CARDS: PromptItem[] = [
     isLegendary: true,
     rarity: 'legendary',
     legendaryTitle: '★ LEGENDARY DARE ★',
-    text: 'Dramatic Opera: Sing your next 3 sentences or comments to the room in full theatrical operatic vibrato with dramatic hand gestures!'
+    text: 'The Shakespearian Curse: Deliver your next 3 comments or answers in full dramatic Shakespearean soliloquy, with theatrical pauses and hand gestures, or do 10 pushups!'
   },
   {
     id: 'leg-easy-3',
@@ -153,8 +153,8 @@ export const LEGENDARY_CARDS: PromptItem[] = [
     isLegendary: true,
     rarity: 'legendary',
     legendaryTitle: '★ LEGENDARY SHOWDOWN ★',
-    text: 'Would you rather have all your Google search queries from the last 7 days read out loud by Siri to everyone here OR let the person to your left post a text status on your social media?',
-    optionA: 'Siri reads last 7 days of Google searches',
+    text: 'Would you rather have all your Google search queries from the past 14 days read aloud by Siri to everyone here OR let the person to your left post a 5-word text status on your primary social account?',
+    optionA: 'Siri reads last 14 days of Google searches',
     optionB: 'Player on left posts a status on your account'
   },
   {
@@ -164,7 +164,7 @@ export const LEGENDARY_CARDS: PromptItem[] = [
     isLegendary: true,
     rarity: 'legendary',
     legendaryTitle: '★ LEGENDARY CONFESSION ★',
-    text: 'Never have I ever stalked someone so deeply on social media that I accidentally double-tapped and liked a post from 5 years ago in sheer panic.'
+    text: 'Never have I ever stalked someone so far back on Instagram or TikTok that I accidentally liked a post or photo from over 4 years ago in sheer panic.'
   },
   {
     id: 'leg-easy-5',
@@ -173,7 +173,7 @@ export const LEGENDARY_CARDS: PromptItem[] = [
     isLegendary: true,
     rarity: 'legendary',
     legendaryTitle: '★ LEGENDARY HOT TAKE ★',
-    text: 'People who dont return shopping carts to the corral should be placed on a federal no-fly list. It is the ultimate test of human decency.',
+    text: 'Leaving a shopping cart stranded in an empty parking space instead of walking it to the corral reveals that someone is an untrustworthy person at their core.',
     discussionPrompt: 'Do you judge someone immediately if they leave a cart in an empty parking spot?'
   },
   {
@@ -183,7 +183,7 @@ export const LEGENDARY_CARDS: PromptItem[] = [
     isLegendary: true,
     rarity: 'legendary',
     legendaryTitle: '★ LEGENDARY SPINNER ★',
-    text: 'The Celebrity Impression: The group picks a famous persona (Gordon Ramsay, Batman, or Christopher Walken); you must speak entirely in their voice until your next turn!'
+    text: 'The Voice Mimic Roulette: The room assigns you a recognizable persona (Gordon Ramsay, Batman, or Siri); you cannot break character or voice until your next turn or take 2 drinks!'
   },
   {
     id: 'leg-easy-7',
@@ -192,7 +192,7 @@ export const LEGENDARY_CARDS: PromptItem[] = [
     isLegendary: true,
     rarity: 'legendary',
     legendaryTitle: '★ LEGENDARY JUDGMENT ★',
-    text: 'On the first date, they ask to taste food directly off your fork before you have even taken your first bite.'
+    text: 'On the first date, they reach over without asking and take food off your plate before you have even taken your first bite.'
   },
   {
     id: 'leg-easy-8',
@@ -201,7 +201,7 @@ export const LEGENDARY_CARDS: PromptItem[] = [
     isLegendary: true,
     rarity: 'legendary',
     legendaryTitle: '★ LEGENDARY TRUTH ★',
-    text: 'Admit the most superficial reason you ever ghosted someone or stopped talking to a potential crush, or take 2 sips!'
+    text: 'The Petty Ghost Confession: Name the single most ridiculous or petty reason you ever ghosted someone or stopped texting back, or take 2 hefty sips!'
   },
   {
     id: 'leg-easy-9',
@@ -210,7 +210,7 @@ export const LEGENDARY_CARDS: PromptItem[] = [
     isLegendary: true,
     rarity: 'legendary',
     legendaryTitle: '★ LEGENDARY POINT ★',
-    text: 'Point to the person in the room who would accidentally join a cult simply because they were too polite to say no to free snacks and tea!'
+    text: 'Point to the person in the room who would accidentally join an eccentric cult simply because they were too polite to say no to free snacks and chamomile tea!'
   },
   {
     id: 'leg-easy-10',
@@ -219,7 +219,7 @@ export const LEGENDARY_CARDS: PromptItem[] = [
     isLegendary: true,
     rarity: 'legendary',
     legendaryTitle: '★ LEGENDARY CONSENSUS ★',
-    text: 'Who is most likely to win the lottery and blow through all the money on ridiculous gadgets and useless investments within 18 months?'
+    text: 'Who is most likely to win a massive jackpot and blow every cent on absurd gadgets, weird collectibles, and impulsive vacations within 18 months?'
   },
   {
     id: 'leg-easy-11',
@@ -228,7 +228,7 @@ export const LEGENDARY_CARDS: PromptItem[] = [
     isLegendary: true,
     rarity: 'legendary',
     legendaryTitle: '★ LEGENDARY CONFESSION ★',
-    text: 'Confess the dumbest late-night purchase you made online that arrived in the mail and made you immediately question your sanity.'
+    text: 'Confess the dumbest late-night 2 AM online purchase you made that arrived at your door and made you instantly question your financial judgment.'
   },
   {
     id: 'leg-easy-12',
@@ -237,7 +237,7 @@ export const LEGENDARY_CARDS: PromptItem[] = [
     isLegendary: true,
     rarity: 'legendary',
     legendaryTitle: '★ LEGENDARY HOT SEAT ★',
-    text: 'The Awkward Era Trial: The group has 60 seconds to interrogate you about your most embarrassing teenage phase. Full honesty required!'
+    text: 'The Nostalgia Interrogation: The room has 60 uninterrupted seconds to cross-examine you about your most cringe-inducing middle school phase. Full truth required!'
   },
 
   // ==========================================
@@ -251,7 +251,7 @@ export const LEGENDARY_CARDS: PromptItem[] = [
     isLegendary: true,
     rarity: 'legendary',
     legendaryTitle: '★ LEGENDARY TRUTH ★',
-    text: 'Who in this room would you trust the LEAST with your unlocked phone for 10 minutes, and what specific thing are you terrified they would find?'
+    text: 'The Phone Hostage: Hand your unlocked phone to the person on your left for 60 seconds with permission to look at anything EXCEPT banking apps, OR reveal the one secret you are terrified someone here might find out.'
   },
   {
     id: 'leg-med-2',
@@ -261,7 +261,7 @@ export const LEGENDARY_CARDS: PromptItem[] = [
     isLegendary: true,
     rarity: 'legendary',
     legendaryTitle: '★ LEGENDARY DARE ★',
-    text: 'The Speakerphone Mystery: Call a mutual friend not in this room right now on speakerphone, and urgently whisper: "Whatever happens tonight, do NOT check my trunk." Hang up after 15 seconds without laughing!'
+    text: 'The Urgent Speakerphone Call: Call a mutual friend not in this room on speakerphone and urgently whisper: "Whatever happens tonight, do NOT check my trunk." Hang up immediately after 15 seconds without laughing!'
   },
   {
     id: 'leg-med-3',
@@ -270,9 +270,9 @@ export const LEGENDARY_CARDS: PromptItem[] = [
     isLegendary: true,
     rarity: 'legendary',
     legendaryTitle: '★ LEGENDARY SHOWDOWN ★',
-    text: 'Would you rather everyone in this room see your hidden/deleted photo album OR everyone in this room see your last 10 text messages with your ex or current crush?',
-    optionA: 'Everyone sees hidden/deleted album',
-    optionB: 'Everyone sees last 10 texts with ex/crush'
+    text: 'Would you rather have everyone in this room see your deleted photo album OR let everyone read your last 10 text messages with your ex or current crush?',
+    optionA: 'Everyone sees deleted photo album',
+    optionB: 'Everyone reads last 10 texts with ex/crush'
   },
   {
     id: 'leg-med-4',
@@ -281,7 +281,7 @@ export const LEGENDARY_CARDS: PromptItem[] = [
     isLegendary: true,
     rarity: 'legendary',
     legendaryTitle: '★ LEGENDARY CONFESSION ★',
-    text: 'Never have I ever pretended to have a sudden family emergency or fake illness just to escape hanging out with someone in this room.'
+    text: 'Never have I ever invented a fake family emergency, phantom illness, or imaginary work crisis just to escape hanging out with someone in this room.'
   },
   {
     id: 'leg-med-5',
@@ -290,7 +290,7 @@ export const LEGENDARY_CARDS: PromptItem[] = [
     isLegendary: true,
     rarity: 'legendary',
     legendaryTitle: '★ LEGENDARY HOT TAKE ★',
-    text: '90% of best friend groups have one member everyone secretly talks about behind their back, and someone in this room knows exactly who it is.',
+    text: 'Every close friend group has one member everyone secretly vents about behind their back, and someone in this room knows exactly who it is.',
     discussionPrompt: 'Is this true in your past or present social circles?'
   },
   {
@@ -300,7 +300,7 @@ export const LEGENDARY_CARDS: PromptItem[] = [
     isLegendary: true,
     rarity: 'legendary',
     legendaryTitle: '★ LEGENDARY SPINNER ★',
-    text: 'The Story Post Auction: The player to your left gets to write a one-sentence story post and publish it on your Instagram or Snapchat right now (must stay up for at least 15 minutes)!'
+    text: 'The Public Broadcast: The player to your right writes a mysterious, cryptic one-sentence story status and publishes it on your social feed for 20 minutes, or you take 3 penalty sips!'
   },
   {
     id: 'leg-med-7',
@@ -309,7 +309,7 @@ export const LEGENDARY_CARDS: PromptItem[] = [
     isLegendary: true,
     rarity: 'legendary',
     legendaryTitle: '★ LEGENDARY JUDGMENT ★',
-    text: 'They maintain a private spreadsheet scoring every date they have ever been on based on punctuality, charisma, hygiene, and spending habits.'
+    text: 'They keep a private spreadsheet or notes document ranking everyone they have ever dated with numerical scores on hygiene, conversation, and emotional stability.'
   },
   {
     id: 'leg-med-8',
@@ -318,7 +318,7 @@ export const LEGENDARY_CARDS: PromptItem[] = [
     isLegendary: true,
     rarity: 'legendary',
     legendaryTitle: '★ LEGENDARY TRUTH ★',
-    text: 'Name someone you know who you think is an absolute walking disaster of a human being, or drain your entire cup right now!'
+    text: 'The Brutal Truth: Name someone you personally know who you think is an absolute disaster of a human being, with full reasoning, or finish your entire drink right now!'
   },
   {
     id: 'leg-med-9',
@@ -327,7 +327,7 @@ export const LEGENDARY_CARDS: PromptItem[] = [
     isLegendary: true,
     rarity: 'legendary',
     legendaryTitle: '★ LEGENDARY POINT ★',
-    text: 'Point to the person whose dating life is currently the most entertaining disaster to watch from the sidelines. Winner takes 2 drinks!'
+    text: 'Point to the person whose current love life or situationship is the most entertaining, high-drama disaster to watch from the sidelines. Winner takes 2 drinks!'
   },
   {
     id: 'leg-med-10',
@@ -336,7 +336,7 @@ export const LEGENDARY_CARDS: PromptItem[] = [
     isLegendary: true,
     rarity: 'legendary',
     legendaryTitle: '★ LEGENDARY CONSENSUS ★',
-    text: 'Who is most likely to accidentally get arrested at an airport for making a terribly timed sarcastic remark to security?'
+    text: 'Who is most likely to get detained at an international airport for making a sarcastic, terribly timed comment to border security?'
   },
   {
     id: 'leg-med-11',
@@ -345,7 +345,7 @@ export const LEGENDARY_CARDS: PromptItem[] = [
     isLegendary: true,
     rarity: 'legendary',
     legendaryTitle: '★ LEGENDARY CONFESSION ★',
-    text: 'Confess the most petty, passive-aggressive revenge you have ever carried out against a roommate, ex, or coworker that they still dont know was you.'
+    text: 'Confess the most petty, calculated revenge you ever pulled off against a roommate, ex, or coworker that they still have no idea was done by you.'
   },
   {
     id: 'leg-med-12',
@@ -354,7 +354,7 @@ export const LEGENDARY_CARDS: PromptItem[] = [
     isLegendary: true,
     rarity: 'legendary',
     legendaryTitle: '★ LEGENDARY HOT SEAT ★',
-    text: 'Rapid Fire Trial: You cannot hesitate for more than 2 seconds. Answer 5 juicy personal questions chosen on the spot by 5 different players!'
+    text: 'The Rapid-Fire Inquest: 60 seconds of zero hesitation! The group can ask you 5 consecutive juicy personal questions, and you have 2 seconds max to answer each!'
   },
 
   // ==========================================
@@ -368,7 +368,7 @@ export const LEGENDARY_CARDS: PromptItem[] = [
     isLegendary: true,
     rarity: 'legendary',
     legendaryTitle: '★ LEGENDARY DARE ★',
-    text: 'The Phone Gauntlet: Hand your unlocked phone to the player on your left for 60 seconds with full permission to inspect your photos and texts OR down a penalty potion concocted by the entire room right now!'
+    text: 'The Central Table Surveillance: Unlock your phone and place it face-up in the dead center of the table. For the next 3 rounds, ANY text, call, or notification that comes in MUST be read out loud to the room by whoever grabs it first!'
   },
   {
     id: 'leg-ext-2',
@@ -378,7 +378,7 @@ export const LEGENDARY_CARDS: PromptItem[] = [
     isLegendary: true,
     rarity: 'legendary',
     legendaryTitle: '★ LEGENDARY TRUTH ★',
-    text: 'What is the most scandalous secret you know about someone sitting in this room right now that you swore to take to your grave?'
+    text: 'The Forbidden Truth: What is the single most scandalous secret you know about someone sitting in this room that you swore on your life you would take to the grave?'
   },
   {
     id: 'leg-ext-3',
@@ -387,9 +387,9 @@ export const LEGENDARY_CARDS: PromptItem[] = [
     isLegendary: true,
     rarity: 'legendary',
     legendaryTitle: '★ LEGENDARY SHOWDOWN ★',
-    text: 'Would you rather let the group scroll through your deleted photos folder for 60 uninterrupted seconds OR let someone give you a temporary buzzcut stripe / permanent marker tattoo?',
+    text: 'Would you rather let the room scroll through your "Recently Deleted" photo folder for 60 uninterrupted seconds OR let the group pick a temporary marker tattoo to draw on your face/neck for the night?',
     optionA: '60 seconds of group scrolling deleted photos',
-    optionB: 'Permanent marker facial tattoo for 24 hours'
+    optionB: 'Group draws marker tattoo on your face/neck'
   },
   {
     id: 'leg-ext-4',
@@ -398,7 +398,7 @@ export const LEGENDARY_CARDS: PromptItem[] = [
     isLegendary: true,
     rarity: 'legendary',
     legendaryTitle: '★ LEGENDARY CONFESSION ★',
-    text: 'Never have I ever hooked up in a dangerously public venue where we were literally seconds away from getting caught by security or police.'
+    text: 'Never have I ever hooked up in a dangerously public or forbidden location where we were literally seconds away from getting arrested or caught by security.'
   },
   {
     id: 'leg-ext-5',
@@ -407,7 +407,7 @@ export const LEGENDARY_CARDS: PromptItem[] = [
     isLegendary: true,
     rarity: 'legendary',
     legendaryTitle: '★ LEGENDARY HOT TAKE ★',
-    text: 'Monogamy is an unnatural social construct that 80% of humans secretly struggle with, whether they admit it to their partner or not.',
+    text: 'True lifelong monogamy is an unnatural social construct that at least 70% of people secretly fight against, whether they ever admit it to their partner or not.',
     discussionPrompt: 'Do you believe humans are biologically built for lifelong monogamy?'
   },
   {
@@ -417,7 +417,7 @@ export const LEGENDARY_CARDS: PromptItem[] = [
     isLegendary: true,
     rarity: 'legendary',
     legendaryTitle: '★ LEGENDARY SPINNER ★',
-    text: 'Body Shot Roulette: Complete a high-velocity body shot off the collarbone or stomach of the player chosen by group vote, or take 3 double penalty drinks right now!'
+    text: 'The High-Stakes Body Shot: Take a high-velocity body shot off the collarbone or stomach of the player determined by majority group vote, or finish 2 full drinks right now!'
   },
   {
     id: 'leg-ext-7',
@@ -426,7 +426,7 @@ export const LEGENDARY_CARDS: PromptItem[] = [
     isLegendary: true,
     rarity: 'legendary',
     legendaryTitle: '★ LEGENDARY JUDGMENT ★',
-    text: 'They casually mention that they still share their permanent live location with their ex-partner "just in case an emergency happens".'
+    text: 'They casually reveal that they still have permanent real-time GPS location sharing enabled with their ex "just in case an emergency happens".'
   },
   {
     id: 'leg-ext-8',
@@ -435,7 +435,7 @@ export const LEGENDARY_CARDS: PromptItem[] = [
     isLegendary: true,
     rarity: 'legendary',
     legendaryTitle: '★ LEGENDARY TRUTH ★',
-    text: 'Reveal the deepest, darkest secret you have actively hidden from your closest friends or family, or finish your entire drink and take another penalty sip!'
+    text: 'The Deep Vault: Confess the deepest, darkest secret or morally gray act you have actively concealed from your closest friends and family, or drain your entire drink and take another penalty!'
   },
   {
     id: 'leg-ext-9',
@@ -444,7 +444,7 @@ export const LEGENDARY_CARDS: PromptItem[] = [
     isLegendary: true,
     rarity: 'legendary',
     legendaryTitle: '★ LEGENDARY POINT ★',
-    text: 'Point to the person who would survive the least amount of time in a survival situation. Most voted player must finish their drink!'
+    text: 'Point to the person in this room who would survive the absolute shortest amount of time if dropped into an apocalyptic survival scenario. Most voted finishes their drink!'
   },
   {
     id: 'leg-ext-10',
@@ -453,7 +453,7 @@ export const LEGENDARY_CARDS: PromptItem[] = [
     isLegendary: true,
     rarity: 'legendary',
     legendaryTitle: '★ LEGENDARY CONSENSUS ★',
-    text: 'Who is most likely to fake their death and flee to South America under an assumed identity after a terrible financial blunder?'
+    text: 'Who is most likely to fake their own disappearance or assume a completely new identity in another country to escape their mounting personal drama?'
   },
   {
     id: 'leg-ext-11',
@@ -462,7 +462,7 @@ export const LEGENDARY_CARDS: PromptItem[] = [
     isLegendary: true,
     rarity: 'legendary',
     legendaryTitle: '★ LEGENDARY CONFESSION ★',
-    text: 'Confess the biggest lie on your resume, dating profile, or social reputation that you have been successfully upholding for years.'
+    text: 'Confess the most reckless, legally dubious, or unhinged thing you have ever done that by all rights should have landed you in jail or hospital.'
   },
   {
     id: 'leg-ext-12',
@@ -471,7 +471,7 @@ export const LEGENDARY_CARDS: PromptItem[] = [
     isLegendary: true,
     rarity: 'legendary',
     legendaryTitle: '★ LEGENDARY HOT SEAT ★',
-    text: 'The Spanish Inquisition: 90 seconds in the hot seat! The group can ask you any 3 unfiltered questions. If you refuse any, 3 penalty shots!'
+    text: 'The Grand Inquisitor: 90 seconds in the hot seat with zero immunity! The group can ask you 3 unfiltered, no-limits questions. Refuse any and you take 3 double penalty drinks!'
   },
 
   // ==========================================
@@ -485,7 +485,7 @@ export const LEGENDARY_CARDS: PromptItem[] = [
     isLegendary: true,
     rarity: 'legendary',
     legendaryTitle: '★ LEGENDARY CHAOS DARE ★',
-    text: 'The Exorcism: Lay flat on the floor while the room gathers in a circle chanting bogus Latin incantations around you. You must rise up like Dracula without bending your knees or using your arms!'
+    text: 'The Hostage Text: Hand your phone to the person on your right. They get to draft a completely unhinged 5-word text message and send it to ANY contact in your phone who is not in this room, with zero explanation allowed for 24 hours!'
   },
   {
     id: 'leg-unh-2',
@@ -495,7 +495,7 @@ export const LEGENDARY_CARDS: PromptItem[] = [
     isLegendary: true,
     rarity: 'legendary',
     legendaryTitle: '★ LEGENDARY CHAOS TRUTH ★',
-    text: 'If you were legally required to replace one of your bodily fluids with a commercial condiment (mayonnaise, sriracha, ranch), which one and how does your day-to-day life change?'
+    text: 'The Condiment Metamorphosis: If you were legally forced to replace one of your bodily fluids with a commercial condiment (warm mayonnaise, sriracha, or ranch dressing), which one do you pick and what does your daily medical checkup look like?'
   },
   {
     id: 'leg-unh-3',
@@ -504,7 +504,7 @@ export const LEGENDARY_CARDS: PromptItem[] = [
     isLegendary: true,
     rarity: 'legendary',
     legendaryTitle: '★ LEGENDARY SHOWDOWN ★',
-    text: 'Would you rather have a live laugh track play loudly in your head every time you speak for a month OR have your inner monologue broadcast via Bluetooth to nearby cars at stoplights?',
+    text: 'Would you rather have a live cartoon laugh track play at maximum volume every time you speak for the next month OR have your inner monologue broadcast via Bluetooth to nearby cars at stoplights?',
     optionA: 'Loud cartoon laugh track every time you talk',
     optionB: 'Inner monologue broadcast via Bluetooth'
   },
@@ -515,7 +515,7 @@ export const LEGENDARY_CARDS: PromptItem[] = [
     isLegendary: true,
     rarity: 'legendary',
     legendaryTitle: '★ LEGENDARY CONFESSION ★',
-    text: 'Never have I ever had a completely serious 10-minute philosophical debate with a housepet or an inanimate piece of furniture while stone-cold sober.'
+    text: 'Never have I ever had a completely serious, heated 10-minute philosophical debate with a housepet, a refrigerator, or a mannequin while stone-cold sober.'
   },
   {
     id: 'leg-unh-5',
@@ -524,7 +524,7 @@ export const LEGENDARY_CARDS: PromptItem[] = [
     isLegendary: true,
     rarity: 'legendary',
     legendaryTitle: '★ LEGENDARY HOT TAKE ★',
-    text: 'Society would be 400% more polite if every human was required by law to carry a water gun filled with cold pickle juice at all times.',
+    text: 'Society would be 400% more civil and respectful if every citizen was legally required to holster a high-powered squirt gun filled with cold dill pickle juice at all times.',
     discussionPrompt: 'Who in this room would abuse the pickle juice gun immediately?'
   },
   {
@@ -534,7 +534,7 @@ export const LEGENDARY_CARDS: PromptItem[] = [
     isLegendary: true,
     rarity: 'legendary',
     legendaryTitle: '★ LEGENDARY SPINNER ★',
-    text: 'The Ransom Call: Call a 24hr diner on speakerphone, ask for "Detective Sullivan", and urgently whisper: "The package has hatched. What do I do with the teeth?" Stay on until they hang up!'
+    text: 'The Diner Ransom: Call a 24-hour restaurant or gas station on speakerphone, ask for "Detective Sullivan", and urgently whisper: "The package has hatched. What do I do with the teeth?" Stay on until they hang up!'
   },
   {
     id: 'leg-unh-7',
@@ -543,7 +543,7 @@ export const LEGENDARY_CARDS: PromptItem[] = [
     isLegendary: true,
     rarity: 'legendary',
     legendaryTitle: '★ LEGENDARY JUDGMENT ★',
-    text: 'They sleep in a three-piece suit and formal dress shoes every night "in case a Victorian burglar breaks in and demands a gentleman duel".'
+    text: 'They sleep every single night in a formal three-piece tailored suit and polished dress shoes "in case a Victorian burglar breaks in and challenges them to a duel of honor".'
   },
   {
     id: 'leg-unh-8',
@@ -552,7 +552,7 @@ export const LEGENDARY_CARDS: PromptItem[] = [
     isLegendary: true,
     rarity: 'legendary',
     legendaryTitle: '★ LEGENDARY TRUTH ★',
-    text: 'What is the most cursed, deranged thought that has randomly popped into your head while standing in a quiet elevator with strangers? Spill it or take 3 drinks!'
+    text: 'The Cursed Thought: What is the most deranged, intrusive thought that has ever entered your brain while standing in a dead-silent room or crowded elevator? Confess it or take 3 penalty drinks!'
   },
   {
     id: 'leg-unh-9',
@@ -561,7 +561,7 @@ export const LEGENDARY_CARDS: PromptItem[] = [
     isLegendary: true,
     rarity: 'legendary',
     legendaryTitle: '★ LEGENDARY POINT ★',
-    text: 'Point to the person who looks the most like they secretly operate an illegal underground ferret wrestling tournament in their basement!'
+    text: 'Point to the person in the room who looks the most like they secretly operate an illegal underground competitive ferret wrestling syndicate in their attic!'
   },
   {
     id: 'leg-unh-10',
@@ -570,7 +570,7 @@ export const LEGENDARY_CARDS: PromptItem[] = [
     isLegendary: true,
     rarity: 'legendary',
     legendaryTitle: '★ LEGENDARY CONSENSUS ★',
-    text: 'Who is most likely to accidentally found a legitimate religious cult because they got way too enthusiastic about sourdough bread baking?'
+    text: 'Who is most likely to accidentally establish a full-fledged apocalyptic cult because they got way too passionate about artisanal sourdough bread fermentation?'
   },
   {
     id: 'leg-unh-11',
@@ -579,7 +579,7 @@ export const LEGENDARY_CARDS: PromptItem[] = [
     isLegendary: true,
     rarity: 'legendary',
     legendaryTitle: '★ LEGENDARY CONFESSION ★',
-    text: 'Confess the weirdest, most unhinged sensory habit you do in complete isolation that would make everyone here slowly back away from you.'
+    text: 'Confess the most cursed, feral sensory habit you perform when completely alone in your house that would make everyone here slowly edge away from you.'
   },
   {
     id: 'leg-unh-12',
@@ -588,7 +588,7 @@ export const LEGENDARY_CARDS: PromptItem[] = [
     isLegendary: true,
     rarity: 'legendary',
     legendaryTitle: '★ LEGENDARY HOT SEAT ★',
-    text: 'The Madness Chamber: 60 seconds where you must defend the most insane conspiracy theory the group invents for you with 100% genuine unblinking passion!'
+    text: 'The Madness Defense: 60 seconds on the clock! The room invents the most absurd, incoherent conspiracy theory imaginable; you must passionately defend it with tears in your eyes and unblinking conviction!'
   },
 
   // ==========================================
@@ -602,7 +602,7 @@ export const LEGENDARY_CARDS: PromptItem[] = [
     isLegendary: true,
     rarity: 'legendary',
     legendaryTitle: '★ LEGENDARY COUPLES DARE ★',
-    text: 'The 60-Second Stare Down: Sit knee-to-knee with your partner, hold both their hands, and look into their eyes for 60 seconds without laughing or breaking contact. Then whisper the exact moment you fell completely in love with them.'
+    text: 'The Soul Lock: Sit knee-to-knee with your partner, interlock fingers, and hold unbroken eye contact for 60 seconds without speaking, laughing, or looking away. When time is up, whisper the exact moment you knew you were head-over-heels in love with them.'
   },
   {
     id: 'leg-cpl-2',
@@ -612,7 +612,7 @@ export const LEGENDARY_CARDS: PromptItem[] = [
     isLegendary: true,
     rarity: 'legendary',
     legendaryTitle: '★ LEGENDARY COUPLES TRUTH ★',
-    text: 'What is a deep emotional longing, romantic fantasy, or vulnerability you have been afraid to voice to your partner because you feared judgment?'
+    text: 'The Unspoken Longing: What is a deep emotional longing, romantic fantasy, or vulnerable secret you have hesitated to say out loud to your partner because you feared being judged or misunderstood?'
   },
   {
     id: 'leg-cpl-3',
@@ -621,9 +621,9 @@ export const LEGENDARY_CARDS: PromptItem[] = [
     isLegendary: true,
     rarity: 'legendary',
     legendaryTitle: '★ LEGENDARY SHOWDOWN ★',
-    text: 'Would you rather have your partner be able to read your exact thoughts whenever they touch your hand OR relive your most awkward first date every single anniversary?',
-    optionA: 'Partner reads your thoughts on physical contact',
-    optionB: 'Relive awkward first date every single anniversary'
+    text: 'Would you rather have your partner be able to hear your exact unfiltered thoughts whenever they touch your skin OR have to relive your most awkward first date every single anniversary for the rest of your lives?',
+    optionA: 'Partner hears your thoughts on skin contact',
+    optionB: 'Relive awkward first date every anniversary'
   },
   {
     id: 'leg-cpl-4',
@@ -632,7 +632,7 @@ export const LEGENDARY_CARDS: PromptItem[] = [
     isLegendary: true,
     rarity: 'legendary',
     legendaryTitle: '★ LEGENDARY CONFESSION ★',
-    text: 'Never have I ever stayed up past 2am re-reading old text messages and looking at photos from when we first started dating while smiling like an idiot.'
+    text: 'Never have I ever stayed awake past 2 AM silently looking at my partner sleeping while being overwhelmed by a wave of pure gratitude that they chose me.'
   },
   {
     id: 'leg-cpl-5',
@@ -641,7 +641,7 @@ export const LEGENDARY_CARDS: PromptItem[] = [
     isLegendary: true,
     rarity: 'legendary',
     legendaryTitle: '★ LEGENDARY HOT TAKE ★',
-    text: 'In every long-term relationship, one person loves slightly harder and cares slightly more, and that power balance shifts back and forth constantly.',
+    text: 'In every long-term relationship, one person secretly loves slightly harder and cares slightly more, and that power balance shifts back and forth constantly over time.',
     discussionPrompt: 'Do you agree that love in relationships is rarely a perfect 50/50 balance?'
   },
   {
@@ -651,7 +651,7 @@ export const LEGENDARY_CARDS: PromptItem[] = [
     isLegendary: true,
     rarity: 'legendary',
     legendaryTitle: '★ LEGENDARY SPINNER ★',
-    text: 'The Slow Burn: Give your partner a slow, gentle 60-second neck and shoulder massage while whispering 3 distinct things that make them completely irresistible to you.'
+    text: 'The Electric Touch: Close your eyes. Your partner has 45 seconds to trace their fingertips, lips, and breath across your neck, collarbone, and hands. If your heartbeat does not visibly race, you owe them breakfast in bed tomorrow!'
   },
   {
     id: 'leg-cpl-7',
@@ -660,7 +660,7 @@ export const LEGENDARY_CARDS: PromptItem[] = [
     isLegendary: true,
     rarity: 'legendary',
     legendaryTitle: '★ LEGENDARY JUDGMENT ★',
-    text: 'They planned out your entire future wedding, house decor, and baby names on Pinterest by week 2 of dating.'
+    text: 'By date number two, they already had a secret private Pinterest board with your wedding theme, living room furniture layout, and joint pet names fully organized.'
   },
   {
     id: 'leg-cpl-8',
@@ -669,7 +669,7 @@ export const LEGENDARY_CARDS: PromptItem[] = [
     isLegendary: true,
     rarity: 'legendary',
     legendaryTitle: '★ LEGENDARY TRUTH ★',
-    text: 'Admit the one specific look, outfit, or gesture your partner wears that makes you instantly lose all self-control. Answer or both take a sip!'
+    text: 'The Irresistible Trigger: Confess the one specific outfit, scent, glance, or gesture your partner does that makes you instantly lose all composure and self-control. Answer or both take a sip!'
   },
   {
     id: 'leg-cpl-9',
@@ -678,7 +678,7 @@ export const LEGENDARY_CARDS: PromptItem[] = [
     isLegendary: true,
     rarity: 'legendary',
     legendaryTitle: '★ LEGENDARY POINT ★',
-    text: 'Point to who said "I love you" first, and who takes 3x longer to apologize after a stupid argument. Loser takes a sip!'
+    text: 'Point to who in the relationship fell in love first, and point to who takes 5x longer to swallow their pride and apologize after an argument. Loser takes a sip!'
   },
   {
     id: 'leg-cpl-10',
@@ -687,7 +687,7 @@ export const LEGENDARY_CARDS: PromptItem[] = [
     isLegendary: true,
     rarity: 'legendary',
     legendaryTitle: '★ LEGENDARY CONSENSUS ★',
-    text: 'Who is most likely to impulsively book a weekend flight to a romantic city because they missed each other too much?'
+    text: 'Who is most likely to impulsively book a surprise weekend getaway to a secluded cabin or romantic city because they could not stand being apart for another week?'
   },
   {
     id: 'leg-cpl-11',
@@ -696,7 +696,7 @@ export const LEGENDARY_CARDS: PromptItem[] = [
     isLegendary: true,
     rarity: 'legendary',
     legendaryTitle: '★ LEGENDARY CONFESSION ★',
-    text: 'Confess the sweetest, most embarrassing thing you secretly did just to impress your partner without them ever finding out.'
+    text: 'Confess the sweetest, most embarrassing thing you secretly did behind your partner\'s back just to make them smile, protect them, or impress them without them ever finding out.'
   },
   {
     id: 'leg-cpl-12',
@@ -705,7 +705,7 @@ export const LEGENDARY_CARDS: PromptItem[] = [
     isLegendary: true,
     rarity: 'legendary',
     legendaryTitle: '★ LEGENDARY HOT SEAT ★',
-    text: 'Couples Interrogation: Your partner has 60 seconds of complete immunity to ask you 3 burning questions you have been dodging. Complete honesty required!'
+    text: 'The Immunity Interrogation: Your partner has 60 seconds of complete, unconditional immunity to ask you 3 burning questions you have been dodging or deflecting. Total honesty required!'
   },
 
   // ==========================================
@@ -719,7 +719,7 @@ export const LEGENDARY_CARDS: PromptItem[] = [
     isLegendary: true,
     rarity: 'legendary',
     legendaryTitle: '★ LEGENDARY SPICY DARE ★',
-    text: 'Sensory Overload: Blindfold yourself. The player of your choice will slowly trace their fingertips and warm breath along your neck, jawline, and collarbone for 30 seconds. If you pull away or shiver visibly, take a drink!'
+    text: 'The Sensory Blindfold: Put on a blindfold. The player of your choice has 35 seconds to slowly trace their warm breath, fingertips, and whispers along your neck, jawline, and collarbone without touching your lips. If you shiver or pull back, take 2 penalty drinks!'
   },
   {
     id: 'leg-spicy-2',
@@ -729,7 +729,7 @@ export const LEGENDARY_CARDS: PromptItem[] = [
     isLegendary: true,
     rarity: 'legendary',
     legendaryTitle: '★ LEGENDARY SPICY TRUTH ★',
-    text: 'Describe in tantalizing, mouth-watering detail the hottest sexual fantasy you replay in your mind that you have not lived out in reality yet.'
+    text: 'The Raw Fantasy: Describe in vivid, heart-pounding detail the single dirtiest, most tantalizing sexual fantasy you replay in your mind that you have never confessed out loud to anyone.'
   },
   {
     id: 'leg-spicy-3',
@@ -738,7 +738,7 @@ export const LEGENDARY_CARDS: PromptItem[] = [
     isLegendary: true,
     rarity: 'legendary',
     legendaryTitle: '★ LEGENDARY SHOWDOWN ★',
-    text: 'Would you rather be handcuffed to the person across from you in bed with zero control over what happens next OR take total dominant control while they obey your every whisper?',
+    text: 'Would you rather be handcuffed to the bed with zero control over what the other person does to tease you OR have total dominant control where they must obey every whispered command you give?',
     optionA: 'Handcuffed with zero control in bed',
     optionB: 'Total dominant control with them obeying'
   },
@@ -749,7 +749,7 @@ export const LEGENDARY_CARDS: PromptItem[] = [
     isLegendary: true,
     rarity: 'legendary',
     legendaryTitle: '★ LEGENDARY CONFESSION ★',
-    text: 'Never have I ever sent a nude or risky photo so daring that my heart was pounding out of my chest for the next 20 minutes.'
+    text: 'Never have I ever taken and sent a risky photo so explicit and daring that my pulse was pounding in my throat for the next 20 minutes waiting for their reaction.'
   },
   {
     id: 'leg-spicy-5',
@@ -758,7 +758,7 @@ export const LEGENDARY_CARDS: PromptItem[] = [
     isLegendary: true,
     rarity: 'legendary',
     legendaryTitle: '★ LEGENDARY HOT TAKE ★',
-    text: 'Polite, quiet sex is overrated; if you aren\'t leaving marks, losing your breath, and talking dirty, you\'re doing it completely wrong.',
+    text: 'Quiet, polite sex is completely overrated; if you aren\'t leaving marks, losing your breath, and talking filthy, you are doing it completely wrong.',
     discussionPrompt: 'Do you prefer intense passionate dirty talk or gentle romantic rhythm?'
   },
   {
@@ -768,7 +768,7 @@ export const LEGENDARY_CARDS: PromptItem[] = [
     isLegendary: true,
     rarity: 'legendary',
     legendaryTitle: '★ LEGENDARY SPINNER ★',
-    text: 'The Temperature Check: Slide your hand under the shirt of the player on your right and place your palm directly over their bare chest and heartbeat for 25 uninterrupted seconds while maintaining eye contact!'
+    text: 'The Pulse Check: Slide your hand under the shirt of the person on your right and place your palm directly over their bare chest and heartbeat for 25 uninterrupted seconds while holding unbroken eye contact!'
   },
   {
     id: 'leg-spicy-7',
@@ -777,7 +777,7 @@ export const LEGENDARY_CARDS: PromptItem[] = [
     isLegendary: true,
     rarity: 'legendary',
     legendaryTitle: '★ LEGENDARY JUDGMENT ★',
-    text: 'On date two, they tell you they own silk blindfolds, handcuffs, and a feather tickler and expect you to take charge on night one.'
+    text: 'On date two, they casually mention that their nightstand is fully stocked with silk restraints, blindfolds, and massage oils, and they expect you to take charge on night one.'
   },
   {
     id: 'leg-spicy-8',
@@ -786,7 +786,7 @@ export const LEGENDARY_CARDS: PromptItem[] = [
     isLegendary: true,
     rarity: 'legendary',
     legendaryTitle: '★ LEGENDARY TRUTH ★',
-    text: 'What is the dirtiest or most taboo kink you secretly find yourself aroused by? Confess all details or finish your entire drink!'
+    text: 'The Forbidden Kink: What is the filthiest, most unexpected kink you have ever been turned on by? Confess every detail with total honesty or finish your entire drink right now!'
   },
   {
     id: 'leg-spicy-9',
@@ -795,7 +795,7 @@ export const LEGENDARY_CARDS: PromptItem[] = [
     isLegendary: true,
     rarity: 'legendary',
     legendaryTitle: '★ LEGENDARY POINT ★',
-    text: 'Point to the person whose whisper or touch would give you the most instant physical reaction. Chosen player distributes 3 drinks!'
+    text: 'Point to the person whose touch or whisper would cause the most instantaneous, uncontrollable physical reaction in your body. Selected player gives out 3 drinks!'
   },
   {
     id: 'leg-spicy-10',
@@ -804,7 +804,7 @@ export const LEGENDARY_CARDS: PromptItem[] = [
     isLegendary: true,
     rarity: 'legendary',
     legendaryTitle: '★ LEGENDARY CONSENSUS ★',
-    text: 'Who is most likely to possess a secret bedroom drawer packed with toys and accessories that would shock their parents to death?'
+    text: 'Who is most likely to own a locked bedside drawer filled with toys, accessories, and gear that would give their parents a heart attack if ever discovered?'
   },
   {
     id: 'leg-spicy-11',
@@ -813,7 +813,7 @@ export const LEGENDARY_CARDS: PromptItem[] = [
     isLegendary: true,
     rarity: 'legendary',
     legendaryTitle: '★ LEGENDARY CONFESSION ★',
-    text: 'Confess the dirtiest, most unexpected thought you have had about someone sitting in this room right now.'
+    text: 'Confess the single dirtiest, most explicit thought or daydream you have had about someone sitting in this room right now.'
   },
   {
     id: 'leg-spicy-12',
@@ -822,7 +822,7 @@ export const LEGENDARY_CARDS: PromptItem[] = [
     isLegendary: true,
     rarity: 'legendary',
     legendaryTitle: '★ LEGENDARY HOT SEAT ★',
-    text: 'Spicy Trial: 60 seconds on the hot seat! The group can ask you 3 explicit questions about your dirty talk, endurance, and bedroom kinks. Total honesty only!'
+    text: 'The Spicy Crucible: 60 seconds on the hot seat! The group can ask you 3 explicit questions about your dirty talk, endurance, and bedroom kinks. Total honesty only!'
   },
 
   // ==========================================
@@ -836,7 +836,7 @@ export const LEGENDARY_CARDS: PromptItem[] = [
     isLegendary: true,
     rarity: 'legendary',
     legendaryTitle: '★ LEGENDARY 18+ DARE ★',
-    text: 'Bedroom Demonstration: Demonstrate using hand motions, breathing, and posture your absolute favorite rhythm, position, and the exact words that make you lose complete control in the bedroom!'
+    text: 'The Bedroom Blueprint: Demonstrate using hand gestures, posture, rhythm, and breathing your absolute favorite position and the exact words spoken that make you lose all self-control in the bedroom!'
   },
   {
     id: 'leg-18p-2',
@@ -846,7 +846,7 @@ export const LEGENDARY_CARDS: PromptItem[] = [
     isLegendary: true,
     rarity: 'legendary',
     legendaryTitle: '★ LEGENDARY 18+ TRUTH ★',
-    text: 'Describe the wildest, most intense orgasm you have ever experienced in your life: where were you, what was happening, and what made it unforgettable?'
+    text: 'The Peak Orgasm: Describe the single wildest, most intense orgasm of your life: where were you, what was happening, what made it so overwhelming, and who made it happen?'
   },
   {
     id: 'leg-18p-3',
@@ -855,8 +855,8 @@ export const LEGENDARY_CARDS: PromptItem[] = [
     isLegendary: true,
     rarity: 'legendary',
     legendaryTitle: '★ LEGENDARY SHOWDOWN ★',
-    text: 'Would you rather have an entire uninterrupted weekend of rough, unrestrained passion in a luxury penthouse OR a high-adrenaline hookup in a location where someone could walk in at any second?',
-    optionA: 'Unrestrained weekend in luxury penthouse',
+    text: 'Would you rather have a 72-hour uninterrupted weekend of rough, uninhibited passion in a secluded penthouse OR a high-adrenaline hookup in a location where someone could walk in on you at any second?',
+    optionA: 'Uninhibited weekend in secluded penthouse',
     optionB: 'High-adrenaline hookup where you could get caught'
   },
   {
@@ -866,7 +866,7 @@ export const LEGENDARY_CARDS: PromptItem[] = [
     isLegendary: true,
     rarity: 'legendary',
     legendaryTitle: '★ LEGENDARY CONFESSION ★',
-    text: 'Never have I ever had sex in an outdoor balcony, airplane bathroom, moving car, or public swimming pool.'
+    text: 'Never have I ever hooked up in an outdoor balcony, moving vehicle, swimming pool, or dressing room with people right outside.'
   },
   {
     id: 'leg-18p-5',
@@ -875,7 +875,7 @@ export const LEGENDARY_CARDS: PromptItem[] = [
     isLegendary: true,
     rarity: 'legendary',
     legendaryTitle: '★ LEGENDARY HOT TAKE ★',
-    text: 'Bedroom compatibility is 75% of a relationship\'s survival, and anyone claiming emotional connection overrides physical chemistry is lying to themselves.',
+    text: 'Sexual compatibility accounts for at least 75% of a relationship\'s long-term survival, and anyone claiming emotional connection overrides physical chemistry is lying to themselves.',
     discussionPrompt: 'Can a relationship survive without great sexual chemistry?'
   },
   {
@@ -885,7 +885,7 @@ export const LEGENDARY_CARDS: PromptItem[] = [
     isLegendary: true,
     rarity: 'legendary',
     legendaryTitle: '★ LEGENDARY SPINNER ★',
-    text: 'The Explicit Whisper: Lean over and whisper the single most graphic, dirty sexual act you want done to you right now directly into the ear of the player chosen by group vote!'
+    text: 'The Graphic Whisper: Lean in and whisper the single filthiest, most explicit sexual act you crave right now directly into the ear of the player chosen by group vote!'
   },
   {
     id: 'leg-18p-7',
@@ -894,7 +894,7 @@ export const LEGENDARY_CARDS: PromptItem[] = [
     isLegendary: true,
     rarity: 'legendary',
     legendaryTitle: '★ LEGENDARY JUDGMENT ★',
-    text: 'They demand light choking, hair pulling, and being given explicit verbal commands every single time you are in bed.'
+    text: 'They require being pinned down, light hair pulling, and being given explicit verbal commands every single time you are in bed together.'
   },
   {
     id: 'leg-18p-8',
@@ -903,7 +903,7 @@ export const LEGENDARY_CARDS: PromptItem[] = [
     isLegendary: true,
     rarity: 'legendary',
     legendaryTitle: '★ LEGENDARY TRUTH ★',
-    text: 'What is the kinky sexual act you tried once that shocked you because you ended up genuinely loving it? Spill everything or take 4 drinks!'
+    text: 'The Kinky Revelation: What is a taboo sexual act or kink you tried once that completely caught you off guard because you ended up genuinely obsessed with it? Spill it all or take 4 drinks!'
   },
   {
     id: 'leg-18p-9',
@@ -912,7 +912,7 @@ export const LEGENDARY_CARDS: PromptItem[] = [
     isLegendary: true,
     rarity: 'legendary',
     legendaryTitle: '★ LEGENDARY POINT ★',
-    text: 'Point to the person who looks the most innocent on the outside but is secretly the wildest behind closed bedroom doors. Most votes takes 3 drinks!'
+    text: 'Point to the person who looks the most innocent and composed on the outside, but is secretly the most ravenous and wild behind closed bedroom doors. Most votes drinks 3!'
   },
   {
     id: 'leg-18p-10',
@@ -921,7 +921,7 @@ export const LEGENDARY_CARDS: PromptItem[] = [
     isLegendary: true,
     rarity: 'legendary',
     legendaryTitle: '★ LEGENDARY CONSENSUS ★',
-    text: 'Who is most likely to accidentally scream someone else\'s name or a completely ridiculous phrase in the heat of passion?'
+    text: 'Who is most likely to accidentally moan someone else\'s name or a completely ridiculous phrase in the absolute heat of passion?'
   },
   {
     id: 'leg-18p-11',
@@ -930,7 +930,7 @@ export const LEGENDARY_CARDS: PromptItem[] = [
     isLegendary: true,
     rarity: 'legendary',
     legendaryTitle: '★ LEGENDARY CONFESSION ★',
-    text: 'Confess the most taboo, explicit scenario you have ever searched for in incognito mode that you would die of embarrassment if exposed.'
+    text: 'Confess the most taboo, explicit scenario you have ever searched in incognito mode that would leave you mortified if your browsing history was leaked to this room.'
   },
   {
     id: 'leg-18p-12',
@@ -939,7 +939,6 @@ export const LEGENDARY_CARDS: PromptItem[] = [
     isLegendary: true,
     rarity: 'legendary',
     legendaryTitle: '★ LEGENDARY HOT SEAT ★',
-    text: '18+ Bedroom Interrogation: 60 seconds of raw bedroom truth! The group can ask you anything about your anatomy, kinks, stamina, and wildest fantasies!'
+    text: 'The Bedroom Confessional: 60 seconds of raw, uncensored bedroom truth! The group gets to ask you 3 unfiltered questions about your anatomy, kinks, stamina, and wildest fantasies!'
   },
 ];
-

@@ -83,9 +83,11 @@ export const WouldYouRatherGame: React.FC<WouldYouRatherGameProps> = ({ prompts,
             Would You Rather
           </span>
         )}
-        <h3 className="text-sm sm:text-base text-zinc-300 font-medium mt-1">
-          Make the impossible call & see how humanity voted
-        </h3>
+        {currentIndex === 0 && (
+          <h3 className="text-sm sm:text-base text-zinc-300 font-medium mt-1">
+            Make the impossible call & see how humanity voted
+          </h3>
+        )}
       </div>
 
       {/* Choice Grid: Option A vs Option B (Screen-Filling & Massive) */}

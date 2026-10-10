@@ -156,9 +156,11 @@ export const ConfessionsGame: React.FC<ConfessionsGameProps> = ({ prompts, playe
 
         {mode === 'submit' ? (
           <div className="w-full flex flex-col items-center">
-            <p className="text-xs sm:text-sm text-zinc-300 mb-4 sm:mb-6 max-w-lg">
-              Pass the phone to submit anonymous answers or drop your secrets below!
-            </p>
+            {currentIndex === 0 && (
+              <p className="text-xs sm:text-sm text-zinc-300 mb-4 sm:mb-6 max-w-lg">
+                Pass the phone to submit anonymous answers or drop your secrets below!
+              </p>
+            )}
 
             <form onSubmit={handleAddSubmission} className="w-full max-w-xl flex flex-col gap-3 sm:gap-4">
               <textarea

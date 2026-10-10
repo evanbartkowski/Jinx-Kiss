@@ -161,13 +161,15 @@ export const PointAndDrinkGame: React.FC<PointAndDrinkGameProps> = ({ prompts, p
           )
         )}
 
-        <div className="text-xs sm:text-base text-zinc-300 font-semibold my-2 z-10">
-          {countdown === null
-            ? 'Tap Start, then on "POINT!" point your finger at someone!'
-            : hasPlayers
-              ? 'Tap player below to record finger points!'
-              : 'Look around the room and count the fingers!'}
-        </div>
+        {currentIndex === 0 && (
+          <div className="text-xs sm:text-base text-zinc-300 font-semibold my-2 z-10">
+            {countdown === null
+              ? 'Tap Start, then on "POINT!" point your finger at someone!'
+              : hasPlayers
+                ? 'Tap player below to record finger points!'
+                : 'Look around the room and count the fingers!'}
+          </div>
+        )}
 
         {/* Card Rating & Report Bar */}
         <div className="w-full max-w-md z-10">

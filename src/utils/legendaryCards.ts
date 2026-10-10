@@ -49,13 +49,13 @@ export function getLegendaryCardForCategory(category: GameCategory, gameId?: Gam
 }
 
 /**
- * Evaluates whether to upgrade a draw to a Rare Legendary Card (~7% chance, 1 in 14 cards).
+ * Evaluates whether to upgrade a draw to a Rare Legendary Card (~2% chance, 1 in 50 cards).
  */
 export function rollForLegendaryCard(
   chosenPrompt: PromptItem,
   category: GameCategory,
   gameId: GameId,
-  chance: number = 0.07
+  chance: number = 0.02
 ): PromptItem {
   // If the prompt is already legendary, keep it
   if (isPromptLegendary(chosenPrompt)) {

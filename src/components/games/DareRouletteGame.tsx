@@ -38,6 +38,7 @@ export const DareRouletteGame: React.FC<DareRouletteGameProps> = ({
   const [currentDare, setCurrentDare] = useState<PromptItem | null>(null);
   const [isSpinning, setIsSpinning] = useState(false);
   const [rotationAngle, setRotationAngle] = useState(0);
+  const [spinCount, setSpinCount] = useState(0);
 
   // Sync when parent players change
   useEffect(() => {
@@ -203,6 +204,7 @@ export const DareRouletteGame: React.FC<DareRouletteGameProps> = ({
   const spinWheel = () => {
     if (isSpinning || activeSegments.length < 2) return;
     setIsSpinning(true);
+    setSpinCount((prev) => prev + 1);
     setSelectedWinner(null);
     setCurrentDare(null);
 
@@ -289,9 +291,11 @@ export const DareRouletteGame: React.FC<DareRouletteGameProps> = ({
             <Sparkles className="w-4 h-4" />
             <span>{isPlayerMode ? `${activeSegments.length} Players on Wheel` : 'Dare Roulette Wheel'}</span>
           </div>
-          <p className="text-sm sm:text-base text-zinc-300 font-medium">
-            {isPlayerMode ? 'Spin to select who faces the next dare' : 'Spin the neon roulette to determine your challenge'}
-          </p>
+          {spinCount === 0 && (
+            <p className="text-sm sm:text-base text-zinc-300 font-medium">
+              {isPlayerMode ? 'Spin to select who faces the next dare' : 'Spin the neon roulette to determine your challenge'}
+            </p>
+          )}
         </div>
       )}
 
