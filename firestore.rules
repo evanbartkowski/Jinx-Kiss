@@ -40,6 +40,9 @@ service cloud.firestore {
     match /votes/{promptId} {
       allow read, write: if true;
     }
+    match /game_votes/{promptId} {
+      allow read, write: if true;
+    }
 
     // Card Ratings & Likes
     match /card_ratings/{cardId} {

@@ -74,6 +74,24 @@ describe('Twelve Playable Games & Category Filtering', () => {
     expect(vote2.optionAPercentage + vote2.optionBPercentage).toBe(100);
   });
 
+  it('saves all players who play Would You Rather and their choices', async () => {
+    const promptId = 'test_wyr_players_save';
+    const voteEvan = await votingService.recordVote(promptId, 'A', 'Evan');
+    expect(voteEvan.recentVoters.some(v => v.name === 'Evan' && v.choice === 'A')).toBe(true);
+
+    const voteSarah = await votingService.recordVote(promptId, 'B', 'Sarah');
+    expect(voteSarah.recentVoters.some(v => v.name === 'Sarah' && v.choice === 'B')).toBe(true);
+
+    const allPlayers = votingService.getAllPlayers();
+    expect(allPlayers.some(p => p.name === 'Evan')).toBe(true);
+    expect(allPlayers.some(p => p.name === 'Sarah')).toBe(true);
+
+    // Verify accurate percentage distribution
+    expect(voteSarah.optionAPercentage + voteSarah.optionBPercentage).toBe(100);
+    expect(voteSarah.optionACount).toBeGreaterThanOrEqual(1);
+    expect(voteSarah.optionBCount).toBeGreaterThanOrEqual(1);
+  });
+
   it('configures exactly 12 vibrant Chaos Wheel segments with valid properties', () => {
     expect(CHAOS_WHEEL_SEGMENTS).toHaveLength(12);
     CHAOS_WHEEL_SEGMENTS.forEach(seg => {
