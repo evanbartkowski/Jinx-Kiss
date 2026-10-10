@@ -1,12 +1,13 @@
 import React from 'react';
 import { useAuth } from '../../context/AuthContext';
-import { Sparkles, User, Layers, Shield, LogOut, Volume2, History } from 'lucide-react';
+import { Sparkles, User, Layers, Shield, LogOut, Volume2, History, Play } from 'lucide-react';
 
 interface HeaderProps {
   currentView: string;
   onNavigate: (view: string, param?: string) => void;
   onOpenAudio?: () => void;
   onOpenHistory?: () => void;
+  onQuickPlay?: () => void;
 }
 
 export const Header: React.FC<HeaderProps> = ({
@@ -14,6 +15,7 @@ export const Header: React.FC<HeaderProps> = ({
   onNavigate,
   onOpenAudio,
   onOpenHistory,
+  onQuickPlay,
 }) => {
   const { currentUser, isAuthenticated, isAdmin, openAuthModal, logout } = useAuth();
 
@@ -38,8 +40,20 @@ export const Header: React.FC<HeaderProps> = ({
         </div>
 
         {/* Navigation & User actions */}
-        <div className="flex items-center gap-1.5 sm:gap-3">
+        <div className="flex items-center gap-1 sm:gap-2.5">
           
+          {/* Quick Play link */}
+          {onQuickPlay && (
+            <button
+              onClick={onQuickPlay}
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs sm:text-sm font-bold bg-gradient-to-r from-brand-pink via-purple-600 to-brand-violet hover:from-pink-500 hover:to-purple-500 text-white shadow-neon-pink/30 hover:shadow-neon-pink/50 transition-all active:scale-95"
+            >
+              <Play className="w-3.5 h-3.5 fill-white" />
+              <span className="hidden sm:inline">Quick Play</span>
+              <span className="sm:hidden">Play</span>
+            </button>
+          )}
+
           {/* Party Mode link */}
           <button
             onClick={() => onNavigate('party-setup')}
@@ -50,7 +64,7 @@ export const Header: React.FC<HeaderProps> = ({
             }`}
           >
             <Sparkles className="w-4 h-4 text-brand-pink" />
-            <span>Party Mode</span>
+            <span className="hidden sm:inline">Party Mode</span>
           </button>
 
           {/* Multiplayer Rooms link */}
@@ -62,7 +76,7 @@ export const Header: React.FC<HeaderProps> = ({
                 : 'text-zinc-300 hover:text-white hover:bg-white/[0.05]'
             }`}
           >
-            <span className="hidden sm:inline">Multiplayer</span> Rooms
+            <span className="hidden md:inline">Multiplayer</span> Rooms
           </button>
 
           {/* Custom Decks link for logged-in users */}
@@ -76,7 +90,7 @@ export const Header: React.FC<HeaderProps> = ({
               }`}
             >
               <Layers className="w-4 h-4 text-brand-pink" />
-              <span className="hidden md:inline">My Decks</span>
+              <span className="hidden lg:inline">My Decks</span>
             </button>
           )}
 
@@ -101,9 +115,10 @@ export const Header: React.FC<HeaderProps> = ({
               onClick={onOpenHistory}
               title="Game History & Saved Sessions"
               aria-label="Game History"
-              className="p-2 rounded-xl text-zinc-400 hover:text-white hover:bg-white/[0.06] border border-transparent hover:border-white/10 transition-all active:scale-95"
+              className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl text-xs sm:text-sm font-medium text-zinc-300 hover:text-white hover:bg-white/[0.06] border border-transparent hover:border-white/10 transition-all active:scale-95"
             >
               <History className="w-4 h-4 text-purple-400" />
+              <span className="hidden md:inline">History</span>
             </button>
           )}
 

@@ -159,6 +159,7 @@ function AppContent() {
         onNavigate={(v) => navigateTo(v as AppView)}
         onOpenAudio={() => setIsAudioModalOpen(true)}
         onOpenHistory={() => setIsHistoryModalOpen(true)}
+        onQuickPlay={handleQuickPlay}
       />
 
       <main className="flex-1 flex flex-col">

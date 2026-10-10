@@ -83,13 +83,15 @@ export const GamePage: React.FC<GamePageProps> = ({ gameId, customDeck, onExit }
       const deduplicated = sessionService.filterUnseenCards(gameId, rawPool);
       setPrompts(deduplicated);
 
-      // 4. Auto-save session
+      // 4. Auto-save session (preserve round if resuming existing session for this game & category)
+      const existing = sessionService.getActiveSession();
+      const isSameSession = existing && existing.gameId === gameId && existing.category === selectedCategory;
       sessionService.saveActiveSession({
         mode: 'solo',
         gameId,
         category: selectedCategory,
-        players: savedPlayers,
-        currentRound: 1,
+        players: isSameSession && existing.players && existing.players.length > 0 ? existing.players : savedPlayers,
+        currentRound: isSameSession ? existing.currentRound : 1,
       });
     };
 

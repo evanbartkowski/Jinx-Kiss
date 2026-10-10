@@ -1,15 +1,15 @@
 {
   "projects": {
-    "default": "starlight-fishing"
+    "default": "jinxkiss-cfbaf"
   },
   "targets": {
-    "starlight-fishing": {
+    "jinxkiss-cfbaf": {
       "hosting": {
         "jinxkiss": [
-          "jinxkiss"
+          "jinxkiss-cfbaf"
         ]
       }
     }
-  }
+  },
+  "etags": {}
 }
-
