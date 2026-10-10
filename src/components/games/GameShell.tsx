@@ -67,7 +67,7 @@ export const GameShell: React.FC<GameShellProps> = ({
       />
 
       {/* Top Bar Controls */}
-      <div className="w-full flex flex-col gap-3 pb-3 relative z-10">
+      <div className="w-full flex flex-col gap-3 pb-3 relative z-30">
         <div className="flex items-center justify-between gap-2 p-2 rounded-2xl bg-zinc-950/60 border border-white/[0.07] backdrop-blur-md shadow-lg">
           {/* Back button */}
           <div className="flex items-center gap-2">

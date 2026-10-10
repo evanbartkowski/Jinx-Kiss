@@ -130,9 +130,11 @@ export const TruthOrSipGame: React.FC<TruthOrSipGameProps> = ({ prompts, players
           </div>
         )}
 
-        <div className="text-xs sm:text-base text-zinc-300 font-semibold my-2 z-10">
-          Answer 100% truthfully or take the sip penalty.
-        </div>
+        {currentIndex === 0 && (
+          <div className="text-xs sm:text-base text-zinc-300 font-semibold my-2 z-10 animate-fade-in">
+            Answer 100% truthfully or take the sip penalty.
+          </div>
+        )}
 
         {/* Card Rating & Report Bar */}
         <div className="w-full max-w-md z-10">

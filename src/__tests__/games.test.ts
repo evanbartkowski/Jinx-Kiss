@@ -117,4 +117,13 @@ describe('Twelve Playable Games & Category Filtering', () => {
     expect(isRemoved).toBe(false);
     expect(favoritesService.isFavorite(samplePrompt.id)).toBe(false);
   });
+
+  it('has valid Truth or Sip prompts with forfeit instructions', () => {
+    const tosPrompts = ALL_DEFAULT_PROMPTS['truth-or-sip'];
+    expect(tosPrompts.length).toBeGreaterThan(0);
+    tosPrompts.forEach(p => {
+      expect(p.gameId).toBe('truth-or-sip');
+      expect(p.text).toBeDefined();
+    });
+  });
 });

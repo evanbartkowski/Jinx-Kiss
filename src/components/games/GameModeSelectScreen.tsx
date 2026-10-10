@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { GameMetadata, GameCategory } from '../../types/game';
 import { CATEGORY_LABELS } from '../../data/gamesConfig';
 import { sessionService, GameSession } from '../../services/sessionService';
+import { useGameSettings } from '../../context/GameSettingsContext';
+import { AgeConfirmationModal } from '../common/AgeConfirmationModal';
 import { soundEffects } from '../../utils/audio';
 import { ArrowLeft, Sparkles, ArrowRight, TrendingUp, History, Play, CheckCircle2 } from 'lucide-react';
 import confetti from 'canvas-confetti';
@@ -17,6 +19,9 @@ export const GameModeSelectScreen: React.FC<GameModeSelectScreenProps> = ({
   onSelectCategory,
   onBack,
 }) => {
+  const { isAgeConfirmed, confirmAge } = useGameSettings();
+  const [pendingCategory, setPendingCategory] = useState<GameCategory | null>(null);
+
   const [activeSession, setActiveSession] = useState<GameSession | null>(() => {
     const current = sessionService.getActiveSession();
     if (current && current.gameId === metadata.id) {
@@ -113,10 +118,26 @@ export const GameModeSelectScreen: React.FC<GameModeSelectScreenProps> = ({
 
   const handleCategoryClick = (cat: GameCategory) => {
     soundEffects.playCardFlip();
+    if (cat === '18+' && !isAgeConfirmed) {
+      setPendingCategory('18+');
+      return;
+    }
     setSelectedCategory(cat);
   };
 
+  const handleAgeConfirm = () => {
+    confirmAge();
+    if (pendingCategory) {
+      setSelectedCategory(pendingCategory);
+      setPendingCategory(null);
+    }
+  };
+
   const handleStartGame = () => {
+    if (selectedCategory === '18+' && !isAgeConfirmed) {
+      setPendingCategory('18+');
+      return;
+    }
     soundEffects.playGameStart();
     confetti({
       particleCount: 35,
@@ -370,6 +391,12 @@ export const GameModeSelectScreen: React.FC<GameModeSelectScreenProps> = ({
           {isProgressive && <span className="text-rose-400 ml-1.5 font-bold">• Progressive Ramping Active</span>}
         </span>
       </div>
+
+      <AgeConfirmationModal
+        isOpen={!!pendingCategory}
+        onConfirm={handleAgeConfirm}
+        onCancel={() => setPendingCategory(null)}
+      />
     </div>
   );
 };

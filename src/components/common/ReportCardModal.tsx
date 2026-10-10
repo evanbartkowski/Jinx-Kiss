@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { createPortal } from 'react-dom';
 import { PromptItem } from '../../types/game';
 import { reportService, ReportReason } from '../../services/reportService';
 import { useToast } from '../../context/ToastContext';
@@ -62,9 +63,9 @@ export const ReportCardModal: React.FC<ReportCardModalProps> = ({
     { id: 'other', label: 'Other Issue', desc: 'Any other problem with this card' },
   ];
 
-  return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md animate-fade-in">
-      <div className="w-full max-w-lg rounded-3xl glass-panel border border-rose-500/40 p-6 sm:p-8 relative shadow-neon-pink/20 max-h-[90vh] overflow-y-auto">
+  const modalContent = (
+    <div className="fixed inset-0 z-[99999] flex items-center justify-center p-4 bg-black/85 backdrop-blur-md animate-fade-in">
+      <div className="w-full max-w-lg rounded-3xl glass-panel border border-rose-500/40 p-6 sm:p-8 relative z-[100000] shadow-neon-pink/20 max-h-[90vh] overflow-y-auto">
         <button
           onClick={onClose}
           className="absolute top-5 right-5 text-zinc-400 hover:text-white transition-colors cursor-pointer"
@@ -162,5 +163,7 @@ export const ReportCardModal: React.FC<ReportCardModalProps> = ({
       </div>
     </div>
   );
+
+  return typeof document !== 'undefined' ? createPortal(modalContent, document.body) : modalContent;
 };
 
