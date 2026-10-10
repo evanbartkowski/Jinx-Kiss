@@ -294,7 +294,7 @@ export const PartyModeSetupPage: React.FC<PartyModeSetupPageProps> = ({ onStartP
                 onClick={() => setSelectedGames(selectedGames.length === allGameIds.length ? [allGameIds[0]] : allGameIds)}
                 className="text-xs text-zinc-400 hover:text-white font-semibold underline cursor-pointer"
               >
-                {selectedGames.length === allGameIds.length ? 'Deselect All' : 'Select All 14'}
+                {selectedGames.length === allGameIds.length ? 'Deselect All' : `Select All (${allGameIds.length})`}
               </button>
             </div>
 

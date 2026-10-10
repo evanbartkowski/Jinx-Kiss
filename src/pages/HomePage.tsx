@@ -75,13 +75,7 @@ export const HomePage: React.FC<HomePageProps> = ({
               <Sparkles className="w-5 h-5 sm:w-7 sm:h-7 text-brand-pink animate-pulse" />
             </div>
             <div>
-              <div className="flex items-center gap-2">
-                <span className="text-[10px] sm:text-xs font-black uppercase tracking-widest text-brand-pink px-2.5 py-0.5 rounded-full bg-brand-pink/15 border border-brand-pink/30 shadow-sm">
-                  ⚡ 12 Party Game Modes
-                </span>
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping hidden sm:inline-block" />
-              </div>
-              <h2 className="text-2xl sm:text-4xl lg:text-5xl font-black uppercase tracking-tight text-white mt-1">
+              <h2 className="text-2xl sm:text-4xl lg:text-5xl font-black uppercase tracking-tight text-white">
                 Browse All <span className="text-brand-gradient drop-shadow-[0_0_20px_rgba(255,77,166,0.35)]">Games</span>
               </h2>
             </div>
@@ -103,7 +97,7 @@ export const HomePage: React.FC<HomePageProps> = ({
                 <div
                   key={game.id}
                   onClick={() => handleGameClick(game.id)}
-                  className="group relative rounded-2xl sm:rounded-3xl glass-panel p-3.5 sm:p-7 min-h-[160px] sm:min-h-[290px] flex flex-col justify-between cursor-pointer transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl active:scale-[0.98] select-none border border-red-500/40 hover:border-emerald-500/60 overflow-hidden"
+                  className="group relative rounded-2xl sm:rounded-3xl glass-panel p-3.5 sm:p-7 min-h-[170px] sm:min-h-[300px] flex flex-col justify-between cursor-pointer transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl active:scale-[0.98] select-none border border-red-500/40 hover:border-emerald-500/60 overflow-hidden"
                   style={{
                     background: 'linear-gradient(135deg, rgba(239, 68, 68, 0.14) 0%, rgba(10, 10, 10, 0.92) 50%, rgba(16, 185, 129, 0.14) 100%)',
                     boxShadow: '0 12px 35px -15px rgba(239, 68, 68, 0.35), 0 12px 35px -15px rgba(16, 185, 129, 0.35)',
@@ -127,8 +121,8 @@ export const HomePage: React.FC<HomePageProps> = ({
                       <span className="text-emerald-400 drop-shadow-[0_0_12px_rgba(16,185,129,0.5)]">Green Flag</span>
                     </h3>
 
-                    <p className="text-[10px] sm:text-xs text-zinc-400 font-medium mt-1 leading-tight sm:leading-relaxed line-clamp-2 sm:line-clamp-none">
-                      {game.tagline}
+                    <p className="text-[10px] sm:text-xs text-zinc-400 font-medium mt-1 leading-snug sm:leading-relaxed line-clamp-3 sm:line-clamp-none">
+                      {game.description}
                     </p>
                   </div>
 
@@ -152,7 +146,7 @@ export const HomePage: React.FC<HomePageProps> = ({
                 <div
                   key={game.id}
                   onClick={() => handleGameClick(game.id)}
-                  className="group relative rounded-2xl sm:rounded-3xl glass-panel p-3.5 sm:p-7 min-h-[160px] sm:min-h-[290px] flex flex-col justify-between cursor-pointer transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl active:scale-[0.98] select-none border border-pink-500/40 hover:border-cyan-400/70 overflow-hidden"
+                  className="group relative rounded-2xl sm:rounded-3xl glass-panel p-3.5 sm:p-7 min-h-[170px] sm:min-h-[300px] flex flex-col justify-between cursor-pointer transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl active:scale-[0.98] select-none border border-pink-500/40 hover:border-cyan-400/70 overflow-hidden"
                   style={{
                     boxShadow: '0 12px 35px -15px rgba(217, 70, 239, 0.4), 0 12px 35px -15px rgba(6, 182, 212, 0.3)',
                   }}
@@ -171,8 +165,8 @@ export const HomePage: React.FC<HomePageProps> = ({
                       {game.title}
                     </h3>
 
-                    <p className="text-[10px] sm:text-xs text-zinc-300 font-medium mt-1 leading-tight sm:leading-relaxed line-clamp-2 sm:line-clamp-none">
-                      {game.tagline}
+                    <p className="text-[10px] sm:text-xs text-zinc-300 font-medium mt-1 leading-snug sm:leading-relaxed line-clamp-3 sm:line-clamp-none">
+                      {game.description}
                     </p>
                   </div>
 
@@ -193,7 +187,7 @@ export const HomePage: React.FC<HomePageProps> = ({
               <div
                 key={game.id}
                 onClick={() => handleGameClick(game.id)}
-                className="group relative rounded-2xl sm:rounded-3xl glass-panel border border-white/[0.08] hover:border-white/30 p-3.5 sm:p-7 min-h-[160px] sm:min-h-[290px] flex flex-col justify-between cursor-pointer transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl active:scale-[0.98] select-none"
+                className="group relative rounded-2xl sm:rounded-3xl glass-panel border border-white/[0.08] hover:border-white/30 p-3.5 sm:p-7 min-h-[170px] sm:min-h-[300px] flex flex-col justify-between cursor-pointer transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl active:scale-[0.98] select-none"
                 style={{
                   boxShadow: `0 10px 30px -15px ${game.themeColor}33`,
                 }}
@@ -226,8 +220,8 @@ export const HomePage: React.FC<HomePageProps> = ({
                   </h3>
 
                   {/* Description */}
-                  <p className="text-[10px] sm:text-xs text-zinc-400 font-medium mt-1 leading-tight sm:leading-relaxed line-clamp-2 sm:line-clamp-none">
-                    {game.tagline}
+                  <p className="text-[10px] sm:text-xs text-zinc-400 font-medium mt-1 leading-snug sm:leading-relaxed line-clamp-3 sm:line-clamp-none">
+                    {game.description}
                   </p>
                 </div>
 
