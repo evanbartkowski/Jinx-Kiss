@@ -4,6 +4,7 @@ import { ONLINE_LEGENDARY_CARDS } from '../data/prompts/online/onlineLegendaryCa
 import { soundEffects } from './audio';
 import confetti from 'canvas-confetti';
 import { getPromptValidationErrors } from './promptValidation';
+import { getCachedPromptOverrides, mergePromptOverrides } from './promptOverrides';
 
 // Track used legendary card IDs in session to avoid repeats until exhausted
 const usedLegendaryIds = new Set<string>();
@@ -25,8 +26,8 @@ export function getLegendaryCardForCategory(
   playMode: PlayMode = 'in-person',
   type?: 'truth' | 'dare'
 ): PromptItem | null {
-  const sourceCards = playMode === 'online' ? ONLINE_LEGENDARY_CARDS : LEGENDARY_CARDS;
-  let candidates = sourceCards.filter(c => c.category === category && (!type || c.type === type) && getPromptValidationErrors(c).length === 0);
+  const sourceCards = mergePromptOverrides(playMode === 'online' ? ONLINE_LEGENDARY_CARDS : LEGENDARY_CARDS, getCachedPromptOverrides(), playMode, true);
+  let candidates = sourceCards.filter(c => c.isActive !== false && c.category === category && (!type || c.type === type) && getPromptValidationErrors(c).length === 0);
   if (gameId && gameId !== 'chaos-mix') {
     candidates = candidates.filter(c => c.gameId === gameId);
   }

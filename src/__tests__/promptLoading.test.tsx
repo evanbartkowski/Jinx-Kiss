@@ -8,7 +8,7 @@ import { getPromptsForGame } from '../data/prompts';
 import { PromptItem } from '../types/game';
 import { CustomDeck } from '../types/deck';
 
-vi.mock('../config/firebase', () => ({ db: undefined }));
+vi.mock('../config/firebase', () => ({ db: undefined, auth: undefined }));
 vi.mock('../components/games/GameShell', () => ({
   GameShell: ({ children, onCategoryChange }: any) => <div>
     <button onClick={() => onCategoryChange('kids')}>Kids category</button>

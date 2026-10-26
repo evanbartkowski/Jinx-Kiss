@@ -1,4 +1,5 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { resetAdminBackend, seedPromptOverrides } from './mocks/adminBackend';
 import { ALL_DEFAULT_PROMPTS, ALL_ONLINE_PROMPTS, getPromptsForGame } from '../data/prompts';
 import { LEGENDARY_CARDS } from '../data/prompts/legendaryCards';
 import { ONLINE_LEGENDARY_CARDS } from '../data/prompts/online/onlineLegendaryCards';
@@ -11,8 +12,6 @@ import { filterPromptsForScope, getPromptValidationErrors, PROMPT_CATEGORIES, pr
 import { getPartyPromptPool } from '../utils/partyPrompts';
 import { getPromptQualityIssue, promptIdeaKey } from '../utils/promptQuality';
 import { EDITORIAL_SPOTLIGHT_PROMPTS, ONLINE_EDITORIAL_SPOTLIGHT_PROMPTS } from '../data/prompts/editorialSpotlights';
-
-vi.mock('../config/firebase', () => ({ db: undefined }));
 
 const gameIds = Object.keys(GAMES_CONFIG) as GameId[];
 const modes: PlayMode[] = ['in-person', 'online'];
@@ -103,7 +102,7 @@ describe('Official prompt content audit', () => {
 
 describe('Admin prompt isolation and moderation', () => {
   const admin = new AdminService();
-  beforeEach(() => localStorage.clear());
+  beforeEach(() => { localStorage.clear(); resetAdminBackend(); });
 
   it('keeps saved overrides scoped to their own game, category, and mode', async () => {
     const added: PromptItem[] = [
@@ -111,7 +110,7 @@ describe('Admin prompt isolation and moderation', () => {
       { id: 'override-take', gameId: 'hot-takes', category: 'easy', text: 'Kitchen timers deserve a snooze button.' },
       { id: 'override-online', gameId: 'truth-or-dare', category: 'easy', playMode: 'online', text: 'What is your funniest call mishap?', type: 'truth' },
     ];
-    localStorage.setItem(overrideKey, JSON.stringify(added));
+    seedPromptOverrides(added);
     for (const mode of modes) for (const gameId of gameIds) {
       const pool = await admin.getAllPromptsForManager(gameId, 'easy', mode);
       expect(pool.every(p => p.gameId === gameId && p.category === 'easy' && (p.playMode || 'in-person') === mode)).toBe(true);
@@ -127,7 +126,7 @@ describe('Admin prompt isolation and moderation', () => {
 
   it('keeps disabled categories empty and applies disabled overrides to Chaos Mix', async () => {
     const pool = getPromptsForGame('point-and-drink', 'kids');
-    localStorage.setItem(overrideKey, JSON.stringify(pool.map(p => ({ ...p, isActive: false }))));
+    seedPromptOverrides(pool.map(p => ({ ...p, isActive: false })));
     const managed = await admin.getAllPromptsForManager('point-and-drink', 'kids');
     expect(filterPromptsForScope(managed, 'point-and-drink', 'kids')).toEqual([]);
     const chaos = filterPromptsForScope(await admin.getAllPromptsForManager('chaos-mix', 'kids'), 'chaos-mix', 'kids');

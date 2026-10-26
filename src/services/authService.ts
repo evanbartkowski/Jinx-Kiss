@@ -1,6 +1,6 @@
 import { auth, db } from '../config/firebase';
-import { signInWithCustomToken, signOut, onAuthStateChanged, User } from 'firebase/auth';
-import { doc, getDoc, setDoc, updateDoc, deleteDoc, serverTimestamp } from 'firebase/firestore';
+import { signInWithEmailAndPassword, signOut, onAuthStateChanged, getIdTokenResult, reauthenticateWithCredential, EmailAuthProvider, updatePassword, User } from 'firebase/auth';
+import { doc, getDoc, setDoc, deleteDoc } from 'firebase/firestore';
 import { UserProfile } from '../types/user';
 
 const LOCAL_SESSION_KEY = 'jinxkiss_session_v1';
@@ -40,13 +40,21 @@ export class AuthService {
 
   constructor() {
     this.restoreSession();
+    if (auth) onAuthStateChanged(auth, user => {
+      if (user) void this.restoreFirebaseAdmin(user).catch(() => {
+        if (this.currentUserProfile?.role === 'admin') this.saveSession(null);
+      });
+      else if (this.currentUserProfile?.role === 'admin') this.saveSession(null);
+    });
   }
 
   private restoreSession() {
     try {
       const stored = localStorage.getItem(LOCAL_SESSION_KEY);
       if (stored) {
-        this.currentUserProfile = JSON.parse(stored);
+        const profile = JSON.parse(stored);
+        // Browser storage cannot grant administrative permissions.
+        this.currentUserProfile = profile.role === 'admin' ? null : profile;
       }
     } catch (e) {
       console.warn('Failed to parse local session', e);
@@ -87,6 +95,29 @@ export class AuthService {
     return this.currentUserProfile?.role === 'admin';
   }
 
+  private async restoreFirebaseAdmin(user: User): Promise<UserProfile | null> {
+    const token = await getIdTokenResult(user);
+    if (token.claims.role !== 'admin' || auth.currentUser?.uid !== user.uid) return null;
+    const snapshot = await getDoc(doc(db, 'users', user.uid));
+    if (auth.currentUser?.uid !== user.uid) return null;
+    const profile: UserProfile = {
+      ...(snapshot.exists() ? snapshot.data() : {}),
+      uid: user.uid,
+      username: 'admin',
+      role: 'admin',
+      createdAt: snapshot.data()?.createdAt || Date.now(),
+      requiresPasswordChange: false,
+    };
+    this.saveSession(profile);
+    return profile;
+  }
+
+  async requireAdmin(): Promise<void> {
+    if (!auth?.currentUser || (await getIdTokenResult(auth.currentUser)).claims.role !== 'admin') {
+      throw new Error('Sign in with the administrator account to manage content.');
+    }
+  }
+
   /**
    * Register with username and password
    */
@@ -100,6 +131,8 @@ export class AuthService {
     }
 
     const normalized = cleanUsername.toLowerCase();
+    if (normalized === 'admin') throw new Error('This username is reserved for the administrator.');
+    if (auth?.currentUser) await signOut(auth);
 
     // Check if user exists in local storage store
     const localUsers = this.getLocalUsers();
@@ -154,12 +187,23 @@ export class AuthService {
    */
   async login(username: string, password: string): Promise<UserProfile> {
     const normalized = username.trim().toLowerCase();
-    const localUsers = this.getLocalUsers();
-
-    // Check for automatic bootstrap of admin if logging in as admin for first time
-    if (normalized === 'admin' && !localUsers['admin']) {
-      await this.bootstrapAdmin();
+    if (normalized === 'admin') {
+      try {
+        const credential = await signInWithEmailAndPassword(auth, 'admin@jinxkiss.com', password);
+        const profile = await this.restoreFirebaseAdmin(credential.user);
+        if (!profile) {
+          await signOut(auth);
+          throw new Error('This account does not have administrator permissions.');
+        }
+        return profile;
+      } catch (error: any) {
+        if (['auth/invalid-credential', 'auth/user-not-found', 'auth/wrong-password', 'auth/invalid-email'].includes(error.code)) {
+          throw new Error('Invalid username or password.');
+        }
+        throw error;
+      }
     }
+    const localUsers = this.getLocalUsers();
 
     const storedUser = localUsers[normalized];
     if (!storedUser) {
@@ -174,11 +218,12 @@ export class AuthService {
     if (computedHash !== storedUser.hash) {
       throw new Error('Invalid username or password.');
     }
+    if (auth?.currentUser) await signOut(auth);
 
     const profile: UserProfile = {
       uid: storedUser.uid,
       username: storedUser.username,
-      role: storedUser.role,
+      role: 'user',
       requiresPasswordChange: storedUser.requiresPasswordChange,
       createdAt: storedUser.createdAt,
       stats: {
@@ -196,7 +241,6 @@ export class AuthService {
         if (docSnap.exists()) {
           const cloudData = docSnap.data() as UserProfile;
           profile.stats = cloudData.stats || profile.stats;
-          if (cloudData.role) profile.role = cloudData.role;
         }
       }
     } catch (e) {
@@ -227,6 +271,14 @@ export class AuthService {
   async changePassword(oldPassword: string, newPassword: string): Promise<void> {
     if (!this.currentUserProfile) {
       throw new Error('You must be signed in.');
+    }
+    if (this.isAdmin()) {
+      await this.requireAdmin();
+      if (newPassword.length < 6) throw new Error('New administrator passwords must be at least 6 characters.');
+      const user = auth.currentUser!;
+      await reauthenticateWithCredential(user, EmailAuthProvider.credential(user.email!, oldPassword));
+      await updatePassword(user, newPassword);
+      return;
     }
     if (newPassword.length < 4) {
       throw new Error('New password must be at least 4 characters.');
@@ -268,6 +320,7 @@ export class AuthService {
     if (!this.currentUserProfile) {
       throw new Error('You must be signed in.');
     }
+    if (this.isAdmin()) throw new Error('The administrator account must be managed in Firebase Authentication.');
 
     const normalized = this.currentUserProfile.username.toLowerCase();
     const localUsers = this.getLocalUsers();
@@ -293,47 +346,6 @@ export class AuthService {
     }
 
     this.saveSession(null);
-  }
-
-  /**
-   * Bootstrap Admin account (one-time setup)
-   * Username: admin
-   * Initial password: 123456789
-   * requiresPasswordChange: true
-   */
-  async bootstrapAdmin(): Promise<void> {
-    const localUsers = this.getLocalUsers();
-    if (localUsers['admin']) {
-      return; // Already bootstrapped
-    }
-
-    const salt = 'jinx_admin_bootstrap_salt';
-    const hash = await hashPasswordWebCrypto('123456789', salt);
-    const uid = 'admin_primary';
-
-    localUsers['admin'] = {
-      uid,
-      username: 'admin',
-      salt,
-      hash,
-      role: 'admin',
-      requiresPasswordChange: true, // Forces immediate password change before permissions unlocked!
-      createdAt: Date.now(),
-    };
-    this.saveLocalUsers(localUsers);
-
-    try {
-      if (db) {
-        await setDoc(doc(db, 'users', uid), {
-          uid,
-          username: 'admin',
-          role: 'admin',
-          createdAt: Date.now(),
-        });
-      }
-    } catch (e) {
-      // Fallback
-    }
   }
 
   private getLocalUsers(): Record<string, any> {

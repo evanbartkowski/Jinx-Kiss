@@ -39,6 +39,7 @@ export class DeckService {
 
     // Load default seed community decks
     this.getSeedCommunityDecks().forEach(d => mergedMap.set(d.id, d));
+    localPublic.forEach(d => mergedMap.set(d.id, d));
 
     try {
       if (db) {
@@ -56,10 +57,8 @@ export class DeckService {
       console.warn('Firestore getPublicDecks fallback to local:', e);
     }
 
-    // Local user public decks take precedence and are immediately included
-    localPublic.forEach(d => mergedMap.set(d.id, d));
-
-    const allDecks = Array.from(mergedMap.values());
+    // Cloud moderation and card edits take precedence over stale local copies.
+    const allDecks = Array.from(mergedMap.values()).filter(d => d.moderationStatus === 'approved');
     if (!playMode) return allDecks;
 
     // Filter by playMode (treat undefined as in-person for full backward compatibility)
@@ -73,16 +72,13 @@ export class DeckService {
     const allLocal = this.getLocalDecks();
     const local = allLocal.find(d => d.id === idOrToken || d.shareToken === idOrToken);
 
-    if (local) {
-      if (local.visibility === 'private' && local.creatorUid !== currentUid) {
-        throw new Error('This deck is private and can only be played by its creator.');
-      }
-      return local;
+    if (local?.visibility === 'private' && local.creatorUid !== currentUid) {
+      throw new Error('This deck is private and can only be played by its creator.');
     }
 
     try {
       if (db) {
-        const docSnap = await getDoc(doc(db, 'custom_decks', idOrToken));
+        const docSnap = await getDoc(doc(db, 'custom_decks', local?.id || idOrToken));
         if (docSnap.exists()) {
           const deck = docSnap.data() as CustomDeck;
           if (deck.visibility === 'private' && deck.creatorUid !== currentUid) {
@@ -95,7 +91,7 @@ export class DeckService {
       console.warn('Firestore getDeck fallback:', e);
     }
 
-    return null;
+    return local || null;
   }
 
   /**

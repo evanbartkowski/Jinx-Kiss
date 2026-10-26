@@ -6,13 +6,13 @@ import { PromptModeration } from '../components/admin/PromptModeration';
 import { GameContentManager } from '../components/admin/GameContentManager';
 import { CommunityDeckManager } from '../components/admin/CommunityDeckManager';
 import { UserManagement } from '../components/admin/UserManagement';
-import { AdminChangePasswordModal } from '../components/auth/AdminChangePasswordModal';
 import { CardReportModeration } from '../components/admin/CardReportModeration';
+import { CollectionBrowser } from '../components/admin/CollectionBrowser';
 import { Shield, LayoutDashboard, Clock, FileText, Layers, Users, Lock, Flag } from 'lucide-react';
 
 export const AdminDashboardPage: React.FC<{ onNavigate: (view: string) => void }> = ({ onNavigate }) => {
-  const { currentUser, isAdmin, requiresPasswordChange } = useAuth();
-  const [activeTab, setActiveTab] = useState<'overview' | 'moderation' | 'reports' | 'content' | 'decks' | 'users'>('overview');
+  const { isAdmin, openAuthModal } = useAuth();
+  const [activeTab, setActiveTab] = useState<'overview' | 'moderation' | 'reports' | 'content' | 'decks' | 'users' | 'collections'>('content');
   const [stats, setStats] = useState<AdminStats>({
     totalUsers: 0,
     totalDecks: 0,
@@ -49,10 +49,10 @@ export const AdminDashboardPage: React.FC<{ onNavigate: (view: string) => void }
           The Jinx Kiss Administrator Dashboard requires authorized server-side administrative credentials.
         </p>
         <button
-          onClick={() => onNavigate('home')}
+          onClick={() => openAuthModal('login')}
           className="px-6 py-2.5 bg-zinc-800 hover:bg-zinc-700 rounded-xl text-white font-bold text-xs transition-all"
         >
-          Return to Games
+          Sign in as admin
         </button>
       </div>
     );
@@ -63,16 +63,14 @@ export const AdminDashboardPage: React.FC<{ onNavigate: (view: string) => void }
     { id: 'moderation', label: 'Submissions', icon: Clock, badge: stats.pendingSubmissions > 0 ? stats.pendingSubmissions : undefined },
     { id: 'reports', label: 'Card Reports', icon: Flag },
     { id: 'content', label: 'Game Content Manager', icon: FileText },
-    { id: 'decks', label: 'Community Decks', icon: Layers },
+    { id: 'decks', label: 'All decks', icon: Layers },
+    { id: 'collections', label: 'Collections', icon: Layers },
     { id: 'users', label: 'User Management', icon: Users },
   ];
 
   return (
     <div className="w-full max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
       
-      {/* Forced Password Modal if first time admin */}
-      <AdminChangePasswordModal />
-
       {/* Top Banner */}
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-6 border-b border-white/[0.08] mb-8">
         <div className="flex items-center gap-3">
@@ -146,6 +144,7 @@ export const AdminDashboardPage: React.FC<{ onNavigate: (view: string) => void }
         {activeTab === 'content' && <GameContentManager />}
         {activeTab === 'decks' && <CommunityDeckManager />}
         {activeTab === 'users' && <UserManagement />}
+        {activeTab === 'collections' && <CollectionBrowser />}
       </div>
 
     </div>

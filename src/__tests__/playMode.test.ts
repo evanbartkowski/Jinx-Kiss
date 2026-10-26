@@ -1,4 +1,5 @@
 import { describe, it, expect, beforeEach } from 'vitest';
+import { resetAdminBackend } from './mocks/adminBackend';
 import { getPromptsForGame, ALL_DEFAULT_PROMPTS, ALL_ONLINE_PROMPTS, ONLINE_STANDALONE_PROMPTS } from '../data/prompts';
 import { getLegendaryCardForCategory, rollForLegendaryCard } from '../utils/legendaryCards';
 import { deckService } from '../services/deckService';
@@ -9,6 +10,7 @@ import { GameId, GameCategory, PlayMode } from '../types/game';
 describe('PlayMode (In-Person vs Online) Architecture', () => {
   beforeEach(() => {
     localStorage.clear();
+    resetAdminBackend();
   });
 
   const coreGames: GameId[] = [

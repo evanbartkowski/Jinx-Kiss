@@ -11,9 +11,9 @@ export const UserManagement: React.FC = () => {
   const [banningUser, setBanningUser] = useState<string | null>(null);
   const [banReason, setBanReason] = useState('');
 
-  const loadUsers = () => {
-    const list = adminService.getLocalUsersList();
-    setUsers(list);
+  const loadUsers = async () => {
+    try { setUsers(await adminService.getUsers()); }
+    catch (e) { showToast(e instanceof Error ? e.message : 'Could not load users.', 'error'); }
   };
 
   useEffect(() => {

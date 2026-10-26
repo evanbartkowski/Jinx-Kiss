@@ -1,11 +1,30 @@
-import { describe, it, expect, beforeEach } from 'vitest';
+import { describe, it, expect, beforeEach, vi } from 'vitest';
 import { AuthService } from '../services/authService';
+import { auth } from '../config/firebase';
+import { getIdTokenResult, signInWithEmailAndPassword, updatePassword } from 'firebase/auth';
+
+vi.mock('../config/firebase', () => ({ auth: { currentUser: null }, db: {} }));
+vi.mock('firebase/firestore', () => ({ doc: vi.fn(), getDoc: vi.fn(async () => ({ exists: () => false, data: () => undefined })), setDoc: vi.fn(), deleteDoc: vi.fn() }));
+vi.mock('firebase/auth', () => ({
+  onAuthStateChanged: vi.fn(() => () => {}),
+  getIdTokenResult: vi.fn(async () => ({ claims: { role: 'admin' } })),
+  signInWithEmailAndPassword: vi.fn(async (instance, _email, password) => {
+    if (password !== 'xyz') throw Object.assign(new Error('Invalid credential'), { code: 'auth/invalid-credential' });
+    instance.currentUser = { uid: 'admin_primary', email: 'admin@jinxkiss.com' };
+    return { user: instance.currentUser };
+  }),
+  signOut: vi.fn(async instance => { instance.currentUser = null; }),
+  reauthenticateWithCredential: vi.fn(), EmailAuthProvider: { credential: vi.fn() }, updatePassword: vi.fn(),
+}));
 
 describe('Authentication & Access Control', () => {
   let authService: AuthService;
 
   beforeEach(() => {
     localStorage.clear();
+    (auth as any).currentUser = null;
+    vi.mocked(getIdTokenResult).mockResolvedValue({ claims: { role: 'admin' } } as any);
+    vi.clearAllMocks();
     authService = new AuthService();
   });
 
@@ -47,31 +66,59 @@ describe('Authentication & Access Control', () => {
     expect(authService.isAuthenticated()).toBe(true);
   });
 
-  it('bootstraps admin account and requires immediate password change', async () => {
-    await authService.bootstrapAdmin();
-    const admin = await authService.login('admin', '123456789');
+  it('signs the reserved admin into Firebase with a short configured password', async () => {
+    const admin = await authService.login(' ADMIN ', 'xyz');
 
     expect(admin.role).toBe('admin');
-    expect(admin.requiresPasswordChange).toBe(true);
+    expect(admin.requiresPasswordChange).toBe(false);
+    expect(signInWithEmailAndPassword).toHaveBeenCalledWith(auth, 'admin@jinxkiss.com', 'xyz');
+    await expect(authService.requireAdmin()).resolves.toBeUndefined();
 
     // Regular users cannot claim admin role
     const regular = await authService.register('RegularPlayer', 'pass1234');
     expect(regular.role).toBe('user');
   });
 
-  it('allows password changes and clears requiresPasswordChange', async () => {
-    await authService.bootstrapAdmin();
-    await authService.login('admin', '123456789');
+  it('changes administrator passwords through Firebase', async () => {
+    await authService.login('admin', 'xyz');
+    await authService.changePassword('xyz', 'ReplacementPassword!');
+    expect(updatePassword).toHaveBeenCalledWith(auth.currentUser, 'ReplacementPassword!');
+  });
 
-    await authService.changePassword('123456789', 'SuperSecurePass2026!');
-    const current = authService.getCurrentUser();
-    expect(current?.requiresPasswordChange).toBe(false);
+  it('rejects wrong admin credentials without a browser fallback', async () => {
+    await expect(authService.login('admin', 'wrong')).rejects.toThrow('Invalid username or password.');
+    expect(authService.isAdmin()).toBe(false);
+  });
 
-    // Can log in with new password
-    await authService.logout();
-    const updated = await authService.login('admin', 'SuperSecurePass2026!');
-    expect(updated.role).toBe('admin');
-    expect(updated.requiresPasswordChange).toBe(false);
+  it('does not trust an admin role in a saved browser session', async () => {
+    localStorage.setItem('jinxkiss_session_v1', JSON.stringify({ uid: 'forged', username: 'admin', role: 'admin' }));
+    const restored = new AuthService();
+    expect(restored.isAdmin()).toBe(false);
+    await expect(restored.requireAdmin()).rejects.toThrow('administrator account');
+  });
+
+  it('requires a signed admin claim even when Firebase sign-in succeeds', async () => {
+    vi.mocked(getIdTokenResult).mockResolvedValue({ claims: { role: 'user' } } as any);
+    await expect(authService.login('admin', 'xyz')).rejects.toThrow('does not have administrator permissions');
+    expect(auth.currentUser).toBeNull();
+  });
+
+  it('reserves the admin username and refuses local account role escalation', async () => {
+    await expect(authService.register('Admin', 'test-password')).rejects.toThrow('reserved');
+    await authService.register('RegularPlayer', 'test-password');
+    const users = JSON.parse(localStorage.getItem('jinxkiss_local_users_v1')!);
+    users.regularplayer.role = 'admin';
+    localStorage.setItem('jinxkiss_local_users_v1', JSON.stringify(users));
+    const profile = await authService.login('RegularPlayer', 'test-password');
+    expect(profile.role).toBe('user');
+    await expect(authService.requireAdmin()).rejects.toThrow('administrator account');
+  });
+
+  it('preserves local user password changes', async () => {
+    await authService.register('PasswordPlayer', 'old-password');
+    await authService.changePassword('old-password', 'new-password');
+    await expect(authService.login('PasswordPlayer', 'old-password')).rejects.toThrow();
+    expect((await authService.login('PasswordPlayer', 'new-password')).role).toBe('user');
   });
 
   it('allows account deletion and removes user records', async () => {

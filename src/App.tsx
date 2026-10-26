@@ -24,6 +24,7 @@ import { CreateDeckPage } from './pages/CreateDeckPage';
 import { EditDeckPage } from './pages/EditDeckPage';
 import { ProfilePage } from './pages/ProfilePage';
 import { AdminDashboardPage } from './pages/AdminDashboardPage';
+import { adminService } from './services/adminService';
 
 export type AppView =
   | 'home'
@@ -38,6 +39,7 @@ export type AppView =
   | 'admin';
 
 function AppContent() {
+  useEffect(() => adminService.watchOfficialPrompts(), []);
   const [currentView, setCurrentView] = useState<AppView>('home');
   const [selectedGameId, setSelectedGameId] = useState<GameId>('truth-or-dare');
   const [activeCustomDeck, setActiveCustomDeck] = useState<CustomDeck | null>(null);

@@ -1,4 +1,5 @@
 import { describe, it, expect, beforeEach } from 'vitest';
+import { resetAdminBackend } from './mocks/adminBackend';
 import { SubmissionService } from '../services/submissionService';
 import { AdminService } from '../services/adminService';
 import { getPromptsForGame } from '../data/prompts';
@@ -9,6 +10,7 @@ describe('Community Submissions & Moderation Workflow', () => {
 
   beforeEach(() => {
     localStorage.clear();
+    resetAdminBackend();
     submissionService = new SubmissionService();
     adminService = new AdminService();
   });

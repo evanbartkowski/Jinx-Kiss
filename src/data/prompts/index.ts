@@ -17,10 +17,10 @@ import { INTERNET_VIRAL_PROMPTS } from './internetViralPrompts';
 import { MASTER_EXPANSION_V2_PROMPTS } from './masterExpansionV2';
 import { MEGA_EXPANSION_800_PROMPTS } from './megaExpansion800';
 import { createPromptCatalog } from '../../utils/promptCatalog';
-import { filterPromptsForScope } from '../../utils/promptValidation';
 import { EDITORIAL_SPOTLIGHT_PROMPTS } from './editorialSpotlights';
 import { UNHINGED_PROMPTS } from './unhinged';
 import { RESEARCHED_IN_PERSON_PROMPTS } from './researchedPrompts';
+import { getCachedGamePrompts } from '../../utils/promptOverrides';
 
 export const ALL_DEFAULT_PROMPTS = createPromptCatalog([
   ...RESEARCHED_IN_PERSON_PROMPTS,
@@ -47,7 +47,7 @@ export const ALL_DEFAULT_PROMPTS = createPromptCatalog([
 export const CHAOS_MIX_PROMPTS = ALL_DEFAULT_PROMPTS['chaos-mix'];
 
 export function getDefaultPromptsForGame(gameId: GameId, category?: GameCategory): PromptItem[] {
-  return filterPromptsForScope(ALL_DEFAULT_PROMPTS[gameId] || [], gameId, category);
+  return getCachedGamePrompts(ALL_DEFAULT_PROMPTS, gameId, category, 'in-person');
 }
 
 export function getPromptsForGame(gameId: GameId, category?: GameCategory, playMode: PlayMode = 'in-person'): PromptItem[] {

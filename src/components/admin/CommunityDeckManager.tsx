@@ -1,151 +1,195 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { CustomDeck } from '../../types/deck';
+import { PromptItem } from '../../types/game';
+import { GAMES_CONFIG } from '../../data/gamesConfig';
 import { adminService } from '../../services/adminService';
 import { useToast } from '../../context/ToastContext';
-import { Check, X, Eye, ShieldAlert, Globe, Lock, Link2 } from 'lucide-react';
+import { PromptEditor } from './PromptEditor';
 
-export const CommunityDeckManager: React.FC = () => {
+export function CommunityDeckManager() {
   const { showToast } = useToast();
   const [decks, setDecks] = useState<CustomDeck[]>([]);
-  const [previewDeck, setPreviewDeck] = useState<CustomDeck | null>(null);
-
-  const loadDecks = async () => {
-    const list = await adminService.getAllDecksForModeration();
-    setDecks(list);
-  };
-
-  useEffect(() => {
-    loadDecks();
-  }, []);
-
-  const handleModerate = async (deckId: string, status: 'approved' | 'rejected', reason?: string) => {
+  const [selected, setSelected] = useState<CustomDeck | null>(null);
+  const [editor, setEditor] = useState<Partial<PromptItem> | null>(null);
+  const [search, setSearch] = useState('');
+  const [visibility, setVisibility] = useState('all');
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(true);
+  const [saving, setSaving] = useState(false);
+  const load = async () => {
+    setLoading(true);
     try {
-      await adminService.moderateDeck(deckId, status, reason);
-      showToast(`Deck ${status === 'approved' ? 'approved for discovery' : 'rejected'}.`, 'success');
-      loadDecks();
-      if (previewDeck?.id === deckId) setPreviewDeck(null);
-    } catch (e: any) {
-      showToast(e.message || 'Action failed', 'error');
+      setDecks(await adminService.getAllDecksForModeration());
+      setError('');
+    } catch (e) {
+      setError(e instanceof Error ? e.message : 'Could not load decks.');
+    } finally {
+      setLoading(false);
     }
   };
-
+  useEffect(() => {
+    void load();
+  }, []);
+  const update = async (deck: CustomDeck, updates: Partial<CustomDeck>) => {
+    setSaving(true);
+    try {
+      const saved = await adminService.updateManagedDeck(deck.id, updates);
+      setDecks((list) => list.map((d) => (d.id === saved.id ? saved : d)));
+      setSelected((current) => (current?.id === saved.id ? saved : current));
+      showToast('Deck saved.', 'success');
+    } finally {
+      setSaving(false);
+    }
+  };
+  const runUpdate = (deck: CustomDeck, updates: Partial<CustomDeck>) => {
+    void update(deck, updates).catch((e) =>
+      showToast(e instanceof Error ? e.message : 'Could not save deck.', 'error')
+    );
+  };
+  const filtered = decks.filter(
+    (d) =>
+      (visibility === 'all' || d.visibility === visibility) &&
+      `${d.title} ${d.creatorUsername} ${d.gameId}`.toLowerCase().includes(search.toLowerCase())
+  );
   return (
-    <div className="space-y-6">
+    <div className="space-y-5">
       <div>
-        <h3 className="text-xl font-black text-white">Community Deck Moderation</h3>
-        <p className="text-xs text-zinc-400">Review public user-created decks for community discovery guidelines</p>
+        <h3 className="text-xl font-black text-white">All decks</h3>
+        <p className="text-sm text-zinc-400">
+          Browse public, unlisted, and private decks. Add, edit, or delete their cards.
+        </p>
       </div>
-
-      <div className="space-y-4">
-        {decks.map(deck => (
-          <div
-            key={deck.id}
-            className="p-5 rounded-2xl glass-panel border border-white/[0.08] flex flex-col md:flex-row md:items-center justify-between gap-4"
-          >
-            <div className="flex-1 space-y-1">
-              <div className="flex items-center gap-2">
-                <span
-                  className="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider border"
-                  style={{
-                    color: deck.themeColor || '#FF4DA6',
-                    borderColor: `${deck.themeColor || '#FF4DA6'}40`,
-                    backgroundColor: `${deck.themeColor || '#FF4DA6'}15`,
-                  }}
-                >
-                  {deck.gameId}
-                </span>
-
-                <span className={`px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider border ${
-                  deck.moderationStatus === 'approved'
-                    ? 'border-emerald-500/40 text-emerald-300 bg-emerald-950/40'
-                    : deck.moderationStatus === 'rejected'
-                    ? 'border-red-500/40 text-red-300 bg-red-950/40'
-                    : 'border-amber-500/40 text-amber-300 bg-amber-950/40'
-                }`}>
-                  {deck.moderationStatus}
-                </span>
-
-                <span className="text-xs text-zinc-400">
-                  By @{deck.creatorUsername} • {deck.cards.length} Cards
-                </span>
-              </div>
-
-              <h4 className="text-base font-bold text-white">{deck.title}</h4>
-              <p className="text-xs text-zinc-400 line-clamp-1">{deck.description}</p>
-            </div>
-
-            <div className="flex items-center gap-2 flex-shrink-0">
-              <button
-                onClick={() => setPreviewDeck(deck)}
-                className="px-3 py-2 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-zinc-200 font-bold text-xs flex items-center gap-1.5 transition-all"
-              >
-                <Eye className="w-3.5 h-3.5" />
-                <span>Inspect Cards</span>
-              </button>
-
-              {deck.moderationStatus !== 'approved' && (
-                <button
-                  onClick={() => handleModerate(deck.id, 'approved')}
-                  className="px-3 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs flex items-center gap-1.5 shadow-neon-green transition-all"
-                >
-                  <Check className="w-3.5 h-3.5" />
-                  <span>Approve</span>
-                </button>
-              )}
-
-              {deck.moderationStatus !== 'rejected' && (
-                <button
-                  onClick={() => handleModerate(deck.id, 'rejected', 'Violates community standards')}
-                  className="px-3 py-2 rounded-xl bg-red-950/60 border border-red-500/40 hover:bg-red-900/60 text-red-200 font-bold text-xs flex items-center gap-1.5 transition-all"
-                >
-                  <X className="w-3.5 h-3.5" />
-                  <span>Reject</span>
-                </button>
-              )}
-            </div>
+      <div className="flex flex-wrap gap-3">
+        <input
+          aria-label="Search decks"
+          value={search}
+          placeholder="Search decks or creators"
+          onChange={(e) => setSearch(e.target.value)}
+          className="bg-zinc-900 border border-white/15 rounded-xl px-3 py-2 text-white"
+        />
+        <select
+          aria-label="Deck visibility"
+          value={visibility}
+          onChange={(e) => setVisibility(e.target.value)}
+          className="bg-zinc-900 border border-white/15 rounded-xl px-3 py-2 text-white"
+        >
+          <option value="all">All visibility</option>
+          <option value="public">Public</option>
+          <option value="unlisted">Unlisted</option>
+          <option value="private">Private</option>
+        </select>
+        <button disabled={loading || saving} onClick={() => void load()} className="text-zinc-300">
+          Refresh
+        </button>
+      </div>
+      {error && (
+        <p role="alert" className="text-red-300">
+          {error}
+        </p>
+      )}
+      {loading && <p className="text-zinc-400">Loading decks…</p>}
+      {filtered.map((deck) => (
+        <article key={deck.id} className="p-5 rounded-2xl bg-zinc-900/70 border border-white/10 space-y-3">
+          <div>
+            <h4 className="font-bold text-white">{deck.title}</h4>
+            <p className="text-xs text-zinc-400">
+              @{deck.creatorUsername} · {GAMES_CONFIG[deck.gameId]?.title} · {deck.visibility} ·{' '}
+              {deck.playMode === 'online' ? 'Online' : 'In person'} · {deck.cards.length} cards ·{' '}
+              {deck.moderationStatus}
+            </p>
           </div>
-        ))}
-      </div>
-
-      {/* Deck Preview Modal */}
-      {previewDeck && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md">
-          <div className="w-full max-w-2xl p-6 rounded-3xl glass-panel border border-white/20 max-h-[85vh] flex flex-col">
-            <div className="flex items-center justify-between pb-4 border-b border-white/10">
-              <div>
-                <h4 className="text-lg font-bold text-white">{previewDeck.title}</h4>
-                <p className="text-xs text-zinc-400">Cards inspection: {previewDeck.cards.length} cards</p>
-              </div>
+          <p className="text-sm text-zinc-300">{deck.description}</p>
+          <div className="flex flex-wrap gap-4 text-sm">
+            <button disabled={saving} onClick={() => setSelected(deck)} className="text-brand-pink">
+              Manage cards
+            </button>
+            {deck.visibility === 'public' && (
               <button
-                onClick={() => setPreviewDeck(null)}
-                className="p-1 rounded-lg text-zinc-400 hover:text-white"
+                disabled={saving}
+                className="text-zinc-300"
+                onClick={() =>
+                  runUpdate(deck, { moderationStatus: deck.moderationStatus === 'rejected' ? 'approved' : 'rejected' })
+                }
               >
-                <X className="w-5 h-5" />
+                {deck.moderationStatus === 'rejected' ? 'Approve for discovery' : 'Hide from discovery'}
               </button>
-            </div>
-
-            <div className="flex-1 overflow-y-auto py-4 space-y-2.5 pr-1">
-              {previewDeck.cards.map((card, idx) => (
-                <div key={idx} className="p-3 rounded-xl bg-zinc-900/80 border border-white/10 text-xs text-zinc-200">
-                  <span className="font-bold text-brand-pink mr-2">#{idx + 1}</span>
-                  {card.optionA ? `A: ${card.optionA} | B: ${card.optionB}` : card.text}
-                </div>
-              ))}
-            </div>
-
-            <div className="pt-4 border-t border-white/10 flex justify-end gap-2">
-              <button
-                onClick={() => setPreviewDeck(null)}
-                className="px-4 py-2 rounded-xl text-xs font-semibold text-zinc-400 hover:text-white"
-              >
+            )}
+          </div>
+        </article>
+      ))}
+      {!loading && !filtered.length && <p className="text-zinc-400">No decks match these filters.</p>}
+      {selected && (
+        <div className="fixed inset-0 z-50 bg-black/85 backdrop-blur-md p-4 flex items-center justify-center">
+          <section
+            role="dialog"
+            aria-modal="true"
+            aria-label={`${selected.title} cards`}
+            className="max-w-3xl w-full max-h-[90vh] overflow-y-auto p-6 rounded-3xl glass-panel border border-white/15 space-y-4"
+          >
+            <div className="flex justify-between gap-4">
+              <h3 className="font-bold text-xl text-white">{selected.title}</h3>
+              <button disabled={saving} className="text-zinc-300" onClick={() => setSelected(null)}>
                 Close
               </button>
             </div>
-          </div>
+            <button
+              disabled={saving}
+              onClick={() =>
+                setEditor({
+                  gameId: selected.gameId === 'chaos-mix' ? 'truth-or-dare' : selected.gameId,
+                  playMode: selected.playMode || 'in-person',
+                  category: selected.gameMode || 'medium',
+                })
+              }
+              className="px-4 py-2 rounded-xl bg-brand-pink text-white font-bold"
+            >
+              Add card to deck
+            </button>
+            {selected.cards.map((card, index) => (
+              <article key={card.id} className="p-4 rounded-xl bg-zinc-900 border border-white/10 space-y-2">
+                <p className="text-xs text-zinc-400">
+                  Card {index + 1} · {card.category} {card.type && `· ${card.type}`}
+                </p>
+                <p className="text-sm text-white">
+                  {card.optionA ? `A: ${card.optionA} / B: ${card.optionB}` : card.text}
+                </p>
+                <div className="flex gap-4 text-sm">
+                  <button disabled={saving} className="text-zinc-200" onClick={() => setEditor(card)}>
+                    Edit card
+                  </button>
+                  <button
+                    disabled={saving}
+                    className="text-red-300"
+                    onClick={() => {
+                      if (confirm('Delete this card from this deck?'))
+                        runUpdate(selected, { cards: selected.cards.filter((c) => c.id !== card.id) });
+                    }}
+                  >
+                    Delete card
+                  </button>
+                </div>
+              </article>
+            ))}
+            {!selected.cards.length && (
+              <p className="text-zinc-400">This deck has no cards. Add a card to make it playable.</p>
+            )}
+          </section>
         </div>
       )}
-
+      {selected && editor && (
+        <PromptEditor
+          initial={editor}
+          fixedGame={selected.gameId === 'chaos-mix' ? undefined : selected.gameId}
+          fixedMode={selected.playMode || 'in-person'}
+          onClose={() => setEditor(null)}
+          onSave={async (card) => {
+            const exists = selected.cards.some((c) => c.id === card.id);
+            await update(selected, {
+              cards: exists ? selected.cards.map((c) => (c.id === card.id ? card : c)) : [...selected.cards, card],
+            });
+          }}
+        />
+      )}
     </div>
   );
-};
-
+}

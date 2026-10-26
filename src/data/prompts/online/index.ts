@@ -13,8 +13,8 @@ import {
   ONLINE_HOT_SEAT_PROMPTS,
 } from './onlineOtherGames';
 import { ONLINE_LEGENDARY_CARDS } from './onlineLegendaryCards';
+import { getCachedGamePrompts } from '../../../utils/promptOverrides';
 import { createPromptCatalog } from '../../../utils/promptCatalog';
-import { filterPromptsForScope } from '../../../utils/promptValidation';
 import { ONLINE_EDITORIAL_SPOTLIGHT_PROMPTS } from '../editorialSpotlights';
 import { ONLINE_UNHINGED_PROMPTS } from '../unhinged';
 import { RESEARCHED_ONLINE_PROMPTS } from '../researchedPrompts';
@@ -58,6 +58,6 @@ export const ONLINE_CHAOS_MIX_PROMPTS = ALL_ONLINE_PROMPTS['chaos-mix'];
  * Filter online prompts by game and category.
  */
 export function getOnlinePromptsForGame(gameId: GameId, category?: GameCategory): PromptItem[] {
-  return filterPromptsForScope(ALL_ONLINE_PROMPTS[gameId] || [], gameId, category, 'online');
+  return getCachedGamePrompts(ALL_ONLINE_PROMPTS, gameId, category, 'online');
 }
 

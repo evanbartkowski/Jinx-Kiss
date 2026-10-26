@@ -56,17 +56,19 @@ Live Website: **jinxkiss.com**
 
 ## 👑 Administrator System & Admin Dashboard
 
-### One-Time Admin Setup
-- Bootstrap username: `admin`
-- Initial temporary password: `123456789`
-- **Mandatory first-login security**: The system enforces an immediate password change on first login. Privileged administrative actions are locked until the temporary password is changed.
+### Administrator sign-in
+- Username: `admin`. Sign in through the normal Sign In form, then open `#/admin`.
+- The administrator is provisioned in Firebase Authentication with a signed admin claim. No password or password hash is shipped in the website or repository.
+- Browser storage cannot grant admin permissions. Firebase rules enforce all cloud access.
+- The configured initial password works immediately; password changes are available from the account page.
 
 ### Admin Dashboard Sections (`#/admin`)
 1. **Overview**: Total users, total custom decks, total prompt submissions, pending submissions, approved prompts, rejected prompts.
 2. **Prompt Moderation**: Review pending community submissions, view game & category, approve, reject (with mandatory reason), or edit and approve. Approved prompts immediately appear in the active game pool!
-3. **Game Content Manager**: Browse, filter, search, add, edit, or disable/delete official cards across all 12 games.
-4. **Community Deck Manager**: Inspect custom public decks, approve or reject them for Community Discovery, and hide violating decks.
-5. **User Management**: View registered usernames, search users, suspend or ban accounts (with reason), and unban. Passwords and hashes are never exposed.
+3. **Game Content Manager**: Search, add, edit, delete, and restore standard and rare cards across all games, categories, and play modes. Chaos Mix follows its source cards. Synced changes also apply to Party Mode and multiplayer.
+4. **All decks**: Inspect public, private, unlisted, and bundled community decks; add, edit, and delete cards; approve or hide public decks. Changes persist in Firebase. Legacy decks saved only in another browser remain on that device until synced.
+5. **Collections**: Browse application collections and nested room collections in pages of 50 records. Enter a collection path for other collections; password credential records remain server-only.
+6. **User Management**: View registered usernames and existing local account moderation tools. Passwords and hashes are never exposed.
 
 ---
 

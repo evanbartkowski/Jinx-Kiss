@@ -1,4 +1,4 @@
-const { onRequest, onCall, HttpsError } = require('firebase-functions/v2/https');
+const { onCall, HttpsError } = require('firebase-functions/v2/https');
 const admin = require('firebase-admin');
 const crypto = require('crypto');
 
@@ -157,52 +157,6 @@ exports.loginUser = onCall({ cors: true }, async (request) => {
       ...profile,
       requiresPasswordChange: !!credData.requiresPasswordChange,
     }
-  };
-});
-
-/**
- * One-time Administrator Bootstrap
- * Creates initial admin if not present
- */
-exports.bootstrapAdmin = onCall({ cors: true }, async () => {
-  const adminUsername = 'admin';
-  const normalized = 'admin';
-
-  const usernameDoc = await db.collection('usernames').doc(normalized).get();
-  if (usernameDoc.exists) {
-    return { status: 'already_initialized', message: 'Administrator account already exists.' };
-  }
-
-  const uid = 'admin_primary';
-  const initialPasswordHash = hashPassword('123456789');
-
-  const batch = db.batch();
-  batch.set(db.collection('usernames').doc(normalized), {
-    uid,
-    username: adminUsername,
-    createdAt: admin.firestore.FieldValue.serverTimestamp()
-  });
-  batch.set(db.collection('users').doc(uid), {
-    uid,
-    username: adminUsername,
-    role: 'admin',
-    createdAt: Date.now(),
-  });
-  batch.set(db.collection('credentials').doc(uid), {
-    uid,
-    username: adminUsername,
-    normalizedUsername: normalized,
-    passwordHash: initialPasswordHash,
-    role: 'admin',
-    requiresPasswordChange: true, // Forces immediate password change before permissions unlocked!
-    updatedAt: Date.now(),
-  });
-
-  await batch.commit();
-
-  return {
-    status: 'success',
-    message: 'Admin account bootstrapped with temporary credentials. Immediate password change required.',
   };
 });
 
