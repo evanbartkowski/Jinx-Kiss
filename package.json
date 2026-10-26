@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "test": "vitest run",
-    "test:prompts": "vitest run src/__tests__/promptIntegrity.test.ts src/__tests__/promptLoading.test.tsx src/__tests__/unhinged.test.ts src/__tests__/ageGates.test.tsx",
+    "test:prompts": "vitest run src/__tests__/promptIntegrity.test.ts src/__tests__/promptLoading.test.tsx src/__tests__/unhinged.test.ts src/__tests__/ageGates.test.tsx src/__tests__/researchedPrompts.test.ts",
     "lint": "oxlint",
     "preview": "vite preview"
   },

@@ -20,8 +20,10 @@ import { createPromptCatalog } from '../../utils/promptCatalog';
 import { filterPromptsForScope } from '../../utils/promptValidation';
 import { EDITORIAL_SPOTLIGHT_PROMPTS } from './editorialSpotlights';
 import { UNHINGED_PROMPTS } from './unhinged';
+import { RESEARCHED_IN_PERSON_PROMPTS } from './researchedPrompts';
 
 export const ALL_DEFAULT_PROMPTS = createPromptCatalog([
+  ...RESEARCHED_IN_PERSON_PROMPTS,
   ...UNHINGED_PROMPTS,
   ...EDITORIAL_SPOTLIGHT_PROMPTS,
   ...TRUTH_OR_DARE_PROMPTS,

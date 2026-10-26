@@ -17,6 +17,7 @@ import { createPromptCatalog } from '../../../utils/promptCatalog';
 import { filterPromptsForScope } from '../../../utils/promptValidation';
 import { ONLINE_EDITORIAL_SPOTLIGHT_PROMPTS } from '../editorialSpotlights';
 import { ONLINE_UNHINGED_PROMPTS } from '../unhinged';
+import { RESEARCHED_ONLINE_PROMPTS } from '../researchedPrompts';
 
 export {
   ONLINE_TRUTH_OR_DARE_PROMPTS,
@@ -34,6 +35,7 @@ export {
 };
 
 export const ONLINE_STANDALONE_PROMPTS: PromptItem[] = [
+  ...RESEARCHED_ONLINE_PROMPTS,
   ...ONLINE_UNHINGED_PROMPTS,
   ...ONLINE_EDITORIAL_SPOTLIGHT_PROMPTS,
   ...ONLINE_TRUTH_OR_DARE_PROMPTS,

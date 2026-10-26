@@ -67,6 +67,11 @@ export interface PromptItem {
   legendaryTitle?: string; // Banner title for legendary card (e.g. ★ LEGENDARY DARE ★)
   rarity?: 'common' | 'rare' | 'epic' | 'legendary';
   playMode?: PlayMode;     // 'in-person' | 'online' (defaults to in-person)
+  provenance?: {
+    sourceId: string;
+    relationship: 'licensed-copy' | 'format-inspired';
+    originalItemId?: string;
+  };
 }
 
 export interface PlayerScore {

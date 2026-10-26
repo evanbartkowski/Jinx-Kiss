@@ -1,0 +1,77 @@
+JINX KISS - PROMPT SOURCES AND LICENSE NOTICE
+Reviewed 2026-10-25
+
+This expansion combines two licensed question reproductions with original
+questions informed by established party-game formats. Commercial card decks
+were not copied. References do not imply endorsement or affiliation.
+Individual new prompts have not been measured for popularity.
+
+parabol: Parabol Icebreakers
+https://github.com/ParabolInc/icebreakers/blob/35b3f1579852e1e1e535983ab7a503b6e0e44550/lib/api.ts
+Two licensed questions; other entries are original variations on conversation starters.
+
+wnrs: We're Not Really Strangers
+https://www.werenotreallystrangers.com/pages/core-game
+Original questions about perception, connection, and relationship reflection.
+
+cut: Truth or Drink — Cut
+https://www.cut.com/truth-or-drink-party-games
+Original personal questions with an answer-or-pass response.
+
+voting: The Voting Game — Dyce Games
+https://dycegames.com/collections/the-voting-game
+Original player nominations based on revealing situations.
+
+poison: Pick Your Poison — Dyce Games
+https://dycegames.com/collections/pick-your-poison
+Original paired dilemmas with comparable costs.
+
+opinions: Bad Opinions — Dyce Games
+https://dycegames.com/collections/bad-opinions
+Original statements suited to agree/disagree debate.
+
+seat: Hot Seat — Dyce Games
+https://dycegames.com/collections/hot-seat
+Original questions about one spotlighted player; no impersonation rule added.
+
+nhie: Never Have I Ever — PsyCat Games
+https://psycatgames.com/magazine/party-games/never-ever/
+Original admissions drawn from familiar confession-game situations.
+
+tod: Truth or Dare — PsyCat Games
+https://psycatgames.com/magazine/party-games/truth-or-dare/
+Original truth questions and playable challenges, separated by type.
+
+flags: Red Flags — Gameology retailer overview
+https://www.gameology.com.au/products/red-flags
+Original perk-versus-dealbreaker scenarios adapted to flag voting.
+
+roles: Role Models — Jackbox Games
+https://www.jackboxgames.com/games/role-models
+Original group-role predictions adapted to single-player nominations.
+
+LICENSED MATERIAL
+Parabol questions 37 and 213 are reproduced from the pinned source above.
+The remaining source references identify format inspiration, not licensed copies.
+
+MIT License
+
+Copyright (c) 2022 Parabol
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.

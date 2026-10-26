@@ -146,7 +146,7 @@ Run `npm run test:prompts` to audit every game/category/mode combination and the
 
 ### Editorial content pass
 
-The official collection contains 2,248 standard cards plus a separate rare-card pool. The editorial pass removed 4,707 weak, repetitive, or unsuitable legacy cards and added four original rare cards. Each game keeps all eight categories in both play formats; every online game has at least 100 distinct cards.
+The official collection contains 2,334 standard cards plus a separate rare-card pool. The editorial pass removed 4,707 weak, repetitive, or unsuitable legacy cards and added four original rare cards. Each game keeps all eight categories in both play formats; every online game has at least 100 distinct cards.
 
 Cards need a concrete incident, surprising choice, playable scene, or debate hook. Bare favorites, numbered variations, cosmetic rewordings, routine flirting tasks, and generic topic templates are excluded. Spicy uses non-explicit flirting; adult content stays in the age-confirmed 18+ and Unhinged categories. Category coverage and originality are checked alongside game formats. Small categories are curated for variety rather than padded to meet a global count.
 
@@ -157,3 +157,7 @@ Spotlight text lives in `src/data/prompts/editorialSpotlights.ts`. Append new se
 The old Unhinged standard and rare pools have been retired. `src/data/prompts/unhinged.ts` supplies 448 distinct cards (224 per play format) and eight rare cards. Every source game has 20 cards per format, with 24 in Truth or Dare split evenly between Truth and Dare. Chaos Mix derives its Unhinged rounds from these source games.
 
 The category focuses on player roasts, messy dating stories, hypocrisy, fake apologies, reputation disasters, dark humor, and uncomfortable choices. Players can pass. It requires adult confirmation when launching, resuming, opening a custom deck, or entering an adult party or multiplayer room. Clean and Kids pools and progression exclude it.
+
+### Researched prompt expansion
+
+Added 86 source-tracked cards across all source games and categories, with 43 per play format. Two questions are reused under Parabol's MIT license; the other 84 are original adaptations of established party-game formats. Source references, category mapping, and attribution are documented in [docs/PROMPT_SOURCES.md](docs/PROMPT_SOURCES.md). The website footer links the public prompt credits and license notice.

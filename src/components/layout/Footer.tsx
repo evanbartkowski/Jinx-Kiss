@@ -46,6 +46,9 @@ export const Footer: React.FC = () => {
           <span className="font-extrabold tracking-wider text-creator-gradient drop-shadow-[0_0_10px_rgba(255,77,166,0.35)] select-none">
             {AUTHOR_CONFIG.displayName}
           </span>
+          <a href="/prompt-sources.txt" target="_blank" rel="noopener noreferrer" className="text-[10px] text-zinc-500 hover:text-zinc-200 underline underline-offset-2">
+            Prompt credits
+          </a>
 
           {/* Social icons inline next to name */}
           <div className="flex items-center gap-1.5 ml-1">

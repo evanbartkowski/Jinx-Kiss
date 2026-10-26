@@ -7,6 +7,7 @@ import { getPartyCategories, getPartyPromptPool, getPartyProgressionLadder } fro
 import { partyRequiresAdultConfirmation, requiresAdultConfirmation } from '../utils/contentPolicy';
 import { getPromptValidationErrors } from '../utils/promptValidation';
 import { advanceProgressiveRound, ProgressiveDifficultyState } from '../utils/progressiveDifficulty';
+import { RESEARCHED_PROMPTS } from '../data/prompts/researchedPrompts';
 
 vi.mock('../config/firebase', () => ({ db: undefined }));
 const games = (Object.keys(GAMES_CONFIG) as GameId[]).filter(game => game !== 'chaos-mix');
@@ -15,7 +16,10 @@ const config: PartyModeConfig = { playerNames: ['Sam', 'Jo'], selectedGames: gam
 describe('Unhinged replacement decks', () => {
   for (const mode of ['in-person', 'online'] as PlayMode[]) {
     it(`replaces the entire ${mode} category without old cards leaking through`, () => {
-      const source = mode === 'online' ? ONLINE_UNHINGED_PROMPTS : UNHINGED_PROMPTS;
+      const source = [
+        ...(mode === 'online' ? ONLINE_UNHINGED_PROMPTS : UNHINGED_PROMPTS),
+        ...RESEARCHED_PROMPTS.filter(p => p.category === 'unhinged' && p.playMode === mode),
+      ];
       const expectedIds = new Set(source.map(p => p.id));
       for (const game of games) {
         const pool = getPromptsForGame(game, 'unhinged', mode);
