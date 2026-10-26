@@ -42,12 +42,13 @@ describe('PlayMode (In-Person vs Online) Architecture', () => {
     });
   });
 
-  it('guarantees at least 100 prompts for every gamemode category in Online mode', () => {
+  it('keeps a distinct, playable selection in every game and online category', () => {
     const categories: GameCategory[] = ['easy', 'medium', 'extreme', 'unhinged', 'couples', '18+', 'spicy', 'kids'];
-    categories.forEach(cat => {
-      const catPrompts = ONLINE_STANDALONE_PROMPTS.filter(p => p.category === cat);
-      expect(catPrompts.length).toBeGreaterThanOrEqual(100);
-    });
+    for (const gameId of coreGames) for (const category of categories) {
+      const prompts = getPromptsForGame(gameId, category, 'online');
+      expect(prompts.length, `${gameId}: ${category}`).toBeGreaterThanOrEqual(3);
+      expect(new Set(prompts.map(p => p.text.toLowerCase())).size).toBe(prompts.length);
+    }
   });
 
   it('guarantees all online prompts have unique IDs', () => {

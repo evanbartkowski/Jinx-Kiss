@@ -1,6 +1,7 @@
 import { describe, it, expect, beforeEach } from 'vitest';
 import { SubmissionService } from '../services/submissionService';
 import { AdminService } from '../services/adminService';
+import { getPromptsForGame } from '../data/prompts';
 
 describe('Community Submissions & Moderation Workflow', () => {
   let submissionService: SubmissionService;
@@ -79,7 +80,7 @@ describe('Community Submissions & Moderation Workflow', () => {
       submissionService.submitPrompt(
         'truth-or-dare',
         'easy',
-        "What's the weirdest food combination you secretly enjoy?", // already in default prompts
+        getPromptsForGame('truth-or-dare', 'easy')[0].text,
         'user_1',
         'User1'
       )

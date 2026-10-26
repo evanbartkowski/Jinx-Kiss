@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useGameSettings } from '../../context/GameSettingsContext';
 import { GameCategory, GameId } from '../../types/game';
 import { GAMES_CONFIG, CATEGORY_LABELS } from '../../data/gamesConfig';
 import { useAuth } from '../../context/AuthContext';
@@ -21,6 +22,7 @@ export const SuggestCardModal: React.FC<SuggestCardModalProps> = ({
 }) => {
   const { currentUser, isAuthenticated, openAuthModal } = useAuth();
   const { showToast } = useToast();
+  const { playMode } = useGameSettings();
 
   const [gameId, setGameId] = useState<GameId>(prefilledGameId);
   const [category, setCategory] = useState<GameCategory>(prefilledCategory);
@@ -61,6 +63,7 @@ export const SuggestCardModal: React.FC<SuggestCardModalProps> = ({
           type: gameId === 'truth-or-dare' ? todType : undefined,
           optionA: gameId === 'would-you-rather' ? optionA : undefined,
           optionB: gameId === 'would-you-rather' ? optionB : undefined,
+          playMode,
         }
       );
 

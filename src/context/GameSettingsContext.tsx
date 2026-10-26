@@ -75,9 +75,7 @@ export const GameSettingsProvider: React.FC<{ children: React.ReactNode }> = ({ 
     localStorage.setItem(PLAY_MODE_STORAGE_KEY, mode);
   };
 
-  const setSavedPlayers = (players: string[]) => {
-    setSavedPlayersState(players);
-  };
+  const setSavedPlayers = setSavedPlayersState;
 
   const addSavedPlayer = (name: string) => {
     const clean = name.trim();

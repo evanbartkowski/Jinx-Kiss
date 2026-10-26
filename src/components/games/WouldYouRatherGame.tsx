@@ -30,14 +30,8 @@ interface WouldYouRatherGameProps {
 const CUSTOM_NAME_KEY = 'jinxkiss_wyr_custom_player_name';
 
 export const WouldYouRatherGame: React.FC<WouldYouRatherGameProps> = ({ prompts, players }) => {
-  // Safe auth hook fallback
-  let authUser: string | null = null;
-  try {
-    const auth = useAuth();
-    authUser = auth?.currentUser?.username || null;
-  } catch {
-    authUser = null;
-  }
+  const { currentUser } = useAuth();
+  const authUser = currentUser?.username || null;
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const [playerIndex, setPlayerIndex] = useState(0);

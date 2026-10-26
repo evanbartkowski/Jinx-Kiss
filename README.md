@@ -8,7 +8,7 @@ Live Website: **jinxkiss.com**
 
 ---
 
-## 🎮 The Eight Playable Games
+## 🎮 The Twelve Playable Games
 
 | Game | Theme Color | Description & Mechanics |
 |---|---|---|
@@ -20,6 +20,10 @@ Live Website: **jinxkiss.com**
 | **Red Flag Green Flag** | Red & Green (`#10B981` / `#EF4444`) | Dating & friendship situations, Red Flag / Green Flag / It Depends voting with color-coded results. |
 | **Truth or Sip** | Golden Amber (`#F59E0B`) | Juicy confessions or take a sip. Golden amber styling, non-alcoholic drink toggle, and "Truth or Snack" in Kids mode. |
 | **Point and Drink** | Neon Magenta (`#EC4899`) | "Who is most likely to..." prompts, 3-2-1 countdown ("POINT!"), finger voting tallies, and "Point and Vote" in Kids mode. |
+| **Most Likely To** | Rose | Group votes on specific, surprising scenarios. |
+| **Confessions** | Violet | Anonymous stories followed by guessing who wrote each one. |
+| **Hot Seat** | Rose | One player answers pointed questions under the clock. |
+| **Chaos Mix** | Magenta | Rounds combine the source games while preserving their card mechanics. |
 
 ---
 
@@ -28,6 +32,7 @@ Live Website: **jinxkiss.com**
 - **Easy**: Casual, lighthearted, funny icebreakers.
 - **Medium**: More personal, challenging, and embarrassing questions.
 - **Extreme**: Bold, intense dares and dilemmas.
+- **Unhinged**: Absurd scenarios, bizarre character challenges, and playful chaos.
 - **Couples**: Romantic, intimate, and relationship-oriented questions.
 - **18+**: Adults-only uncensored prompts (**requires age verification modal confirmation**).
 - **Spicy**: Flirty, magnetic, and provocative challenges.
@@ -37,7 +42,7 @@ Live Website: **jinxkiss.com**
 
 ## 🔐 Optional User Accounts & Authentication
 
-- **Guest Mode**: Anyone can open Jinx Kiss and play all 8 games, select categories, spin the roulette wheel, add party players, vote, and play public community decks with zero registration.
+- **Guest Mode**: Anyone can open Jinx Kiss and play all 12 games, select categories, spin the roulette wheel, add party players, vote, and play public community decks with zero registration.
 - **Username-Only Authentication**:
   - Requires only **Username** and **Password** (min 4 characters).
   - **No email address required**.
@@ -59,7 +64,7 @@ Live Website: **jinxkiss.com**
 ### Admin Dashboard Sections (`#/admin`)
 1. **Overview**: Total users, total custom decks, total prompt submissions, pending submissions, approved prompts, rejected prompts.
 2. **Prompt Moderation**: Review pending community submissions, view game & category, approve, reject (with mandatory reason), or edit and approve. Approved prompts immediately appear in the active game pool!
-3. **Game Content Manager**: Browse, filter, search, add, edit, or disable/delete official cards across all 8 games.
+3. **Game Content Manager**: Browse, filter, search, add, edit, or disable/delete official cards across all 12 games.
 4. **Community Deck Manager**: Inspect custom public decks, approve or reject them for Community Discovery, and hide violating decks.
 5. **User Management**: View registered usernames, search users, suspend or ban accounts (with reason), and unban. Passwords and hashes are never exposed.
 
@@ -101,9 +106,9 @@ Live Website: **jinxkiss.com**
 ## 🚀 Firebase Setup & Deployment
 
 ### Project Configuration
-- **Firebase Project ID**: `starlight-fishing`
-- **Hosting Site**: `jinxkiss` ([https://jinxkiss.web.app](https://jinxkiss.web.app))
-- **App ID**: `1:1092703473317:web:bd339b3915feb05633c74c`
+- **Firebase Project ID**: `jinxkiss-cfbaf`
+- **Hosting Site**: `jinxkiss-cfbaf` ([https://jinxkiss-cfbaf.web.app](https://jinxkiss-cfbaf.web.app)); CLI target: `jinxkiss`
+- **App ID**: `1:1044843832410:web:97cf361b4767a5c56c6463`
 
 ### Deployment Commands
 ```bash
@@ -122,3 +127,27 @@ firebase deploy --only hosting:jinxkiss
 # Deploy Firestore Security Rules & Indexes
 firebase deploy --only firestore:rules,firestore:indexes
 ```
+## Prompt library validation
+
+Official cards are grouped by their actual game mechanics, category, and play mode. Chaos Mix is the only game that deliberately combines cards from other games, and it retains each card's source game. Admin overrides are merged before filtering, so moving or disabling a card also updates its original pool and Chaos Mix.
+
+- **Kids:** wholesome, age-appropriate questions and challenges, without romance, adult themes, or drinking.
+- **Easy:** light conversation and low-pressure challenges.
+- **Medium:** personal stories and mild embarrassment.
+- **Extreme:** intense questions, difficult dilemmas, and bold challenges.
+- **Unhinged:** absurd scenarios and playful chaos.
+- **Couples:** shared memories, affection, and relationship conversations.
+- **Spicy:** flirting and attraction without explicit adult content.
+- **18+:** explicit adult topics and mature nightlife stories.
+
+Repeated filler has been removed. Would You Rather cards require two distinct choices; Truth or Dare cards require a type; statements, opinions, and group votes use their corresponding game formats. Newly submitted and admin-added cards are validated before publication. Editorial review is still needed to assess meaning and tone beyond the automated checks.
+
+Run `npm run test:prompts` to audit every game/category/mode combination and the category-switching regressions. Run `npm test` and `npm run build` for the complete automated checks and production build.
+
+### Editorial content pass
+
+The official collection contains 2,078 standard cards, including 450 newly written spotlights, plus a separate rare-card pool. The editorial pass removed 4,707 weak, repetitive, or unsuitable legacy cards and added four original rare cards. Each game keeps all eight categories in both play formats; every online game has at least 100 distinct cards.
+
+Cards need a concrete incident, surprising choice, playable scene, or debate hook. Bare favorites, numbered variations, cosmetic rewordings, routine flirting tasks, and generic topic templates are excluded. Spicy uses non-explicit flirting; explicit legacy content stays in 18+. Category coverage and originality are checked alongside game formats. Small categories are curated for variety rather than padded to meet a global count.
+
+Spotlight text lives in `src/data/prompts/editorialSpotlights.ts`. Append new seed rows to preserve the IDs of existing cards. The automated wording checks in `src/utils/promptQuality.ts` catch simple templates; editorial review remains necessary for tone and entertainment value.

@@ -276,7 +276,7 @@ export const PartyModeSetupPage: React.FC<PartyModeSetupPageProps> = ({ onStartP
                   className="w-full bg-black/60 border border-white/15 rounded-xl px-3 py-2 text-xs text-zinc-300 focus:outline-none"
                 >
                   <option value="all">Unfiltered (All)</option>
-                  <option value="clean">Non-Alcoholic</option>
+                  <option value="clean">Clean (no adult content)</option>
                   <option value="adults-only">Adults Only (18+)</option>
                   <option value="kids-only">Kids Safe Mode</option>
                 </select>

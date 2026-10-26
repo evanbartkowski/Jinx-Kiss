@@ -8,6 +8,7 @@ import { sessionService } from '../services/sessionService';
 import { useGameSettings } from '../context/GameSettingsContext';
 import { GameShell } from '../components/games/GameShell';
 import { GameModeSelectScreen } from '../components/games/GameModeSelectScreen';
+import { filterPromptsForScope } from '../utils/promptValidation';
 
 // Game implementations
 import { TruthOrDareGame } from '../components/games/TruthOrDareGame';
@@ -30,10 +31,19 @@ interface GamePageProps {
 }
 
 export const GamePage: React.FC<GamePageProps> = ({ gameId, customDeck, onExit }) => {
-  const { selectedCategory, setSelectedCategory, savedPlayers, setSavedPlayers, playMode } = useGameSettings();
+  const { selectedCategory, setSelectedCategory, savedPlayers, setSavedPlayers, playMode, setPlayMode } = useGameSettings();
   const [prompts, setPrompts] = useState<PromptItem[]>([]);
+  const [loadedScope, setLoadedScope] = useState<string | null>(null);
   const [gameKey, setGameKey] = useState(0); // For clean restart
   const [isSelectingMode, setIsSelectingMode] = useState<boolean>(!customDeck);
+  const promptScope = `${gameId}_${selectedCategory}_${playMode}_${customDeck?.id || 'official'}_${gameKey}`;
+
+  useEffect(() => {
+    if (customDeck) {
+      setSelectedCategory(customDeck.gameMode || customDeck.cards[0]?.category || 'medium');
+      setPlayMode(customDeck.playMode || 'in-person');
+    }
+  }, [customDeck?.id]);
 
   // Clear player list when navigating away or unmounting so players must be re-entered fresh
   useEffect(() => {
@@ -54,14 +64,22 @@ export const GamePage: React.FC<GamePageProps> = ({ gameId, customDeck, onExit }
         title: customDeck.title,
         tagline: customDeck.description || baseMetadata.tagline,
         themeColor: customDeck.themeColor || baseMetadata.themeColor,
+        applicableCategories: baseMetadata.applicableCategories.filter(category => customDeck.cards.some(card => card.category === category)),
       }
     : baseMetadata;
 
   // Load prompts for current game, category, and playMode (In-Person vs Online)
   useEffect(() => {
+    let cancelled = false;
     if (customDeck) {
-      const unseen = sessionService.filterUnseenCards(customDeck.id, customDeck.cards);
+      const deckMode = customDeck.playMode || 'in-person';
+      // Legacy custom cards inherit the deck's mode when it was stored only on
+      // the deck. Explicitly different modes and categories remain isolated.
+      const deckCards = customDeck.cards.map(card => ({ ...card, playMode: card.playMode || deckMode }));
+      const validCards = filterPromptsForScope(deckCards, gameId, selectedCategory, deckMode);
+      const unseen = sessionService.filterUnseenCards(customDeck.id, validCards);
       setPrompts(unseen);
+      setLoadedScope(promptScope);
       setIsSelectingMode(false);
       sessionService.saveActiveSession({
         mode: 'solo',
@@ -84,23 +102,19 @@ export const GamePage: React.FC<GamePageProps> = ({ gameId, customDeck, onExit }
       let rawPool: PromptItem[] = base;
       try {
         const overrides = await adminService.getAllPromptsForManager(gameId, selectedCategory, playMode);
-        const activeOverrides = overrides.filter(p => p.isActive !== false);
-        rawPool = activeOverrides.length > 0 ? activeOverrides : base;
+        rawPool = filterPromptsForScope(overrides, gameId, selectedCategory, playMode);
       } catch {
         rawPool = base;
       }
 
-      // Hard quarantine: in Online mode, strictly ensure NO in-person prompts ever leak in
-      if (playMode === 'online') {
-        rawPool = rawPool.filter(p => p.playMode === 'online');
-      } else {
-        rawPool = rawPool.filter(p => p.playMode !== 'online');
-      }
+      if (cancelled) return;
+      rawPool = filterPromptsForScope(rawPool, gameId, selectedCategory, playMode);
 
       // 3. Deduplicate: only show unseen cards until collection exhausted (isolated by playMode and category)
       const historyKey = `${playMode}_${gameId}_${selectedCategory}`;
       const deduplicated = sessionService.filterUnseenCards(historyKey, rawPool);
       setPrompts(deduplicated);
+      setLoadedScope(promptScope);
 
       // 4. Auto-save session (preserve round if resuming existing session for this game & category)
       const existing = sessionService.getActiveSession();
@@ -116,6 +130,7 @@ export const GamePage: React.FC<GamePageProps> = ({ gameId, customDeck, onExit }
     };
 
     loadPrompts();
+    return () => { cancelled = true; };
   }, [gameId, selectedCategory, customDeck, gameKey, playMode]);
 
   const handleRestart = () => {
@@ -145,6 +160,7 @@ export const GamePage: React.FC<GamePageProps> = ({ gameId, customDeck, onExit }
   }
 
   const renderActiveGame = () => {
+    if (loadedScope !== promptScope) return <p role="status" className="text-zinc-400">Loading cards…</p>;
     if (prompts.length === 0) {
       return (
         <div className="text-center py-16 glass-panel rounded-3xl p-8 border border-white/10 max-w-md mx-auto">
@@ -160,7 +176,7 @@ export const GamePage: React.FC<GamePageProps> = ({ gameId, customDeck, onExit }
       );
     }
 
-    const compKey = `${gameKey}_${selectedCategory}_${playMode}`;
+    const compKey = promptScope;
 
     switch (gameId) {
       case 'truth-or-dare':

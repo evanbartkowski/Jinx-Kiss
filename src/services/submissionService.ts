@@ -1,8 +1,9 @@
 import { CommunitySubmission } from '../types/submission';
-import { GameCategory, GameId } from '../types/game';
+import { GameCategory, GameId, PlayMode } from '../types/game';
+import { getPromptValidationErrors } from '../utils/promptValidation';
 import { db } from '../config/firebase';
 import { collection, doc, getDocs, setDoc, query, where } from 'firebase/firestore';
-import { ALL_DEFAULT_PROMPTS } from '../data/prompts';
+import { getPromptsForGame } from '../data/prompts';
 
 const LOCAL_SUBMISSIONS_KEY = 'jinxkiss_local_submissions_v1';
 const RATE_LIMIT_KEY = 'jinxkiss_submission_rate_limit_v1';
@@ -17,23 +18,23 @@ export class SubmissionService {
     text: string,
     submitterUid: string,
     submitterUsername: string,
-    extras?: { type?: 'truth' | 'dare'; optionA?: string; optionB?: string }
+    extras?: { type?: 'truth' | 'dare'; optionA?: string; optionB?: string; playMode?: PlayMode }
   ): Promise<CommunitySubmission> {
     const cleanText = text.trim();
     if (cleanText.length < 10) {
       throw new Error('Proposed card prompt must be at least 10 characters.');
     }
-
-    // Rate limiting check: Max 10 submissions per 10 minutes
-    this.checkRateLimit(submitterUid);
-
     // Duplicate detection: check existing default prompts
-    const existing = ALL_DEFAULT_PROMPTS[gameId] || [];
+    const existing = getPromptsForGame(gameId, undefined, extras?.playMode || 'in-person');
     const normalizedInput = cleanText.toLowerCase().replace(/[^a-z0-9]/g, '');
     const isDuplicate = existing.some(p => p.text.toLowerCase().replace(/[^a-z0-9]/g, '') === normalizedInput);
     if (isDuplicate) {
       throw new Error('A very similar prompt already exists in the official library.');
     }
+    const errors = getPromptValidationErrors({ id: 'submission', gameId, category, text: cleanText, ...extras });
+    if (errors.length) throw new Error(errors.join(' '));
+    // Invalid cards and duplicates do not consume the submission allowance.
+    this.checkRateLimit(submitterUid);
 
     const id = 'sub_' + Math.random().toString(36).substring(2, 11);
     const submission: CommunitySubmission = {
@@ -44,6 +45,7 @@ export class SubmissionService {
       type: extras?.type,
       optionA: extras?.optionA?.trim(),
       optionB: extras?.optionB?.trim(),
+      playMode: extras?.playMode || 'in-person',
       submitterUid,
       submitterUsername,
       status: 'pending',
@@ -58,7 +60,7 @@ export class SubmissionService {
     // Save to Firestore
     try {
       if (db) {
-        await setDoc(doc(db, 'community_submissions', id), submission);
+        await setDoc(doc(db, 'community_submissions', id), Object.fromEntries(Object.entries(submission).filter(([, value]) => value !== undefined)));
       }
     } catch (e) {
       console.warn('Firestore submitPrompt fallback:', e);

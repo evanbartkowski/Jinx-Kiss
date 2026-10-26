@@ -117,7 +117,7 @@ export const GameContentManager: React.FC = () => {
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div>
           <h3 className="text-xl font-black text-white">Game Content Manager</h3>
-          <p className="text-xs text-zinc-400">Add, edit, disable, or modify official cards across all 8 games</p>
+          <p className="text-xs text-zinc-400">Add, edit, disable, or modify official cards across all 12 games</p>
         </div>
 
         <button

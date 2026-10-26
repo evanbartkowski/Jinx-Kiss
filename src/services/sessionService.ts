@@ -137,6 +137,7 @@ export const sessionService = {
       id,
       name: sessionData.name || existing?.name || `Party Session (${new Date().toLocaleDateString()})`,
       mode: sessionData.mode || existing?.mode || 'solo',
+      playMode: sessionData.playMode || existing?.playMode || 'in-person',
       gameId: sessionData.gameId,
       category: sessionData.category,
       customDeckId: sessionData.customDeckId || existing?.customDeckId,

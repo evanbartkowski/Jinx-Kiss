@@ -5,8 +5,9 @@ import { UserProfile } from '../types/user';
 import { submissionService } from './submissionService';
 import { deckService } from './deckService';
 import { ALL_DEFAULT_PROMPTS, ALL_ONLINE_PROMPTS } from '../data/prompts';
+import { getPromptValidationErrors } from '../utils/promptValidation';
 import { db } from '../config/firebase';
-import { collection, doc, getDocs, setDoc, updateDoc, deleteDoc } from 'firebase/firestore';
+import { doc, setDoc } from 'firebase/firestore';
 
 const LOCAL_OFFICIAL_PROMPTS_KEY = 'jinxkiss_official_prompts_override_v1';
 const LOCAL_USERS_KEY = 'jinxkiss_local_users_v1';
@@ -66,9 +67,6 @@ export class AdminService {
       reviewedBy: 'admin',
     };
 
-    submissions[index] = sub;
-    submissionService.saveLocalSubmissions(submissions);
-
     // Publish to official prompts pool!
     const newPromptItem: PromptItem = {
       id: 'approved_' + sub.id,
@@ -78,12 +76,15 @@ export class AdminService {
       type: sub.type,
       optionA: sub.optionA,
       optionB: sub.optionB,
+      playMode: sub.playMode || 'in-person',
       authorUsername: sub.submitterUsername,
       isCommunity: true,
       isActive: true,
     };
 
     await this.addOfficialPrompt(newPromptItem);
+    submissions[index] = sub;
+    submissionService.saveLocalSubmissions(submissions);
   }
 
   /**
@@ -114,36 +115,22 @@ export class AdminService {
     playMode: PlayMode = 'in-person'
   ): Promise<PromptItem[]> {
     const overrides = this.getLocalOfficialPrompts();
-    let prompts: PromptItem[] = [];
-
     const sourceMap = playMode === 'online' ? ALL_ONLINE_PROMPTS : ALL_DEFAULT_PROMPTS;
-
-    // Base default prompts
-    if (gameId) {
-      prompts = [...(sourceMap[gameId] || [])];
-    } else {
-      Object.values(sourceMap).forEach(list => {
-        prompts.push(...list);
-      });
+    // Merge before filtering: a moved card must disappear from its previous game,
+    // category, and play mode. Chaos Mix is derived after the merge.
+    const merged = new Map<string, PromptItem>();
+    Object.entries(sourceMap).filter(([id]) => id !== 'chaos-mix').forEach(([, list]) => {
+      list.forEach(prompt => merged.set(prompt.id, prompt));
+    });
+    for (const override of overrides) {
+      merged.delete(override.id);
+      if ((override.playMode || 'in-person') === playMode) merged.set(override.id, override);
     }
-
-    // Merge in admin added/overridden prompts matching playMode
-    overrides
-      .filter(ov => (ov.playMode || 'in-person') === playMode)
-      .forEach(ov => {
-        const existingIdx = prompts.findIndex(p => p.id === ov.id);
-        if (existingIdx !== -1) {
-          prompts[existingIdx] = ov;
-        } else {
-          prompts.unshift(ov);
-        }
-      });
-
-    if (category) {
-      prompts = prompts.filter(p => p.category === category);
+    let prompts = Array.from(merged.values());
+    if (gameId === 'chaos-mix') {
+      prompts = prompts.filter(p => p.gameId !== 'chaos-mix').map(p => ({ ...p, originGameId: p.gameId, gameId: 'chaos-mix' }));
     }
-
-    return prompts;
+    return prompts.filter(p => (!gameId || p.gameId === gameId) && (!category || p.category === category) && (p.playMode || 'in-person') === playMode);
   }
 
   /**
@@ -156,12 +143,16 @@ export class AdminService {
       id: prompt.id || 'admin_prompt_' + Math.random().toString(36).substring(2, 10),
       isActive: prompt.isActive !== false,
     };
-    overrides.unshift(item);
+    const errors = getPromptValidationErrors(item);
+    if (errors.length) throw new Error(errors.join(' '));
+    const existingIndex = overrides.findIndex(p => p.id === item.id);
+    if (existingIndex !== -1) overrides[existingIndex] = item;
+    else overrides.unshift(item);
     this.saveLocalOfficialPrompts(overrides);
 
     try {
       if (db) {
-        await setDoc(doc(db, 'official_prompts', item.id), item);
+        await setDoc(doc(db, 'official_prompts', item.id), Object.fromEntries(Object.entries(item).filter(([, value]) => value !== undefined)));
       }
     } catch (e) {
       console.warn('Firestore addOfficialPrompt fallback:', e);
@@ -173,50 +164,24 @@ export class AdminService {
    */
   async updateOfficialPrompt(promptId: string, updates: Partial<PromptItem>): Promise<void> {
     const overrides = this.getLocalOfficialPrompts();
-    const index = overrides.findIndex(p => p.id === promptId);
-
-    if (index !== -1) {
-      overrides[index] = { ...overrides[index], ...updates };
-    } else {
-      // Find from defaults and create override
-      let found: PromptItem | undefined;
-      for (const list of Object.values(ALL_DEFAULT_PROMPTS)) {
-        found = list.find(p => p.id === promptId);
-        if (found) break;
-      }
-      if (!found) {
-        for (const list of Object.values(ALL_ONLINE_PROMPTS)) {
-          found = list.find(p => p.id === promptId);
-          if (found) break;
-        }
-      }
-      if (found) {
-        overrides.push({ ...found, ...updates });
-      }
+    const found = overrides.find(p => p.id === promptId) ||
+      [...Object.values(ALL_DEFAULT_PROMPTS), ...Object.values(ALL_ONLINE_PROMPTS)].flat().find(p => p.id === promptId);
+    if (!found) throw new Error('Prompt not found.');
+    const item = { ...found, ...updates, id: promptId };
+    if (item.isActive !== false) {
+      const errors = getPromptValidationErrors(item);
+      if (errors.length) throw new Error(errors.join(' '));
     }
-
-    this.saveLocalOfficialPrompts(overrides);
+    const next = overrides.filter(p => p.id !== promptId);
+    next.push(item);
+    this.saveLocalOfficialPrompts(next);
   }
 
   /**
    * Toggle prompt active status or delete
    */
   async deleteOfficialPrompt(promptId: string): Promise<void> {
-    const overrides = this.getLocalOfficialPrompts();
-    const index = overrides.findIndex(p => p.id === promptId);
-    if (index !== -1) {
-      overrides[index].isActive = false;
-    } else {
-      let found: PromptItem | undefined;
-      for (const list of Object.values(ALL_DEFAULT_PROMPTS)) {
-        found = list.find(p => p.id === promptId);
-        if (found) break;
-      }
-      if (found) {
-        overrides.push({ ...found, isActive: false });
-      }
-    }
-    this.saveLocalOfficialPrompts(overrides);
+    await this.updateOfficialPrompt(promptId, { isActive: false });
   }
 
   /**
@@ -294,7 +259,8 @@ export class AdminService {
   public getLocalOfficialPrompts(): PromptItem[] {
     try {
       const raw = localStorage.getItem(LOCAL_OFFICIAL_PROMPTS_KEY);
-      return raw ? JSON.parse(raw) : [];
+      const parsed = raw ? JSON.parse(raw) : [];
+      return Array.isArray(parsed) ? parsed.filter(p => p && typeof p.id === 'string' && typeof p.text === 'string') : [];
     } catch {
       return [];
     }

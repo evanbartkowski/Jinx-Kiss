@@ -3,6 +3,7 @@ import { LEGENDARY_CARDS } from '../data/prompts/legendaryCards';
 import { ONLINE_LEGENDARY_CARDS } from '../data/prompts/online/onlineLegendaryCards';
 import { soundEffects } from './audio';
 import confetti from 'canvas-confetti';
+import { getPromptValidationErrors } from './promptValidation';
 
 // Track used legendary card IDs in session to avoid repeats until exhausted
 const usedLegendaryIds = new Set<string>();
@@ -21,13 +22,13 @@ export function isPromptLegendary(prompt?: PromptItem | null): boolean {
 export function getLegendaryCardForCategory(
   category: GameCategory,
   gameId?: GameId,
-  playMode: PlayMode = 'in-person'
+  playMode: PlayMode = 'in-person',
+  type?: 'truth' | 'dare'
 ): PromptItem | null {
   const sourceCards = playMode === 'online' ? ONLINE_LEGENDARY_CARDS : LEGENDARY_CARDS;
-  let candidates = sourceCards.filter(c => c.category === category);
+  let candidates = sourceCards.filter(c => c.category === category && (!type || c.type === type) && getPromptValidationErrors(c).length === 0);
   if (gameId && gameId !== 'chaos-mix') {
-    const gameMatching = candidates.filter(c => c.gameId === gameId);
-    if (gameMatching.length > 0) candidates = gameMatching;
+    candidates = candidates.filter(c => c.gameId === gameId);
   }
 
   if (candidates.length === 0) return null;
@@ -76,7 +77,7 @@ export function rollForLegendaryCard(
 
   // Rare roll for a category-specific legendary card
   if (Math.random() < chance) {
-    const legendary = getLegendaryCardForCategory(category, gameId, resolvedPlayMode);
+    const legendary = getLegendaryCardForCategory(category, gameId, resolvedPlayMode, chosenPrompt.type);
     if (legendary) {
       return legendary;
     }

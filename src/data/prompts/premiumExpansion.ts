@@ -5,14 +5,6 @@ import { PromptItem } from '../../types/game';
  * Eccentric, funny, hilarious, highly creative prompts curated across all games and modes.
  */
 export const PREMIUM_EXPANSION_PROMPTS: PromptItem[] = [
-  // --- TRUTH OR DARE ---
-  {
-    id: "pe-tod-1",
-    gameId: "truth-or-dare",
-    category: "unhinged",
-    type: "dare",
-    text: "Put a slice of lime, ice cube, or coaster between your chin and collarbone and do not drop it until your next turn."
-  },
   {
     id: "pe-tod-2",
     gameId: "truth-or-dare",
@@ -21,30 +13,9 @@ export const PREMIUM_EXPANSION_PROMPTS: PromptItem[] = [
     text: "What is the single most deranged combination of items you have ever purchased together at a pharmacy at 1 AM?"
   },
   {
-    id: "pe-tod-3",
-    gameId: "truth-or-dare",
-    category: "extreme",
-    type: "dare",
-    text: "Let the person to your left draft a 2-word question and send it to your 4th most recent contact on Instagram."
-  },
-  {
-    id: "pe-tod-4",
-    gameId: "truth-or-dare",
-    category: "extreme",
-    type: "truth",
-    text: "What is an event you attended where you felt so painfully out of place you contemplated inventing an emergency to leave?"
-  },
-  {
-    id: "pe-tod-5",
-    gameId: "truth-or-dare",
-    category: "spicy",
-    type: "dare",
-    text: "Slowly unbutton the top two buttons of your shirt or trace your fingertips along the jaw of the player on your right."
-  },
-  {
     id: "pe-tod-6",
     gameId: "truth-or-dare",
-    category: "spicy",
+    category: "18+",
     type: "truth",
     text: "What is the most scandalous piece of clothing you own that has never seen the light of day outside your bedroom?"
   },
@@ -61,20 +32,6 @@ export const PREMIUM_EXPANSION_PROMPTS: PromptItem[] = [
     category: "18+",
     type: "truth",
     text: "What is an unexpected kink or physical sensation you tried once as a joke and realized you genuinely enjoyed?"
-  },
-  {
-    id: "pe-tod-9",
-    gameId: "truth-or-dare",
-    category: "couples",
-    type: "dare",
-    text: "Look into your partner's eyes and whisper the exact date, weather, or memory you first realized you wanted to be with them."
-  },
-  {
-    id: "pe-tod-10",
-    gameId: "truth-or-dare",
-    category: "couples",
-    type: "truth",
-    text: "What is something cute your partner does when they think you are asleep or not paying attention?"
   },
   {
     id: "pe-tod-11",
@@ -119,12 +76,6 @@ export const PREMIUM_EXPANSION_PROMPTS: PromptItem[] = [
     text: "Never have I ever stalked someone's Spotify listening activity so closely I deduced their exact emotional breakdown status."
   },
   {
-    id: "pe-nhie-3",
-    gameId: "never-have-i-ever",
-    category: "extreme",
-    text: "Never have I ever accidentally sent a screenshot of someone's text message back to that exact same person."
-  },
-  {
     id: "pe-nhie-4",
     gameId: "never-have-i-ever",
     category: "extreme",
@@ -139,14 +90,8 @@ export const PREMIUM_EXPANSION_PROMPTS: PromptItem[] = [
   {
     id: "pe-nhie-6",
     gameId: "never-have-i-ever",
-    category: "spicy",
-    text: "Never have I ever hooked up with someone specifically because they had a luxury apartment with a skyline view."
-  },
-  {
-    id: "pe-nhie-7",
-    gameId: "never-have-i-ever",
     category: "18+",
-    text: "Never have I ever hooked up with someone whose name I forgot halfway through the interaction."
+    text: "Never have I ever hooked up with someone specifically because they had a luxury apartment with a skyline view."
   },
   {
     id: "pe-nhie-8",
@@ -184,7 +129,7 @@ export const PREMIUM_EXPANSION_PROMPTS: PromptItem[] = [
     id: "pe-wyr-1",
     gameId: "would-you-rather",
     category: "unhinged",
-    text: "Would You Rather...",
+    text: "Would you rather Have your laugh sound like a dying lawnmower at every funeral or Have your sneeze sound like an angry airhorn on crowded public transit?",
     optionA: "Have your laugh sound like a dying lawnmower at every funeral",
     optionB: "Have your sneeze sound like an angry airhorn on crowded public transit"
   },
@@ -192,7 +137,7 @@ export const PREMIUM_EXPANSION_PROMPTS: PromptItem[] = [
     id: "pe-wyr-2",
     gameId: "would-you-rather",
     category: "unhinged",
-    text: "Would You Rather...",
+    text: "Would you rather Only be able to communicate via singing medieval tavern ballads or Have to explain your most toxic dating situationship to your high school principal?",
     optionA: "Only be able to communicate via singing medieval tavern ballads",
     optionB: "Have to explain your most toxic dating situationship to your high school principal"
   },
@@ -200,15 +145,15 @@ export const PREMIUM_EXPANSION_PROMPTS: PromptItem[] = [
     id: "pe-wyr-3",
     gameId: "would-you-rather",
     category: "extreme",
-    text: "Would You Rather...",
+    text: "Would you rather Lose access to your phone for 30 consecutive days or Have your entire internet search history read out loud to your parents and boss?",
     optionA: "Lose access to your phone for 30 consecutive days",
     optionB: "Have your entire internet search history read out loud to your parents and boss"
   },
   {
     id: "pe-wyr-4",
     gameId: "would-you-rather",
-    category: "spicy",
-    text: "Would You Rather...",
+    category: "18+",
+    text: "Would you rather Have incredible physical chemistry with someone who has zero personality or Have your emotional soulmate have completely awkward, lukewarm bedroom chemistry?",
     optionA: "Have incredible physical chemistry with someone who has zero personality",
     optionB: "Have your emotional soulmate have completely awkward, lukewarm bedroom chemistry"
   },
@@ -216,7 +161,7 @@ export const PREMIUM_EXPANSION_PROMPTS: PromptItem[] = [
     id: "pe-wyr-5",
     gameId: "would-you-rather",
     category: "18+",
-    text: "Would You Rather...",
+    text: "Would you rather Accidentally send an explicit bedroom voice note to your landlord or Get caught in a compromising position by your partner's overbearing parents?",
     optionA: "Accidentally send an explicit bedroom voice note to your landlord",
     optionB: "Get caught in a compromising position by your partner's overbearing parents"
   },
@@ -224,7 +169,7 @@ export const PREMIUM_EXPANSION_PROMPTS: PromptItem[] = [
     id: "pe-wyr-6",
     gameId: "would-you-rather",
     category: "couples",
-    text: "Would You Rather...",
+    text: "Would you rather Relive the first magical month of dating your partner every 3 years or Be guaranteed to grow old together in a cozy seaside cottage with 4 golden retrievers?",
     optionA: "Relive the first magical month of dating your partner every 3 years",
     optionB: "Be guaranteed to grow old together in a cozy seaside cottage with 4 golden retrievers"
   },
@@ -232,7 +177,7 @@ export const PREMIUM_EXPANSION_PROMPTS: PromptItem[] = [
     id: "pe-wyr-7",
     gameId: "would-you-rather",
     category: "medium",
-    text: "Would You Rather...",
+    text: "Would you rather Always have damp socks that take 8 hours to dry or Always have an annoying itch on your back that moves whenever you scratch it?",
     optionA: "Always have damp socks that take 8 hours to dry",
     optionB: "Always have an annoying itch on your back that moves whenever you scratch it"
   },
@@ -240,7 +185,7 @@ export const PREMIUM_EXPANSION_PROMPTS: PromptItem[] = [
     id: "pe-wyr-8",
     gameId: "would-you-rather",
     category: "kids",
-    text: "Would You Rather...",
+    text: "Would you rather Have a pet baby dinosaur the size of a kitten or Have a flying carpet that can only go as fast as a bicycle?",
     optionA: "Have a pet baby dinosaur the size of a kitten",
     optionB: "Have a flying carpet that can only go as fast as a bicycle"
   },
@@ -283,24 +228,10 @@ export const PREMIUM_EXPANSION_PROMPTS: PromptItem[] = [
     text: "Bedroom compatibility is at least 65% of long-term relationship success, and pretending otherwise leads to bitter divorces."
   },
   {
-    id: "pe-ht-7",
-    gameId: "hot-takes",
-    category: "couples",
-    text: "Having completely separate blankets on the same bed is the secret to a long, blissful, non-resentful marriage."
-  },
-  {
     id: "pe-ht-8",
     gameId: "hot-takes",
     category: "kids",
     text: "Waffles are mathematically and structurally superior to pancakes because of the built-in syrup pockets."
-  },
-
-  // --- DARE ROULETTE ---
-  {
-    id: "pe-dr-1",
-    gameId: "dare-roulette",
-    category: "unhinged",
-    text: "Do your best runway high-fashion pose and freeze completely like a museum statue for 30 seconds."
   },
   {
     id: "pe-dr-2",
@@ -309,54 +240,16 @@ export const PREMIUM_EXPANSION_PROMPTS: PromptItem[] = [
     text: "Let the person across from you pick any photo from your phone's camera roll and show it to the group for 3 seconds."
   },
   {
-    id: "pe-dr-3",
-    gameId: "dare-roulette",
-    category: "spicy",
-    text: "Maintain unbroken, smoldering eye contact with the player of your choice for 15 seconds without breaking character."
-  },
-  {
-    id: "pe-dr-4",
-    gameId: "dare-roulette",
-    category: "18+",
-    text: "Whisper your boldest intimate turn-on to the player sitting directly across from you."
-  },
-  {
     id: "pe-dr-5",
     gameId: "dare-roulette",
     category: "couples",
     text: "Give your partner a slow forehead kiss and whisper the three words they need to hear most right now."
   },
   {
-    id: "pe-dr-6",
-    gameId: "dare-roulette",
-    category: "medium",
-    text: "Swap drinks or seats with the person sitting two spots to your left."
-  },
-  {
-    id: "pe-dr-7",
-    gameId: "dare-roulette",
-    category: "kids",
-    text: "Recite the alphabet backwards starting from G down to A while hopping on one foot."
-  },
-
-  // --- RED FLAG GREEN FLAG ---
-  {
-    id: "pe-rf-1",
-    gameId: "red-flag-green-flag",
-    category: "unhinged",
-    text: "They have a framed autographed photo of Shrek hanging in their bathroom over the towel rack."
-  },
-  {
     id: "pe-rf-2",
     gameId: "red-flag-green-flag",
     category: "medium",
     text: "They remember the exact date and shirt you were wearing when you first met, but forget where they put their own keys 5 minutes ago."
-  },
-  {
-    id: "pe-rf-3",
-    gameId: "red-flag-green-flag",
-    category: "extreme",
-    text: "They have a spreadsheet calculating the cost-per-minute of activities when planning a weekend trip."
   },
   {
     id: "pe-rf-4",
@@ -388,43 +281,43 @@ export const PREMIUM_EXPANSION_PROMPTS: PromptItem[] = [
     id: "pe-tos-1",
     gameId: "truth-or-sip",
     category: "unhinged",
-    text: "What is an imaginary scenario you concocted in your head that made you physically angry at someone who did nothing wrong?"
+    text: "What is an imaginary scenario you concocted in your head that made you physically angry at someone who did nothing wrong?",
+    "forfeit": "Take a sip of any drink, or pass."
   },
   {
     id: "pe-tos-2",
     gameId: "truth-or-sip",
     category: "medium",
-    text: "What is a message sitting in your unsent drafts right now that you know you will never have the courage to deliver?"
-  },
-  {
-    id: "pe-tos-3",
-    gameId: "truth-or-sip",
-    category: "extreme",
-    text: "Who was the last person you stalked on Instagram using a burner account or your friend's phone?"
+    text: "What is a message sitting in your unsent drafts right now that you know you will never have the courage to deliver?",
+    "forfeit": "Take a sip of any drink, or pass."
   },
   {
     id: "pe-tos-4",
     gameId: "truth-or-sip",
     category: "spicy",
-    text: "What is the single best kiss you have ever experienced in your life? Describe the setting and sensory details."
+    text: "What is the single best kiss you have ever experienced in your life? Describe the setting and sensory details.",
+    "forfeit": "Take a sip of any drink, or pass."
   },
   {
     id: "pe-tos-5",
     gameId: "truth-or-sip",
     category: "18+",
-    text: "What is the most scandalous place you have ever engaged in bedroom activities where you risked getting walked in on?"
+    text: "What is the most scandalous place you have ever engaged in bedroom activities where you risked getting walked in on?",
+    "forfeit": "Take a sip of any drink, or pass."
   },
   {
     id: "pe-tos-6",
     gameId: "truth-or-sip",
     category: "couples",
-    text: "What was the very first thought you had the morning after your first sleepover with your partner?"
+    text: "What was the very first thought you had the morning after your first sleepover with your partner?",
+    "forfeit": "Take a sip of any drink, or pass."
   },
   {
     id: "pe-tos-7",
     gameId: "truth-or-sip",
     category: "kids",
-    text: "What is the silliest excuse you gave a teacher for not finishing your homework on time?"
+    text: "What is the silliest excuse you gave a teacher for not finishing your homework on time?",
+    "forfeit": "Do your funniest animal impression."
   },
 
   // --- POINT AND DRINK ---
@@ -447,12 +340,6 @@ export const PREMIUM_EXPANSION_PROMPTS: PromptItem[] = [
     text: "Point at the person most likely to get roped into an international spy mission because they were too polite to say no."
   },
   {
-    id: "pe-pad-4",
-    gameId: "point-and-drink",
-    category: "spicy",
-    text: "Point at the player who gives off the most dangerous, alluring after-hours bedroom energy tonight."
-  },
-  {
     id: "pe-pad-5",
     gameId: "point-and-drink",
     category: "18+",
@@ -469,14 +356,6 @@ export const PREMIUM_EXPANSION_PROMPTS: PromptItem[] = [
     gameId: "point-and-drink",
     category: "kids",
     text: "Point at the person who would survive the longest on a deserted island with only a spoon and a flashlight."
-  },
-
-  // --- MOST LIKELY TO ---
-  {
-    id: "pe-mlt-1",
-    gameId: "most-likely-to",
-    category: "unhinged",
-    text: "Most likely to wake up in another timezone with no recollection of booking the budget airline ticket."
   },
   {
     id: "pe-mlt-2",
@@ -495,18 +374,6 @@ export const PREMIUM_EXPANSION_PROMPTS: PromptItem[] = [
     gameId: "most-likely-to",
     category: "spicy",
     text: "Most likely to seduce someone in an elevator between floors 1 and 20."
-  },
-  {
-    id: "pe-mlt-5",
-    gameId: "most-likely-to",
-    category: "18+",
-    text: "Most likely to have an entire secret collection of spicy lingerie hidden in a decoy shoebox."
-  },
-  {
-    id: "pe-mlt-6",
-    gameId: "most-likely-to",
-    category: "couples",
-    text: "Most likely to cry happy tears during a romantic movie while holding their partner's sleeve."
   },
   {
     id: "pe-mlt-7",
@@ -529,15 +396,9 @@ export const PREMIUM_EXPANSION_PROMPTS: PromptItem[] = [
     text: "What was a white lie you told a friend that spiraled so out of hand you had to maintain the charade for over a year?"
   },
   {
-    id: "pe-conf-3",
-    gameId: "confessions",
-    category: "extreme",
-    text: "What is something you witnessed at a party that you swore on your life you would never repeat until tonight?"
-  },
-  {
     id: "pe-conf-4",
     gameId: "confessions",
-    category: "spicy",
+    category: "18+",
     text: "What is a sensual confession or secret longing you have had about a friend's acquaintance that you never spoke aloud?"
   },
   {
@@ -583,12 +444,6 @@ export const PREMIUM_EXPANSION_PROMPTS: PromptItem[] = [
     gameId: "hot-seat",
     category: "spicy",
     text: "You are on the Hot Seat: What is the single most intoxicating thing someone has whispered into your ear?"
-  },
-  {
-    id: "pe-hs-5",
-    gameId: "hot-seat",
-    category: "18+",
-    text: "You are on the Hot Seat: What is your absolute non-negotiable requirement for an unforgettable bedroom encounter?"
   },
   {
     id: "pe-hs-6",

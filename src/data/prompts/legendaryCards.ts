@@ -84,7 +84,8 @@ export const LEGENDARY_CARDS: PromptItem[] = [
     isLegendary: true,
     rarity: 'legendary',
     legendaryTitle: '★ LEGENDARY FORFEIT ★',
-    text: 'The Master Rulebreaker: Confess the funniest rule you broke at home or school without getting caught, or perform the Chicken Dance with full rooster sounds for 30 seconds!'
+    text: 'The Master Rulebreaker: Confess the funniest rule you broke at home or school without getting caught, or perform the Chicken Dance with full rooster sounds for 30 seconds!',
+    "forfeit": "Do your funniest animal impression."
   },
   {
     id: 'leg-kids-9',
@@ -130,10 +131,10 @@ export const LEGENDARY_CARDS: PromptItem[] = [
     id: 'leg-easy-1',
     gameId: 'truth-or-dare',
     category: 'easy',
-    type: 'truth',
+    type: "dare",
     isLegendary: true,
     rarity: 'legendary',
-    legendaryTitle: '★ LEGENDARY TRUTH ★',
+    legendaryTitle: '? LEGENDARY DARE ?',
     text: 'The Camera Roll Lottery: Unlock your phone right now, open your photo gallery, scroll with your eyes closed for 5 seconds, and show the photo your finger lands on to the entire room!'
   },
   {
@@ -201,7 +202,8 @@ export const LEGENDARY_CARDS: PromptItem[] = [
     isLegendary: true,
     rarity: 'legendary',
     legendaryTitle: '★ LEGENDARY TRUTH ★',
-    text: 'The Petty Ghost Confession: Name the single most ridiculous or petty reason you ever ghosted someone or stopped texting back, or take 2 hefty sips!'
+    text: 'The Petty Ghost Confession: Name the single most ridiculous or petty reason you ever ghosted someone or stopped texting back, or take 2 hefty sips!',
+    "forfeit": "Take a sip of any drink, or pass."
   },
   {
     id: 'leg-easy-9',
@@ -239,20 +241,6 @@ export const LEGENDARY_CARDS: PromptItem[] = [
     legendaryTitle: '★ LEGENDARY HOT SEAT ★',
     text: 'The Nostalgia Interrogation: The room has 60 uninterrupted seconds to cross-examine you about your most cringe-inducing middle school phase. Full truth required!'
   },
-
-  // ==========================================
-  // 3. MEDIUM CATEGORY (Personal, witty, juicy)
-  // ==========================================
-  {
-    id: 'leg-med-1',
-    gameId: 'truth-or-dare',
-    category: 'medium',
-    type: 'truth',
-    isLegendary: true,
-    rarity: 'legendary',
-    legendaryTitle: '★ LEGENDARY TRUTH ★',
-    text: 'The Phone Hostage: Hand your unlocked phone to the person on your left for 60 seconds with permission to look at anything EXCEPT banking apps, OR reveal the one secret you are terrified someone here might find out.'
-  },
   {
     id: 'leg-med-2',
     gameId: 'truth-or-dare',
@@ -262,17 +250,6 @@ export const LEGENDARY_CARDS: PromptItem[] = [
     rarity: 'legendary',
     legendaryTitle: '★ LEGENDARY DARE ★',
     text: 'The Urgent Speakerphone Call: Call a mutual friend not in this room on speakerphone and urgently whisper: "Whatever happens tonight, do NOT check my trunk." Hang up immediately after 15 seconds without laughing!'
-  },
-  {
-    id: 'leg-med-3',
-    gameId: 'would-you-rather',
-    category: 'medium',
-    isLegendary: true,
-    rarity: 'legendary',
-    legendaryTitle: '★ LEGENDARY SHOWDOWN ★',
-    text: 'Would you rather have everyone in this room see your deleted photo album OR let everyone read your last 10 text messages with your ex or current crush?',
-    optionA: 'Everyone sees deleted photo album',
-    optionB: 'Everyone reads last 10 texts with ex/crush'
   },
   {
     id: 'leg-med-4',
@@ -318,7 +295,8 @@ export const LEGENDARY_CARDS: PromptItem[] = [
     isLegendary: true,
     rarity: 'legendary',
     legendaryTitle: '★ LEGENDARY TRUTH ★',
-    text: 'The Brutal Truth: Name someone you personally know who you think is an absolute disaster of a human being, with full reasoning, or finish your entire drink right now!'
+    text: 'The Brutal Truth: Name someone you personally know who you think is an absolute disaster of a human being, with full reasoning, or finish your entire drink right now!',
+    "forfeit": "Take a sip of any drink, or pass."
   },
   {
     id: 'leg-med-9',
@@ -394,7 +372,7 @@ export const LEGENDARY_CARDS: PromptItem[] = [
   {
     id: 'leg-ext-4',
     gameId: 'never-have-i-ever',
-    category: 'extreme',
+    category: "18+",
     isLegendary: true,
     rarity: 'legendary',
     legendaryTitle: '★ LEGENDARY CONFESSION ★',
@@ -409,15 +387,6 @@ export const LEGENDARY_CARDS: PromptItem[] = [
     legendaryTitle: '★ LEGENDARY HOT TAKE ★',
     text: 'True lifelong monogamy is an unnatural social construct that at least 70% of people secretly fight against, whether they ever admit it to their partner or not.',
     discussionPrompt: 'Do you believe humans are biologically built for lifelong monogamy?'
-  },
-  {
-    id: 'leg-ext-6',
-    gameId: 'dare-roulette',
-    category: 'extreme',
-    isLegendary: true,
-    rarity: 'legendary',
-    legendaryTitle: '★ LEGENDARY SPINNER ★',
-    text: 'The High-Stakes Body Shot: Take a high-velocity body shot off the collarbone or stomach of the player determined by majority group vote, or finish 2 full drinks right now!'
   },
   {
     id: 'leg-ext-7',
@@ -435,7 +404,8 @@ export const LEGENDARY_CARDS: PromptItem[] = [
     isLegendary: true,
     rarity: 'legendary',
     legendaryTitle: '★ LEGENDARY TRUTH ★',
-    text: 'The Deep Vault: Confess the deepest, darkest secret or morally gray act you have actively concealed from your closest friends and family, or drain your entire drink and take another penalty!'
+    text: 'The Deep Vault: Confess the deepest, darkest secret or morally gray act you have actively concealed from your closest friends and family, or drain your entire drink and take another penalty!',
+    "forfeit": "Take a sip of any drink, or pass."
   },
   {
     id: 'leg-ext-9',
@@ -473,20 +443,6 @@ export const LEGENDARY_CARDS: PromptItem[] = [
     legendaryTitle: '★ LEGENDARY HOT SEAT ★',
     text: 'The Grand Inquisitor: 90 seconds in the hot seat with zero immunity! The group can ask you 3 unfiltered, no-limits questions. Refuse any and you take 3 double penalty drinks!'
   },
-
-  // ==========================================
-  // 5. UNHINGED CATEGORY (Absurd, surreal, chaos)
-  // ==========================================
-  {
-    id: 'leg-unh-1',
-    gameId: 'truth-or-dare',
-    category: 'unhinged',
-    type: 'dare',
-    isLegendary: true,
-    rarity: 'legendary',
-    legendaryTitle: '★ LEGENDARY CHAOS DARE ★',
-    text: 'The Hostage Text: Hand your phone to the person on your right. They get to draft a completely unhinged 5-word text message and send it to ANY contact in your phone who is not in this room, with zero explanation allowed for 24 hours!'
-  },
   {
     id: 'leg-unh-2',
     gameId: 'truth-or-dare',
@@ -518,16 +474,6 @@ export const LEGENDARY_CARDS: PromptItem[] = [
     text: 'Never have I ever had a completely serious, heated 10-minute philosophical debate with a housepet, a refrigerator, or a mannequin while stone-cold sober.'
   },
   {
-    id: 'leg-unh-5',
-    gameId: 'hot-takes',
-    category: 'unhinged',
-    isLegendary: true,
-    rarity: 'legendary',
-    legendaryTitle: '★ LEGENDARY HOT TAKE ★',
-    text: 'Society would be 400% more civil and respectful if every citizen was legally required to holster a high-powered squirt gun filled with cold dill pickle juice at all times.',
-    discussionPrompt: 'Who in this room would abuse the pickle juice gun immediately?'
-  },
-  {
     id: 'leg-unh-6',
     gameId: 'dare-roulette',
     category: 'unhinged',
@@ -552,7 +498,8 @@ export const LEGENDARY_CARDS: PromptItem[] = [
     isLegendary: true,
     rarity: 'legendary',
     legendaryTitle: '★ LEGENDARY TRUTH ★',
-    text: 'The Cursed Thought: What is the most deranged, intrusive thought that has ever entered your brain while standing in a dead-silent room or crowded elevator? Confess it or take 3 penalty drinks!'
+    text: 'The Cursed Thought: What is the most deranged, intrusive thought that has ever entered your brain while standing in a dead-silent room or crowded elevator? Confess it or take 3 penalty drinks!',
+    "forfeit": "Take a sip of any drink, or pass."
   },
   {
     id: 'leg-unh-9',
@@ -669,7 +616,8 @@ export const LEGENDARY_CARDS: PromptItem[] = [
     isLegendary: true,
     rarity: 'legendary',
     legendaryTitle: '★ LEGENDARY TRUTH ★',
-    text: 'The Irresistible Trigger: Confess the one specific outfit, scent, glance, or gesture your partner does that makes you instantly lose all composure and self-control. Answer or both take a sip!'
+    text: 'The Irresistible Trigger: Confess the one specific outfit, scent, glance, or gesture your partner does that makes you instantly lose all composure and self-control. Answer or both take a sip!',
+    "forfeit": "Take a sip of any drink, or pass."
   },
   {
     id: 'leg-cpl-9',
@@ -679,24 +627,6 @@ export const LEGENDARY_CARDS: PromptItem[] = [
     rarity: 'legendary',
     legendaryTitle: '★ LEGENDARY POINT ★',
     text: 'Point to who in the relationship fell in love first, and point to who takes 5x longer to swallow their pride and apologize after an argument. Loser takes a sip!'
-  },
-  {
-    id: 'leg-cpl-10',
-    gameId: 'most-likely-to',
-    category: 'couples',
-    isLegendary: true,
-    rarity: 'legendary',
-    legendaryTitle: '★ LEGENDARY CONSENSUS ★',
-    text: 'Who is most likely to impulsively book a surprise weekend getaway to a secluded cabin or romantic city because they could not stand being apart for another week?'
-  },
-  {
-    id: 'leg-cpl-11',
-    gameId: 'confessions',
-    category: 'couples',
-    isLegendary: true,
-    rarity: 'legendary',
-    legendaryTitle: '★ LEGENDARY CONFESSION ★',
-    text: 'Confess the sweetest, most embarrassing thing you secretly did behind your partner\'s back just to make them smile, protect them, or impress them without them ever finding out.'
   },
   {
     id: 'leg-cpl-12',
@@ -714,7 +644,7 @@ export const LEGENDARY_CARDS: PromptItem[] = [
   {
     id: 'leg-spicy-1',
     gameId: 'truth-or-dare',
-    category: 'spicy',
+    category: "18+",
     type: 'dare',
     isLegendary: true,
     rarity: 'legendary',
@@ -724,7 +654,7 @@ export const LEGENDARY_CARDS: PromptItem[] = [
   {
     id: 'leg-spicy-2',
     gameId: 'truth-or-dare',
-    category: 'spicy',
+    category: "18+",
     type: 'truth',
     isLegendary: true,
     rarity: 'legendary',
@@ -734,7 +664,7 @@ export const LEGENDARY_CARDS: PromptItem[] = [
   {
     id: 'leg-spicy-3',
     gameId: 'would-you-rather',
-    category: 'spicy',
+    category: "18+",
     isLegendary: true,
     rarity: 'legendary',
     legendaryTitle: '★ LEGENDARY SHOWDOWN ★',
@@ -745,7 +675,7 @@ export const LEGENDARY_CARDS: PromptItem[] = [
   {
     id: 'leg-spicy-4',
     gameId: 'never-have-i-ever',
-    category: 'spicy',
+    category: "18+",
     isLegendary: true,
     rarity: 'legendary',
     legendaryTitle: '★ LEGENDARY CONFESSION ★',
@@ -754,7 +684,7 @@ export const LEGENDARY_CARDS: PromptItem[] = [
   {
     id: 'leg-spicy-5',
     gameId: 'hot-takes',
-    category: 'spicy',
+    category: "18+",
     isLegendary: true,
     rarity: 'legendary',
     legendaryTitle: '★ LEGENDARY HOT TAKE ★',
@@ -764,7 +694,7 @@ export const LEGENDARY_CARDS: PromptItem[] = [
   {
     id: 'leg-spicy-6',
     gameId: 'dare-roulette',
-    category: 'spicy',
+    category: "18+",
     isLegendary: true,
     rarity: 'legendary',
     legendaryTitle: '★ LEGENDARY SPINNER ★',
@@ -773,7 +703,7 @@ export const LEGENDARY_CARDS: PromptItem[] = [
   {
     id: 'leg-spicy-7',
     gameId: 'red-flag-green-flag',
-    category: 'spicy',
+    category: "18+",
     isLegendary: true,
     rarity: 'legendary',
     legendaryTitle: '★ LEGENDARY JUDGMENT ★',
@@ -782,16 +712,17 @@ export const LEGENDARY_CARDS: PromptItem[] = [
   {
     id: 'leg-spicy-8',
     gameId: 'truth-or-sip',
-    category: 'spicy',
+    category: "18+",
     isLegendary: true,
     rarity: 'legendary',
     legendaryTitle: '★ LEGENDARY TRUTH ★',
-    text: 'The Forbidden Kink: What is the filthiest, most unexpected kink you have ever been turned on by? Confess every detail with total honesty or finish your entire drink right now!'
+    text: 'The Forbidden Kink: What is the filthiest, most unexpected kink you have ever been turned on by? Confess every detail with total honesty or finish your entire drink right now!',
+    "forfeit": "Take a sip of any drink, or pass."
   },
   {
     id: 'leg-spicy-9',
     gameId: 'point-and-drink',
-    category: 'spicy',
+    category: "18+",
     isLegendary: true,
     rarity: 'legendary',
     legendaryTitle: '★ LEGENDARY POINT ★',
@@ -800,7 +731,7 @@ export const LEGENDARY_CARDS: PromptItem[] = [
   {
     id: 'leg-spicy-10',
     gameId: 'most-likely-to',
-    category: 'spicy',
+    category: "18+",
     isLegendary: true,
     rarity: 'legendary',
     legendaryTitle: '★ LEGENDARY CONSENSUS ★',
@@ -809,7 +740,7 @@ export const LEGENDARY_CARDS: PromptItem[] = [
   {
     id: 'leg-spicy-11',
     gameId: 'confessions',
-    category: 'spicy',
+    category: "18+",
     isLegendary: true,
     rarity: 'legendary',
     legendaryTitle: '★ LEGENDARY CONFESSION ★',
@@ -818,7 +749,7 @@ export const LEGENDARY_CARDS: PromptItem[] = [
   {
     id: 'leg-spicy-12',
     gameId: 'hot-seat',
-    category: 'spicy',
+    category: "18+",
     isLegendary: true,
     rarity: 'legendary',
     legendaryTitle: '★ LEGENDARY HOT SEAT ★',
@@ -903,7 +834,8 @@ export const LEGENDARY_CARDS: PromptItem[] = [
     isLegendary: true,
     rarity: 'legendary',
     legendaryTitle: '★ LEGENDARY TRUTH ★',
-    text: 'The Kinky Revelation: What is a taboo sexual act or kink you tried once that completely caught you off guard because you ended up genuinely obsessed with it? Spill it all or take 4 drinks!'
+    text: 'The Kinky Revelation: What is a taboo sexual act or kink you tried once that completely caught you off guard because you ended up genuinely obsessed with it? Spill it all or take 4 drinks!',
+    "forfeit": "Take a sip of any drink, or pass."
   },
   {
     id: 'leg-18p-9',
@@ -933,12 +865,13 @@ export const LEGENDARY_CARDS: PromptItem[] = [
     text: 'Confess the most taboo, explicit scenario you have ever searched in incognito mode that would leave you mortified if your browsing history was leaked to this room.'
   },
   {
-    id: 'leg-18p-12',
-    gameId: 'hot-seat',
-    category: '18+',
-    isLegendary: true,
-    rarity: 'legendary',
-    legendaryTitle: '★ LEGENDARY HOT SEAT ★',
-    text: 'The Bedroom Confessional: 60 seconds of raw, uncensored bedroom truth! The group gets to ask you 3 unfiltered questions about your anatomy, kinks, stamina, and wildest fantasies!'
+    id: 'leg-editorial-spicy-truth', gameId: 'truth-or-dare', category: 'spicy', type: 'truth',
+    isLegendary: true, rarity: 'legendary', legendaryTitle: 'LEGENDARY MISSED SIGNAL',
+    text: 'Tell the story of a moment when you realized someone had been flirting with you long after the conversation ended. What line would you finally say back?'
   },
+  {
+    id: 'leg-editorial-spicy-dare', gameId: 'truth-or-dare', category: 'spicy', type: 'dare',
+    isLegendary: true, rarity: 'legendary', legendaryTitle: 'LEGENDARY ROMANTIC AUDITION',
+    text: 'With a willing player, audition for a romantic film scene. The group supplies an absurd location and an inconvenient prop; you have 45 seconds to make the chemistry convincing.'
+  }
 ];

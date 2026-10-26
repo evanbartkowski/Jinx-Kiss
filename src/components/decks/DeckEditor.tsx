@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { CustomDeck, DeckVisibility } from '../../types/deck';
 import { GameId, GameCategory, PromptItem, PlayMode } from '../../types/game';
 import { GAMES_CONFIG, CATEGORY_LABELS } from '../../data/gamesConfig';
+import { getPromptValidationErrors } from '../../utils/promptValidation';
 import { useAuth } from '../../context/AuthContext';
 import { useToast } from '../../context/ToastContext';
 import { Plus, Trash2, ArrowUp, ArrowDown, Eye, Save, Globe, Lock, Link2, Sparkles, Users } from 'lucide-react';
@@ -58,11 +59,15 @@ export const DeckEditor: React.FC<DeckEditorProps> = ({
       id: 'card_' + Math.random().toString(36).substring(2, 9),
       gameId,
       category: gameMode,
+      playMode: deckPlayMode,
       text: gameId === 'would-you-rather' ? 'Would You Rather...' : newCardText.trim(),
       type: gameId === 'truth-or-dare' ? newCardType : undefined,
       optionA: gameId === 'would-you-rather' ? newOptionA.trim() : undefined,
       optionB: gameId === 'would-you-rather' ? newOptionB.trim() : undefined,
     };
+
+    const errors = getPromptValidationErrors(newCard);
+    if (errors.length) { showToast(errors.join(' '), 'error'); return; }
 
     setCards(prev => [...prev, newCard]);
     setNewCardText('');
@@ -109,7 +114,7 @@ export const DeckEditor: React.FC<DeckEditorProps> = ({
         playMode: deckPlayMode,
         themeColor,
         visibility,
-        cards,
+        cards: cards.map(card => ({ ...card, playMode: deckPlayMode })),
         creatorUid: currentUser?.uid || 'guest',
         creatorUsername: currentUser?.username || 'Guest',
       });
@@ -186,6 +191,7 @@ export const DeckEditor: React.FC<DeckEditorProps> = ({
                   Game Type
                 </label>
                 <select
+                  disabled={cards.length > 0}
                   value={gameId}
                   onChange={(e) => {
                     const newId = e.target.value as GameId;
@@ -200,6 +206,7 @@ export const DeckEditor: React.FC<DeckEditorProps> = ({
                     </option>
                   ))}
                 </select>
+                {cards.length > 0 && <p className="text-xs text-zinc-400 mt-1">Remove the current cards before changing games.</p>}
               </div>
             </div>
 
@@ -209,7 +216,7 @@ export const DeckEditor: React.FC<DeckEditorProps> = ({
                 Game Mode / Category
               </label>
               <div className="flex flex-wrap gap-2">
-                {(['easy', 'medium', 'extreme', 'couples', '18+', 'spicy', 'kids'] as GameCategory[]).map((mode) => {
+                {(['easy', 'medium', 'extreme', 'unhinged', 'couples', '18+', 'spicy', 'kids'] as GameCategory[]).map((mode) => {
                   const isSelected = gameMode === mode;
                   return (
                     <button

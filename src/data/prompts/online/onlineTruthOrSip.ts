@@ -7,33 +7,6 @@ import { PromptItem } from '../../../types/game';
  * Covers all 8 categories: easy, medium, extreme, unhinged, couples, 18+, spicy, kids.
  */
 const BASE_ONLINE_TRUTH_OR_SIP_PROMPTS: PromptItem[] = [
-  // ==========================================
-  // EASY (Light, funny truths or take a casual sip)
-  // ==========================================
-  {
-    id: 'on-tos-easy-1',
-    gameId: 'truth-or-sip',
-    category: 'easy',
-    playMode: 'online',
-    text: "What is the most ridiculous YouTube video you have re-watched more than 5 times?",
-    forfeit: "Take 1 remote sip or confess"
-  },
-  {
-    id: 'on-tos-easy-2',
-    gameId: 'truth-or-sip',
-    category: 'easy',
-    playMode: 'online',
-    text: "Have you ever muted your microphone in call just so you could loudly complain about someone?",
-    forfeit: "Take 1 sip"
-  },
-  {
-    id: 'on-tos-easy-3',
-    gameId: 'truth-or-sip',
-    category: 'easy',
-    playMode: 'online',
-    text: "What is the most embarrassing nickname anyone in your family or group chat calls you?",
-    forfeit: "Take 1 sip"
-  },
   {
     id: 'on-tos-easy-4',
     gameId: 'truth-or-sip',
@@ -43,40 +16,12 @@ const BASE_ONLINE_TRUTH_OR_SIP_PROMPTS: PromptItem[] = [
     forfeit: "Take 1 sip"
   },
   {
-    id: 'on-tos-easy-5',
-    gameId: 'truth-or-sip',
-    category: 'easy',
-    playMode: 'online',
-    text: "What is the weirdest impulse food delivery you ordered past midnight while gaming?",
-    forfeit: "Take 1 sip"
-  },
-  {
     id: 'on-tos-easy-6',
     gameId: 'truth-or-sip',
     category: 'easy',
     playMode: 'online',
     text: "What is a song you know every word to that you would never admit on your Spotify profile?",
     forfeit: "Take 1 sip"
-  },
-
-  // ==========================================
-  // MEDIUM (Awkward, mildly revealing remote confessions)
-  // ==========================================
-  {
-    id: 'on-tos-med-1',
-    gameId: 'truth-or-sip',
-    category: 'medium',
-    playMode: 'online',
-    text: "Whose message or DM notification in this call makes your heart drop or race fastest?",
-    forfeit: "Take 2 remote sips"
-  },
-  {
-    id: 'on-tos-med-2',
-    gameId: 'truth-or-sip',
-    category: 'medium',
-    playMode: 'online',
-    text: "Have you ever stalked an ex or crush's social media within the past 7 days?",
-    forfeit: "Take 2 remote sips"
   },
   {
     id: 'on-tos-med-3',
@@ -102,14 +47,6 @@ const BASE_ONLINE_TRUTH_OR_SIP_PROMPTS: PromptItem[] = [
     text: "What is the longest amount of time you have left someone in this call on 'Delivered' on purpose?",
     forfeit: "Take 2 sips"
   },
-  {
-    id: 'on-tos-med-6',
-    gameId: 'truth-or-sip',
-    category: 'medium',
-    playMode: 'online',
-    text: "What is a message you sent that gave you immediate physical nausea the second you hit send?",
-    forfeit: "Take 2 sips"
-  },
 
   // ==========================================
   // EXTREME (High voltage, secrets, heavy sips)
@@ -123,36 +60,12 @@ const BASE_ONLINE_TRUTH_OR_SIP_PROMPTS: PromptItem[] = [
     forfeit: "Take 3 heavy sips"
   },
   {
-    id: 'on-tos-ext-2',
-    gameId: 'truth-or-sip',
-    category: 'extreme',
-    playMode: 'online',
-    text: "Have you ever developed real romantic or sexual feelings for someone in this voice call?",
-    forfeit: "Take 3 heavy sips"
-  },
-  {
     id: 'on-tos-ext-3',
     gameId: 'truth-or-sip',
     category: 'extreme',
     playMode: 'online',
     text: "What is a secret about yourself that nobody in this call knows, and that would change how they see you?",
     forfeit: "Finish your drink"
-  },
-  {
-    id: 'on-tos-ext-4',
-    gameId: 'truth-or-sip',
-    category: 'extreme',
-    playMode: 'online',
-    text: "Have you ever talked trash about someone in this call to another person on this call?",
-    forfeit: "Take 3 heavy sips"
-  },
-  {
-    id: 'on-tos-ext-5',
-    gameId: 'truth-or-sip',
-    category: 'extreme',
-    playMode: 'online',
-    text: "What is the most shameful thing you have done while intoxicated or completely alone in your room?",
-    forfeit: "Take 3 sips"
   },
 
   // ==========================================
@@ -165,30 +78,6 @@ const BASE_ONLINE_TRUTH_OR_SIP_PROMPTS: PromptItem[] = [
     playMode: 'online',
     text: "Have you ever taken your laptop or phone into the bathroom during a voice call and accidentally unmuted?",
     forfeit: "Take 2 sips"
-  },
-  {
-    id: 'on-tos-unh-2',
-    gameId: 'truth-or-sip',
-    category: 'unhinged',
-    playMode: 'online',
-    text: "What is the most degenerate rabbit hole you found yourself in at 4 AM on the internet?",
-    forfeit: "Take 3 sips"
-  },
-  {
-    id: 'on-tos-unh-3',
-    gameId: 'truth-or-sip',
-    category: 'unhinged',
-    playMode: 'online',
-    text: "What is a totally irrational, paranoid conspiracy theory about someone you know that you secretly believe?",
-    forfeit: "Take 2 sips"
-  },
-  {
-    id: 'on-tos-unh-4',
-    gameId: 'truth-or-sip',
-    category: 'unhinged',
-    playMode: 'online',
-    text: "Have you ever stalked an ex so hard that you found their sibling's friend's cousin's vacation photos?",
-    forfeit: "Take 3 sips"
   },
 
   // ==========================================
@@ -246,22 +135,6 @@ const BASE_ONLINE_TRUTH_OR_SIP_PROMPTS: PromptItem[] = [
     text: "Have you ever engaged in cybersex, phone sex, or webcam intimacy with someone on this call or a mutual friend?",
     forfeit: "Take 3 heavy sips"
   },
-  {
-    id: 'on-tos-18-3',
-    gameId: 'truth-or-sip',
-    category: '18+',
-    playMode: 'online',
-    text: "What is the most wild or risky place you have ever sent an explicit photo from?",
-    forfeit: "Take 2 sips"
-  },
-  {
-    id: 'on-tos-18-4',
-    gameId: 'truth-or-sip',
-    category: '18+',
-    playMode: 'online',
-    text: "Have you ever masturbated while on a muted voice call with someone in this circle?",
-    forfeit: "Finish your drink"
-  },
 
   // ==========================================
   // SPICY (Sensual, explicit erotic confessions)
@@ -269,34 +142,10 @@ const BASE_ONLINE_TRUTH_OR_SIP_PROMPTS: PromptItem[] = [
   {
     id: 'on-tos-spicy-1',
     gameId: 'truth-or-sip',
-    category: 'spicy',
+    category: "18+",
     playMode: 'online',
     text: "Describe in vivid, explicit detail what you would do to the person of your choice in this call if they were in your bedroom right now.",
     forfeit: "Down your entire drink"
-  },
-  {
-    id: 'on-tos-spicy-2',
-    gameId: 'truth-or-sip',
-    category: 'spicy',
-    playMode: 'online',
-    text: "What is your absolute dirtiest sexual turn-on that gets you wet or hard almost instantly?",
-    forfeit: "Take 3 heavy penalty sips"
-  },
-  {
-    id: 'on-tos-spicy-3',
-    gameId: 'truth-or-sip',
-    category: 'spicy',
-    playMode: 'online',
-    text: "What is the most intense, toe-curling climax you've ever had during a webcam or phone sex session?",
-    forfeit: "Take 3 sips"
-  },
-  {
-    id: 'on-tos-spicy-4',
-    gameId: 'truth-or-sip',
-    category: 'spicy',
-    playMode: 'online',
-    text: "Have you ever watched someone in this call touch themselves over video, and did you join in?",
-    forfeit: "Take 3 sips"
   },
 
   // ==========================================
@@ -311,108 +160,12 @@ const BASE_ONLINE_TRUTH_OR_SIP_PROMPTS: PromptItem[] = [
     forfeit: "Take 1 sip of juice or water"
   },
   {
-    id: 'on-tos-kids-2',
-    gameId: 'truth-or-sip',
-    category: 'kids',
-    playMode: 'online',
-    text: "Have you ever hidden a snack in your bedroom so nobody else could eat it?",
-    forfeit: "Take 1 sip of your drink"
-  },
-  {
-    id: 'on-tos-kids-3',
-    gameId: 'truth-or-sip',
-    category: 'kids',
-    playMode: 'online',
-    text: "What cartoon character do you secretly wish was your real-life best friend?",
-    forfeit: "Take 1 sip of juice"
-  },
-  {
-    id: 'on-tos-kids-4',
-    gameId: 'truth-or-sip',
-    category: 'kids',
-    playMode: 'online',
-    text: "What is the funniest dream you ever had that made you laugh when you woke up?",
-    forfeit: "Take 1 sip of water"
-  },
-
-  // ==========================================
-  // EXPANDED EASY (Light, funny digital confessions or sip)
-  // ==========================================
-  {
-    id: 'on-tos-easy-7',
-    gameId: 'truth-or-sip',
-    category: 'easy',
-    playMode: 'online',
-    text: "What is an embarrassing video game you have more than 100 hours in that you keep hidden?",
-    forfeit: "Take 1 remote sip"
-  },
-  {
-    id: 'on-tos-easy-8',
-    gameId: 'truth-or-sip',
-    category: 'easy',
-    playMode: 'online',
-    text: "Have you ever claimed your mic was lagging just so you didn't have to answer someone's question?",
-    forfeit: "Take 1 sip"
-  },
-  {
-    id: 'on-tos-easy-9',
-    gameId: 'truth-or-sip',
-    category: 'easy',
-    playMode: 'online',
-    text: "What is the single most useless thing currently sitting on your desk or computer table?",
-    forfeit: "Take 1 sip"
-  },
-  {
     id: 'on-tos-easy-10',
     gameId: 'truth-or-sip',
     category: 'easy',
     playMode: 'online',
     text: "Have you ever ordered food delivery from a place less than a 5-minute walk from your house out of pure laziness?",
     forfeit: "Take 1 sip"
-  },
-  {
-    id: 'on-tos-easy-11',
-    gameId: 'truth-or-sip',
-    category: 'easy',
-    playMode: 'online',
-    text: "What is an internet drama or YouTuber feud that you spent way too many hours watching unfold?",
-    forfeit: "Take 1 sip"
-  },
-
-  // ==========================================
-  // EXPANDED MEDIUM (Relatable awkward truths)
-  // ==========================================
-  {
-    id: 'on-tos-med-7',
-    gameId: 'truth-or-sip',
-    category: 'medium',
-    playMode: 'online',
-    text: "What is the longest time you've gone without showering while staying home playing video games or binge-watching?",
-    forfeit: "Take 2 remote penalty sips"
-  },
-  {
-    id: 'on-tos-med-8',
-    gameId: 'truth-or-sip',
-    category: 'medium',
-    playMode: 'online',
-    text: "Have you ever sent a screenshot of a conversation to the exact person you took the screenshot of?",
-    forfeit: "Take 2 penalty sips"
-  },
-  {
-    id: 'on-tos-med-9',
-    gameId: 'truth-or-sip',
-    category: 'medium',
-    playMode: 'online',
-    text: "Whose stream, profile, or social account do you secretly check without following them?",
-    forfeit: "Take 2 penalty sips"
-  },
-  {
-    id: 'on-tos-med-10',
-    gameId: 'truth-or-sip',
-    category: 'medium',
-    playMode: 'online',
-    text: "What is a message you left someone on 'Delivered' for days while actively posting memes online?",
-    forfeit: "Take 2 penalty sips"
   },
   {
     id: 'on-tos-med-11',
@@ -451,14 +204,6 @@ const BASE_ONLINE_TRUTH_OR_SIP_PROMPTS: PromptItem[] = [
     forfeit: "Take 3 penalty sips"
   },
   {
-    id: 'on-tos-ext-9',
-    gameId: 'truth-or-sip',
-    category: 'extreme',
-    playMode: 'online',
-    text: "Have you ever ghosted someone after talking every single day for more than a month?",
-    forfeit: "Take 3 penalty sips"
-  },
-  {
     id: 'on-tos-ext-10',
     gameId: 'truth-or-sip',
     category: 'extreme',
@@ -466,32 +211,12 @@ const BASE_ONLINE_TRUTH_OR_SIP_PROMPTS: PromptItem[] = [
     text: "What is the most expensive mistake you've made while buying something online while drunk or tired?",
     forfeit: "Take 3 penalty sips"
   },
-
-  // ==========================================
-  // EXPANDED UNHINGED (Chaotic online confessions)
-  // ==========================================
-  {
-    id: 'on-tos-unh-5',
-    gameId: 'truth-or-sip',
-    category: 'unhinged',
-    playMode: 'online',
-    text: "Have you ever argued with an anonymous stranger online until 4 AM over something completely meaningless?",
-    forfeit: "Take 3 heavy penalty sips"
-  },
   {
     id: 'on-tos-unh-6',
     gameId: 'truth-or-sip',
     category: 'unhinged',
     playMode: 'online',
     text: "What is the weirdest thing you have said out loud to yourself when you thought your microphone was muted?",
-    forfeit: "Take 3 penalty sips"
-  },
-  {
-    id: 'on-tos-unh-7',
-    gameId: 'truth-or-sip',
-    category: 'unhinged',
-    playMode: 'online',
-    text: "Have you ever looked up an ex's new partner's LinkedIn, Spotify, or family members online?",
     forfeit: "Take 3 penalty sips"
   },
   {
@@ -530,14 +255,6 @@ const BASE_ONLINE_TRUTH_OR_SIP_PROMPTS: PromptItem[] = [
     text: "What is something I do on camera or in my voice that gives you butterflies every single time?",
     forfeit: "Take 1 romantic sip"
   },
-  {
-    id: 'on-tos-cpl-8',
-    gameId: 'truth-or-sip',
-    category: 'couples',
-    playMode: 'online',
-    text: "What is a secret romantic dream about our future together that you've been shy to tell me?",
-    forfeit: "Take 1 sip together"
-  },
 
   // ==========================================
   // EXPANDED 18+ (Adult late-night confessions)
@@ -566,14 +283,6 @@ const BASE_ONLINE_TRUTH_OR_SIP_PROMPTS: PromptItem[] = [
     text: "What is the most unusual thing that turns you on that you would never admit on your main social media?",
     forfeit: "Take 2 penalty drinks"
   },
-  {
-    id: 'on-tos-18-8',
-    gameId: 'truth-or-sip',
-    category: '18+',
-    playMode: 'online',
-    text: "What is an explicit fantasy you have imagined involving someone currently in this call?",
-    forfeit: "Take 3 penalty drinks"
-  },
 
   // ==========================================
   // EXPANDED SPICY (Sensual chemistry & explicit confessions)
@@ -581,81 +290,10 @@ const BASE_ONLINE_TRUTH_OR_SIP_PROMPTS: PromptItem[] = [
   {
     id: 'on-tos-spicy-5',
     gameId: 'truth-or-sip',
-    category: 'spicy',
+    category: "18+",
     playMode: 'online',
     text: "Describe the last spicy video or photo you sent: what were you wearing and what was the caption?",
     forfeit: "Take 3 penalty sips"
-  },
-  {
-    id: 'on-tos-spicy-6',
-    gameId: 'truth-or-sip',
-    category: 'spicy',
-    playMode: 'online',
-    text: "Have you ever touched yourself while listening to someone's voice on a Discord or FaceTime call?",
-    forfeit: "Take 3 penalty sips"
-  },
-  {
-    id: 'on-tos-spicy-7',
-    gameId: 'truth-or-sip',
-    category: 'spicy',
-    playMode: 'online',
-    text: "What is your favorite sexual sound or phrase to hear during late-night intimate audio?",
-    forfeit: "Take 3 penalty drinks"
-  },
-  {
-    id: 'on-tos-spicy-8',
-    gameId: 'truth-or-sip',
-    category: 'spicy',
-    playMode: 'online',
-    text: "If the person of your choice in this call was in your room right now, what is the first thing you would take off?",
-    forfeit: "Down your entire drink"
-  },
-
-  // ==========================================
-  // EXPANDED KIDS (Pure silly family fun)
-  // ==========================================
-  {
-    id: 'on-tos-kids-5',
-    gameId: 'truth-or-sip',
-    category: 'kids',
-    playMode: 'online',
-    text: "What is a chore you pretended to do but actually just stuffed everything under the bed?",
-    forfeit: "Take 1 sip of your drink"
-  },
-  {
-    id: 'on-tos-kids-6',
-    gameId: 'truth-or-sip',
-    category: 'kids',
-    playMode: 'online',
-    text: "Have you ever blamed a funny noise on your dog or cat when it was actually you?",
-    forfeit: "Take 1 sip of juice"
-  },
-  {
-    id: 'on-tos-kids-7',
-    gameId: 'truth-or-sip',
-    category: 'kids',
-    playMode: 'online',
-    text: "What is the silliest face or noise you can make right now on camera?",
-    forfeit: "Take 1 sip of water"
-  },
-  {
-    id: 'on-tos-kids-8',
-    gameId: 'truth-or-sip',
-    category: 'kids',
-    playMode: 'online',
-    text: "If you could eat dessert for dinner every night, what would you choose?",
-    forfeit: "Take 1 sip of juice"
-  },
-
-  // --- ADDITIONAL ONLINE TRUTH OR SIP EXPANSION (100+ PROMPTS) ---
-  // Easy:
-  {
-    id: 'on-tos-easy-12',
-    gameId: 'truth-or-sip',
-    category: 'easy',
-    playMode: 'online',
-    text: "What is an embarrassing YouTube or TikTok video that you have watched more than 5 times?",
-    forfeit: "Take 1 penalty sip"
   },
   {
     id: 'on-tos-easy-13',
@@ -692,27 +330,11 @@ const BASE_ONLINE_TRUTH_OR_SIP_PROMPTS: PromptItem[] = [
     forfeit: "Take 2 penalty sips"
   },
   {
-    id: 'on-tos-med-13',
-    gameId: 'truth-or-sip',
-    category: 'medium',
-    playMode: 'online',
-    text: "What is a message you drafted in DMs but deleted because your courage failed you?",
-    forfeit: "Take 2 penalty sips"
-  },
-  {
     id: 'on-tos-med-14',
     gameId: 'truth-or-sip',
     category: 'medium',
     playMode: 'online',
     text: "Have you ever secretly muted or deafened someone on Discord because their voice was getting on your nerves?",
-    forfeit: "Take 2 penalty sips"
-  },
-  {
-    id: 'on-tos-med-15',
-    gameId: 'truth-or-sip',
-    category: 'medium',
-    playMode: 'online',
-    text: "What is an assumption you made about someone here when you first met online that turned out to be completely false?",
     forfeit: "Take 2 penalty sips"
   },
 
@@ -760,27 +382,11 @@ const BASE_ONLINE_TRUTH_OR_SIP_PROMPTS: PromptItem[] = [
     forfeit: "Take 2 penalty sips"
   },
   {
-    id: 'on-tos-unh-10',
-    gameId: 'truth-or-sip',
-    category: 'unhinged',
-    playMode: 'online',
-    text: "If you had to choose between never using internet search again or drinking pickle juice with every meal, which do you pick?",
-    forfeit: "Take 2 penalty sips"
-  },
-  {
     id: 'on-tos-unh-11',
     gameId: 'truth-or-sip',
     category: 'unhinged',
     playMode: 'online',
     text: "What is a bizarre food concoction you eat when you are gaming alone at 2 AM that would appall a chef?",
-    forfeit: "Take 2 penalty sips"
-  },
-  {
-    id: 'on-tos-unh-12',
-    gameId: 'truth-or-sip',
-    category: 'unhinged',
-    playMode: 'online',
-    text: "What is an imaginary scenario you rehearsed in the shower this week with complete seriousness?",
     forfeit: "Take 2 penalty sips"
   },
 
@@ -792,14 +398,6 @@ const BASE_ONLINE_TRUTH_OR_SIP_PROMPTS: PromptItem[] = [
     playMode: 'online',
     text: "What was the moment on video call where you realized you wanted to be with me forever?",
     forfeit: "Take 2 penalty sips of wine"
-  },
-  {
-    id: 'on-tos-cpl-10',
-    gameId: 'truth-or-sip',
-    category: 'couples',
-    playMode: 'online',
-    text: "What is something I do when I'm tired on FaceTime that you secretly find completely adorable?",
-    forfeit: "Take 2 penalty sips"
   },
   {
     id: 'on-tos-cpl-11',
@@ -828,14 +426,6 @@ const BASE_ONLINE_TRUTH_OR_SIP_PROMPTS: PromptItem[] = [
     forfeit: "Take 3 penalty drinks"
   },
   {
-    id: 'on-tos-18-10',
-    gameId: 'truth-or-sip',
-    category: '18+',
-    playMode: 'online',
-    text: "What is the filthiest text you have ever received that gave you immediate physical chills?",
-    forfeit: "Take 3 penalty drinks"
-  },
-  {
     id: 'on-tos-18-11',
     gameId: 'truth-or-sip',
     category: '18+',
@@ -844,88 +434,12 @@ const BASE_ONLINE_TRUTH_OR_SIP_PROMPTS: PromptItem[] = [
     forfeit: "Finish your drink"
   },
   {
-    id: 'on-tos-18-12',
-    gameId: 'truth-or-sip',
-    category: '18+',
-    playMode: 'online',
-    text: "What is your secret physical tell or reaction when you get intensely turned on during a call?",
-    forfeit: "Take 3 penalty drinks"
-  },
-
-  // Spicy:
-  {
-    id: 'on-tos-spicy-9',
-    gameId: 'truth-or-sip',
-    category: 'spicy',
-    playMode: 'online',
-    text: "What is the most sensitive spot on your body that nobody would ever guess makes you gasp?",
-    forfeit: "Take 3 heavy penalty sips"
-  },
-  {
-    id: 'on-tos-spicy-10',
-    gameId: 'truth-or-sip',
-    category: 'spicy',
-    playMode: 'online',
-    text: "Describe the exact voice tone and words that make you lose all self-control over headset.",
-    forfeit: "Down your entire drink"
-  },
-  {
     id: 'on-tos-spicy-11',
     gameId: 'truth-or-sip',
-    category: 'spicy',
+    category: "18+",
     playMode: 'online',
     text: "What is an explicit bedroom scenario you've watched online that you desperately want to try in real life?",
     forfeit: "Take 3 penalty drinks"
-  },
-  {
-    id: 'on-tos-spicy-12',
-    gameId: 'truth-or-sip',
-    category: 'spicy',
-    playMode: 'online',
-    text: "How quickly can you make yourself climax when you're completely alone and undisturbed?",
-    forfeit: "Take 3 heavy penalty sips"
-  },
-
-  // Kids:
-  {
-    id: 'on-tos-kids-9',
-    gameId: 'truth-or-sip',
-    category: 'kids',
-    playMode: 'online',
-    text: "What is the funniest nickname a family member has ever given you?",
-    forfeit: "Take 1 sip of milk or juice"
-  },
-  {
-    id: 'on-tos-kids-10',
-    gameId: 'truth-or-sip',
-    category: 'kids',
-    playMode: 'online',
-    text: "Have you ever pretended to be asleep when your parents walked into your room at night?",
-    forfeit: "Take 1 sip of water"
-  },
-  {
-    id: 'on-tos-kids-11',
-    gameId: 'truth-or-sip',
-    category: 'kids',
-    playMode: 'online',
-    text: "What cartoon character do you wish you could have as your real-life best friend?",
-    forfeit: "Take 1 sip of juice"
-  },
-  {
-    id: 'on-tos-kids-12',
-    gameId: 'truth-or-sip',
-    category: 'kids',
-    playMode: 'online',
-    text: "What is the silliest rule in your house that you secretly think is ridiculous?",
-    forfeit: "Take 1 sip of your drink"
-  },
-  {
-    id: 'on-tos-kids-13',
-    gameId: 'truth-or-sip',
-    category: 'kids',
-    playMode: 'online',
-    text: "If you had a treehouse, what is the #1 coolest gadget you would put inside it?",
-    forfeit: "Take 1 sip of water"
   }
 ];
 

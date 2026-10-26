@@ -23,7 +23,7 @@ export const ONLINE_LEGENDARY_CARDS: PromptItem[] = [
   {
     id: 'on-leg-kids-2',
     gameId: 'would-you-rather',
-    category: 'kids',
+    category: "18+",
     playMode: 'online',
     isLegendary: true,
     rarity: 'legendary',
@@ -81,8 +81,8 @@ export const ONLINE_LEGENDARY_CARDS: PromptItem[] = [
     isLegendary: true,
     rarity: 'legendary',
     legendaryTitle: '★ LEGENDARY DIGITAL TRIAL ★',
-    text: "Trial by Discord: Everyone in this call must vote on whether you are the most chaotic, the most mysterious, or the most chronically online member of this group. The verdict is permanent!",
-    discussionPrompt: "Defend your online character or accept your title."
+    text: "Your habits in voice chat reveal more about your personality than your social media profile does.",
+    discussionPrompt: "Which call habit tells you the most about someone?"
   },
 
   // ==========================================
@@ -189,32 +189,26 @@ export const ONLINE_LEGENDARY_CARDS: PromptItem[] = [
     text: "The Audio Siren: Mute all other participants. Lean directly into your microphone and deliver a 45-second uncensored erotic monologue describing exactly what you crave late at night when nobody is watching.",
     forfeit: "Take 3 heavy penalty drinks"
   },
-
-  // ==========================================
-  // 8. SPICY CATEGORY
-  // ==========================================
-  {
-    id: 'on-leg-spicy-1',
-    gameId: 'truth-or-dare',
-    category: 'spicy',
-    type: 'dare',
-    playMode: 'online',
-    isLegendary: true,
-    rarity: 'legendary',
-    legendaryTitle: '★ LEGENDARY WEBCAM SIREN ★',
-    text: "The Sultry Command: Turn the main lights down. Look into the camera lens with burning intensity, unbutton or slip down your top to reveal your collarbone or chest, and whisper the dirtiest command you've ever wanted to hear obeyed.",
-    forfeit: "Down your entire drink in one go"
-  },
   {
     id: 'on-leg-spicy-2',
     gameId: 'truth-or-sip',
-    category: 'spicy',
+    category: "18+",
     playMode: 'online',
     isLegendary: true,
     rarity: 'legendary',
     legendaryTitle: '★ LEGENDARY CARNAL TRUTH ★',
     text: "The Ultimate Arousal: Name the single person in this call who turns you on the most, and describe in explicit, heart-pounding detail what you would do to them if they unlocked your door right now.",
     forfeit: "Take 3 massive penalty drinks"
+  },
+  {
+    id: 'on-leg-editorial-spicy-truth', gameId: 'truth-or-dare', category: 'spicy', type: 'truth', playMode: 'online',
+    isLegendary: true, rarity: 'legendary', legendaryTitle: 'LEGENDARY FLIRTING GLITCH',
+    text: 'Tell the call about a typo or misheard word that sent a flirty conversation in a completely different direction. What did you mean, and did the accident help?'
+  },
+  {
+    id: 'on-leg-editorial-spicy-dare', gameId: 'truth-or-dare', category: 'spicy', type: 'dare', playMode: 'online',
+    isLegendary: true, rarity: 'legendary', legendaryTitle: 'LEGENDARY SPACE TRANSMISSION',
+    text: 'With a willing player, play two space captains trying to invite each other on a date through a terrible connection. The call supplies one absurd misunderstanding you must make romantic.'
   }
 ];
 

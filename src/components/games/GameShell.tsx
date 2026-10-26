@@ -36,7 +36,7 @@ export const GameShell: React.FC<GameShellProps> = ({
   children,
   supportsNonalcoholic = false,
 }) => {
-  const { isNonAlcoholic, setIsNonAlcoholic } = useGameSettings();
+  const { isNonAlcoholic, setIsNonAlcoholic, playMode } = useGameSettings();
   const [isPlayerModalOpen, setIsPlayerModalOpen] = useState(false);
   const [isSuggestModalOpen, setIsSuggestModalOpen] = useState(false);
   const [showFirstPromptPlayerBanner, setShowFirstPromptPlayerBanner] = useState(true);
@@ -317,6 +317,7 @@ export const GameShell: React.FC<GameShellProps> = ({
       )}
 
       <SuggestCardModal
+        key={`${metadata.id}_${category}_${playMode}_${Number(isSuggestModalOpen)}`}
         isOpen={isSuggestModalOpen}
         onClose={() => setIsSuggestModalOpen(false)}
         prefilledGameId={metadata.id}

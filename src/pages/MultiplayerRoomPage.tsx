@@ -6,7 +6,7 @@ import {
 } from '../services/multiplayerService';
 import { GameId, PartyModeConfig, PlayMode, PromptItem } from '../types/game';
 import { GAMES_CONFIG } from '../data/gamesConfig';
-import { ALL_DEFAULT_PROMPTS, ALL_ONLINE_PROMPTS, getPromptsForGame } from '../data/prompts';
+import { getPartyPromptPool } from '../utils/partyPrompts';
 import { useGameSettings } from '../context/GameSettingsContext';
 import { soundEffects } from '../utils/audio';
 import { useToast } from '../context/ToastContext';
@@ -166,9 +166,9 @@ export const MultiplayerRoomPage: React.FC<MultiplayerRoomPageProps> = ({
     soundEffects.playSuccess();
     const currentMode = room.playMode || playMode || 'in-person';
     const firstGameId = room.config.selectedGames[0] || 'truth-or-dare';
-    const promptsPool = getPromptsForGame(firstGameId, 'medium', currentMode);
-    const fallbackPool = currentMode === 'online' ? ALL_ONLINE_PROMPTS[firstGameId] : ALL_DEFAULT_PROMPTS[firstGameId];
-    const firstPrompt = promptsPool[0] || fallbackPool[0];
+    const promptsPool = getPartyPromptPool(firstGameId, { ...room.config, playMode: currentMode });
+    const firstPrompt = promptsPool[Math.floor(Math.random() * promptsPool.length)];
+    if (!firstPrompt) { showToast('No cards match the room categories.', 'error'); return; }
     await multiplayerService.startRoomGame(roomCode, firstPrompt);
   };
 
@@ -179,8 +179,9 @@ export const MultiplayerRoomPage: React.FC<MultiplayerRoomPageProps> = ({
     const currentMode = room.playMode || playMode || 'in-person';
     const games = room.config.selectedGames;
     const nextGame = games[Math.floor(Math.random() * games.length)];
-    const pool = currentMode === 'online' ? ALL_ONLINE_PROMPTS[nextGame] : ALL_DEFAULT_PROMPTS[nextGame];
+    const pool = getPartyPromptPool(nextGame, { ...room.config, playMode: currentMode });
     const nextPrompt = pool[Math.floor(Math.random() * pool.length)];
+    if (!nextPrompt) { showToast('No cards match the room categories.', 'error'); return; }
 
     await multiplayerService.nextRound(roomCode, nextGame, nextPrompt, room.currentRound + 1);
   };

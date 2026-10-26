@@ -1,4 +1,4 @@
-import { GameCategory, GameId } from './game';
+import { GameCategory, GameId, PlayMode } from './game';
 
 export type SubmissionStatus = 'pending' | 'approved' | 'rejected';
 
@@ -6,6 +6,7 @@ export interface CommunitySubmission {
   id: string;
   gameId: GameId;
   category: GameCategory;
+  playMode?: PlayMode;
   text: string;
   type?: 'truth' | 'dare';
   optionA?: string;

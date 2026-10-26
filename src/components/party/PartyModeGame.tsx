@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { GameId, GameCategory, PartyModeConfig, PromptItem, MysteryCard, SecretMission, Achievement } from '../../types/game';
 import { GAMES_CONFIG } from '../../data/gamesConfig';
-import { ALL_DEFAULT_PROMPTS, ALL_ONLINE_PROMPTS, getPromptsForGame } from '../../data/prompts';
+import { getPartyCategories, getPartyPromptPool } from '../../utils/partyPrompts';
 import { MYSTERY_CARDS } from '../../data/mysteryCards';
 import { SECRET_MISSIONS } from '../../data/secretMissions';
 import { SpecialCard } from '../../types/specialCard';
@@ -53,8 +53,8 @@ export const PartyModeGame: React.FC<PartyModeGameProps> = ({ config, onExit }) 
   // Progressive Difficulty State
   const [progressiveState, setProgressiveState] = useState<ProgressiveDifficultyState>(() => ({
     enabled: !!config.enableProgressiveDifficulty,
-    currentCategory: config.categories[0] || 'medium',
-    initialCategory: config.categories[0] || 'medium',
+    currentCategory: getPartyCategories(config)[0],
+    initialCategory: getPartyCategories(config)[0],
     roundsPerLevel: config.roundsPerProgressiveLevel || 5,
     roundsCompletedAtTier: 0,
     totalProgressiveRounds: 0,
@@ -92,12 +92,13 @@ export const PartyModeGame: React.FC<PartyModeGameProps> = ({ config, onExit }) 
   const playMode = config.playMode || 'in-person';
 
   // Helper to pick next prompt with balanced variety & guaranteed deduplication
-  const pickPromptForGame = (gameId: GameId, categoryOverride?: GameCategory): PromptItem => {
-    const cat = categoryOverride || (progressiveState.enabled ? progressiveState.currentCategory : config.categories[Math.floor(Math.random() * config.categories.length)]);
-    const pool = getPromptsForGame(gameId, cat, playMode);
+  const pickPromptForGame = (gameId: GameId, categoryOverride?: GameCategory): PromptItem | null => {
+    const categories = getPartyCategories(config, categoryOverride || (progressiveState.enabled ? progressiveState.currentCategory : undefined));
+    const cat = categories[Math.floor(Math.random() * categories.length)];
+    const pool = getPartyPromptPool(gameId, config, cat);
     
     // Deduplication filter: exclude previously seen cards for this deck & mode
-    const historyKey = `${playMode}_${gameId}`;
+    const historyKey = `${playMode}_${gameId}_${cat}`;
     const unseenPool = sessionService.filterUnseenCards(historyKey, pool);
 
     if (unseenPool.length > 0) {
@@ -107,17 +108,7 @@ export const PartyModeGame: React.FC<PartyModeGameProps> = ({ config, onExit }) 
       return rolled;
     }
 
-    const allForGame = (playMode === 'online' ? ALL_ONLINE_PROMPTS[gameId] : ALL_DEFAULT_PROMPTS[gameId]) || [];
-    const chosen = allForGame[Math.floor(Math.random() * allForGame.length)] || {
-      id: 'fallback-prompt',
-      gameId,
-      category: 'medium',
-      playMode,
-      text: playMode === 'online' ? 'Share something about your desk setup or digital life with the call!' : 'Share something nobody in the room knows about you!',
-    };
-    const rolled = rollForLegendaryCard(chosen, cat, gameId, 0.02, playMode);
-    sessionService.markCardSeen(historyKey, rolled.id);
-    return rolled;
+    return null;
   };
 
   // Trigger legendary effects when active party prompt is legendary
@@ -221,7 +212,10 @@ export const PartyModeGame: React.FC<PartyModeGameProps> = ({ config, onExit }) 
     // Advance progressive difficulty
     let activeCat = progressiveState.currentCategory;
     if (progressiveState.enabled) {
-      const { newState, didLevelUp, newCategory } = advanceProgressiveRound(progressiveState);
+      const ladder: GameCategory[] | undefined = config.contentBoundary === 'kids-only' ? ['kids']
+        : config.contentBoundary === 'adults-only' ? ['18+']
+        : config.contentBoundary === 'clean' ? ['kids', 'easy', 'medium', 'couples', 'extreme', 'unhinged'] : undefined;
+      const { newState, didLevelUp, newCategory } = advanceProgressiveRound(progressiveState, ladder);
       setProgressiveState(newState);
       if (didLevelUp) {
         setLevelUpInfo({ newCat: newCategory, prevCat: activeCat });
@@ -237,14 +231,15 @@ export const PartyModeGame: React.FC<PartyModeGameProps> = ({ config, onExit }) 
       : config.selectedGames[0];
     setActiveGameId(nextGame);
 
-    const nextPrompt = pickPromptForGame(nextGame, activeCat);
+    const nextPrompt = pickPromptForGame(nextGame, progressiveState.enabled ? activeCat : undefined);
     setCurrentPrompt(nextPrompt);
 
     // Save game session automatically after every completed card
     sessionService.saveActiveSession({
       mode: 'party',
+      playMode,
       gameId: nextGame,
-      category: activeCat,
+      category: nextPrompt?.category || activeCat,
       players,
       currentRound: nextRoundNumber,
       scores: updatedScores,
@@ -271,7 +266,7 @@ export const PartyModeGame: React.FC<PartyModeGameProps> = ({ config, onExit }) 
 
   const handleSkipPrompt = () => {
     soundEffects.playCardFlip();
-    const nextPrompt = pickPromptForGame(activeGameId, progressiveState.currentCategory);
+    const nextPrompt = pickPromptForGame(activeGameId, currentPrompt?.category);
     setCurrentPrompt(nextPrompt);
     setTimerLeft(config.timerSeconds);
   };

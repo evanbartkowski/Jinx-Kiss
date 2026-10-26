@@ -19,7 +19,7 @@ export const TruthOrDareGame: React.FC<TruthOrDareGameProps> = ({ prompts, playe
   const [playerIndex, setPlayerIndex] = useState(0);
   const [, setIsRevealed] = useState(false);
 
-  const truths = prompts.filter(p => p.type === 'truth' || !p.type);
+  const truths = prompts.filter(p => p.type === 'truth');
   const dares = prompts.filter(p => p.type === 'dare');
 
   const activePlayer = players.length > 0 ? players[playerIndex % players.length] : null;
@@ -29,6 +29,7 @@ export const TruthOrDareGame: React.FC<TruthOrDareGameProps> = ({ prompts, playe
     setIsRevealed(false);
 
     const pool = type === 'truth' ? truths : dares;
+    if (pool.length === 0) return;
     const available = pool.filter(p => !usedPromptIds.has(p.id));
 
     let chosen: PromptItem;
@@ -38,7 +39,7 @@ export const TruthOrDareGame: React.FC<TruthOrDareGameProps> = ({ prompts, playe
     } else {
       // Pool exhausted, reset pool
       setUsedPromptIds(new Set());
-      chosen = pool[Math.floor(Math.random() * pool.length)] || prompts[0];
+      chosen = pool[Math.floor(Math.random() * pool.length)];
     }
 
     // Rare roll to summon a legendary card for the category
@@ -95,6 +96,7 @@ export const TruthOrDareGame: React.FC<TruthOrDareGameProps> = ({ prompts, playe
           {/* Truth Option Card */}
           <button
             onClick={() => pickNextPrompt('truth')}
+            disabled={truths.length === 0}
             className="group relative p-6 sm:p-14 md:p-16 min-h-[220px] sm:min-h-[420px] rounded-3xl sm:rounded-4xl glass-panel border border-brand-pink/40 hover:border-brand-pink hover:shadow-neon-pink flex flex-col items-center justify-between text-center transition-all duration-300 hover:scale-[1.02] active:scale-95 cursor-pointer bg-gradient-to-b from-pink-950/25 via-black/50 to-black/90"
           >
             <div className="w-16 h-16 sm:w-28 sm:h-28 rounded-2xl sm:rounded-4xl bg-brand-pink/20 border border-brand-pink/50 flex items-center justify-center text-brand-pink group-hover:scale-110 transition-transform shadow-neon-pink/40">
@@ -118,6 +120,7 @@ export const TruthOrDareGame: React.FC<TruthOrDareGameProps> = ({ prompts, playe
           {/* Dare Option Card */}
           <button
             onClick={() => pickNextPrompt('dare')}
+            disabled={dares.length === 0}
             className="group relative p-6 sm:p-14 md:p-16 min-h-[220px] sm:min-h-[420px] rounded-3xl sm:rounded-4xl glass-panel border border-brand-violet/40 hover:border-brand-violet hover:shadow-neon-violet flex flex-col items-center justify-between text-center transition-all duration-300 hover:scale-[1.02] active:scale-95 cursor-pointer bg-gradient-to-b from-purple-950/25 via-black/50 to-black/90"
           >
             <div className="w-16 h-16 sm:w-28 sm:h-28 rounded-2xl sm:rounded-4xl bg-brand-violet/20 border border-brand-violet/50 flex items-center justify-center text-brand-violet group-hover:scale-110 transition-transform shadow-neon-violet/40">
