@@ -80,6 +80,42 @@ describe('Unhinged age confirmation', () => {
     expect(launch).toHaveBeenCalledWith('unhinged', false);
   });
 
+  it('selects a desktop difficulty on the first click and starts it on the second', async () => {
+    const launch = vi.fn();
+    await mount(<GameModeSelectScreen metadata={GAMES_CONFIG['truth-or-dare']} onSelectCategory={launch} onBack={() => {}} />);
+    await click('Easy');
+    expect(launch).not.toHaveBeenCalled();
+    expect(container.querySelector('button[aria-pressed="true"]')?.textContent).toContain('Easy');
+    await click('Easy');
+    expect(launch).toHaveBeenCalledExactlyOnceWith('easy', false);
+  });
+
+  it('selecting another difficulty does not start the previously selected one', async () => {
+    const launch = vi.fn();
+    await mount(<GameModeSelectScreen metadata={GAMES_CONFIG['truth-or-dare']} onSelectCategory={launch} onBack={() => {}} />);
+    await click('Easy');
+    await click('Extreme');
+    expect(launch).not.toHaveBeenCalled();
+    await click('Progressive Difficulty:');
+    await click('Extreme');
+    expect(launch).toHaveBeenCalledExactlyOnceWith('extreme', true);
+  });
+
+  it('keeps the adult gate on a second difficulty click and allows cancellation', async () => {
+    const launch = vi.fn();
+    await mount(<GameModeSelectScreen metadata={GAMES_CONFIG['truth-or-dare']} onSelectCategory={launch} onBack={() => {}} />);
+    await click('Unhinged');
+    expect(document.body.textContent).not.toContain('Age Verification');
+    await click('Unhinged');
+    expect(launch).not.toHaveBeenCalled();
+    expect(document.body.textContent).toContain('Age Verification');
+    await click('Go Back');
+    expect(launch).not.toHaveBeenCalled();
+    await click('Unhinged');
+    await click('I am 18+');
+    expect(launch).toHaveBeenCalledExactlyOnceWith('unhinged', false);
+  });
+
   it('does not draw a party card or start a saved round before confirmation', async () => {
     const config: PartyModeConfig = { playerNames: ['Sam', 'Jo'], selectedGames: ['truth-or-dare'], categories: ['unhinged'], roundCount: 10, enableChaosWheel: false, enableMysteryCards: false, enableSpecialCards: false, enableScoring: false, timerSeconds: 30, contentBoundary: 'all' };
     vi.spyOn(Math, 'random').mockReturnValue(0.5);

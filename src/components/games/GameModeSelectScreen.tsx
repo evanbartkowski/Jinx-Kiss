@@ -148,8 +148,8 @@ export const GameModeSelectScreen: React.FC<GameModeSelectScreenProps> = ({
     soundEffects.playCardFlip();
     setSelectedCategory(cat);
 
-    // On mobile, tap to play directly without needing the bottom start button!
-    if (isMobile) {
+    // Selecting the active card starts the game; mobile keeps its single-tap launch.
+    if (isMobile || cat === selectedCategory) {
       if (requiresAdultConfirmation(cat) && !isAgeConfirmed) {
         setPendingCategory(cat);
         return;
@@ -255,6 +255,9 @@ export const GameModeSelectScreen: React.FC<GameModeSelectScreenProps> = ({
         <h2 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-black uppercase tracking-tight text-white drop-shadow-[0_0_25px_rgba(255,255,255,0.15)] leading-tight">
           Select Game <span className="text-brand-gradient">Mode</span>
         </h2>
+        <p id="mode-selection-hint" className="text-xs sm:text-sm text-zinc-400 mt-2">
+          {isMobile ? 'Tap a mode to play.' : 'Choose a mode, then click it again to play.'}
+        </p>
 
         {/* Clean, Balanced Control Toolbar for Progressive Difficulty & Saved Session */}
         <div className="flex flex-wrap items-center justify-center gap-2.5 sm:gap-4 mt-3 sm:mt-5 max-w-3xl mx-auto px-1">
@@ -327,6 +330,8 @@ export const GameModeSelectScreen: React.FC<GameModeSelectScreenProps> = ({
               type="button"
               key={cat}
               onClick={() => handleCategoryClick(cat)}
+              aria-pressed={isSelected}
+              aria-describedby="mode-selection-hint"
               className={`text-left w-full group relative rounded-2xl sm:rounded-3xl glass-panel p-3 sm:p-6 lg:p-7 min-h-[145px] sm:min-h-[220px] lg:min-h-[250px] flex flex-col justify-between cursor-pointer transition-all duration-300 hover:-translate-y-1.5 hover:shadow-2xl active:scale-[0.98] ${
                 isSelected
                   ? 'ring-2 ring-white/90 scale-[1.02] sm:scale-105 shadow-2xl bg-white/[0.08]'
@@ -392,7 +397,7 @@ export const GameModeSelectScreen: React.FC<GameModeSelectScreenProps> = ({
 
               {/* Bottom Card Action */}
               <div className="w-full mt-2.5 sm:mt-5 pt-2 sm:pt-3 border-t border-white/[0.06] flex items-center justify-between text-[10px] sm:text-xs font-bold text-zinc-300 group-hover:text-white transition-colors">
-                <span className="truncate">{isMobile ? 'Tap to Play' : isSelected ? 'Active Mode' : 'Select'}</span>
+                <span className="truncate">{isMobile ? 'Tap to Play' : isSelected ? 'Click to Play' : 'Select'}</span>
                 <div
                   className="w-5 h-5 sm:w-7 sm:h-7 rounded-full flex items-center justify-center transition-transform duration-300 group-hover:translate-x-1 shrink-0"
                   style={{
