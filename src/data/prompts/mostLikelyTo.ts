@@ -38,12 +38,6 @@ export const MOST_LIKELY_TO_PROMPTS: PromptItem[] = [
     "text": "Who is most likely to accidentally burn down the kitchen trying to cook a gourmet dinner?"
   },
   {
-    "id": "mlt-unhinged-2",
-    "gameId": "most-likely-to",
-    "category": "unhinged",
-    "text": "Who is most likely to eat an entire block of sharp cheddar standing in the dark at 3 AM?"
-  },
-  {
     "id": "mlt-couples-1",
     "gameId": "most-likely-to",
     "category": "couples",

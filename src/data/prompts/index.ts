@@ -19,8 +19,10 @@ import { MEGA_EXPANSION_800_PROMPTS } from './megaExpansion800';
 import { createPromptCatalog } from '../../utils/promptCatalog';
 import { filterPromptsForScope } from '../../utils/promptValidation';
 import { EDITORIAL_SPOTLIGHT_PROMPTS } from './editorialSpotlights';
+import { UNHINGED_PROMPTS } from './unhinged';
 
 export const ALL_DEFAULT_PROMPTS = createPromptCatalog([
+  ...UNHINGED_PROMPTS,
   ...EDITORIAL_SPOTLIGHT_PROMPTS,
   ...TRUTH_OR_DARE_PROMPTS,
   ...NEVER_HAVE_I_EVER_PROMPTS,

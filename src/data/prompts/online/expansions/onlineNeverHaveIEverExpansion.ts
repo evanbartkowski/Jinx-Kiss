@@ -301,69 +301,6 @@ export const ONLINE_NEVER_HAVE_I_EVER_EXPANSION: PromptItem[] = [
     "text": "Never have I ever teased a partner over text for hours about what I was going to do to them."
   },
   {
-    "id": "on-nhie-unhinged-e10",
-    "gameId": "never-have-i-ever",
-    "category": "unhinged",
-    "playMode": "online",
-    "text": "Never have I ever pretended to be a medieval knight in my room with a broom when home alone."
-  },
-  {
-    "id": "on-nhie-unhinged-e11",
-    "gameId": "never-have-i-ever",
-    "category": "unhinged",
-    "playMode": "online",
-    "text": "Never have I ever eaten food off the floor well past the ten-second rule because it was too good."
-  },
-  {
-    "id": "on-nhie-unhinged-e12",
-    "gameId": "never-have-i-ever",
-    "category": "unhinged",
-    "playMode": "online",
-    "text": "Never have I ever had a staring contest with a pigeon or squirrel outside my window and lost."
-  },
-  {
-    "id": "on-nhie-unhinged-e14",
-    "gameId": "never-have-i-ever",
-    "category": "unhinged",
-    "playMode": "online",
-    "text": "Never have I ever worn clothes inside out all day without realizing until I got home."
-  },
-  {
-    "id": "on-nhie-unhinged-e21",
-    "gameId": "never-have-i-ever",
-    "category": "unhinged",
-    "playMode": "online",
-    "text": "Never have I ever accidentally drank from a water glass that had been sitting out for three days."
-  },
-  {
-    "id": "on-nhie-unhinged-e29",
-    "gameId": "never-have-i-ever",
-    "category": "unhinged",
-    "playMode": "online",
-    "text": "Never have I ever given an interview to an imaginary documentary crew in my kitchen."
-  },
-  {
-    "id": "on-nhie-unhinged-e30",
-    "gameId": "never-have-i-ever",
-    "category": "unhinged",
-    "playMode": "online",
-    "text": "Never have I ever eaten an entire pint of ice cream with a fork because spoons were dirty."
-  },
-  {
-    "id": "on-nhie-unhinged-e36",
-    "gameId": "never-have-i-ever",
-    "category": "unhinged",
-    "playMode": "online",
-    "text": "Never have I ever tried to pour milk into a bowl before realizing there was no cereal in it."
-  },
-  {
-    "id": "on-nhie-unhinged-e37",
-    "gameId": "never-have-i-ever",
-    "category": "unhinged",
-    "playMode": "online",
-    "text": "Never have I ever stared at the moon and wondered if an alien was staring back through a telescope."
-  },
-  {
     "id": "on-nhie-kids-e1",
     "gameId": "never-have-i-ever",
     "category": "kids",

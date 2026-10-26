@@ -1,4 +1,5 @@
 import { PromptItem } from '../../../types/game';
+import { ONLINE_UNHINGED_LEGENDARY_CARDS } from '../unhinged';
 
 /**
  * ONLINE RARE LEGENDARY CARDS
@@ -6,6 +7,7 @@ import { PromptItem } from '../../../types/game';
  * Each card features `isLegendary: true`, `rarity: 'legendary'`, and an epic `legendaryTitle`.
  */
 export const ONLINE_LEGENDARY_CARDS: PromptItem[] = [
+  ...ONLINE_UNHINGED_LEGENDARY_CARDS,
   // ==========================================
   // 1. KIDS CATEGORY
   // ==========================================
@@ -109,33 +111,6 @@ export const ONLINE_LEGENDARY_CARDS: PromptItem[] = [
     legendaryTitle: '★ LEGENDARY REVELATION ★',
     text: "The Vault of Secrets: Reveal the single deepest secret you have ever kept from someone currently in this call. If you refuse to answer, you must chug your entire beverage live on webcam!",
     forfeit: "Down your entire drink"
-  },
-
-  // ==========================================
-  // 5. UNHINGED CATEGORY
-  // ==========================================
-  {
-    id: 'on-leg-unh-1',
-    gameId: 'dare-roulette',
-    category: 'unhinged',
-    playMode: 'online',
-    isLegendary: true,
-    rarity: 'legendary',
-    legendaryTitle: '★ LEGENDARY CHAOS OVERLOAD ★',
-    text: "The Full Discord Takeover: Change your Discord avatar to a picture chosen by the group, change your nickname to 'Local Cryptid', tilt your webcam 90 degrees sideways, and speak only in exaggerated operatic whispers for the next 3 rounds!",
-    forfeit: "Take 3 heavy penalty sips"
-  },
-  {
-    id: 'on-leg-unh-2',
-    gameId: 'would-you-rather',
-    category: 'unhinged',
-    playMode: 'online',
-    isLegendary: true,
-    rarity: 'legendary',
-    legendaryTitle: '★ LEGENDARY PARADOX ★',
-    text: "Would you rather have every single voice note you've ever recorded blasted on an arena loudspeaker OR have your deleted photos printed and mailed as postcards to all your contacts?",
-    optionA: "Arena loudspeaker voice notes",
-    optionB: "Mailed deleted photo postcards"
   },
 
   // ==========================================

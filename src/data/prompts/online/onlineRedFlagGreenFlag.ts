@@ -117,26 +117,6 @@ const BASE_ONLINE_RED_FLAG_GREEN_FLAG_PROMPTS: PromptItem[] = [
   },
 
   // ==========================================
-  // EXPANDED UNHINGED (Chaotic remote habits)
-  // ==========================================
-  {
-    id: 'on-rf-unh-5',
-    gameId: 'red-flag-green-flag',
-    category: 'unhinged',
-    playMode: 'online',
-    text: "They join your voice channel while driving on the highway with their windows rolled down and wind roaring into the mic.",
-    scenario: "Highway hurricane audio"
-  },
-  {
-    id: 'on-rf-unh-8',
-    gameId: 'red-flag-green-flag',
-    category: 'unhinged',
-    playMode: 'online',
-    text: "They stream entire 3-hour episodes of a TV show to you while falling asleep and snoring loudly on mic.",
-    scenario: "Sleep-stream snoring"
-  },
-
-  // ==========================================
   // EXPANDED COUPLES (Long-distance & digital chemistry)
   // ==========================================
   {
@@ -200,22 +180,6 @@ const BASE_ONLINE_RED_FLAG_GREEN_FLAG_PROMPTS: PromptItem[] = [
     playMode: 'online',
     text: "They check your online status every hour and bring up 'I saw you were playing games at 3 AM'.",
     scenario: "Activity status surveillance"
-  },
-  {
-    id: 'on-rf-unh-11',
-    gameId: 'red-flag-green-flag',
-    category: 'unhinged',
-    playMode: 'online',
-    text: "They change their webcam background to a photo of the inside of your bedroom that you posted 2 years ago.",
-    scenario: "Cursed virtual background stunt"
-  },
-  {
-    id: 'on-rf-unh-12',
-    gameId: 'red-flag-green-flag',
-    category: 'unhinged',
-    playMode: 'online',
-    text: "They order identical takeout food as you and pretend you're eating at the same table across the country.",
-    scenario: "Synced delivery date mimicry"
   },
 
   // Couples:

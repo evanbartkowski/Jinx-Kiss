@@ -99,14 +99,6 @@ const BASE_ONLINE_HOT_TAKES_PROMPTS: PromptItem[] = [
     discussionPrompt: "Does text communication breed artificial bravery?"
   },
   {
-    id: 'on-ht-unh-3',
-    gameId: 'hot-takes',
-    category: 'unhinged',
-    playMode: 'online',
-    text: "People who use light mode on Discord or IDEs are genuine sociopaths who cannot be trusted around children.",
-    discussionPrompt: "Why does dark mode hold such cultural dominance?"
-  },
-  {
     id: 'on-ht-cpl-2',
     gameId: 'hot-takes',
     category: 'couples',
@@ -206,18 +198,6 @@ const BASE_ONLINE_HOT_TAKES_PROMPTS: PromptItem[] = [
     text: "Lying about your mic being broken to avoid speaking in a voice call makes you a fake friend.",
     discussionPrompt: "Social battery exhaustion vs honest communication: where is the line?"
   },
-
-  // ==========================================
-  // EXPANDED UNHINGED (Chaotic audio & internet takes)
-  // ==========================================
-  {
-    id: 'on-ht-unh-5',
-    gameId: 'hot-takes',
-    category: 'unhinged',
-    playMode: 'online',
-    text: "People who eat loud crunchy snacks while completely unmuted in voice chat deserve an immediate 7-day server ban.",
-    discussionPrompt: "Chewing on mic: harmless accident or auditory assault?"
-  },
   {
     id: 'on-ht-18-7',
     gameId: 'hot-takes',
@@ -285,32 +265,6 @@ const BASE_ONLINE_HOT_TAKES_PROMPTS: PromptItem[] = [
     playMode: 'online',
     text: "Reading an ex's public social media updates months after a breakup is emotional self-harm that everyone pretends is normal.",
     discussionPrompt: "Post-breakup digital lurk: inevitable human curiosity or toxic obsession?"
-  },
-
-  // Unhinged:
-  {
-    id: 'on-ht-unh-9',
-    gameId: 'hot-takes',
-    category: 'unhinged',
-    playMode: 'online',
-    text: "People who eat loud crunchy snacks while their mic sensitivity is set to zero threshold should be banned from VoIP permanently.",
-    discussionPrompt: "Microphone mouth-breathing and chip crunching: capital digital offense or minor annoyance?"
-  },
-  {
-    id: 'on-ht-unh-11',
-    gameId: 'hot-takes',
-    category: 'unhinged',
-    playMode: 'online',
-    text: "Anyone who uses voice changers to pretend to be an anime character in serious gaming lobbies is secretly a genius.",
-    discussionPrompt: "Trolling lobbies with voice filters: hilarious artform or unhinged nuisance?"
-  },
-  {
-    id: 'on-ht-unh-12',
-    gameId: 'hot-takes',
-    category: 'unhinged',
-    playMode: 'online',
-    text: "If you have more than 100 tabs open in your browser, your brain is operating in the 5th dimension.",
-    discussionPrompt: "Tab hoarders: visionary multitaskers or digital hoarders needing intervention?"
   },
 
   // Couples:

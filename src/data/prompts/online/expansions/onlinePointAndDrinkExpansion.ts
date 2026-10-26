@@ -210,34 +210,6 @@ export const ONLINE_POINT_AND_DRINK_EXPANSION: PromptItem[] = [
     "text": "Who in this call is most likely to give a slow, sensual full-body oil massage that leads to lovemaking?"
   },
   {
-    "id": "on-pad-unhinged-e5",
-    "gameId": "point-and-drink",
-    "category": "unhinged",
-    "playMode": "online",
-    "text": "Who in this call is most likely to buy 100 rubber ducks online at 3 AM with zero explanation?"
-  },
-  {
-    "id": "on-pad-unhinged-e6",
-    "gameId": "point-and-drink",
-    "category": "unhinged",
-    "playMode": "online",
-    "text": "Who in this call is most likely to try to use Jedi mind tricks on an automatic grocery store door?"
-  },
-  {
-    "id": "on-pad-unhinged-e8",
-    "gameId": "point-and-drink",
-    "category": "unhinged",
-    "playMode": "online",
-    "text": "Who in this call is most likely to wear socks on their hands while wandering around their apartment?"
-  },
-  {
-    "id": "on-pad-unhinged-e9",
-    "gameId": "point-and-drink",
-    "category": "unhinged",
-    "playMode": "online",
-    "text": "Who in this call is most likely to have an existential crisis over a slice of burnt toast in the dark?"
-  },
-  {
     "id": "on-pad-kids-e9",
     "gameId": "point-and-drink",
     "category": "kids",

@@ -58,30 +58,6 @@ export const WOULD_YOU_RATHER_PROMPTS: PromptItem[] = [
     "optionB": "Alien invasion"
   },
   {
-    "id": "wyr-unhinged-1",
-    "gameId": "would-you-rather",
-    "category": "unhinged",
-    "text": "Would you rather fight an aggressive goose every time you open a refrigerator or a raccoon in your shower?",
-    "optionA": "Fridge battle goose",
-    "optionB": "Shower ninja raccoon"
-  },
-  {
-    "id": "wyr-unhinged-3",
-    "gameId": "would-you-rather",
-    "category": "unhinged",
-    "text": "Would you rather have bagpipes play loudly whenever you enter a room or a slide whistle when you sit down?",
-    "optionA": "Heroic bagpipes entrance",
-    "optionB": "Slide whistle sitting down"
-  },
-  {
-    "id": "wyr-unhinged-5",
-    "gameId": "would-you-rather",
-    "category": "unhinged",
-    "text": "Would you rather have your pet speak fluent English with a rude British accent or your car talk to you?",
-    "optionA": "Rude British pet",
-    "optionB": "Sassy talking car"
-  },
-  {
     "id": "wyr-couples-1",
     "gameId": "would-you-rather",
     "category": "couples",

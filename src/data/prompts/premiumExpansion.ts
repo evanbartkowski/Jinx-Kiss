@@ -6,13 +6,6 @@ import { PromptItem } from '../../types/game';
  */
 export const PREMIUM_EXPANSION_PROMPTS: PromptItem[] = [
   {
-    id: "pe-tod-2",
-    gameId: "truth-or-dare",
-    category: "unhinged",
-    type: "truth",
-    text: "What is the single most deranged combination of items you have ever purchased together at a pharmacy at 1 AM?"
-  },
-  {
     id: "pe-tod-6",
     gameId: "truth-or-dare",
     category: "18+",
@@ -60,20 +53,6 @@ export const PREMIUM_EXPANSION_PROMPTS: PromptItem[] = [
     category: "kids",
     type: "dare",
     text: "Pretend you are a robotic penguin walking across an iceberg for 20 seconds."
-  },
-
-  // --- NEVER HAVE I EVER ---
-  {
-    id: "pe-nhie-1",
-    gameId: "never-have-i-ever",
-    category: "unhinged",
-    text: "Never have I ever pretended to be on an urgent phone call to avoid having a 30-second conversation with my neighbor in the hallway."
-  },
-  {
-    id: "pe-nhie-2",
-    gameId: "never-have-i-ever",
-    category: "unhinged",
-    text: "Never have I ever stalked someone's Spotify listening activity so closely I deduced their exact emotional breakdown status."
   },
   {
     id: "pe-nhie-4",
@@ -123,24 +102,6 @@ export const PREMIUM_EXPANSION_PROMPTS: PromptItem[] = [
     category: "kids",
     text: "Never have I ever tried to balance a spoon on my nose for more than 10 seconds."
   },
-
-  // --- WOULD YOU RATHER ---
-  {
-    id: "pe-wyr-1",
-    gameId: "would-you-rather",
-    category: "unhinged",
-    text: "Would you rather Have your laugh sound like a dying lawnmower at every funeral or Have your sneeze sound like an angry airhorn on crowded public transit?",
-    optionA: "Have your laugh sound like a dying lawnmower at every funeral",
-    optionB: "Have your sneeze sound like an angry airhorn on crowded public transit"
-  },
-  {
-    id: "pe-wyr-2",
-    gameId: "would-you-rather",
-    category: "unhinged",
-    text: "Would you rather Only be able to communicate via singing medieval tavern ballads or Have to explain your most toxic dating situationship to your high school principal?",
-    optionA: "Only be able to communicate via singing medieval tavern ballads",
-    optionB: "Have to explain your most toxic dating situationship to your high school principal"
-  },
   {
     id: "pe-wyr-3",
     gameId: "would-you-rather",
@@ -188,20 +149,6 @@ export const PREMIUM_EXPANSION_PROMPTS: PromptItem[] = [
     text: "Would you rather Have a pet baby dinosaur the size of a kitten or Have a flying carpet that can only go as fast as a bicycle?",
     optionA: "Have a pet baby dinosaur the size of a kitten",
     optionB: "Have a flying carpet that can only go as fast as a bicycle"
-  },
-
-  // --- HOT TAKES ---
-  {
-    id: "pe-ht-1",
-    gameId: "hot-takes",
-    category: "unhinged",
-    text: "Sleeping with the bedroom closet door cracked open is practically an invitation for ghosts and sleep paralysis monsters."
-  },
-  {
-    id: "pe-ht-2",
-    gameId: "hot-takes",
-    category: "unhinged",
-    text: "People who eat pizza with a fork and knife should be gently escorted to the nearest airport and flown out of the country."
   },
   {
     id: "pe-ht-3",
@@ -275,15 +222,6 @@ export const PREMIUM_EXPANSION_PROMPTS: PromptItem[] = [
     category: "kids",
     text: "They eat the marshmallows out of the Lucky Charms cereal box first and leave the grain pieces for everyone else."
   },
-
-  // --- TRUTH OR SIP ---
-  {
-    id: "pe-tos-1",
-    gameId: "truth-or-sip",
-    category: "unhinged",
-    text: "What is an imaginary scenario you concocted in your head that made you physically angry at someone who did nothing wrong?",
-    "forfeit": "Take a sip of any drink, or pass."
-  },
   {
     id: "pe-tos-2",
     gameId: "truth-or-sip",
@@ -318,14 +256,6 @@ export const PREMIUM_EXPANSION_PROMPTS: PromptItem[] = [
     category: "kids",
     text: "What is the silliest excuse you gave a teacher for not finishing your homework on time?",
     "forfeit": "Do your funniest animal impression."
-  },
-
-  // --- POINT AND DRINK ---
-  {
-    id: "pe-pad-1",
-    gameId: "point-and-drink",
-    category: "unhinged",
-    text: "Point at the person most likely to get kicked out of an upscale country club for doing cannonballs into the pool."
   },
   {
     id: "pe-pad-2",
@@ -381,14 +311,6 @@ export const PREMIUM_EXPANSION_PROMPTS: PromptItem[] = [
     category: "kids",
     text: "Most likely to eat a cupcake by licking all the frosting off first and throwing the bread part away."
   },
-
-  // --- CONFESSIONS ---
-  {
-    id: "pe-conf-1",
-    gameId: "confessions",
-    category: "unhinged",
-    text: "What is an utterly absurd superstition you privately observe even though you know it makes zero logical sense?"
-  },
   {
     id: "pe-conf-2",
     gameId: "confessions",
@@ -418,14 +340,6 @@ export const PREMIUM_EXPANSION_PROMPTS: PromptItem[] = [
     gameId: "confessions",
     category: "kids",
     text: "What toy or stuffed animal did you secretly hide under your pillow past the age you were supposed to?"
-  },
-
-  // --- HOT SEAT ---
-  {
-    id: "pe-hs-1",
-    gameId: "hot-seat",
-    category: "unhinged",
-    text: "You are on the Hot Seat: If you had to marry a fictional villain to save humanity, which villain are you picking?"
   },
   {
     id: "pe-hs-2",

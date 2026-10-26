@@ -25,15 +25,6 @@ const BASE_ONLINE_MOST_LIKELY_TO_PROMPTS: PromptItem[] = [
   { id: 'on-mlt-ext-10', gameId: 'most-likely-to', category: 'extreme', playMode: 'online', text: "Who is most likely to leak an inside joke to someone outside the circle and ruin the fun?" },
   { id: 'on-mlt-ext-11', gameId: 'most-likely-to', category: 'extreme', playMode: 'online', text: "Who is most likely to fake sick just to binge an entire new season of a show online?" },
   { id: 'on-mlt-ext-12', gameId: 'most-likely-to', category: 'extreme', playMode: 'online', text: "Who is most likely to have an ongoing feud with an online stranger that they take deadly seriously?" },
-
-  // ==========================================
-  // UNHINGED (Chaotic, absurd, boundary-pushing)
-  // ==========================================
-  { id: 'on-mlt-unh-1', gameId: 'most-likely-to', category: 'unhinged', playMode: 'online', text: "Who is most likely to join a Discord call from the bathroom while claiming they're just washing dishes?" },
-  { id: 'on-mlt-unh-3', gameId: 'most-likely-to', category: 'unhinged', playMode: 'online', text: "Who is most likely to spend an entire month's rent on a virtual game skin or anime collectible?" },
-  { id: 'on-mlt-unh-7', gameId: 'most-likely-to', category: 'unhinged', playMode: 'online', text: "Who is most likely to order $80 worth of fast food delivery to eat completely alone at 3 AM?" },
-  { id: 'on-mlt-unh-9', gameId: 'most-likely-to', category: 'unhinged', playMode: 'online', text: "Who is most likely to convince an entire online lobby of strangers that they are an undercover celebrity?" },
-  { id: 'on-mlt-unh-13', gameId: 'most-likely-to', category: 'unhinged', playMode: 'online', text: "Who is most likely to adopt an absurd fake British accent and refuse to break character for a week?" },
   { id: 'on-mlt-cpl-6', gameId: 'most-likely-to', category: 'couples', playMode: 'online', text: "Who is most likely to send a spontaneous 3-minute voice note singing an acoustic song to their partner?" },
   { id: 'on-mlt-cpl-11', gameId: 'most-likely-to', category: 'couples', playMode: 'online', text: "Who remembers the exact anniversary of the first Discord call or text message?" },
   { id: 'on-mlt-18-2', gameId: 'most-likely-to', category: '18+', playMode: 'online', text: "Who is most likely to have hooked up with someone they originally met in a gaming Discord server?" },

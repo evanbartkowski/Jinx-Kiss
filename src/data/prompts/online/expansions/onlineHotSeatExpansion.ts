@@ -189,34 +189,6 @@ export const ONLINE_HOT_SEAT_EXPANSION: PromptItem[] = [
     "text": "What is a kink, fantasy, or desire you have had for a long time that you rarely confess?"
   },
   {
-    "id": "on-hs-unhinged-e2",
-    "gameId": "hot-seat",
-    "category": "unhinged",
-    "playMode": "online",
-    "text": "If you had to fight one mascot in a gladiatorial arena to the death, who are you fighting?"
-  },
-  {
-    "id": "on-hs-unhinged-e7",
-    "gameId": "hot-seat",
-    "category": "unhinged",
-    "playMode": "online",
-    "text": "What is an absurd belief you held until an embarrassingly old age (like brown cows make chocolate milk)?"
-  },
-  {
-    "id": "on-hs-unhinged-e8",
-    "gameId": "hot-seat",
-    "category": "unhinged",
-    "playMode": "online",
-    "text": "Have you ever walked into a room, completely forgot why you were there, and stood staring like an NPC?"
-  },
-  {
-    "id": "on-hs-unhinged-e13",
-    "gameId": "hot-seat",
-    "category": "unhinged",
-    "playMode": "online",
-    "text": "What is the most unhinged excuse you have ever given someone to explain why your room was messy?"
-  },
-  {
     "id": "on-hs-kids-e15",
     "gameId": "hot-seat",
     "category": "kids",

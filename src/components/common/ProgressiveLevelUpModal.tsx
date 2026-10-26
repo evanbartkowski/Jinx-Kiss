@@ -37,7 +37,7 @@ export const ProgressiveLevelUpModal: React.FC<ProgressiveLevelUpModalProps> = (
       case 'spicy': return 'Tension rising! Flirty, intimate, and mischievous cards enter the mix.';
       case 'extreme': return 'High stakes! Deep secrets, unfiltered confessions, and wild challenges.';
       case '18+': return 'After hours unlocked. Late-night adult truths and uncensored questions.';
-      case 'unhinged': return 'MAXIMUM CHAOS! Unpredictable, hilarious, and completely wild prompts.';
+      case 'unhinged': return 'Adults-only roast territory: brutal choices, messy confessions, and personal callouts. Anyone can pass.';
       default: return 'The party advances to the next tier of intensity and excitement!';
     }
   };

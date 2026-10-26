@@ -87,24 +87,6 @@ const BASE_ONLINE_POINT_AND_DRINK_PROMPTS: PromptItem[] = [
   },
 
   // ==========================================
-  // UNHINGED (Chaotic, absurd, unpredictable targets)
-  // ==========================================
-  {
-    id: 'on-pad-unh-1',
-    gameId: 'point-and-drink',
-    category: 'unhinged',
-    playMode: 'online',
-    text: "Point at whoever is most likely to take their laptop into the bathroom and keep playing games while on mute."
-  },
-  {
-    id: 'on-pad-unh-2',
-    gameId: 'point-and-drink',
-    category: 'unhinged',
-    playMode: 'online',
-    text: "Point at whoever is most likely to rage-quit a voice call, slam their desk, and punch their mattress."
-  },
-
-  // ==========================================
   // COUPLES (Romantic, intimate, sweet couples pointing)
   // ==========================================
   {
@@ -160,39 +142,12 @@ const BASE_ONLINE_POINT_AND_DRINK_PROMPTS: PromptItem[] = [
     playMode: 'online',
     text: "Point at whoever is most likely to stalk an ex's social media and accidentally like a 2-year-old post."
   },
-
-  // ==========================================
-  // EXPANDED UNHINGED (Chaotic remote targets)
-  // ==========================================
-  {
-    id: 'on-pad-unh-5',
-    gameId: 'point-and-drink',
-    category: 'unhinged',
-    playMode: 'online',
-    text: "Point at whoever is most likely to stay in a Discord voice channel completely silent for 6 hours."
-  },
-  {
-    id: 'on-pad-unh-6',
-    gameId: 'point-and-drink',
-    category: 'unhinged',
-    playMode: 'online',
-    text: "Point at whoever is most likely to buy a completely absurd $200 gadget on TikTok shop at 3 AM."
-  },
   {
     id: 'on-pad-cpl-6',
     gameId: 'point-and-drink',
     category: 'couples',
     playMode: 'online',
     text: "Point at whoever falls asleep first when watching a movie together on screen-share."
-  },
-
-  // Unhinged:
-  {
-    id: 'on-pad-unh-9',
-    gameId: 'point-and-drink',
-    category: 'unhinged',
-    playMode: 'online',
-    text: "Point at whoever gives off the strongest chaotic energy and stays up until 6 AM for no reason."
   },
 
   // Couples:

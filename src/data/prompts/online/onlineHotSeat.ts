@@ -49,20 +49,6 @@ const BASE_ONLINE_HOT_SEAT_PROMPTS: PromptItem[] = [
   { id: 'on-hs-ext-13', gameId: 'hot-seat', category: 'extreme', playMode: 'online', text: "Hot Seat: Rank everyone on this call in order of who you trust the most to who you trust the least." },
 
   // ==========================================
-  // UNHINGED (Chaotic absurdity, 4 AM internet madness)
-  // ==========================================
-  { id: 'on-hs-unh-1', gameId: 'hot-seat', category: 'unhinged', playMode: 'online', text: "Hot Seat: What is the most unhinged impulse purchase you made on Amazon or eBay late at night?" },
-  { id: 'on-hs-unh-2', gameId: 'hot-seat', category: 'unhinged', playMode: 'online', text: "Hot Seat: If you had to livestream your desk and room for 24 hours straight without muting, what would ruin you first?" },
-  { id: 'on-hs-unh-4', gameId: 'hot-seat', category: 'unhinged', playMode: 'online', text: "Hot Seat: If you were forced to eat only one bizarre food combination for the rest of your life, what would it be?" },
-  { id: 'on-hs-unh-6', gameId: 'hot-seat', category: 'unhinged', playMode: 'online', text: "Hot Seat: What is the single weirdest noise or voice impression you can produce right now on microphone?" },
-  { id: 'on-hs-unh-7', gameId: 'hot-seat', category: 'unhinged', playMode: 'online', text: "Hot Seat: What is the longest you went without speaking a single word in real life while spending 16 hours a day online?" },
-  { id: 'on-hs-unh-8', gameId: 'hot-seat', category: 'unhinged', playMode: 'online', text: "Hot Seat: What is an unhinged ritual or habit you do before joining any intense gaming voice channel?" },
-  { id: 'on-hs-unh-9', gameId: 'hot-seat', category: 'unhinged', playMode: 'online', text: "Hot Seat: If an internet demon granted you $100,000 but you had to post your camera roll publicly, do you take it?" },
-  { id: 'on-hs-unh-11', gameId: 'hot-seat', category: 'unhinged', playMode: 'online', text: "Hot Seat: What is the most cursed meme folder or image format you have saved on your PC?" },
-  { id: 'on-hs-unh-12', gameId: 'hot-seat', category: 'unhinged', playMode: 'online', text: "Hot Seat: What is an argument you got into with a complete stranger in YouTube comments that lasted for over a week?" },
-  { id: 'on-hs-unh-13', gameId: 'hot-seat', category: 'unhinged', playMode: 'online', text: "Hot Seat: If you had to dress like an anime character on webcam every day for a month, which one would it be?" },
-
-  // ==========================================
   // COUPLES (Deep emotional connection, romance)
   // ==========================================
   { id: 'on-hs-cpl-1', gameId: 'hot-seat', category: 'couples', playMode: 'online', text: "Hot Seat: What is the moment on video call where you realized I was the one you wanted to be with?" },

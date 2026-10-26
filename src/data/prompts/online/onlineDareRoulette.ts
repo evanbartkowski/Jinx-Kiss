@@ -66,30 +66,6 @@ const BASE_ONLINE_DARE_ROULETTE_PROMPTS: PromptItem[] = [
     text: "Call someone not in this game on speakerphone and convince them for 60 seconds that you just bought an alpaca.",
     forfeit: "Take 3 penalty sips"
   },
-  {
-    id: 'on-dr-unh-2',
-    gameId: 'dare-roulette',
-    category: 'unhinged',
-    playMode: 'online',
-    text: "Turn your webcam completely upside down, speak only backwards, and act like everything is normal for 2 rounds.",
-    forfeit: "Take 2 penalty sips"
-  },
-  {
-    id: 'on-dr-unh-3',
-    gameId: 'dare-roulette',
-    category: 'unhinged',
-    playMode: 'online',
-    text: "Put on 4 layers of shirts or sweaters on camera right now and keep them all on for the rest of the game.",
-    forfeit: "Take 3 penalty sips"
-  },
-  {
-    id: 'on-dr-unh-4',
-    gameId: 'dare-roulette',
-    category: 'unhinged',
-    playMode: 'online',
-    text: "Send a random single emoji (like 🦝 or 🚽) to your parents with zero explanation and do not respond to their reply.",
-    forfeit: "Take 3 penalty sips"
-  },
 
   // ==========================================
   // COUPLES (Intimate, romantic, deep connection dares)
@@ -188,26 +164,6 @@ const BASE_ONLINE_DARE_ROULETTE_PROMPTS: PromptItem[] = [
   },
 
   // ==========================================
-  // EXPANDED UNHINGED (Chaotic forfeits & absurd webcam dares)
-  // ==========================================
-  {
-    id: 'on-dr-unh-5',
-    gameId: 'dare-roulette',
-    category: 'unhinged',
-    playMode: 'online',
-    text: "Put an ice cube inside your socks or shirt collar on camera and keep it there until it melts.",
-    forfeit: "Take 3 heavy penalty sips"
-  },
-  {
-    id: 'on-dr-unh-6',
-    gameId: 'dare-roulette',
-    category: 'unhinged',
-    playMode: 'online',
-    text: "Wrap a t-shirt around your head like a mummy turban and do a dramatic villain laugh directly into the mic for 15 seconds.",
-    forfeit: "Take 2 penalty sips"
-  },
-
-  // ==========================================
   // EXPANDED COUPLES (Romantic & intimate webcam connection)
   // ==========================================
   {
@@ -303,40 +259,6 @@ const BASE_ONLINE_DARE_ROULETTE_PROMPTS: PromptItem[] = [
     playMode: 'online',
     text: "Call your best friend outside this call on speaker, say 'I need to hide a body, bring a shovel', and immediately hang up.",
     forfeit: "Take 3 penalty drinks"
-  },
-
-  // Unhinged:
-  {
-    id: 'on-dr-unh-9',
-    gameId: 'dare-roulette',
-    category: 'unhinged',
-    playMode: 'online',
-    text: "Eat a slice of lemon or a pinch of salt on camera with an expression of pure, unbothered tranquility.",
-    forfeit: "Take 2 penalty sips"
-  },
-  {
-    id: 'on-dr-unh-10',
-    gameId: 'dare-roulette',
-    category: 'unhinged',
-    playMode: 'online',
-    text: "Turn your monitor brightness to 100%, hold a cold beverage against your forehead, and recite the alphabet backwards.",
-    forfeit: "Take 2 penalty sips"
-  },
-  {
-    id: 'on-dr-unh-11',
-    gameId: 'dare-roulette',
-    category: 'unhinged',
-    playMode: 'online',
-    text: "Wrap your head in a towel like a mystical fortune teller and deliver a 30-second psychic reading for someone on call.",
-    forfeit: "Take 2 penalty sips"
-  },
-  {
-    id: 'on-dr-unh-12',
-    gameId: 'dare-roulette',
-    category: 'unhinged',
-    playMode: 'online',
-    text: "Put on sunglasses, a jacket, and a hat indoors on webcam and speak only in secret agent code words for 2 rounds.",
-    forfeit: "Take 2 penalty sips"
   },
 
   // Couples:

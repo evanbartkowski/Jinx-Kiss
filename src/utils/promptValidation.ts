@@ -1,5 +1,6 @@
 import { GameCategory, GameId, PlayMode, PromptItem } from '../types/game';
 import { getPromptQualityIssue } from './promptQuality';
+import { requiresAdultConfirmation } from './contentPolicy';
 
 export const PROMPT_CATEGORIES: GameCategory[] = ['easy', 'medium', 'extreme', 'unhinged', 'couples', '18+', 'spicy', 'kids'];
 const GAME_IDS: GameId[] = ['truth-or-dare', 'never-have-i-ever', 'would-you-rather', 'hot-takes', 'dare-roulette', 'red-flag-green-flag', 'truth-or-sip', 'point-and-drink', 'most-likely-to', 'confessions', 'hot-seat', 'chaos-mix'];
@@ -37,7 +38,7 @@ export function getPromptValidationErrors(prompt: PromptItem): string[] {
   if (game === 'red-flag-green-flag' && QUESTION.test(text)) errors.push('Describe a behavior players can judge as a red or green flag.');
   if ((game === 'dare-roulette' || (game === 'truth-or-dare' && prompt.type === 'dare')) && QUESTION.test(text)) errors.push('A dare must describe an action to perform.');
   const content = promptContentText(prompt).replace(/opposite sex/gi, 'another gender');
-  if (prompt.category !== '18+' && (EXPLICIT_CONTENT.test(content) || (prompt.category === 'spicy' && ADULT_SPICY_CONTEXT.test(content)))) errors.push('Explicit adult content belongs in 18+.');
+  if (!requiresAdultConfirmation(prompt.category) && (EXPLICIT_CONTENT.test(content) || (prompt.category === 'spicy' && ADULT_SPICY_CONTEXT.test(content)))) errors.push('Adult content belongs in 18+ or Unhinged.');
   if (prompt.category === 'kids' && KIDS_MATURE_CONTENT.test(content)) errors.push('Kids cards must avoid adult themes, romance, and drinking.');
   return errors;
 }

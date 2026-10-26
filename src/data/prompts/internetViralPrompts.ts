@@ -101,50 +101,6 @@ export const INTERNET_VIRAL_PROMPTS: PromptItem[] = [
     text: 'Let the person across from you scroll through your screen time app reports and read your top 3 most used apps out loud.',
   },
 
-  // UNHINGED
-  {
-    id: 'iv-tod-u1',
-    gameId: 'truth-or-dare',
-    category: 'unhinged',
-    type: 'dare',
-    text: 'Lie flat on your back on the floor, look directly at the ceiling, and give a heartfelt 60-second eulogy for a fictional dropped hotdog.',
-  },
-  {
-    id: 'iv-tod-u2',
-    gameId: 'truth-or-dare',
-    category: 'unhinged',
-    type: 'truth',
-    text: 'What is the most unhinged, feral intrusive thought you have ever had while standing in line at a quiet public establishment?',
-  },
-  {
-    id: 'iv-tod-u3',
-    gameId: 'truth-or-dare',
-    category: 'unhinged',
-    type: 'dare',
-    text: 'Narrate everything the person to your left does for the next two minutes like an intense National Geographic wildlife documentary.',
-  },
-  {
-    id: 'iv-tod-u4',
-    gameId: 'truth-or-dare',
-    category: 'unhinged',
-    type: 'truth',
-    text: 'If you were legally obligated to marry a cartoon villain or food mascot, who are you picking and what does your shared household look like?',
-  },
-  {
-    id: 'iv-tod-u5',
-    gameId: 'truth-or-dare',
-    category: 'unhinged',
-    type: 'dare',
-    text: 'Wear an ice cube inside your sock for the next three rounds without complaining or taking it out.',
-  },
-  {
-    id: 'iv-tod-u6',
-    gameId: 'truth-or-dare',
-    category: 'unhinged',
-    type: 'truth',
-    text: 'What is the weirdest conspiracy theory that you secretly think might have at least a 5% chance of being completely true?',
-  },
-
   // COUPLES
   {
     id: 'iv-tod-c1',
@@ -303,14 +259,6 @@ export const INTERNET_VIRAL_PROMPTS: PromptItem[] = [
     optionA: 'Smash Mouth plays on climax',
     optionB: 'Climax whenever Smash Mouth plays in public',
   },
-  {
-    id: 'iv-wyr-u2',
-    gameId: 'would-you-rather',
-    category: 'unhinged',
-    text: 'Would you rather your hands be permanently made of cold spiral ham, or have your armpits dispense SPF 50 sunscreen on command?',
-    optionA: 'Hands permanently made of spiral ham',
-    optionB: 'Sunscreen-dispensing armpits',
-  },
 
   // COUPLES
   {
@@ -400,20 +348,6 @@ export const INTERNET_VIRAL_PROMPTS: PromptItem[] = [
     text: 'Never have I ever pretended to have a family emergency to abruptly escape a disastrous date.',
   },
 
-  // UNHINGED
-  {
-    id: 'iv-nhe-u1',
-    gameId: 'never-have-i-ever',
-    category: 'unhinged',
-    text: 'Never have I ever eaten food directly off the floor past the 5-second rule because nobody was looking.',
-  },
-  {
-    id: 'iv-nhe-u2',
-    gameId: 'never-have-i-ever',
-    category: 'unhinged',
-    text: 'Never have I ever spent more than 40 minutes sitting in a parked car staring into the void questioning reality.',
-  },
-
   // COUPLES
   {
     id: 'iv-nhe-c1',
@@ -493,15 +427,6 @@ export const INTERNET_VIRAL_PROMPTS: PromptItem[] = [
     category: 'extreme',
     text: 'Ghosting is sometimes the most polite and merciful way to end things when a connection has zero chemistry.',
     discussionPrompt: 'Is closure a selfish myth or does everyone deserve an explanation text?',
-  },
-
-  // UNHINGED
-  {
-    id: 'iv-ht-u1',
-    gameId: 'hot-takes',
-    category: 'unhinged',
-    text: 'Drinking warm water from the bathroom tap at 3 AM hits harder than any $12 bottled artisan glacier water.',
-    discussionPrompt: 'Defend your water temperature hierarchy right now.',
   },
   {
     id: 'iv-ht-c2',
@@ -618,14 +543,6 @@ export const INTERNET_VIRAL_PROMPTS: PromptItem[] = [
     category: 'extreme',
     text: 'Most likely to start a fist fight or heated shouting match over a casual game of Monopoly or Uno.',
   },
-
-  // UNHINGED
-  {
-    id: 'iv-mlt-u1',
-    gameId: 'most-likely-to',
-    category: 'unhinged',
-    text: 'Most likely to accidentally start an underground cult over a niche hobby or sourdough recipe.',
-  },
   {
     id: 'iv-mlt-s2',
     gameId: 'most-likely-to',
@@ -667,15 +584,6 @@ export const INTERNET_VIRAL_PROMPTS: PromptItem[] = [
     category: 'extreme',
     text: 'What is a secret that could ruin a relationship, job, or friendship if it ever became public knowledge?',
     confessionStarter: 'If this ever came out, it would ruin...',
-  },
-
-  // UNHINGED
-  {
-    id: 'iv-cf-u1',
-    gameId: 'confessions',
-    category: 'unhinged',
-    text: 'What is the most bizarre lie you told to escape a social situation because you simply didn’t want to go?',
-    confessionStarter: 'To avoid hanging out, I told them that...',
   },
 
   // COUPLES
@@ -723,14 +631,6 @@ export const INTERNET_VIRAL_PROMPTS: PromptItem[] = [
     gameId: 'hot-seat',
     category: 'extreme',
     text: 'If you had to pick one person in this room to delete from your life forever, who are you sacrificing right now?',
-  },
-
-  // UNHINGED
-  {
-    id: 'iv-hs-u1',
-    gameId: 'hot-seat',
-    category: 'unhinged',
-    text: 'If an alien landed right now and offered you $10M to fight your best friend in a Walmart parking lot, would you take it?',
   },
 
   // COUPLES
@@ -785,14 +685,6 @@ export const INTERNET_VIRAL_PROMPTS: PromptItem[] = [
     gameId: 'dare-roulette',
     category: 'medium',
     text: 'Let the group pick any photo from your camera roll and set it as your lock screen wallpaper for the night.',
-  },
-
-  // UNHINGED
-  {
-    id: 'iv-dr-u1',
-    gameId: 'dare-roulette',
-    category: 'unhinged',
-    text: 'Crawl under the main table like a mischievous goblin and stay there in character for the next two full rounds.',
   },
 
   // COUPLES
@@ -874,15 +766,6 @@ export const INTERNET_VIRAL_PROMPTS: PromptItem[] = [
     forfeit: 'Take 3 sips',
   },
 
-  // UNHINGED
-  {
-    id: 'iv-tos-u1',
-    gameId: 'truth-or-sip',
-    category: 'unhinged',
-    text: 'If you were put on trial for a crime you didn’t commit, which player in this room would make the worst defense lawyer?',
-    forfeit: 'Take 2 sips',
-  },
-
   // COUPLES
   {
     id: 'iv-tos-c1',
@@ -934,14 +817,6 @@ export const INTERNET_VIRAL_PROMPTS: PromptItem[] = [
     gameId: 'point-and-drink',
     category: 'extreme',
     text: 'Who in this room is most likely to accidentally become an international fugitive on vacation?',
-  },
-
-  // UNHINGED
-  {
-    id: 'iv-pad-u1',
-    gameId: 'point-and-drink',
-    category: 'unhinged',
-    text: 'Who in this room looks most like an undercover alien pretending to understand how human conversations work?',
   }
 ];
 

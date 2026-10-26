@@ -207,14 +207,6 @@ export const ONLINE_CONFESSIONS_EXPANSION: PromptItem[] = [
     "confessionStarter": "If I only had ten seconds, I would tell them..."
   },
   {
-    "id": "on-cf-unhinged-e7",
-    "gameId": "confessions",
-    "category": "unhinged",
-    "playMode": "online",
-    "text": "Confess a time you walked into a room, forgot what you were doing, and stood staring like an NPC.",
-    "confessionStarter": "I stood in the hallway for three minutes because..."
-  },
-  {
     "id": "on-cf-kids-e7",
     "gameId": "confessions",
     "category": "kids",

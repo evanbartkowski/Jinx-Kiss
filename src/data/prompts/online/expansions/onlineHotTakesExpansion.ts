@@ -87,22 +87,6 @@ export const ONLINE_HOT_TAKES_EXPANSION: PromptItem[] = [
     "discussionPrompt": "Can physical attraction grow if it wasn't there at the start?"
   },
   {
-    "id": "on-ht-unhinged-e9",
-    "gameId": "hot-takes",
-    "category": "unhinged",
-    "playMode": "online",
-    "text": "Eating an entire bag of shredded cheese out of the fridge at 3 AM is peak human freedom.",
-    "discussionPrompt": "What is your most unhinged late-night snack confession?"
-  },
-  {
-    "id": "on-ht-unhinged-e11",
-    "gameId": "hot-takes",
-    "category": "unhinged",
-    "playMode": "online",
-    "text": "Ghosts don't haunt old houses because of tragedy; they haunt old houses because rent is free.",
-    "discussionPrompt": "Would you live in a haunted Victorian mansion for $100/month rent?"
-  },
-  {
     "id": "on-ht-kids-e1",
     "gameId": "hot-takes",
     "category": "kids",

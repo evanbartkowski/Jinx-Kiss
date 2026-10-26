@@ -40,15 +40,6 @@ const BASE_ONLINE_NEVER_HAVE_I_EVER_PROMPTS: PromptItem[] = [
   { id: 'on-nhie-ext-12', gameId: 'never-have-i-ever', category: 'extreme', playMode: 'online', text: "Never have I ever checked someone's follower list count hourly to see if they were following someone new." },
 
   // ==========================================
-  // UNHINGED (Chaotic, absurd, boundary-pushing)
-  // ==========================================
-  { id: 'on-nhie-unh-1', gameId: 'never-have-i-ever', category: 'unhinged', playMode: 'online', text: "Never have I ever brought my laptop into the bathroom and muted my mic to take a dump during a call." },
-  { id: 'on-nhie-unh-4', gameId: 'never-have-i-ever', category: 'unhinged', playMode: 'online', text: "Never have I ever stayed up past 4 AM arguing with complete strangers in Reddit or YouTube comments." },
-  { id: 'on-nhie-unh-6', gameId: 'never-have-i-ever', category: 'unhinged', playMode: 'online', text: "Never have I ever ordered fast food delivery past 2 AM while already lying in bed with my headset on." },
-  { id: 'on-nhie-unh-8', gameId: 'never-have-i-ever', category: 'unhinged', playMode: 'online', text: "Never have I ever pretended to have a dramatic life crisis just to see who in the server would DM me." },
-  { id: 'on-nhie-unh-10', gameId: 'never-have-i-ever', category: 'unhinged', playMode: 'online', text: "Never have I ever muted myself to eat an entire bag of chips with my mouth directly on the microphone." },
-
-  // ==========================================
   // COUPLES (Vulnerable, intimate remote romance)
   // ==========================================
   { id: 'on-nhie-cpl-1', gameId: 'never-have-i-ever', category: 'couples', playMode: 'online', text: "Never have I ever fallen asleep on FaceTime or call with you just to feel like you were sleeping next to me." },
@@ -70,7 +61,6 @@ const BASE_ONLINE_NEVER_HAVE_I_EVER_PROMPTS: PromptItem[] = [
   { id: 'on-nhie-ext-13', gameId: 'never-have-i-ever', category: 'extreme', playMode: 'online', text: "Never have I ever accidentally shared the wrong screen monitor during a group call and showed something personal." },
   { id: 'on-nhie-ext-14', gameId: 'never-have-i-ever', category: 'extreme', playMode: 'online', text: "Never have I ever stayed up past 6 AM on call with someone while promising 'I am going to sleep in 5 minutes' every hour." },
   { id: 'on-nhie-ext-15', gameId: 'never-have-i-ever', category: 'extreme', playMode: 'online', text: "Never have I ever stalked someone's location or live status so closely that I knew their exact schedule." },
-  { id: 'on-nhie-unh-13', gameId: 'never-have-i-ever', category: 'unhinged', playMode: 'online', text: "Never have I ever ordered midnight takeout for delivery while already in the middle of eating another meal on call." },
 
   // ADDITIONAL COUPLES
   { id: 'on-nhie-cpl-11', gameId: 'never-have-i-ever', category: 'couples', playMode: 'online', text: "Never have I ever kept a call connected for over 12 hours straight just to be in each other's presence." },

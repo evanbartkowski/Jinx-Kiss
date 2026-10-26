@@ -203,62 +203,6 @@ export const ONLINE_DARE_ROULETTE_EXPANSION: PromptItem[] = [
     "text": "Take a slow, sensual sip of your drink on webcam while maintaining unbroken eye contact with the group."
   },
   {
-    "id": "on-dr-unhinged-e1",
-    "gameId": "dare-roulette",
-    "category": "unhinged",
-    "playMode": "online",
-    "text": "Put a slice of bread or a snack on your head and deliver a serious news broadcast on webcam for 20 seconds."
-  },
-  {
-    "id": "on-dr-unhinged-e4",
-    "gameId": "dare-roulette",
-    "category": "unhinged",
-    "playMode": "online",
-    "text": "Change your Discord nickname to 'Sentient Toaster' and make toaster buzzing noises when spoken to for 2 rounds."
-  },
-  {
-    "id": "on-dr-unhinged-e6",
-    "gameId": "dare-roulette",
-    "category": "unhinged",
-    "playMode": "online",
-    "text": "Hold a shoe up to your ear like a phone and have a completely serious argument with it on webcam."
-  },
-  {
-    "id": "on-dr-unhinged-e7",
-    "gameId": "dare-roulette",
-    "category": "unhinged",
-    "playMode": "online",
-    "text": "Do your best impression of a goat screaming like a human at the top of your lungs on microphone."
-  },
-  {
-    "id": "on-dr-unhinged-e8",
-    "gameId": "dare-roulette",
-    "category": "unhinged",
-    "playMode": "online",
-    "text": "Narrate the next two minutes of this call as if you are a medieval court jester mocking the nobility."
-  },
-  {
-    "id": "on-dr-unhinged-e11",
-    "gameId": "dare-roulette",
-    "category": "unhinged",
-    "playMode": "online",
-    "text": "Sing the national anthem or a pop song in the voice of a grumpy cartoon pirate on microphone."
-  },
-  {
-    "id": "on-dr-unhinged-e13",
-    "gameId": "dare-roulette",
-    "category": "unhinged",
-    "playMode": "online",
-    "text": "Put on every hat, hood, or pair of glasses currently in your room at the same time and pose on webcam."
-  },
-  {
-    "id": "on-dr-unhinged-e14",
-    "gameId": "dare-roulette",
-    "category": "unhinged",
-    "playMode": "online",
-    "text": "Hold up a raw egg, fruit, or vegetable to the camera and introduce it as your long-lost twin sibling."
-  },
-  {
     "id": "on-dr-kids-e15",
     "gameId": "dare-roulette",
     "category": "kids",

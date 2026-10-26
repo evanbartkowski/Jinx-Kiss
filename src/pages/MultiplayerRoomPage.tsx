@@ -7,6 +7,8 @@ import {
 import { GameId, PartyModeConfig, PlayMode, PromptItem } from '../types/game';
 import { GAMES_CONFIG } from '../data/gamesConfig';
 import { getPartyPromptPool } from '../utils/partyPrompts';
+import { partyRequiresAdultConfirmation, requiresAdultConfirmation } from '../utils/contentPolicy';
+import { AgeConfirmationModal } from '../components/common/AgeConfirmationModal';
 import { useGameSettings } from '../context/GameSettingsContext';
 import { soundEffects } from '../utils/audio';
 import { useToast } from '../context/ToastContext';
@@ -40,7 +42,7 @@ export const MultiplayerRoomPage: React.FC<MultiplayerRoomPageProps> = ({
   onExit,
 }) => {
   const { showToast } = useToast();
-  const { playMode, setPlayMode } = useGameSettings();
+  const { playMode, setPlayMode, isAgeConfirmed, confirmAge } = useGameSettings();
 
   // Mode: 'menu' | 'in-room'
   const [roomCode, setRoomCode] = useState<string>(initialRoomCode || '');
@@ -214,6 +216,10 @@ export const MultiplayerRoomPage: React.FC<MultiplayerRoomPageProps> = ({
     await multiplayerService.submitAnswer(roomCode, playerId, guestAnswer.trim());
     showToast('Secret answer sent!', 'success');
   };
+
+  if (room && !isAgeConfirmed && (partyRequiresAdultConfirmation(room.config) || (room.currentPrompt && requiresAdultConfirmation(room.currentPrompt.category)))) {
+    return <AgeConfirmationModal isOpen onConfirm={confirmAge} onCancel={onExit} />;
+  }
 
   const handleKick = async (targetId: string) => {
     if (!isHost) return;

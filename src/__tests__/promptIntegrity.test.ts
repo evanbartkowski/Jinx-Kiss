@@ -76,7 +76,7 @@ describe('Official prompt content audit', () => {
 
   it('provides original spotlight cards with game and category coverage in both formats', () => {
     for (const prompts of [EDITORIAL_SPOTLIGHT_PROMPTS, ONLINE_EDITORIAL_SPOTLIGHT_PROMPTS]) {
-      for (const game of gameIds.filter(id => id !== 'chaos-mix')) for (const category of PROMPT_CATEGORIES) {
+      for (const game of gameIds.filter(id => id !== 'chaos-mix')) for (const category of PROMPT_CATEGORIES.filter(cat => cat !== 'unhinged')) {
         expect(prompts.some(p => p.gameId === game && p.category === category)).toBe(true);
       }
     }

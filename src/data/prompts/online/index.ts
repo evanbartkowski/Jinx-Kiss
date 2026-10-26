@@ -16,6 +16,7 @@ import { ONLINE_LEGENDARY_CARDS } from './onlineLegendaryCards';
 import { createPromptCatalog } from '../../../utils/promptCatalog';
 import { filterPromptsForScope } from '../../../utils/promptValidation';
 import { ONLINE_EDITORIAL_SPOTLIGHT_PROMPTS } from '../editorialSpotlights';
+import { ONLINE_UNHINGED_PROMPTS } from '../unhinged';
 
 export {
   ONLINE_TRUTH_OR_DARE_PROMPTS,
@@ -33,6 +34,7 @@ export {
 };
 
 export const ONLINE_STANDALONE_PROMPTS: PromptItem[] = [
+  ...ONLINE_UNHINGED_PROMPTS,
   ...ONLINE_EDITORIAL_SPOTLIGHT_PROMPTS,
   ...ONLINE_TRUTH_OR_DARE_PROMPTS,
   ...ONLINE_NEVER_HAVE_I_EVER_PROMPTS,

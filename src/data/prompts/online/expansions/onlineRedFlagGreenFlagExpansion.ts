@@ -133,13 +133,6 @@ export const ONLINE_RED_FLAG_GREEN_FLAG_EXPANSION: PromptItem[] = [
     "text": "They take full command in the bedroom, pinning your hands gently and making sure you are taken care of first."
   },
   {
-    "id": "on-rf-unhinged-e15",
-    "gameId": "red-flag-green-flag",
-    "category": "unhinged",
-    "playMode": "online",
-    "text": "They carry a single raw potato in their coat pocket and tell people it is an emotional support tuber."
-  },
-  {
     "id": "on-rf-kids-e8",
     "gameId": "red-flag-green-flag",
     "category": "kids",

@@ -122,4 +122,19 @@ describe('Game prompt loading', () => {
     expect(container.textContent).not.toContain('favorite webcam background');
     expect(container.textContent).not.toContain('share at the table');
   });
+
+  it('requires adult confirmation before displaying a saved Unhinged custom deck', async () => {
+    const deck: CustomDeck = {
+      id: 'adult-custom', shareToken: 'adult-test', title: 'Roast deck', description: '',
+      gameId: 'truth-or-dare', gameMode: 'unhinged', playMode: 'in-person', themeColor: '#FF4DA6',
+      creatorUid: 'test-user', creatorUsername: 'Tester', visibility: 'private', moderationStatus: 'approved', createdAt: 1, updatedAt: 1,
+      cards: [{ id: 'adult-card', gameId: 'truth-or-dare', category: 'unhinged', type: 'truth', text: 'Which player would turn a fake apology into a second scandal?' }],
+    };
+    await act(async () => root.render(<GameSettingsProvider><GamePage gameId="truth-or-dare" customDeck={deck} onExit={() => {}} /></GameSettingsProvider>));
+    expect(document.body.textContent).toContain('Age Verification');
+    expect(container.querySelector('[data-testid="game"]')).toBeNull();
+    const confirm = Array.from(document.querySelectorAll('button')).find(button => button.textContent === 'I am 18+');
+    await act(async () => confirm!.click());
+    expect(container.textContent).toContain('Which player would turn a fake apology into a second scandal?');
+  });
 });

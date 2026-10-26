@@ -14,12 +14,6 @@ export const NEVER_HAVE_I_EVER_PROMPTS: PromptItem[] = [
     "text": "Never have I ever told a lie so colossal that I still have to keep maintaining it today."
   },
   {
-    "id": "nhie-unhinged-10",
-    "gameId": "never-have-i-ever",
-    "category": "unhinged",
-    "text": "Never have I ever given an elaborate backstory to a stranger in an elevator that was 100% fake."
-  },
-  {
     "id": "nhie-couples-7",
     "gameId": "never-have-i-ever",
     "category": "couples",

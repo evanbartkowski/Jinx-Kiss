@@ -3,6 +3,7 @@ import { GameId, GameCategory, PartyModeConfig } from '../types/game';
 import { GAMES_CONFIG, CATEGORY_LABELS } from '../data/gamesConfig';
 import { soundEffects } from '../utils/audio';
 import { useGameSettings } from '../context/GameSettingsContext';
+import { requiresAdultConfirmation } from '../utils/contentPolicy';
 import {
   Sparkles,
   Users,
@@ -38,7 +39,6 @@ export const PartyModeSetupPage: React.FC<PartyModeSetupPageProps> = ({ onStartP
   const [selectedCategories, setSelectedCategories] = useState<GameCategory[]>([
     'medium',
     'spicy',
-    'unhinged',
   ]);
 
   // Rounds & Settings
@@ -234,7 +234,7 @@ export const PartyModeSetupPage: React.FC<PartyModeSetupPageProps> = ({ onStartP
                         : 'border-white/10 bg-white/[0.02] text-zinc-500 opacity-60 hover:opacity-100'
                     }`}
                   >
-                    <span className="text-xs font-bold block">{meta.label}</span>
+                    <span className="text-xs font-bold block">{meta.label}{requiresAdultConfirmation(cat) && <span className="ml-1 text-[10px]">18+</span>}</span>
                   </button>
                 );
               })}

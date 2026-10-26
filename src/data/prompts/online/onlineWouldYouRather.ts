@@ -124,46 +124,6 @@ const BASE_ONLINE_WOULD_YOU_RATHER_PROMPTS: PromptItem[] = [
   },
 
   // ==========================================
-  // UNHINGED (Chaotic, absurdity, maximum disruption)
-  // ==========================================
-  {
-    id: 'on-wyr-unh-1',
-    gameId: 'would-you-rather',
-    category: 'unhinged',
-    playMode: 'online',
-    text: "Would you rather have an unskippable audio ad play through your microphone whenever you speak on call or have your webcam automatically zoom in on your mouth when chewing?",
-    optionA: "Microphone audio ads",
-    optionB: "Mouth-cam zoom"
-  },
-  {
-    id: 'on-wyr-unh-2',
-    gameId: 'would-you-rather',
-    category: 'unhinged',
-    playMode: 'online',
-    text: "Would you rather have your computer lock up and blast circus music every time you open a private browser tab or have your webcam randomly take a photo and set it as your wallpaper?",
-    optionA: "Circus music incognito alarm",
-    optionB: "Random surprise webcam wallpaper"
-  },
-  {
-    id: 'on-wyr-unh-3',
-    gameId: 'would-you-rather',
-    category: 'unhinged',
-    playMode: 'online',
-    text: "Would you rather be forced to speak exclusively in Twitch chat emote slang for 24 hours ('poggers', 'monkaS', 'KEKW') or narrate all your movements out loud like an NPC?",
-    optionA: "Twitch chat slang only",
-    optionB: "NPC commentary out loud"
-  },
-  {
-    id: 'on-wyr-unh-4',
-    gameId: 'would-you-rather',
-    category: 'unhinged',
-    playMode: 'online',
-    text: "Would you rather have someone remotely control your mouse for 5 minutes without warning once a week or have your auto-correct replace every 10th word with 'daddy'?",
-    optionA: "Random mouse hijacking",
-    optionB: "'Daddy' auto-correct glitch"
-  },
-
-  // ==========================================
   // COUPLES (Romantic, intimate, long-distance connection)
   // ==========================================
   {
@@ -351,46 +311,6 @@ const BASE_ONLINE_WOULD_YOU_RATHER_PROMPTS: PromptItem[] = [
   },
 
   // ==========================================
-  // EXPANDED UNHINGED (Chaotic webcam & audio chaos)
-  // ==========================================
-  {
-    id: 'on-wyr-unh-5',
-    gameId: 'would-you-rather',
-    category: 'unhinged',
-    playMode: 'online',
-    text: "Would you rather every time you join a voice call have a robotic TTS voice announce your battery percentage and screen brightness or have your webcam automatically mirror your video horizontally?",
-    optionA: "TTS battery announcement",
-    optionB: "Mirrored webcam permanently"
-  },
-  {
-    id: 'on-wyr-unh-6',
-    gameId: 'would-you-rather',
-    category: 'unhinged',
-    playMode: 'online',
-    text: "Would you rather have your microphone pitch-shifted up two octaves like a chipmunk for the next hour of gaming or have heavy reverb added to every syllable?",
-    optionA: "Chipmunk pitch-shift",
-    optionB: "Massive cavernous reverb"
-  },
-  {
-    id: 'on-wyr-unh-7',
-    gameId: 'would-you-rather',
-    category: 'unhinged',
-    playMode: 'online',
-    text: "Would you rather only be able to type in all caps on Discord for a full month or have your avatar replaced with a cursed low-res Shrek thumbnail?",
-    optionA: "ALL CAPS FOR A MONTH",
-    optionB: "Cursed Shrek avatar"
-  },
-  {
-    id: 'on-wyr-unh-8',
-    gameId: 'would-you-rather',
-    category: 'unhinged',
-    playMode: 'online',
-    text: "Would you rather have an unskippable 5-second slide whistle sound play every time you enter a voice channel or have your screen dim to 10% whenever anyone says your name?",
-    optionA: "Slide whistle entry chime",
-    optionB: "Screen dims on your name"
-  },
-
-  // ==========================================
   // EXPANDED 18+ (Adult online secrets)
   // ==========================================
   {
@@ -563,33 +483,6 @@ const BASE_ONLINE_WOULD_YOU_RATHER_PROMPTS: PromptItem[] = [
     text: "Would you rather be banned from all online gaming and streaming for 6 months or only be able to communicate online using voice notes?",
     optionA: "6-month gaming & stream ban",
     optionB: "Voice notes only forever"
-  },
-  {
-    id: 'on-wyr-unh-10',
-    gameId: 'would-you-rather',
-    category: 'unhinged',
-    playMode: 'online',
-    text: "Would you rather permanently have a 3-second audio delay on every sentence you speak in calls or have a loud rooster crow sound effect play whenever you unmute?",
-    optionA: "3-second voice delay",
-    optionB: "Rooster crow on unmute"
-  },
-  {
-    id: 'on-wyr-unh-11',
-    gameId: 'would-you-rather',
-    category: 'unhinged',
-    playMode: 'online',
-    text: "Would you rather have an AI clone of your voice constantly join random voice channels to argue with strangers or have your search history printed out as a book?",
-    optionA: "AI voice clone arguing in calls",
-    optionB: "Search history printed as book"
-  },
-  {
-    id: 'on-wyr-unh-12',
-    gameId: 'would-you-rather',
-    category: 'unhinged',
-    playMode: 'online',
-    text: "Would you rather sleep on your keyboard with your mic hot on Discord for 8 hours or let everyone in call change your profile banner to whatever they want?",
-    optionA: "Sleep on keyboard with hot mic",
-    optionB: "Group chooses profile banner"
   },
   {
     id: 'on-wyr-cpl-11',

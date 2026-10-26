@@ -4,6 +4,7 @@ import { CATEGORY_LABELS } from '../../data/gamesConfig';
 import { useGameSettings } from '../../context/GameSettingsContext';
 import { AgeConfirmationModal } from './AgeConfirmationModal';
 import { soundEffects } from '../../utils/audio';
+import { requiresAdultConfirmation } from '../../utils/contentPolicy';
 
 interface CategorySelectorProps {
   applicableCategories?: GameCategory[];
@@ -13,7 +14,7 @@ interface CategorySelectorProps {
 }
 
 export const CategorySelector: React.FC<CategorySelectorProps> = ({
-  applicableCategories = ['easy', 'medium', 'extreme', 'couples', '18+', 'spicy', 'kids'],
+  applicableCategories = ['easy', 'medium', 'extreme', 'unhinged', 'couples', '18+', 'spicy', 'kids'],
   currentCategory,
   onSelectCategory,
   className = '',
@@ -23,8 +24,8 @@ export const CategorySelector: React.FC<CategorySelectorProps> = ({
 
   const handleCategoryClick = (cat: GameCategory) => {
     soundEffects.playClick();
-    if (cat === '18+' && !isAgeConfirmed) {
-      setPendingCategory('18+');
+    if (requiresAdultConfirmation(cat) && !isAgeConfirmed) {
+      setPendingCategory(cat);
       return;
     }
     onSelectCategory(cat);
@@ -57,7 +58,7 @@ export const CategorySelector: React.FC<CategorySelectorProps> = ({
               }`}
             >
               {meta.label}
-              {cat === '18+' && (
+              {requiresAdultConfirmation(cat) && (
                 <span className="ml-1 text-[10px] text-pink-400 font-bold">🔞</span>
               )}
             </button>

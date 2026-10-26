@@ -1,4 +1,5 @@
 import { PromptItem } from '../../types/game';
+import { UNHINGED_LEGENDARY_CARDS } from './unhinged';
 
 /**
  * JINX KISS — RARE LEGENDARY CARDS
@@ -6,6 +7,7 @@ import { PromptItem } from '../../types/game';
  * Each card features `isLegendary: true`, `rarity: 'legendary'`, and an epic `legendaryTitle`.
  */
 export const LEGENDARY_CARDS: PromptItem[] = [
+  ...UNHINGED_LEGENDARY_CARDS,
   // ==========================================
   // 1. KIDS CATEGORY (Super silly, epic, clean)
   // ==========================================
@@ -442,100 +444,6 @@ export const LEGENDARY_CARDS: PromptItem[] = [
     rarity: 'legendary',
     legendaryTitle: '★ LEGENDARY HOT SEAT ★',
     text: 'The Grand Inquisitor: 90 seconds in the hot seat with zero immunity! The group can ask you 3 unfiltered, no-limits questions. Refuse any and you take 3 double penalty drinks!'
-  },
-  {
-    id: 'leg-unh-2',
-    gameId: 'truth-or-dare',
-    category: 'unhinged',
-    type: 'truth',
-    isLegendary: true,
-    rarity: 'legendary',
-    legendaryTitle: '★ LEGENDARY CHAOS TRUTH ★',
-    text: 'The Condiment Metamorphosis: If you were legally forced to replace one of your bodily fluids with a commercial condiment (warm mayonnaise, sriracha, or ranch dressing), which one do you pick and what does your daily medical checkup look like?'
-  },
-  {
-    id: 'leg-unh-3',
-    gameId: 'would-you-rather',
-    category: 'unhinged',
-    isLegendary: true,
-    rarity: 'legendary',
-    legendaryTitle: '★ LEGENDARY SHOWDOWN ★',
-    text: 'Would you rather have a live cartoon laugh track play at maximum volume every time you speak for the next month OR have your inner monologue broadcast via Bluetooth to nearby cars at stoplights?',
-    optionA: 'Loud cartoon laugh track every time you talk',
-    optionB: 'Inner monologue broadcast via Bluetooth'
-  },
-  {
-    id: 'leg-unh-4',
-    gameId: 'never-have-i-ever',
-    category: 'unhinged',
-    isLegendary: true,
-    rarity: 'legendary',
-    legendaryTitle: '★ LEGENDARY CONFESSION ★',
-    text: 'Never have I ever had a completely serious, heated 10-minute philosophical debate with a housepet, a refrigerator, or a mannequin while stone-cold sober.'
-  },
-  {
-    id: 'leg-unh-6',
-    gameId: 'dare-roulette',
-    category: 'unhinged',
-    isLegendary: true,
-    rarity: 'legendary',
-    legendaryTitle: '★ LEGENDARY SPINNER ★',
-    text: 'The Diner Ransom: Call a 24-hour restaurant or gas station on speakerphone, ask for "Detective Sullivan", and urgently whisper: "The package has hatched. What do I do with the teeth?" Stay on until they hang up!'
-  },
-  {
-    id: 'leg-unh-7',
-    gameId: 'red-flag-green-flag',
-    category: 'unhinged',
-    isLegendary: true,
-    rarity: 'legendary',
-    legendaryTitle: '★ LEGENDARY JUDGMENT ★',
-    text: 'They sleep every single night in a formal three-piece tailored suit and polished dress shoes "in case a Victorian burglar breaks in and challenges them to a duel of honor".'
-  },
-  {
-    id: 'leg-unh-8',
-    gameId: 'truth-or-sip',
-    category: 'unhinged',
-    isLegendary: true,
-    rarity: 'legendary',
-    legendaryTitle: '★ LEGENDARY TRUTH ★',
-    text: 'The Cursed Thought: What is the most deranged, intrusive thought that has ever entered your brain while standing in a dead-silent room or crowded elevator? Confess it or take 3 penalty drinks!',
-    "forfeit": "Take a sip of any drink, or pass."
-  },
-  {
-    id: 'leg-unh-9',
-    gameId: 'point-and-drink',
-    category: 'unhinged',
-    isLegendary: true,
-    rarity: 'legendary',
-    legendaryTitle: '★ LEGENDARY POINT ★',
-    text: 'Point to the person in the room who looks the most like they secretly operate an illegal underground competitive ferret wrestling syndicate in their attic!'
-  },
-  {
-    id: 'leg-unh-10',
-    gameId: 'most-likely-to',
-    category: 'unhinged',
-    isLegendary: true,
-    rarity: 'legendary',
-    legendaryTitle: '★ LEGENDARY CONSENSUS ★',
-    text: 'Who is most likely to accidentally establish a full-fledged apocalyptic cult because they got way too passionate about artisanal sourdough bread fermentation?'
-  },
-  {
-    id: 'leg-unh-11',
-    gameId: 'confessions',
-    category: 'unhinged',
-    isLegendary: true,
-    rarity: 'legendary',
-    legendaryTitle: '★ LEGENDARY CONFESSION ★',
-    text: 'Confess the most cursed, feral sensory habit you perform when completely alone in your house that would make everyone here slowly edge away from you.'
-  },
-  {
-    id: 'leg-unh-12',
-    gameId: 'hot-seat',
-    category: 'unhinged',
-    isLegendary: true,
-    rarity: 'legendary',
-    legendaryTitle: '★ LEGENDARY HOT SEAT ★',
-    text: 'The Madness Defense: 60 seconds on the clock! The room invents the most absurd, incoherent conspiracy theory imaginable; you must passionately defend it with tears in your eyes and unblinking conviction!'
   },
 
   // ==========================================

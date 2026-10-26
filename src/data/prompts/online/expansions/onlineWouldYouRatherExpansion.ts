@@ -241,42 +241,6 @@ export const ONLINE_WOULD_YOU_RATHER_EXPANSION: PromptItem[] = [
     "text": "Would you rather have a secret friends-with-benefits relationship that nobody in your circle finds out about OR have a whirlwind romance with a mysterious stranger you meet at an airport lounge?"
   },
   {
-    "id": "on-wyr-unhinged-e5",
-    "gameId": "would-you-rather",
-    "category": "unhinged",
-    "playMode": "online",
-    "optionA": "have to wear a giant inflatable dinosaur costume during every job interview you ever have",
-    "optionB": "have to introduce yourself as 'The Crimson Shadow' in every official professional meeting",
-    "text": "Would you rather have to wear a giant inflatable dinosaur costume during every job interview you ever have OR have to introduce yourself as 'The Crimson Shadow' in every official professional meeting?"
-  },
-  {
-    "id": "on-wyr-unhinged-e10",
-    "gameId": "would-you-rather",
-    "category": "unhinged",
-    "playMode": "online",
-    "optionA": "have your pet gain the ability to speak fluent English, but it only roasts your life choices",
-    "optionB": "have your car scream like a Victorian monarch whenever you brake too quickly",
-    "text": "Would you rather have your pet gain the ability to speak fluent English, but it only roasts your life choices OR have your car scream like a Victorian monarch whenever you brake too quickly?"
-  },
-  {
-    "id": "on-wyr-unhinged-e11",
-    "gameId": "would-you-rather",
-    "category": "unhinged",
-    "playMode": "online",
-    "optionA": "have to replace all the water in your house with lukewarm chicken broth for three days",
-    "optionB": "have to replace all your pillows with bags of slightly stale marshmallows for a month",
-    "text": "Would you rather have to replace all the water in your house with lukewarm chicken broth for three days OR have to replace all your pillows with bags of slightly stale marshmallows for a month?"
-  },
-  {
-    "id": "on-wyr-unhinged-e12",
-    "gameId": "would-you-rather",
-    "category": "unhinged",
-    "playMode": "online",
-    "optionA": "have your keyboard randomly capitalize every third letter of every word you type forever",
-    "optionB": "have your autocorrect replace every proper name with the name of a breakfast cereal",
-    "text": "Would you rather have your keyboard randomly capitalize every third letter of every word you type forever OR have your autocorrect replace every proper name with the name of a breakfast cereal?"
-  },
-  {
     "id": "on-wyr-kids-e2",
     "gameId": "would-you-rather",
     "category": "kids",

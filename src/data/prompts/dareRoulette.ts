@@ -9,20 +9,6 @@ export const DARE_ROULETTE_PROMPTS: PromptItem[] = [
     "forfeit": "Take 1 penalty sip"
   },
   {
-    "id": "dr-unhinged-1",
-    "gameId": "dare-roulette",
-    "category": "unhinged",
-    "text": "Stand by the window or balcony and howl at the moon like a lone wolf for 5 seconds.",
-    "forfeit": "Take 3 penalty sips"
-  },
-  {
-    "id": "dr-unhinged-6",
-    "gameId": "dare-roulette",
-    "category": "unhinged",
-    "text": "Hold completely still like a frozen wax figure for 60 seconds while people try to make you laugh.",
-    "forfeit": "Take 2 penalty sips"
-  },
-  {
     "id": "dr-couples-1",
     "gameId": "dare-roulette",
     "category": "couples",

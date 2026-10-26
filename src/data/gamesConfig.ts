@@ -176,7 +176,7 @@ export const CATEGORY_LABELS: Record<string, { label: string; description: strin
   },
   unhinged: {
     label: 'Unhinged',
-    description: 'Wild, unpredictable, absurd, and chaotic prompts that test every boundary.',
+    description: 'Adults-only player roasts, dark humor, messy confessions, and brutal choices. Anyone can pass.',
     badgeColor: 'border-fuchsia-500/40 text-fuchsia-300 bg-fuchsia-950/30',
   },
   couples: {

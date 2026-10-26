@@ -7,6 +7,7 @@ import { AgeConfirmationModal } from '../common/AgeConfirmationModal';
 import { soundEffects } from '../../utils/audio';
 import { ArrowLeft, Sparkles, ArrowRight, TrendingUp, History, Play, CheckCircle2 } from 'lucide-react';
 import confetti from 'canvas-confetti';
+import { requiresAdultConfirmation } from '../../utils/contentPolicy';
 
 interface GameModeSelectScreenProps {
   metadata: GameMetadata;
@@ -91,8 +92,8 @@ export const GameModeSelectScreen: React.FC<GameModeSelectScreenProps> = ({
         return {
           color: '#D946EF',
           icon: '⚡',
-          badge: 'Pure Chaos',
-          desc: 'Wild, unpredictable, absurd, and chaotic prompts that test every boundary.',
+          badge: '18+ · Savage & Personal',
+          desc: 'Player roasts, fucked-up confessions, dark humor, and choices that expose your priorities. Anyone can pass.',
         };
       case 'couples':
         return {
@@ -149,8 +150,8 @@ export const GameModeSelectScreen: React.FC<GameModeSelectScreenProps> = ({
 
     // On mobile, tap to play directly without needing the bottom start button!
     if (isMobile) {
-      if (cat === '18+' && !isAgeConfirmed) {
-        setPendingCategory('18+');
+      if (requiresAdultConfirmation(cat) && !isAgeConfirmed) {
+        setPendingCategory(cat);
         return;
       }
       triggerGameLaunch(cat);
@@ -163,15 +164,13 @@ export const GameModeSelectScreen: React.FC<GameModeSelectScreenProps> = ({
       const catToStart = pendingCategory;
       setSelectedCategory(catToStart);
       setPendingCategory(null);
-      if (isMobile) {
-        triggerGameLaunch(catToStart);
-      }
+      triggerGameLaunch(catToStart);
     }
   };
 
   const handleStartGame = () => {
-    if (selectedCategory === '18+' && !isAgeConfirmed) {
-      setPendingCategory('18+');
+    if (requiresAdultConfirmation(selectedCategory) && !isAgeConfirmed) {
+      setPendingCategory(selectedCategory);
       return;
     }
     triggerGameLaunch(selectedCategory);
@@ -179,6 +178,10 @@ export const GameModeSelectScreen: React.FC<GameModeSelectScreenProps> = ({
 
   const handleResumeSession = () => {
     if (!activeSession) return;
+    if (requiresAdultConfirmation(activeSession.category) && !isAgeConfirmed) {
+      setPendingCategory(activeSession.category);
+      return;
+    }
     soundEffects.playGameStart();
     onSelectCategory(activeSession.category, isProgressive);
   };

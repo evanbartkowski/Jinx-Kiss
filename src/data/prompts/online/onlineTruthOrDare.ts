@@ -20,13 +20,6 @@ const BASE_ONLINE_TRUTH_OR_DARE_PROMPTS: PromptItem[] = [
   { id: 'on-tod-ext-t-4', gameId: 'truth-or-dare', category: 'extreme', type: 'truth', playMode: 'online', text: "What is a secret about yourself that nobody in this voice channel knows and that would change how they view you?" },
 
   // ==========================================
-  // UNHINGED (Chaotic, absurd, unpredictability)
-  // ==========================================
-  { id: 'on-tod-unh-t-1', gameId: 'truth-or-dare', category: 'unhinged', type: 'truth', playMode: 'online', text: "What is the most chaotic unhinged internet rabbit hole you fell into between 3 AM and 5 AM?" },
-  { id: 'on-tod-unh-d-2', gameId: 'truth-or-dare', category: 'unhinged', type: 'dare', playMode: 'online', text: "Turn off all lights at your desk, shine your phone flashlight under your chin, and tell an unhinged 45-second ghost story." },
-  { id: 'on-tod-unh-t-3', gameId: 'truth-or-dare', category: 'unhinged', type: 'truth', playMode: 'online', text: "If you had to delete your hard drive or leak your Discord chat logs from the past year, which do you pick?" },
-
-  // ==========================================
   // COUPLES (Romantic, intimate remote connection)
   // ==========================================
   { id: 'on-tod-cpl-t-1', gameId: 'truth-or-dare', category: 'couples', type: 'truth', playMode: 'online', text: "What was the exact moment on a late-night call where you realized you had real feelings for me?" },
@@ -46,9 +39,6 @@ const BASE_ONLINE_TRUTH_OR_DARE_PROMPTS: PromptItem[] = [
   { id: 'on-tod-ext-t-7', gameId: 'truth-or-dare', category: 'extreme', type: 'truth', playMode: 'online', text: "What is a message you sent that you instantly regretted so much you considered faking your own death?" },
   { id: 'on-tod-ext-d-7', gameId: 'truth-or-dare', category: 'extreme', type: 'dare', playMode: 'online', text: "Open your camera roll on screen share and let the group pick one photo that you must post as your profile banner." },
   { id: 'on-tod-ext-d-8', gameId: 'truth-or-dare', category: 'extreme', type: 'dare', playMode: 'online', text: "Call someone in your contacts on speaker right now and say 'I don't have much time, they're watching me' and hang up." },
-  { id: 'on-tod-unh-d-5', gameId: 'truth-or-dare', category: 'unhinged', type: 'dare', playMode: 'online', text: "Change your Discord / call display name to 'Local Cryptid' and speak only in guttural goblin noises for 60 seconds." },
-  { id: 'on-tod-unh-t-6', gameId: 'truth-or-dare', category: 'unhinged', type: 'truth', playMode: 'online', text: "If an alien civilization demanded one person from this call as a test subject, who are you sacrificing and why?" },
-  { id: 'on-tod-unh-d-6', gameId: 'truth-or-dare', category: 'unhinged', type: 'dare', playMode: 'online', text: "Eat a raw slice of onion, a clove of garlic, or a spoonful of plain mayonnaise on webcam with zero flinching." },
   { id: 'on-tod-cpl-d-6', gameId: 'truth-or-dare', category: 'couples', type: 'dare', playMode: 'online', text: "Look straight into the lens, describe the exact moment you first knew you wanted to kiss me, and don't look away." },
 
   // 18+ ADDITIONS

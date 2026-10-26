@@ -32,7 +32,7 @@ Live Website: **jinxkiss.com**
 - **Easy**: Casual, lighthearted, funny icebreakers.
 - **Medium**: More personal, challenging, and embarrassing questions.
 - **Extreme**: Bold, intense dares and dilemmas.
-- **Unhinged**: Absurd scenarios, bizarre character challenges, and playful chaos.
+- **Unhinged**: Adults-only player roasts, dark humor, messy confessions, and brutal social choices.
 - **Couples**: Romantic, intimate, and relationship-oriented questions.
 - **18+**: Adults-only uncensored prompts (**requires age verification modal confirmation**).
 - **Spicy**: Flirty, magnetic, and provocative challenges.
@@ -135,7 +135,7 @@ Official cards are grouped by their actual game mechanics, category, and play mo
 - **Easy:** light conversation and low-pressure challenges.
 - **Medium:** personal stories and mild embarrassment.
 - **Extreme:** intense questions, difficult dilemmas, and bold challenges.
-- **Unhinged:** absurd scenarios and playful chaos.
+- **Unhinged:** adults-only roasts, dark social satire, hypocrisy, betrayal, and brutal dilemmas.
 - **Couples:** shared memories, affection, and relationship conversations.
 - **Spicy:** flirting and attraction without explicit adult content.
 - **18+:** explicit adult topics and mature nightlife stories.
@@ -146,8 +146,14 @@ Run `npm run test:prompts` to audit every game/category/mode combination and the
 
 ### Editorial content pass
 
-The official collection contains 2,078 standard cards, including 450 newly written spotlights, plus a separate rare-card pool. The editorial pass removed 4,707 weak, repetitive, or unsuitable legacy cards and added four original rare cards. Each game keeps all eight categories in both play formats; every online game has at least 100 distinct cards.
+The official collection contains 2,248 standard cards plus a separate rare-card pool. The editorial pass removed 4,707 weak, repetitive, or unsuitable legacy cards and added four original rare cards. Each game keeps all eight categories in both play formats; every online game has at least 100 distinct cards.
 
-Cards need a concrete incident, surprising choice, playable scene, or debate hook. Bare favorites, numbered variations, cosmetic rewordings, routine flirting tasks, and generic topic templates are excluded. Spicy uses non-explicit flirting; explicit legacy content stays in 18+. Category coverage and originality are checked alongside game formats. Small categories are curated for variety rather than padded to meet a global count.
+Cards need a concrete incident, surprising choice, playable scene, or debate hook. Bare favorites, numbered variations, cosmetic rewordings, routine flirting tasks, and generic topic templates are excluded. Spicy uses non-explicit flirting; adult content stays in the age-confirmed 18+ and Unhinged categories. Category coverage and originality are checked alongside game formats. Small categories are curated for variety rather than padded to meet a global count.
 
 Spotlight text lives in `src/data/prompts/editorialSpotlights.ts`. Append new seed rows to preserve the IDs of existing cards. The automated wording checks in `src/utils/promptQuality.ts` catch simple templates; editorial review remains necessary for tone and entertainment value.
+
+### Unhinged rewrite
+
+The old Unhinged standard and rare pools have been retired. `src/data/prompts/unhinged.ts` supplies 448 distinct cards (224 per play format) and eight rare cards. Every source game has 20 cards per format, with 24 in Truth or Dare split evenly between Truth and Dare. Chaos Mix derives its Unhinged rounds from these source games.
+
+The category focuses on player roasts, messy dating stories, hypocrisy, fake apologies, reputation disasters, dark humor, and uncomfortable choices. Players can pass. It requires adult confirmation when launching, resuming, opening a custom deck, or entering an adult party or multiplayer room. Clean and Kids pools and progression exclude it.

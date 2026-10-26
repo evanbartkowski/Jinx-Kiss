@@ -1,7 +1,10 @@
 import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { GameId, GameCategory, PartyModeConfig, PromptItem, MysteryCard, SecretMission, Achievement } from '../../types/game';
 import { GAMES_CONFIG } from '../../data/gamesConfig';
-import { getPartyCategories, getPartyPromptPool } from '../../utils/partyPrompts';
+import { getPartyCategories, getPartyPromptPool, getPartyProgressionLadder } from '../../utils/partyPrompts';
+import { useGameSettings } from '../../context/GameSettingsContext';
+import { partyRequiresAdultConfirmation } from '../../utils/contentPolicy';
+import { AgeConfirmationModal } from '../common/AgeConfirmationModal';
 import { MYSTERY_CARDS } from '../../data/mysteryCards';
 import { SECRET_MISSIONS } from '../../data/secretMissions';
 import { SpecialCard } from '../../types/specialCard';
@@ -45,6 +48,8 @@ interface PartyModeGameProps {
 }
 
 export const PartyModeGame: React.FC<PartyModeGameProps> = ({ config, onExit }) => {
+  const { isAgeConfirmed, confirmAge } = useGameSettings();
+  const awaitingAdultConfirmation = partyRequiresAdultConfirmation(config) && !isAgeConfirmed;
   const [currentRound, setCurrentRound] = useState(1);
   const [activeGameId, setActiveGameId] = useState<GameId>(config.selectedGames[0] || 'truth-or-dare');
   const [activePlayerIndex, setActivePlayerIndex] = useState(0);
@@ -120,6 +125,7 @@ export const PartyModeGame: React.FC<PartyModeGameProps> = ({ config, onExit }) 
 
   // Initialize first prompt & auto-save session
   useEffect(() => {
+    if (awaitingAdultConfirmation) return;
     const initialPrompt = pickPromptForGame(activeGameId);
     setCurrentPrompt(initialPrompt);
 
@@ -141,11 +147,11 @@ export const PartyModeGame: React.FC<PartyModeGameProps> = ({ config, onExit }) 
       missionsMap[p] = SECRET_MISSIONS[idx % SECRET_MISSIONS.length];
     });
     setAssignedMissions(missionsMap);
-  }, []);
+  }, [awaitingAdultConfirmation]);
 
   // Timer countdown hook
   useEffect(() => {
-    if (config.timerSeconds === 0 || isTimerPaused || showChaosWheel || activeMysteryCard || showPartyRecap) return;
+    if (awaitingAdultConfirmation || config.timerSeconds === 0 || isTimerPaused || showChaosWheel || activeMysteryCard || showPartyRecap) return;
 
     if (timerLeft <= 0) {
       soundEffects.playBuzzer();
@@ -166,7 +172,7 @@ export const PartyModeGame: React.FC<PartyModeGameProps> = ({ config, onExit }) 
     }, 1000);
 
     return () => clearInterval(interval);
-  }, [timerLeft, isTimerPaused, showChaosWheel, activeMysteryCard, showPartyRecap, config.timerSeconds]);
+  }, [timerLeft, isTimerPaused, showChaosWheel, activeMysteryCard, showPartyRecap, config.timerSeconds, awaitingAdultConfirmation]);
 
   // Turn rotation & game advancement
   const handleNextRound = (awardCurrentPlayerPoints = false) => {
@@ -212,10 +218,7 @@ export const PartyModeGame: React.FC<PartyModeGameProps> = ({ config, onExit }) 
     // Advance progressive difficulty
     let activeCat = progressiveState.currentCategory;
     if (progressiveState.enabled) {
-      const ladder: GameCategory[] | undefined = config.contentBoundary === 'kids-only' ? ['kids']
-        : config.contentBoundary === 'adults-only' ? ['18+']
-        : config.contentBoundary === 'clean' ? ['kids', 'easy', 'medium', 'couples', 'extreme', 'unhinged'] : undefined;
-      const { newState, didLevelUp, newCategory } = advanceProgressiveRound(progressiveState, ladder);
+      const { newState, didLevelUp, newCategory } = advanceProgressiveRound(progressiveState, getPartyProgressionLadder(config));
       setProgressiveState(newState);
       if (didLevelUp) {
         setLevelUpInfo({ newCat: newCategory, prevCat: activeCat });
@@ -281,6 +284,10 @@ export const PartyModeGame: React.FC<PartyModeGameProps> = ({ config, onExit }) 
   const activeMetadata = GAMES_CONFIG[activeGameId] || GAMES_CONFIG['truth-or-dare'];
   const activeMission = assignedMissions[activePlayer];
   const isLegendary = isPromptLegendary(currentPrompt);
+
+  if (awaitingAdultConfirmation) {
+    return <AgeConfirmationModal isOpen onConfirm={confirmAge} onCancel={onExit} />;
+  }
 
   if (showPartyRecap) {
     return (

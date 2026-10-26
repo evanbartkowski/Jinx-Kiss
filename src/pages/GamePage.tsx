@@ -9,6 +9,8 @@ import { useGameSettings } from '../context/GameSettingsContext';
 import { GameShell } from '../components/games/GameShell';
 import { GameModeSelectScreen } from '../components/games/GameModeSelectScreen';
 import { filterPromptsForScope } from '../utils/promptValidation';
+import { requiresAdultConfirmation } from '../utils/contentPolicy';
+import { AgeConfirmationModal } from '../components/common/AgeConfirmationModal';
 
 // Game implementations
 import { TruthOrDareGame } from '../components/games/TruthOrDareGame';
@@ -31,7 +33,7 @@ interface GamePageProps {
 }
 
 export const GamePage: React.FC<GamePageProps> = ({ gameId, customDeck, onExit }) => {
-  const { selectedCategory, setSelectedCategory, savedPlayers, setSavedPlayers, playMode, setPlayMode } = useGameSettings();
+  const { selectedCategory, setSelectedCategory, savedPlayers, setSavedPlayers, playMode, setPlayMode, isAgeConfirmed, confirmAge } = useGameSettings();
   const [prompts, setPrompts] = useState<PromptItem[]>([]);
   const [loadedScope, setLoadedScope] = useState<string | null>(null);
   const [gameKey, setGameKey] = useState(0); // For clean restart
@@ -157,6 +159,10 @@ export const GamePage: React.FC<GamePageProps> = ({ gameId, customDeck, onExit }
         onBack={handleExitGame}
       />
     );
+  }
+
+  if (requiresAdultConfirmation(selectedCategory) && !isAgeConfirmed) {
+    return <AgeConfirmationModal isOpen onConfirm={confirmAge} onCancel={handleExitGame} />;
   }
 
   const renderActiveGame = () => {

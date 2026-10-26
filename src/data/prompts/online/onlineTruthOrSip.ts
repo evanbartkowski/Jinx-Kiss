@@ -69,18 +69,6 @@ const BASE_ONLINE_TRUTH_OR_SIP_PROMPTS: PromptItem[] = [
   },
 
   // ==========================================
-  // UNHINGED (Chaotic, wild confessions)
-  // ==========================================
-  {
-    id: 'on-tos-unh-1',
-    gameId: 'truth-or-sip',
-    category: 'unhinged',
-    playMode: 'online',
-    text: "Have you ever taken your laptop or phone into the bathroom during a voice call and accidentally unmuted?",
-    forfeit: "Take 2 sips"
-  },
-
-  // ==========================================
   // COUPLES (Vulnerable, intimate remote romance)
   // ==========================================
   {
@@ -209,22 +197,6 @@ const BASE_ONLINE_TRUTH_OR_SIP_PROMPTS: PromptItem[] = [
     category: 'extreme',
     playMode: 'online',
     text: "What is the most expensive mistake you've made while buying something online while drunk or tired?",
-    forfeit: "Take 3 penalty sips"
-  },
-  {
-    id: 'on-tos-unh-6',
-    gameId: 'truth-or-sip',
-    category: 'unhinged',
-    playMode: 'online',
-    text: "What is the weirdest thing you have said out loud to yourself when you thought your microphone was muted?",
-    forfeit: "Take 3 penalty sips"
-  },
-  {
-    id: 'on-tos-unh-8',
-    gameId: 'truth-or-sip',
-    category: 'unhinged',
-    playMode: 'online',
-    text: "What is a bizarre habit you have when you're completely alone at your computer that would shock people?",
     forfeit: "Take 3 penalty sips"
   },
 
@@ -370,24 +342,6 @@ const BASE_ONLINE_TRUTH_OR_SIP_PROMPTS: PromptItem[] = [
     playMode: 'online',
     text: "Who on this call would you be the most horrified to have look through your saved photo album?",
     forfeit: "Take 3 heavy penalty sips"
-  },
-
-  // Unhinged:
-  {
-    id: 'on-tos-unh-9',
-    gameId: 'truth-or-sip',
-    category: 'unhinged',
-    playMode: 'online',
-    text: "What is the most unhinged lie you ever told in an online argument just to prove a point?",
-    forfeit: "Take 2 penalty sips"
-  },
-  {
-    id: 'on-tos-unh-11',
-    gameId: 'truth-or-sip',
-    category: 'unhinged',
-    playMode: 'online',
-    text: "What is a bizarre food concoction you eat when you are gaming alone at 2 AM that would appall a chef?",
-    forfeit: "Take 2 penalty sips"
   },
 
   // Couples:
