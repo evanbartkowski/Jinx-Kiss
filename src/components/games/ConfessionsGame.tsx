@@ -1,3 +1,5 @@
+import { RemovedPrompt } from '../common/RemovedPrompt';
+import { useLivePromptState } from '../../hooks/useLivePrompt';
 import React, { useState, useEffect } from 'react';
 import { PromptItem } from '../../types/game';
 import { CardRatingBar } from '../common/CardRatingBar';
@@ -23,7 +25,7 @@ export const ConfessionsGame: React.FC<ConfessionsGameProps> = ({ prompts, playe
   const activePlayers = players && players.length >= 2 ? players : [];
   const hasPlayers = activePlayers.length >= 2;
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [activePrompt, setActivePrompt] = useState<PromptItem>(() => {
+  const [activePrompt, setActivePrompt] = useLivePromptState<PromptItem>(() => {
     const first = prompts[0] || { id: 'cf-default', gameId: 'confessions', category: 'medium', text: 'Share a secret nobody in this game or call knows about you.' };
     return rollForLegendaryCard(first, first.category, 'confessions', 0.02, first.playMode);
   });
@@ -36,12 +38,6 @@ export const ConfessionsGame: React.FC<ConfessionsGameProps> = ({ prompts, playe
 
   const isLegendary = isPromptLegendary(activePrompt);
 
-  useEffect(() => {
-    if (prompts.length > 0) {
-      const p = prompts[currentIndex] || prompts[0];
-      setActivePrompt(rollForLegendaryCard(p, p.category, 'confessions', 0.02, p?.playMode));
-    }
-  }, [currentIndex, prompts]);
 
   useEffect(() => {
     if (activePrompt && isLegendary) {
@@ -113,6 +109,8 @@ export const ConfessionsGame: React.FC<ConfessionsGameProps> = ({ prompts, playe
   };
 
   const activeConfession = anonymousSubmissions[activeRevealedIdx];
+
+  if (!activePrompt) return <RemovedPrompt onNext={handleNextConfession} />;
 
   return (
     <div className="w-full max-w-5xl xl:max-w-6xl flex flex-col items-center gap-6 animate-fade-in select-none">

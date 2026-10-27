@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { GameId, GameCategory, PromptItem } from '../types/game';
 import { CustomDeck } from '../types/deck';
 import { GAMES_CONFIG } from '../data/gamesConfig';
@@ -11,6 +11,10 @@ import { GameModeSelectScreen } from '../components/games/GameModeSelectScreen';
 import { filterPromptsForScope } from '../utils/promptValidation';
 import { requiresAdultConfirmation } from '../utils/contentPolicy';
 import { AgeConfirmationModal } from '../components/common/AgeConfirmationModal';
+import { PlayingDeckProvider } from '../context/PlayingDeckContext';
+import { usePlayingDeckUpdates } from '../hooks/usePlayingDeckUpdates';
+import { usePromptContentVersion } from '../hooks/useLivePrompt';
+import { getCachedPromptOverrides, mergePromptOverrides } from '../utils/promptOverrides';
 
 // Game implementations
 import { TruthOrDareGame } from '../components/games/TruthOrDareGame';
@@ -32,9 +36,21 @@ interface GamePageProps {
   onExit: () => void;
 }
 
-export const GamePage: React.FC<GamePageProps> = ({ gameId, customDeck, onExit }) => {
+export const GamePage: React.FC<GamePageProps> = ({ gameId, customDeck: initialDeck, onExit }) => {
+  const customDeck = usePlayingDeckUpdates(initialDeck);
+  const contentVersion = usePromptContentVersion();
   const { selectedCategory, setSelectedCategory, savedPlayers, setSavedPlayers, playMode, setPlayMode, isAgeConfirmed, confirmAge } = useGameSettings();
-  const [prompts, setPrompts] = useState<PromptItem[]>([]);
+  const [loadedPrompts, setPrompts] = useState<PromptItem[]>([]);
+  const prompts = useMemo(() => {
+    if (customDeck) {
+      const mode = customDeck.playMode || 'in-person';
+      const cards = customDeck.cards.map(card => ({ ...card, playMode: card.playMode || mode, ...(gameId === 'chaos-mix' && card.gameId !== 'chaos-mix' ? { originGameId: card.gameId, gameId } : {}) }));
+      return filterPromptsForScope(cards, gameId, selectedCategory, mode);
+    }
+    const pool = mergePromptOverrides(loadedPrompts, getCachedPromptOverrides(), playMode);
+    const scoped = gameId === 'chaos-mix' ? pool.map(card => ({ ...card, originGameId: card.originGameId || card.gameId, gameId })) : pool;
+    return filterPromptsForScope(scoped, gameId, selectedCategory, playMode);
+  }, [loadedPrompts, customDeck, gameId, selectedCategory, playMode, contentVersion]);
   const [loadedScope, setLoadedScope] = useState<string | null>(null);
   const [gameKey, setGameKey] = useState(0); // For clean restart
   const [isSelectingMode, setIsSelectingMode] = useState<boolean>(!customDeck);
@@ -133,7 +149,7 @@ export const GamePage: React.FC<GamePageProps> = ({ gameId, customDeck, onExit }
 
     loadPrompts();
     return () => { cancelled = true; };
-  }, [gameId, selectedCategory, customDeck, gameKey, playMode]);
+  }, [gameId, selectedCategory, customDeck?.id, gameKey, playMode]);
 
   const handleRestart = () => {
     setGameKey(prev => prev + 1);
@@ -215,7 +231,7 @@ export const GamePage: React.FC<GamePageProps> = ({ gameId, customDeck, onExit }
   };
 
   return (
-    <GameShell
+    <PlayingDeckProvider value={customDeck || undefined}><GameShell
       metadata={metadata}
       category={selectedCategory}
       onCategoryChange={setSelectedCategory}
@@ -228,6 +244,6 @@ export const GamePage: React.FC<GamePageProps> = ({ gameId, customDeck, onExit }
       supportsNonalcoholic={gameId === 'truth-or-sip' || gameId === 'point-and-drink'}
     >
       {renderActiveGame()}
-    </GameShell>
+    </GameShell></PlayingDeckProvider>
   );
 };

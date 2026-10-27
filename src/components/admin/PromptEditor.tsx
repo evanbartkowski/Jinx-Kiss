@@ -9,9 +9,11 @@ interface Props {
   fixedMode?: 'online' | 'in-person';
   onSave: (card: PromptItem) => Promise<void>;
   onClose: () => void;
+  saveLabel?: string;
+  notice?: string;
 }
 
-export function PromptEditor({ initial, fixedGame, fixedMode, onSave, onClose }: Props) {
+export function PromptEditor({ initial, fixedGame, fixedMode, onSave, onClose, saveLabel = 'Save card', notice }: Props) {
   const titleId = useId();
   const [card, setCard] = useState<PromptItem>({
     id: crypto.randomUUID(),
@@ -73,6 +75,7 @@ export function PromptEditor({ initial, fixedGame, fixedMode, onSave, onClose }:
           {initial?.id ? 'Edit card' : 'Add card'}
         </h3>
         <form onSubmit={save} className="space-y-4">
+          {notice && <p className="text-sm text-zinc-400">{notice}</p>}
           <div className="grid grid-cols-2 gap-3">
             <label className="text-xs text-zinc-300">
               Game
@@ -222,7 +225,7 @@ export function PromptEditor({ initial, fixedGame, fixedMode, onSave, onClose }:
               disabled={saving}
               className="px-5 py-2 rounded-xl bg-brand-pink text-white font-bold disabled:opacity-50"
             >
-              {saving ? 'Saving…' : 'Save card'}
+            {saving ? 'Saving…' : saveLabel}
             </button>
           </div>
         </form>

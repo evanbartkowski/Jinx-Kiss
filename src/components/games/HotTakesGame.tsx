@@ -1,3 +1,5 @@
+import { RemovedPrompt } from '../common/RemovedPrompt';
+import { useLivePromptState } from '../../hooks/useLivePrompt';
 import React, { useState, useEffect } from 'react';
 import { PromptItem } from '../../types/game';
 import { votingService, VoteStats } from '../../services/votingService';
@@ -17,7 +19,7 @@ export const HotTakesGame: React.FC<HotTakesGameProps> = ({ prompts, players }) 
   const [currentIndex, setCurrentIndex] = useState(0);
   const [vote, setVote] = useState<'agree' | 'disagree' | null>(null);
   const [stats, setStats] = useState<VoteStats | null>(null);
-  const [activePrompt, setActivePrompt] = useState<PromptItem>(() => {
+  const [activePrompt, setActivePrompt] = useLivePromptState<PromptItem>(() => {
     const initial = prompts[0] || {
       id: 'init-ht',
       gameId: 'hot-takes',
@@ -33,10 +35,10 @@ export const HotTakesGame: React.FC<HotTakesGameProps> = ({ prompts, players }) 
     if (isLegendary) {
       triggerLegendaryCardEffects(activePrompt);
     }
-  }, [activePrompt.id]);
+  }, [activePrompt?.id]);
 
   const handleVote = async (choice: 'agree' | 'disagree') => {
-    if (vote) return;
+    if (!activePrompt || vote) return;
     setVote(choice);
     soundEffects.playVoteSubmit();
 
@@ -66,6 +68,8 @@ export const HotTakesGame: React.FC<HotTakesGameProps> = ({ prompts, players }) 
     const rolled = rollForLegendaryCard(nextP, nextP.category || 'medium', 'hot-takes', 0.02, nextP?.playMode);
     setActivePrompt(rolled);
   };
+
+  if (!activePrompt) return <RemovedPrompt onNext={nextCard} />;
 
   return (
     <div className="w-full max-w-5xl xl:max-w-6xl flex flex-col items-center gap-6 animate-fade-in select-none">

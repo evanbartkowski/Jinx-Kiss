@@ -1,3 +1,4 @@
+import { useLivePromptState } from '../../hooks/useLivePrompt';
 import React, { useState } from 'react';
 import { PromptItem } from '../../types/game';
 import { CardRatingBar } from '../common/CardRatingBar';
@@ -14,7 +15,7 @@ interface TruthOrDareGameProps {
 
 export const TruthOrDareGame: React.FC<TruthOrDareGameProps> = ({ prompts, players }) => {
   const [selectedType, setSelectedType] = useState<'truth' | 'dare'>('truth');
-  const [currentPrompt, setCurrentPrompt] = useState<PromptItem | null>(null);
+  const [currentPrompt, setCurrentPrompt] = useLivePromptState<PromptItem | null>(null);
   const [usedPromptIds, setUsedPromptIds] = useState<Set<string>>(new Set());
   const [playerIndex, setPlayerIndex] = useState(0);
   const [, setIsRevealed] = useState(false);

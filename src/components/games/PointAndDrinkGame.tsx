@@ -1,3 +1,5 @@
+import { RemovedPrompt } from '../common/RemovedPrompt';
+import { useLivePromptState } from '../../hooks/useLivePrompt';
 import React, { useState, useEffect } from 'react';
 import { PromptItem } from '../../types/game';
 import { useGameSettings } from '../../context/GameSettingsContext';
@@ -20,7 +22,7 @@ export const PointAndDrinkGame: React.FC<PointAndDrinkGameProps> = ({ prompts, p
   const [countdown, setCountdown] = useState<number | null>(null);
   const [tallies, setTallies] = useState<Record<string, number>>({});
   const [isRevealed, setIsRevealed] = useState(false);
-  const [activePrompt, setActivePrompt] = useState<PromptItem>(() => {
+  const [activePrompt, setActivePrompt] = useLivePromptState<PromptItem>(() => {
     const initial = prompts[0] || {
       id: 'init-pad',
       gameId: 'point-and-drink',
@@ -36,7 +38,7 @@ export const PointAndDrinkGame: React.FC<PointAndDrinkGameProps> = ({ prompts, p
     if (isLegendary) {
       triggerLegendaryCardEffects(activePrompt);
     }
-  }, [activePrompt.id]);
+  }, [activePrompt?.id]);
 
   const activePlayers = players;
   const hasPlayers = activePlayers.length >= 2;
@@ -94,6 +96,8 @@ export const PointAndDrinkGame: React.FC<PointAndDrinkGameProps> = ({ prompts, p
   // Find player with max votes
   const sortedWinners = Object.entries(tallies).sort((a, b) => b[1] - a[1]);
   const leader = sortedWinners[0];
+
+  if (!activePrompt) return <RemovedPrompt onNext={nextCard} />;
 
   return (
     <div className="w-full max-w-5xl xl:max-w-6xl flex flex-col items-center gap-6 animate-fade-in select-none">

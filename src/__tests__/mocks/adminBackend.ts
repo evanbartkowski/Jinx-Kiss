@@ -7,6 +7,7 @@ vi.mock('firebase/firestore', async (importOriginal) => {
   const actual = await importOriginal<typeof import('firebase/firestore')>();
   return {
     ...actual,
+    onSnapshot: vi.fn(() => () => {}),
     setDoc: vi.fn(async (ref, data) => {
       backend.documents.set(ref.path, structuredClone(data));
     }),

@@ -1,3 +1,5 @@
+import { RemovedPrompt } from '../common/RemovedPrompt';
+import { useLivePromptState } from '../../hooks/useLivePrompt';
 import React, { useState, useEffect } from 'react';
 import { PromptItem } from '../../types/game';
 import { CardRatingBar } from '../common/CardRatingBar';
@@ -16,7 +18,7 @@ export const NeverHaveIEverGame: React.FC<NeverHaveIEverGameProps> = ({ prompts,
   const [usedIndices, setUsedIndices] = useState<number[]>([]);
   const [playerLives, setPlayerLives] = useState<Record<string, number>>({});
   const [isCompleting, setIsCompleting] = useState(false);
-  const [activePrompt, setActivePrompt] = useState<PromptItem>(() => {
+  const [activePrompt, setActivePrompt] = useLivePromptState<PromptItem>(() => {
     const initial = prompts[0] || {
       id: 'init-nhie',
       gameId: 'never-have-i-ever',
@@ -39,7 +41,7 @@ export const NeverHaveIEverGame: React.FC<NeverHaveIEverGameProps> = ({ prompts,
     if (isLegendary) {
       triggerLegendaryCardEffects(activePrompt);
     }
-  }, [activePrompt.id]);
+  }, [activePrompt?.id]);
 
   const handleComplete = () => {
     if (isCompleting) return;
@@ -72,6 +74,8 @@ export const NeverHaveIEverGame: React.FC<NeverHaveIEverGameProps> = ({ prompts,
       [playerName]: Math.max(0, (prev[playerName] || 5) - 1),
     }));
   };
+
+  if (!activePrompt) return <RemovedPrompt onNext={handleComplete} />;
 
   return (
     <div className="w-full max-w-5xl xl:max-w-6xl flex flex-col items-center gap-6 animate-fade-in select-none">

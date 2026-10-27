@@ -26,6 +26,7 @@ import { SEED_COMMUNITY_DECKS } from '../data/communityDecksSeed';
 import { LEGENDARY_CARDS } from '../data/prompts/legendaryCards';
 import { ONLINE_LEGENDARY_CARDS } from '../data/prompts/online/onlineLegendaryCards';
 import { getCachedPromptOverrides, cachePromptOverrides } from '../utils/promptOverrides';
+import { cachePlayingDeck } from '../utils/playingDeckUpdates';
 
 const LOCAL_USERS_KEY = 'jinxkiss_local_users_v1';
 
@@ -154,9 +155,9 @@ export class AdminService {
     if (includeRare)
       (playMode === 'online' ? ONLINE_LEGENDARY_CARDS : LEGENDARY_CARDS).forEach((p) => merged.set(p.id, p));
     for (const override of overrides) {
-      merged.delete(override.id);
       if ((override.playMode || 'in-person') === playMode && (includeRare || !override.isLegendary))
         merged.set(override.id, override);
+      else merged.delete(override.id);
     }
     let prompts = Array.from(merged.values());
     if (gameId === 'chaos-mix') {
@@ -282,7 +283,23 @@ export class AdminService {
     await setDoc(doc(db, 'custom_decks', deckId), this.withoutUndefined(updated));
     const local = JSON.parse(localStorage.getItem('jinxkiss_local_decks_v1') || '[]') as CustomDeck[];
     localStorage.setItem('jinxkiss_local_decks_v1', JSON.stringify([...local.filter((d) => d.id !== deckId), updated]));
+    cachePlayingDeck(updated);
     return updated;
+  }
+
+  async savePlayingPrompt(prompt: PromptItem, deckId?: string): Promise<void> {
+    const source = { ...prompt, gameId: prompt.originGameId || prompt.gameId, originGameId: undefined };
+    if (!deckId) { await this.updateOfficialPrompt(source.id, source); return; }
+    const deck = (await this.getAllDecksForModeration()).find(item => item.id === deckId);
+    if (!deck || !deck.cards.some(card => card.id === source.id)) throw new Error('This card is no longer in the deck.');
+    await this.updateManagedDeck(deckId, { cards: deck.cards.map(card => card.id === source.id ? source : card) });
+  }
+
+  async removePlayingPrompt(prompt: PromptItem, deckId?: string): Promise<void> {
+    if (!deckId) { await this.deleteOfficialPrompt(prompt.id); return; }
+    const deck = (await this.getAllDecksForModeration()).find(item => item.id === deckId);
+    if (!deck) throw new Error('Deck not found.');
+    await this.updateManagedDeck(deckId, { cards: deck.cards.filter(card => card.id !== prompt.id) });
   }
 
   async getUsers(): Promise<UserProfile[]> {

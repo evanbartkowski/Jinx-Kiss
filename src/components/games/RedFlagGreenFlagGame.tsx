@@ -1,3 +1,5 @@
+import { RemovedPrompt } from '../common/RemovedPrompt';
+import { useLivePromptState } from '../../hooks/useLivePrompt';
 import React, { useState, useEffect } from 'react';
 import { PromptItem } from '../../types/game';
 import { CardRatingBar } from '../common/CardRatingBar';
@@ -15,7 +17,7 @@ interface RedFlagGreenFlagGameProps {
 export const RedFlagGreenFlagGame: React.FC<RedFlagGreenFlagGameProps> = ({ prompts, players }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedFlag, setSelectedFlag] = useState<'red' | 'green' | 'depends' | null>(null);
-  const [activePrompt, setActivePrompt] = useState<PromptItem>(() => {
+  const [activePrompt, setActivePrompt] = useLivePromptState<PromptItem>(() => {
     const initial = prompts[0] || {
       id: 'init-rf',
       gameId: 'red-flag-green-flag',
@@ -31,7 +33,7 @@ export const RedFlagGreenFlagGame: React.FC<RedFlagGreenFlagGameProps> = ({ prom
     if (isLegendary) {
       triggerLegendaryCardEffects(activePrompt);
     }
-  }, [activePrompt.id]);
+  }, [activePrompt?.id]);
 
   const handleVote = (choice: 'red' | 'green' | 'depends') => {
     setSelectedFlag(choice);
@@ -53,6 +55,8 @@ export const RedFlagGreenFlagGame: React.FC<RedFlagGreenFlagGameProps> = ({ prom
     const rolled = rollForLegendaryCard(nextP, nextP.category || 'medium', 'red-flag-green-flag', 0.02, nextP?.playMode);
     setActivePrompt(rolled);
   };
+
+  if (!activePrompt) return <RemovedPrompt onNext={nextCard} />;
 
   return (
     <div className="w-full max-w-5xl xl:max-w-6xl flex flex-col items-center gap-6 animate-fade-in select-none">

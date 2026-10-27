@@ -1,3 +1,5 @@
+import { RemovedPrompt } from '../common/RemovedPrompt';
+import { useLivePromptState } from '../../hooks/useLivePrompt';
 import React, { useState, useEffect } from 'react';
 import { PromptItem } from '../../types/game';
 import { CardRatingBar } from '../common/CardRatingBar';
@@ -14,7 +16,7 @@ interface HotSeatGameProps {
 
 export const HotSeatGame: React.FC<HotSeatGameProps> = ({ prompts, players }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [activePrompt, setActivePrompt] = useState<PromptItem>(() => {
+  const [activePrompt, setActivePrompt] = useLivePromptState<PromptItem>(() => {
     const first = prompts[0] || { id: 'hs-default', gameId: 'hot-seat', category: 'medium', text: 'Confess the most questionable thing currently in your search history.' };
     return rollForLegendaryCard(first, first.category, 'hot-seat', 0.02, first.playMode);
   });
@@ -91,6 +93,8 @@ export const HotSeatGame: React.FC<HotSeatGameProps> = ({ prompts, players }) =>
 
     return () => clearInterval(interval);
   }, [isTimerRunning, timerSeconds]);
+
+  if (!activePrompt) return <RemovedPrompt onNext={nextQuestion} />;
 
   return (
     <div className="w-full max-w-5xl xl:max-w-6xl flex flex-col items-center gap-6 animate-fade-in select-none">

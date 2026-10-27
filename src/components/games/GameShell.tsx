@@ -50,7 +50,7 @@ export const GameShell: React.FC<GameShellProps> = ({
     <div 
       className="relative w-full min-h-[calc(100vh-5rem)] flex flex-col justify-between py-4 px-4 sm:px-8 xl:px-12 overflow-hidden"
       style={{
-        background: `radial-gradient(circle at 50% 10%, ${metadata.themeColor}22 0%, rgba(5,5,5,0) 60%), radial-gradient(circle at 80% 80%, ${metadata.themeColor}12 0%, rgba(5,5,5,0) 50%), #050505`,
+        background: `radial-gradient(circle at 50% 10%, ${metadata.themeColor}22 0%, rgba(5,5,5,0) 60%), radial-gradient(circle at 80% 80%, ${metadata.themeColor}12 0%, rgba(5,5,5,0) 50%), rgba(5,5,5,0.35)`,
       }}
     >
       {/* Dynamic Animated Ambient Neon Orbs */}

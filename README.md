@@ -62,6 +62,8 @@ Live Website: **jinxkiss.com**
 - Browser storage cannot grant admin permissions. Firebase rules enforce all cloud access.
 - The configured initial password works immediately; password changes are available from the account page.
 
+During play, the signed-in admin can choose **Edit prompt** below a card, then **Save permanently**. Official edits update the source card, including when drawn in Chaos Mix; custom-deck edits stay within that deck. Saved changes update active cards in other browsers without restarting their rounds, and edited cards keep their deck position after reloading.
+
 ### Admin Dashboard Sections (`#/admin`)
 1. **Overview**: Total users, total custom decks, total prompt submissions, pending submissions, approved prompts, rejected prompts.
 2. **Prompt Moderation**: Review pending community submissions, view game & category, approve, reject (with mandatory reason), or edit and approve. Approved prompts immediately appear in the active game pool!

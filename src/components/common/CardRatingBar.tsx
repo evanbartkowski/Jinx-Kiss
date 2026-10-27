@@ -6,6 +6,7 @@ import { soundEffects } from '../../utils/audio';
 import { useToast } from '../../context/ToastContext';
 import { ReportCardModal } from './ReportCardModal';
 import { ThumbsUp, ThumbsDown, Heart, Flag } from 'lucide-react';
+import { AdminPromptControls } from '../admin/AdminPromptControls';
 
 interface CardRatingBarProps {
   prompt: PromptItem;
@@ -36,7 +37,7 @@ export const CardRatingBar: React.FC<CardRatingBarProps> = ({ prompt }) => {
   };
 
   return (
-    <div className="flex items-center justify-center gap-2 pt-3 border-t border-white/[0.08]">
+    <div className="flex flex-wrap items-center justify-center gap-2 pt-3 border-t border-white/[0.08]">
       {/* Favorite Button */}
       <button
         type="button"
@@ -93,6 +94,7 @@ export const CardRatingBar: React.FC<CardRatingBarProps> = ({ prompt }) => {
       </button>
 
       {/* Comprehensive Report Modal */}
+      <AdminPromptControls prompt={prompt} />
       <ReportCardModal
         isOpen={showReportModal}
         onClose={() => setShowReportModal(false)}

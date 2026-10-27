@@ -1,3 +1,5 @@
+import { RemovedPrompt } from '../common/RemovedPrompt';
+import { useLivePromptState } from '../../hooks/useLivePrompt';
 import React, { useState, useEffect } from 'react';
 import { PromptItem } from '../../types/game';
 import { votingService, VoteStats, SavedPlayerInfo } from '../../services/votingService';
@@ -56,7 +58,7 @@ export const WouldYouRatherGame: React.FC<WouldYouRatherGameProps> = ({ prompts,
   });
   const [tempNameInput, setTempNameInput] = useState(customName);
 
-  const [activePrompt, setActivePrompt] = useState<PromptItem>(() => {
+  const [activePrompt, setActivePrompt] = useLivePromptState<PromptItem>(() => {
     const initial = prompts[0] || {
       id: 'init',
       gameId: 'would-you-rather',
@@ -77,10 +79,11 @@ export const WouldYouRatherGame: React.FC<WouldYouRatherGameProps> = ({ prompts,
     if (isLegendary) {
       triggerLegendaryCardEffects(activePrompt);
     }
-  }, [activePrompt.id]);
+  }, [activePrompt?.id]);
 
   // Fetch latest stats for prompt on mount or prompt change
   useEffect(() => {
+    if (!activePrompt) return;
     let isMounted = true;
     votingService.fetchStats(activePrompt.id).then((freshStats) => {
       if (isMounted && selectedChoice) {
@@ -90,7 +93,7 @@ export const WouldYouRatherGame: React.FC<WouldYouRatherGameProps> = ({ prompts,
     return () => {
       isMounted = false;
     };
-  }, [activePrompt.id]);
+  }, [activePrompt?.id]);
 
   const handleSaveCustomName = () => {
     const trimmed = tempNameInput.trim() || 'You';
@@ -106,7 +109,7 @@ export const WouldYouRatherGame: React.FC<WouldYouRatherGameProps> = ({ prompts,
   };
 
   const handleVote = async (choice: 'A' | 'B') => {
-    if (selectedChoice || isSubmitting) return;
+    if (!activePrompt || selectedChoice || isSubmitting) return;
     setSelectedChoice(choice);
     setIsSubmitting(true);
     soundEffects.playVoteSubmit();
@@ -136,7 +139,7 @@ export const WouldYouRatherGame: React.FC<WouldYouRatherGameProps> = ({ prompts,
 
   // Allow other players in the party to cast their vote on the current card
   const handlePartyPlayerVote = async (playerName: string, choice: 'A' | 'B') => {
-    if (partyVotes[playerName]) return;
+    if (!activePrompt || partyVotes[playerName]) return;
     soundEffects.playVoteSubmit();
     setPartyVotes(prev => ({ ...prev, [playerName]: choice }));
     try {
@@ -166,6 +169,8 @@ export const WouldYouRatherGame: React.FC<WouldYouRatherGameProps> = ({ prompts,
   const votersA = voteStats?.recentVoters?.filter(v => v.choice === 'A') || [];
   const votersB = voteStats?.recentVoters?.filter(v => v.choice === 'B') || [];
   const allSavedPlayers: SavedPlayerInfo[] = votingService.getAllPlayers();
+
+  if (!activePrompt) return <RemovedPrompt onNext={nextCard} />;
 
   return (
     <div className="w-full max-w-5xl xl:max-w-6xl flex flex-col items-center gap-6">

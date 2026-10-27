@@ -60,6 +60,20 @@ describe('Persistent administrator content management', () => {
     ).toEqual({ ...card, isActive: true });
   });
 
+  for (const mode of ['in-person', 'online'] as const) {
+    it(`keeps edited ${mode} cards in their original position after a fresh load`, async () => {
+      const before = await admin.getAllPromptsForManager('hot-takes', 'easy', mode);
+      const first = before[0];
+      const text = 'Office printers deserve a tiny courtroom for paper jams.';
+      await admin.updateOfficialPrompt(first.id, { text });
+      localStorage.clear();
+      const after = await new AdminService().getAllPromptsForManager('hot-takes', 'easy', mode);
+      expect(after.map(p => p.id)).toEqual(before.map(p => p.id));
+      expect(after[0].text).toBe(text);
+      expect(getPromptsForGame('hot-takes', 'easy', mode)[0]).toMatchObject({ id: first.id, text });
+    });
+  }
+
   it('moves built-in cards between categories and modes without leaving the old copy', async () => {
     const original = getPromptsForGame('hot-seat', 'easy')[0];
     await admin.updateOfficialPrompt(original.id, { category: 'medium', playMode: 'online' });

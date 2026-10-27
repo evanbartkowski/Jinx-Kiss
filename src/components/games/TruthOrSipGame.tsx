@@ -1,3 +1,5 @@
+import { RemovedPrompt } from '../common/RemovedPrompt';
+import { useLivePromptState } from '../../hooks/useLivePrompt';
 import React, { useState, useEffect } from 'react';
 import { PromptItem } from '../../types/game';
 import { useGameSettings } from '../../context/GameSettingsContext';
@@ -18,7 +20,7 @@ export const TruthOrSipGame: React.FC<TruthOrSipGameProps> = ({ prompts, players
   const [currentIndex, setCurrentIndex] = useState(0);
   const [playerIndex, setPlayerIndex] = useState(0);
   const [choice, setChoice] = useState<'answer' | 'sip' | null>(null);
-  const [activePrompt, setActivePrompt] = useState<PromptItem>(() => {
+  const [activePrompt, setActivePrompt] = useLivePromptState<PromptItem>(() => {
     const initial = prompts[0] || {
       id: 'init-tos',
       gameId: 'truth-or-sip',
@@ -34,7 +36,7 @@ export const TruthOrSipGame: React.FC<TruthOrSipGameProps> = ({ prompts, players
     if (isLegendary) {
       triggerLegendaryCardEffects(activePrompt);
     }
-  }, [activePrompt.id]);
+  }, [activePrompt?.id]);
 
   const activePlayer = players.length > 0 ? players[playerIndex % players.length] : null;
 
@@ -64,6 +66,8 @@ export const TruthOrSipGame: React.FC<TruthOrSipGameProps> = ({ prompts, players
       setPlayerIndex(prev => (prev + 1) % players.length);
     }
   };
+
+  if (!activePrompt) return <RemovedPrompt onNext={nextCard} />;
 
   return (
     <div className="w-full max-w-5xl xl:max-w-6xl flex flex-col items-center gap-6 animate-fade-in select-none">

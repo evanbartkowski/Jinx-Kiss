@@ -1,3 +1,4 @@
+import { useLivePromptState } from '../../hooks/useLivePrompt';
 import React, { useState, useEffect, useRef } from 'react';
 import { PromptItem } from '../../types/game';
 import { CardRatingBar } from '../common/CardRatingBar';
@@ -48,7 +49,7 @@ export const DareRouletteGame: React.FC<DareRouletteGameProps> = ({
     isPlayerMode ? players : defaultSectors
   );
   const [selectedWinner, setSelectedWinner] = useState<string | null>(null);
-  const [currentDare, setCurrentDare] = useState<PromptItem | null>(null);
+  const [currentDare, setCurrentDare] = useLivePromptState<PromptItem | null>(null);
   const [isSpinning, setIsSpinning] = useState(false);
   const [rotationAngle, setRotationAngle] = useState(0);
   const [spinCount, setSpinCount] = useState(0);

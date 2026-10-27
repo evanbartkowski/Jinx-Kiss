@@ -1,3 +1,5 @@
+import { RemovedPrompt } from '../common/RemovedPrompt';
+import { useLivePromptState } from '../../hooks/useLivePrompt';
 import React, { useState, useEffect } from 'react';
 import { PromptItem, GameId } from '../../types/game';
 import { GAMES_CONFIG } from '../../data/gamesConfig';
@@ -30,7 +32,7 @@ interface ChaosMixGameProps {
 }
 
 export const ChaosMixGame: React.FC<ChaosMixGameProps> = ({ prompts, players }) => {
-  const [currentPrompt, setCurrentPrompt] = useState<PromptItem | null>(null);
+  const [currentPrompt, setCurrentPrompt] = useLivePromptState<PromptItem | null>(null);
   const [seenPromptIds, setSeenPromptIds] = useState<Set<string>>(new Set());
   const [playerIndex, setPlayerIndex] = useState(0);
   const [selectedChoice, setSelectedChoice] = useState<string | null>(null);
@@ -91,7 +93,7 @@ export const ChaosMixGame: React.FC<ChaosMixGameProps> = ({ prompts, players }) 
   };
 
   if (!currentPrompt) {
-    return <div className="text-zinc-400">Loading Chaos Mix...</div>;
+    return <RemovedPrompt onNext={nextCard} />;
   }
 
   const isLegendary = isPromptLegendary(currentPrompt);

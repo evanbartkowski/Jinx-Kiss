@@ -41,6 +41,7 @@ import {
   TrendingUp,
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
+import { useLivePromptState } from '../../hooks/useLivePrompt';
 
 interface PartyModeGameProps {
   config: PartyModeConfig;
@@ -53,7 +54,7 @@ export const PartyModeGame: React.FC<PartyModeGameProps> = ({ config, onExit }) 
   const [currentRound, setCurrentRound] = useState(1);
   const [activeGameId, setActiveGameId] = useState<GameId>(config.selectedGames[0] || 'truth-or-dare');
   const [activePlayerIndex, setActivePlayerIndex] = useState(0);
-  const [currentPrompt, setCurrentPrompt] = useState<PromptItem | null>(null);
+  const [currentPrompt, setCurrentPrompt] = useLivePromptState<PromptItem | null>(null);
 
   // Progressive Difficulty State
   const [progressiveState, setProgressiveState] = useState<ProgressiveDifficultyState>(() => ({
@@ -459,7 +460,7 @@ export const PartyModeGame: React.FC<PartyModeGameProps> = ({ config, onExit }) 
         </span>
 
         <p className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white leading-tight my-5 sm:my-8 max-w-4xl tracking-tight">
-          "{currentPrompt?.text}"
+          {currentPrompt ? `"${currentPrompt.text}"` : 'This card was removed. Skip to another prompt.'}
         </p>
 
         {/* Secret Mission Peek for Active Player */}

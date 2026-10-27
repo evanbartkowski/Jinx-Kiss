@@ -1,3 +1,5 @@
+import { RemovedPrompt } from '../common/RemovedPrompt';
+import { useLivePromptState } from '../../hooks/useLivePrompt';
 import React, { useState, useEffect } from 'react';
 import { PromptItem } from '../../types/game';
 import { useGameSettings } from '../../context/GameSettingsContext';
@@ -18,7 +20,7 @@ export const MostLikelyToGame: React.FC<MostLikelyToGameProps> = ({ prompts, pla
   const [currentIndex, setCurrentIndex] = useState(0);
   const [votes, setVotes] = useState<Record<string, number>>({});
   const [isRevealed, setIsRevealed] = useState(false);
-  const [activePrompt, setActivePrompt] = useState<PromptItem>(() => {
+  const [activePrompt, setActivePrompt] = useLivePromptState<PromptItem>(() => {
     const initial = prompts[0] || {
       id: 'init-mlt',
       gameId: 'most-likely-to',
@@ -34,7 +36,7 @@ export const MostLikelyToGame: React.FC<MostLikelyToGameProps> = ({ prompts, pla
     if (isLegendary) {
       triggerLegendaryCardEffects(activePrompt);
     }
-  }, [activePrompt.id]);
+  }, [activePrompt?.id]);
 
   const hasPlayers = players.length >= 2;
   const activePlayers = players;
@@ -78,6 +80,8 @@ export const MostLikelyToGame: React.FC<MostLikelyToGameProps> = ({ prompts, pla
   const totalVotes = Object.values(votes).reduce((sum, v) => sum + v, 0);
   const sortedLeaderboard = Object.entries(votes).sort((a, b) => b[1] - a[1]);
   const leader = sortedLeaderboard[0];
+
+  if (!activePrompt) return <RemovedPrompt onNext={handleNext} />;
 
   return (
     <div className="w-full max-w-5xl xl:max-w-6xl flex flex-col items-center gap-6 animate-fade-in select-none">

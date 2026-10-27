@@ -31,6 +31,8 @@ import {
   Globe,
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
+import { useLivePrompt } from '../hooks/useLivePrompt';
+import { AdminPromptControls } from '../components/admin/AdminPromptControls';
 
 interface MultiplayerRoomPageProps {
   initialRoomCode?: string;
@@ -49,6 +51,7 @@ export const MultiplayerRoomPage: React.FC<MultiplayerRoomPageProps> = ({
   const [playerId, setPlayerId] = useState<string>('');
   const [playerName, setPlayerName] = useState<string>('');
   const [room, setRoom] = useState<MultiplayerRoom | null>(null);
+  const currentPrompt = useLivePrompt(room?.currentPrompt);
   const [players, setPlayers] = useState<MultiplayerPlayer[]>([]);
 
   // UI state
@@ -666,8 +669,9 @@ export const MultiplayerRoomPage: React.FC<MultiplayerRoomPageProps> = ({
         </span>
 
         <p className="text-2xl sm:text-4xl md:text-5xl font-black text-white leading-relaxed my-6 max-w-4xl">
-          "{room?.currentPrompt?.text || 'Get ready for the next round...'}"
+          {currentPrompt ? `"${currentPrompt.text}"` : room?.currentPrompt ? 'This card was removed. The host can start the next round.' : 'Get ready for the next round...'}
         </p>
+        {currentPrompt && <AdminPromptControls prompt={currentPrompt} />}
 
         {/* If Results Revealed */}
         {room?.revealResults ? (
