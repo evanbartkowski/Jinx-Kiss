@@ -1,3 +1,4 @@
+import { useLegendaryDraw } from '../../hooks/useLegendaryDraw';
 import { RemovedPrompt } from '../common/RemovedPrompt';
 import { useLivePromptState } from '../../hooks/useLivePrompt';
 import React, { useState, useEffect } from 'react';
@@ -5,7 +6,7 @@ import { PromptItem } from '../../types/game';
 import { votingService, VoteStats, SavedPlayerInfo } from '../../services/votingService';
 import { CardRatingBar } from '../common/CardRatingBar';
 import { soundEffects } from '../../utils/audio';
-import { isPromptLegendary, rollForLegendaryCard, triggerLegendaryCardEffects } from '../../utils/legendaryCards';
+import { isPromptLegendary, triggerLegendaryCardEffects } from '../../utils/legendaryCards';
 import { LegendaryCardBadge } from '../common/LegendaryCardBadge';
 import { useAuth } from '../../context/AuthContext';
 import {
@@ -35,6 +36,7 @@ export const WouldYouRatherGame: React.FC<WouldYouRatherGameProps> = ({ prompts,
   const { currentUser } = useAuth();
   const authUser = currentUser?.username || null;
 
+  const rollForLegendaryCard = useLegendaryDraw();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [playerIndex, setPlayerIndex] = useState(0);
   const [selectedChoice, setSelectedChoice] = useState<'A' | 'B' | null>(null);

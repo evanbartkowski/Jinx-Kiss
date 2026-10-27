@@ -1,3 +1,4 @@
+import { useLegendaryDraw } from '../../hooks/useLegendaryDraw';
 import { RemovedPrompt } from '../common/RemovedPrompt';
 import { useLivePromptState } from '../../hooks/useLivePrompt';
 import React, { useState, useEffect } from 'react';
@@ -5,7 +6,7 @@ import { PromptItem, GameId } from '../../types/game';
 import { GAMES_CONFIG } from '../../data/gamesConfig';
 import { CardRatingBar } from '../common/CardRatingBar';
 import { soundEffects } from '../../utils/audio';
-import { isPromptLegendary, rollForLegendaryCard, triggerLegendaryCardEffects } from '../../utils/legendaryCards';
+import { isPromptLegendary, triggerLegendaryCardEffects } from '../../utils/legendaryCards';
 import { LegendaryCardBadge } from '../common/LegendaryCardBadge';
 import {
   Shuffle,
@@ -32,6 +33,7 @@ interface ChaosMixGameProps {
 }
 
 export const ChaosMixGame: React.FC<ChaosMixGameProps> = ({ prompts, players }) => {
+  const rollForLegendaryCard = useLegendaryDraw();
   const [currentPrompt, setCurrentPrompt] = useLivePromptState<PromptItem | null>(null);
   const [seenPromptIds, setSeenPromptIds] = useState<Set<string>>(new Set());
   const [playerIndex, setPlayerIndex] = useState(0);

@@ -1,9 +1,10 @@
+import { useLegendaryDraw } from '../../hooks/useLegendaryDraw';
 import { useLivePromptState } from '../../hooks/useLivePrompt';
 import React, { useState, useEffect, useRef } from 'react';
 import { PromptItem } from '../../types/game';
 import { CardRatingBar } from '../common/CardRatingBar';
 import { soundEffects } from '../../utils/audio';
-import { isPromptLegendary, rollForLegendaryCard, triggerLegendaryCardEffects } from '../../utils/legendaryCards';
+import { isPromptLegendary, triggerLegendaryCardEffects } from '../../utils/legendaryCards';
 import { LegendaryCardBadge } from '../common/LegendaryCardBadge';
 import { Disc3, RotateCcw, Flame, Sparkles } from 'lucide-react';
 import confetti from 'canvas-confetti';
@@ -45,6 +46,7 @@ export const DareRouletteGame: React.FC<DareRouletteGameProps> = ({
   const isOnline = prompts[0]?.playMode === 'online';
   const defaultSectors = isOnline ? ONLINE_DARE_SECTORS : DEFAULT_DARE_SECTORS;
   const isPlayerMode = players.length >= 2;
+  const rollForLegendaryCard = useLegendaryDraw();
   const [activeSegments, setActiveSegments] = useState<string[]>(
     isPlayerMode ? players : defaultSectors
   );

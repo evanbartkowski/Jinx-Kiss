@@ -10,6 +10,9 @@ import { cachePromptOverrides } from '../utils/promptOverrides';
 import { setDoc } from 'firebase/firestore';
 import { PromptItem } from '../types/game';
 import { CustomDeck } from '../types/deck';
+import { PlayingDeckProvider } from '../context/PlayingDeckContext';
+import { useLegendaryDraw } from '../hooks/useLegendaryDraw';
+import { LEGENDARY_CARDS } from '../data/prompts/legendaryCards';
 
 const account = vi.hoisted(() => ({ isAdmin: true }));
 vi.mock('../context/AuthContext', () => ({ useAuth: () => account }));
@@ -205,5 +208,20 @@ describe('Permanent prompt editing during a running game', () => {
     await start();
     expect(container.querySelector('[data-admin-prompt-id]')).toBeNull();
     expect(container.textContent).toContain(first.text);
+  });
+
+  it('never substitutes a global rare card into a custom deck', async () => {
+    const rare = LEGENDARY_CARDS[0];
+    const own = { ...rare, id: 'deck-owned-card', isLegendary: false, rarity: undefined };
+    function Draw() {
+      const draw = useLegendaryDraw();
+      return <p>{draw(own, own.category, own.gameId, 1, own.playMode).id}</p>;
+    }
+    const deck = { id: 'owned-deck', cards: [own] } as CustomDeck;
+    await act(async () => root.render(<PlayingDeckProvider value={deck}><Draw /></PlayingDeckProvider>));
+    expect(container.textContent).toBe(own.id);
+    await act(async () => root.render(<Draw />));
+    expect(container.textContent).not.toBe(own.id);
+    expect(LEGENDARY_CARDS.some(card => card.id === container.textContent)).toBe(true);
   });
 });

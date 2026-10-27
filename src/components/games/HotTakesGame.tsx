@@ -1,3 +1,4 @@
+import { useLegendaryDraw } from '../../hooks/useLegendaryDraw';
 import { RemovedPrompt } from '../common/RemovedPrompt';
 import { useLivePromptState } from '../../hooks/useLivePrompt';
 import React, { useState, useEffect } from 'react';
@@ -5,7 +6,7 @@ import { PromptItem } from '../../types/game';
 import { votingService, VoteStats } from '../../services/votingService';
 import { CardRatingBar } from '../common/CardRatingBar';
 import { soundEffects } from '../../utils/audio';
-import { isPromptLegendary, rollForLegendaryCard, triggerLegendaryCardEffects } from '../../utils/legendaryCards';
+import { isPromptLegendary, triggerLegendaryCardEffects } from '../../utils/legendaryCards';
 import { LegendaryCardBadge } from '../common/LegendaryCardBadge';
 import { ArrowRight, ThumbsUp, ThumbsDown, MessageSquare } from 'lucide-react';
 import confetti from 'canvas-confetti';
@@ -16,6 +17,7 @@ interface HotTakesGameProps {
 }
 
 export const HotTakesGame: React.FC<HotTakesGameProps> = ({ prompts, players }) => {
+  const rollForLegendaryCard = useLegendaryDraw();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [vote, setVote] = useState<'agree' | 'disagree' | null>(null);
   const [stats, setStats] = useState<VoteStats | null>(null);

@@ -1,10 +1,11 @@
+import { useLegendaryDraw } from '../../hooks/useLegendaryDraw';
 import { RemovedPrompt } from '../common/RemovedPrompt';
 import { useLivePromptState } from '../../hooks/useLivePrompt';
 import React, { useState, useEffect } from 'react';
 import { PromptItem } from '../../types/game';
 import { CardRatingBar } from '../common/CardRatingBar';
 import { soundEffects } from '../../utils/audio';
-import { isPromptLegendary, rollForLegendaryCard, triggerLegendaryCardEffects } from '../../utils/legendaryCards';
+import { isPromptLegendary, triggerLegendaryCardEffects } from '../../utils/legendaryCards';
 import { LegendaryCardBadge } from '../common/LegendaryCardBadge';
 import { EyeOff, Send, HelpCircle, Users, ArrowRight, RotateCcw, Flame } from 'lucide-react';
 import confetti from 'canvas-confetti';
@@ -24,6 +25,7 @@ interface SubmittedConfession {
 export const ConfessionsGame: React.FC<ConfessionsGameProps> = ({ prompts, players }) => {
   const activePlayers = players && players.length >= 2 ? players : [];
   const hasPlayers = activePlayers.length >= 2;
+  const rollForLegendaryCard = useLegendaryDraw();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [activePrompt, setActivePrompt] = useLivePromptState<PromptItem>(() => {
     const first = prompts[0] || { id: 'cf-default', gameId: 'confessions', category: 'medium', text: 'Share a secret nobody in this game or call knows about you.' };

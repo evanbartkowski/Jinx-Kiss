@@ -1,9 +1,10 @@
+import { useLegendaryDraw } from '../../hooks/useLegendaryDraw';
 import { useLivePromptState } from '../../hooks/useLivePrompt';
 import React, { useState } from 'react';
 import { PromptItem } from '../../types/game';
 import { CardRatingBar } from '../common/CardRatingBar';
 import { soundEffects } from '../../utils/audio';
-import { isPromptLegendary, rollForLegendaryCard, triggerLegendaryCardEffects } from '../../utils/legendaryCards';
+import { isPromptLegendary, triggerLegendaryCardEffects } from '../../utils/legendaryCards';
 import { LegendaryCardBadge } from '../common/LegendaryCardBadge';
 import { ArrowRight, RotateCw, SkipForward, Flame, Sparkles } from 'lucide-react';
 import confetti from 'canvas-confetti';
@@ -14,6 +15,7 @@ interface TruthOrDareGameProps {
 }
 
 export const TruthOrDareGame: React.FC<TruthOrDareGameProps> = ({ prompts, players }) => {
+  const rollForLegendaryCard = useLegendaryDraw();
   const [selectedType, setSelectedType] = useState<'truth' | 'dare'>('truth');
   const [currentPrompt, setCurrentPrompt] = useLivePromptState<PromptItem | null>(null);
   const [usedPromptIds, setUsedPromptIds] = useState<Set<string>>(new Set());

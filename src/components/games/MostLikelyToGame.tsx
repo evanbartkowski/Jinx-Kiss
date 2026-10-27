@@ -1,3 +1,4 @@
+import { useLegendaryDraw } from '../../hooks/useLegendaryDraw';
 import { RemovedPrompt } from '../common/RemovedPrompt';
 import { useLivePromptState } from '../../hooks/useLivePrompt';
 import React, { useState, useEffect } from 'react';
@@ -5,7 +6,7 @@ import { PromptItem } from '../../types/game';
 import { useGameSettings } from '../../context/GameSettingsContext';
 import { CardRatingBar } from '../common/CardRatingBar';
 import { soundEffects } from '../../utils/audio';
-import { isPromptLegendary, rollForLegendaryCard, triggerLegendaryCardEffects } from '../../utils/legendaryCards';
+import { isPromptLegendary, triggerLegendaryCardEffects } from '../../utils/legendaryCards';
 import { LegendaryCardBadge } from '../common/LegendaryCardBadge';
 import { ArrowRight, Users, Trophy, RotateCcw } from 'lucide-react';
 import confetti from 'canvas-confetti';
@@ -17,6 +18,7 @@ interface MostLikelyToGameProps {
 
 export const MostLikelyToGame: React.FC<MostLikelyToGameProps> = ({ prompts, players }) => {
   const { selectedCategory } = useGameSettings();
+  const rollForLegendaryCard = useLegendaryDraw();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [votes, setVotes] = useState<Record<string, number>>({});
   const [isRevealed, setIsRevealed] = useState(false);

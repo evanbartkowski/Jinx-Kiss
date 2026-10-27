@@ -1,10 +1,11 @@
+import { useLegendaryDraw } from '../../hooks/useLegendaryDraw';
 import { RemovedPrompt } from '../common/RemovedPrompt';
 import { useLivePromptState } from '../../hooks/useLivePrompt';
 import React, { useState, useEffect } from 'react';
 import { PromptItem } from '../../types/game';
 import { CardRatingBar } from '../common/CardRatingBar';
 import { soundEffects } from '../../utils/audio';
-import { isPromptLegendary, rollForLegendaryCard, triggerLegendaryCardEffects } from '../../utils/legendaryCards';
+import { isPromptLegendary, triggerLegendaryCardEffects } from '../../utils/legendaryCards';
 import { LegendaryCardBadge } from '../common/LegendaryCardBadge';
 import { Heart, CheckCircle2 } from 'lucide-react';
 
@@ -14,6 +15,7 @@ interface NeverHaveIEverGameProps {
 }
 
 export const NeverHaveIEverGame: React.FC<NeverHaveIEverGameProps> = ({ prompts, players }) => {
+  const rollForLegendaryCard = useLegendaryDraw();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [usedIndices, setUsedIndices] = useState<number[]>([]);
   const [playerLives, setPlayerLives] = useState<Record<string, number>>({});

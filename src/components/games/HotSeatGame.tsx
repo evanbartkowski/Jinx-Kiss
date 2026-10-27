@@ -1,3 +1,4 @@
+import { useLegendaryDraw } from '../../hooks/useLegendaryDraw';
 import { RemovedPrompt } from '../common/RemovedPrompt';
 import { useLivePromptState } from '../../hooks/useLivePrompt';
 import React, { useState, useEffect } from 'react';
@@ -6,7 +7,7 @@ import { CardRatingBar } from '../common/CardRatingBar';
 import { ArrowRight, Flame, Clock, Play, Pause, RotateCw, Users } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { soundEffects } from '../../utils/audio';
-import { isPromptLegendary, rollForLegendaryCard, triggerLegendaryCardEffects } from '../../utils/legendaryCards';
+import { isPromptLegendary, triggerLegendaryCardEffects } from '../../utils/legendaryCards';
 import { LegendaryCardBadge } from '../common/LegendaryCardBadge';
 
 interface HotSeatGameProps {
@@ -15,6 +16,7 @@ interface HotSeatGameProps {
 }
 
 export const HotSeatGame: React.FC<HotSeatGameProps> = ({ prompts, players }) => {
+  const rollForLegendaryCard = useLegendaryDraw();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [activePrompt, setActivePrompt] = useLivePromptState<PromptItem>(() => {
     const first = prompts[0] || { id: 'hs-default', gameId: 'hot-seat', category: 'medium', text: 'Confess the most questionable thing currently in your search history.' };
