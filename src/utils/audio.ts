@@ -191,6 +191,7 @@ export const soundEffects = {
 
       osc.start(now);
       osc.stop(now + 0.14);
+      cleanupNode(osc, filter, gain);
 
       // Micro card snap transient
       const snapOsc = ctx.createOscillator();
@@ -204,6 +205,7 @@ export const soundEffects = {
       snapGain.connect(sfxGainNode);
       snapOsc.start(now + 0.01);
       snapOsc.stop(now + 0.04);
+      cleanupNode(snapOsc, snapGain);
     } catch {
       // autoplay fallback
     }
@@ -234,6 +236,7 @@ export const soundEffects = {
 
       osc.start(now);
       osc.stop(now + 0.045);
+      cleanupNode(osc, gain);
     } catch {
       // ignore
     }
@@ -362,6 +365,7 @@ export const soundEffects = {
 
         osc.start(now + idx * 0.055);
         osc.stop(now + idx * 0.055 + 0.28);
+        cleanupNode(osc, gain);
       });
     } catch {
       // ignore
@@ -392,6 +396,7 @@ export const soundEffects = {
       punchGain.connect(outNode);
       punchOsc.start(now);
       punchOsc.stop(now + 0.06);
+      cleanupNode(punchOsc, punchGain);
 
       // 2. Game-customized harmonic chime frequencies
       let freqs = [523.25, 659.25, 783.99]; // C5, E5, G5 default cheerful triad
@@ -422,6 +427,7 @@ export const soundEffects = {
 
         osc.start(now + 0.02 + idx * 0.04);
         osc.stop(now + 0.02 + idx * 0.04 + 0.22);
+        cleanupNode(osc, gain);
       });
     } catch {
       // ignore

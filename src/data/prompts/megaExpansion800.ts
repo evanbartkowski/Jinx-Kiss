@@ -7,13 +7,6 @@ import { PromptItem } from '../../types/game';
  */
 export const MEGA_EXPANSION_800_PROMPTS: PromptItem[] = [
   {
-    "id": "mega-easy-2",
-    "gameId": "truth-or-dare",
-    "category": "easy",
-    "text": "Try to balance a pen or spoon on your nose for a full 15 seconds without letting it fall.",
-    "type": "dare"
-  },
-  {
     "id": "mega-easy-4",
     "gameId": "truth-or-dare",
     "category": "easy",
@@ -21,30 +14,10 @@ export const MEGA_EXPANSION_800_PROMPTS: PromptItem[] = [
     "type": "truth"
   },
   {
-    "id": "mega-easy-5",
-    "gameId": "dare-roulette",
-    "category": "easy",
-    "text": "Demonstrate your absolute best victory dance as if you just won an Olympic gold medal in potato sack racing."
-  },
-  {
     "id": "mega-easy-10",
     "gameId": "confessions",
     "category": "easy",
     "text": "What is the most ridiculous excuse you ever gave someone to get out of doing a minor chore?"
-  },
-  {
-    "id": "mega-easy-12",
-    "gameId": "truth-or-dare",
-    "category": "easy",
-    "text": "If you had to wear one Halloween costume every single day for an entire month, what would it be?",
-    "type": "truth"
-  },
-  {
-    "id": "mega-easy-16",
-    "gameId": "truth-or-dare",
-    "category": "easy",
-    "text": "What is the weirdest habit your pet has, or the weirdest habit of a pet you've ever met?",
-    "type": "truth"
   },
   {
     "id": "mega-easy-18",
@@ -62,38 +35,11 @@ export const MEGA_EXPANSION_800_PROMPTS: PromptItem[] = [
     "type": "truth"
   },
   {
-    "id": "mega-easy-29",
-    "gameId": "truth-or-sip",
-    "category": "easy",
-    "text": "If you had to listen to only one elevator song on repeat for a 12-hour road trip, what would it be?",
-    "forfeit": "Take a sip of any drink, or pass."
-  },
-  {
     "id": "mega-easy-30",
     "gameId": "truth-or-dare",
     "category": "easy",
     "text": "Pretend you are an infomercial host aggressively trying to sell a basic water bottle to the group.",
     "type": "dare"
-  },
-  {
-    "id": "mega-easy-32",
-    "gameId": "truth-or-dare",
-    "category": "easy",
-    "text": "Try to draw a cat on a piece of paper or napkin with your non-dominant hand in 20 seconds.",
-    "type": "dare"
-  },
-  {
-    "id": "mega-easy-40",
-    "gameId": "truth-or-sip",
-    "category": "easy",
-    "text": "If your life had a theme song that played whenever you walked into a grocery store, what would it be?",
-    "forfeit": "Take a sip of any drink, or pass."
-  },
-  {
-    "id": "mega-easy-44",
-    "gameId": "hot-seat",
-    "category": "easy",
-    "text": "If you were legally required to ride a tricycle to work or school every day, would you decorate it?"
   },
   {
     "id": "mega-easy-52",
@@ -128,13 +74,6 @@ export const MEGA_EXPANSION_800_PROMPTS: PromptItem[] = [
     "gameId": "truth-or-dare",
     "category": "easy",
     "text": "Hum the theme song of a famous TV show and see who in the room can guess it first.",
-    "type": "dare"
-  },
-  {
-    "id": "mega-easy-86",
-    "gameId": "truth-or-dare",
-    "category": "easy",
-    "text": "Give a grand, dramatic review of the beverage you are currently drinking as if you were a sommelier.",
     "type": "dare"
   },
   {
@@ -748,13 +687,6 @@ export const MEGA_EXPANSION_800_PROMPTS: PromptItem[] = [
     "type": "dare"
   },
   {
-    "id": "mega-kids-7",
-    "gameId": "truth-or-sip",
-    "category": "kids",
-    "text": "If you had a pet dragon the size of a kitten, what color would it be and what tricks could it do?",
-    "forfeit": "Do your funniest animal impression."
-  },
-  {
     "id": "mega-kids-10",
     "gameId": "would-you-rather",
     "category": "kids",
@@ -800,38 +732,11 @@ export const MEGA_EXPANSION_800_PROMPTS: PromptItem[] = [
     "optionB": "swim in a pool filled with warm chocolate pudding"
   },
   {
-    "id": "mega-kids-31",
-    "gameId": "truth-or-dare",
-    "category": "kids",
-    "text": "If you could invent a new holiday where everyone had to wear funny hats and eat pancakes, what would you name it?",
-    "type": "truth"
-  },
-  {
     "id": "mega-kids-34",
     "gameId": "truth-or-dare",
     "category": "kids",
     "text": "Pretend to be an alien who landed in a pizza shop and has no idea how to eat a slice.",
     "type": "dare"
-  },
-  {
-    "id": "mega-kids-37",
-    "gameId": "truth-or-dare",
-    "category": "kids",
-    "text": "Spin around in a circle 3 times, then strike a superhero victory pose and freeze for 5 seconds.",
-    "type": "dare"
-  },
-  {
-    "id": "mega-kids-41",
-    "gameId": "truth-or-dare",
-    "category": "kids",
-    "text": "If you could have a pocket-sized unicorn or a giant friendly polar bear as a pet, which do you pick?",
-    "type": "truth"
-  },
-  {
-    "id": "mega-kids-44",
-    "gameId": "hot-seat",
-    "category": "kids",
-    "text": "If you could build the world's tallest Lego tower, what color would it be and how high would it go?"
   },
   {
     "id": "mega-kids-46",
@@ -842,26 +747,11 @@ export const MEGA_EXPANSION_800_PROMPTS: PromptItem[] = [
     "optionB": "always talk like an excited game show host"
   },
   {
-    "id": "mega-kids-47",
-    "gameId": "truth-or-dare",
-    "category": "kids",
-    "text": "Show everyone your best funny walking style, like walking like a duck or marching like a toy soldier.",
-    "type": "dare"
-  },
-  {
     "id": "mega-kids-50",
     "gameId": "truth-or-dare",
     "category": "kids",
     "text": "Try to make everyone in the room laugh in under 20 seconds using only funny faces and goofy noises.",
     "type": "dare"
-  },
-  {
-    "id": "mega-kids-53",
-    "gameId": "would-you-rather",
-    "category": "kids",
-    "text": "Would you rather have a magical pencil that brings whatever you draw to life or shoes that let you walk up walls?",
-    "optionA": "have a magical pencil that brings whatever you draw to life",
-    "optionB": "shoes that let you walk up walls"
   },
   {
     "id": "mega-kids-58",
@@ -879,26 +769,12 @@ export const MEGA_EXPANSION_800_PROMPTS: PromptItem[] = [
     "optionB": "a flying carpet that takes you to school"
   },
   {
-    "id": "mega-kids-64",
-    "gameId": "truth-or-dare",
-    "category": "kids",
-    "text": "If you had a magical jacket where every time you reached into the pocket you found a piece of candy, what candy is it?",
-    "type": "truth"
-  },
-  {
     "id": "mega-kids-66",
     "gameId": "would-you-rather",
     "category": "kids",
     "text": "Would you rather have puppy ears that perk up when you hear your name or a bunny nose that twitches when you smell cookies?",
     "optionA": "have puppy ears that perk up when you hear your name",
     "optionB": "a bunny nose that twitches when you smell cookies"
-  },
-  {
-    "id": "mega-kids-71",
-    "gameId": "truth-or-dare",
-    "category": "kids",
-    "text": "If you could invent a cereal that turns the milk neon blue and makes you giggle, what is the name of it?",
-    "type": "truth"
   },
   {
     "id": "mega-kids-73",
@@ -914,13 +790,6 @@ export const MEGA_EXPANSION_800_PROMPTS: PromptItem[] = [
     "category": "kids",
     "text": "Do your best impression of an elephant blowing water out of its trunk on a hot sunny day.",
     "type": "dare"
-  },
-  {
-    "id": "mega-kids-78",
-    "gameId": "truth-or-dare",
-    "category": "kids",
-    "text": "If you were given a magic bean that grew into a giant plant overnight, what would grow at the top?",
-    "type": "truth"
   },
   {
     "id": "mega-kids-80",
@@ -950,11 +819,5 @@ export const MEGA_EXPANSION_800_PROMPTS: PromptItem[] = [
     "text": "Would you rather be able to breathe underwater like a mermaid or climb tall trees like a squirrel?",
     "optionA": "be able to breathe underwater like a mermaid",
     "optionB": "climb tall trees like a squirrel"
-  },
-  {
-    "id": "mega-kids-99",
-    "gameId": "hot-seat",
-    "category": "kids",
-    "text": "If you had a magic backpack that could hold an entire swimming pool, what would you put in it?"
   }
 ];

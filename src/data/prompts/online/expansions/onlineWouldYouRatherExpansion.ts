@@ -241,33 +241,6 @@ export const ONLINE_WOULD_YOU_RATHER_EXPANSION: PromptItem[] = [
     "text": "Would you rather have a secret friends-with-benefits relationship that nobody in your circle finds out about OR have a whirlwind romance with a mysterious stranger you meet at an airport lounge?"
   },
   {
-    "id": "on-wyr-kids-e2",
-    "gameId": "would-you-rather",
-    "category": "kids",
-    "playMode": "online",
-    "optionA": "have a friendly pet baby dragon that breathes harmless colorful confetti",
-    "optionB": "have a magical flying unicorn that leaves glowing rainbow trails behind it",
-    "text": "Would you rather have a friendly pet baby dragon that breathes harmless colorful confetti OR have a magical flying unicorn that leaves glowing rainbow trails behind it?"
-  },
-  {
-    "id": "on-wyr-kids-e8",
-    "gameId": "would-you-rather",
-    "category": "kids",
-    "playMode": "online",
-    "optionA": "visit a magical kingdom where all toys and stuffed animals come to life and play",
-    "optionB": "visit an alien planet where the gravity is bouncy and everyone travels by giant bubbles",
-    "text": "Would you rather visit a magical kingdom where all toys and stuffed animals come to life and play OR visit an alien planet where the gravity is bouncy and everyone travels by giant bubbles?"
-  },
-  {
-    "id": "on-wyr-kids-e11",
-    "gameId": "would-you-rather",
-    "category": "kids",
-    "playMode": "online",
-    "optionA": "have a friendly robot best friend who helps you build awesome science inventions",
-    "optionB": "have a magic wand that can turn ordinary rocks into shiny sparkling gemstones",
-    "text": "Would you rather have a friendly robot best friend who helps you build awesome science inventions OR have a magic wand that can turn ordinary rocks into shiny sparkling gemstones?"
-  },
-  {
     "id": "on-wyr-kids-e12",
     "gameId": "would-you-rather",
     "category": "kids",

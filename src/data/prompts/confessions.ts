@@ -21,12 +21,5 @@ export const CONFESSIONS_PROMPTS: PromptItem[] = [
     "category": "spicy",
     "text": "What is the boldest, most shameless flirtatious move you ever pulled off?",
     "confessionStarter": "I once completely charmed someone by saying..."
-  },
-  {
-    "id": "cnf-kids-5",
-    "gameId": "confessions",
-    "category": "kids",
-    "text": "What is a funny thing you used to believe when you were little that makes you laugh now?",
-    "confessionStarter": "I used to believe that..."
   }
 ];

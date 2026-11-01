@@ -7,13 +7,6 @@ import { PromptItem } from '../../../../types/game';
  */
 export const ONLINE_DARE_ROULETTE_EXPANSION: PromptItem[] = [
   {
-    "id": "on-dr-easy-e4",
-    "gameId": "dare-roulette",
-    "category": "easy",
-    "playMode": "online",
-    "text": "Hold up a mug or glass to the webcam and give a dramatic monologue thanking it for hydration."
-  },
-  {
     "id": "on-dr-easy-e5",
     "gameId": "dare-roulette",
     "category": "easy",
@@ -26,13 +19,6 @@ export const ONLINE_DARE_ROULETTE_EXPANSION: PromptItem[] = [
     "category": "easy",
     "playMode": "online",
     "text": "Pretend you are an AI assistant and answer the next three questions with an emotionless robot voice."
-  },
-  {
-    "id": "on-dr-easy-e12",
-    "gameId": "dare-roulette",
-    "category": "easy",
-    "playMode": "online",
-    "text": "Balance a pen or spoon on your nose for 15 seconds without letting it fall on camera."
   },
   {
     "id": "on-dr-medium-e1",
@@ -201,12 +187,5 @@ export const ONLINE_DARE_ROULETTE_EXPANSION: PromptItem[] = [
     "category": "18+",
     "playMode": "online",
     "text": "Take a slow, sensual sip of your drink on webcam while maintaining unbroken eye contact with the group."
-  },
-  {
-    "id": "on-dr-kids-e15",
-    "gameId": "dare-roulette",
-    "category": "kids",
-    "playMode": "online",
-    "text": "Draw a funny smiley face on a piece of paper in 10 seconds and show it to the webcam."
   }
 ];

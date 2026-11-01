@@ -28,12 +28,5 @@ export const RED_FLAG_GREEN_FLAG_PROMPTS: PromptItem[] = [
     "category": "spicy",
     "text": "They whisper playful compliments in your ear during a boring dinner party.",
     "scenario": "Subtle flirtation"
-  },
-  {
-    "id": "rf-gf-kids-4",
-    "gameId": "red-flag-green-flag",
-    "category": "kids",
-    "text": "They build an epic blanket fort and invite you inside to read comics.",
-    "scenario": "Fort architecture"
   }
 ];

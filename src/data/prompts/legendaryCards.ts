@@ -133,11 +133,11 @@ export const LEGENDARY_CARDS: PromptItem[] = [
     id: 'leg-easy-1',
     gameId: 'truth-or-dare',
     category: 'easy',
-    type: "dare",
+    type: 'truth',
     isLegendary: true,
     rarity: 'legendary',
-    legendaryTitle: '? LEGENDARY DARE ?',
-    text: 'The Camera Roll Lottery: Unlock your phone right now, open your photo gallery, scroll with your eyes closed for 5 seconds, and show the photo your finger lands on to the entire room!'
+    legendaryTitle: '★ LEGENDARY TRUTH ★',
+    text: 'The Secret Rookie Mistake: What is the most embarrassingly simple thing you had to secretly look up online as an adult because you were too afraid to admit you never learned it?'
   },
   {
     id: 'leg-easy-2',
@@ -243,6 +243,20 @@ export const LEGENDARY_CARDS: PromptItem[] = [
     legendaryTitle: '★ LEGENDARY HOT SEAT ★',
     text: 'The Nostalgia Interrogation: The room has 60 uninterrupted seconds to cross-examine you about your most cringe-inducing middle school phase. Full truth required!'
   },
+
+  // ==========================================
+  // 3. MEDIUM CATEGORY (Bold, personal, revealing)
+  // ==========================================
+  {
+    id: 'leg-med-1',
+    gameId: 'truth-or-dare',
+    category: 'medium',
+    type: 'truth',
+    isLegendary: true,
+    rarity: 'legendary',
+    legendaryTitle: '★ LEGENDARY TRUTH ★',
+    text: 'The Unfiltered First Impression: What was your brutally honest, unfiltered first impression of the person sitting directly across from you, and how long did it take for that impression to be completely shattered?'
+  },
   {
     id: 'leg-med-2',
     gameId: 'truth-or-dare',
@@ -252,6 +266,17 @@ export const LEGENDARY_CARDS: PromptItem[] = [
     rarity: 'legendary',
     legendaryTitle: '★ LEGENDARY DARE ★',
     text: 'The Urgent Speakerphone Call: Call a mutual friend not in this room on speakerphone and urgently whisper: "Whatever happens tonight, do NOT check my trunk." Hang up immediately after 15 seconds without laughing!'
+  },
+  {
+    id: 'leg-med-3',
+    gameId: 'would-you-rather',
+    category: 'medium',
+    isLegendary: true,
+    rarity: 'legendary',
+    legendaryTitle: '★ LEGENDARY SHOWDOWN ★',
+    text: 'Would you rather have everyone in this room listen to your last three private voice memos OR let the person to your right read your entire unsent message drafts folder?',
+    optionA: 'Room listens to your last 3 voice memos',
+    optionB: 'Player on right reads your unsent drafts folder'
   },
   {
     id: 'leg-med-4',
@@ -374,11 +399,11 @@ export const LEGENDARY_CARDS: PromptItem[] = [
   {
     id: 'leg-ext-4',
     gameId: 'never-have-i-ever',
-    category: "18+",
+    category: 'extreme',
     isLegendary: true,
     rarity: 'legendary',
     legendaryTitle: '★ LEGENDARY CONFESSION ★',
-    text: 'Never have I ever hooked up in a dangerously public or forbidden location where we were literally seconds away from getting arrested or caught by security.'
+    text: 'Never have I ever done an adrenaline-fueled dare or stunt so dangerous that paramedics, police, or emergency security had to get involved.'
   },
   {
     id: 'leg-ext-5',
@@ -389,6 +414,15 @@ export const LEGENDARY_CARDS: PromptItem[] = [
     legendaryTitle: '★ LEGENDARY HOT TAKE ★',
     text: 'True lifelong monogamy is an unnatural social construct that at least 70% of people secretly fight against, whether they ever admit it to their partner or not.',
     discussionPrompt: 'Do you believe humans are biologically built for lifelong monogamy?'
+  },
+  {
+    id: 'leg-ext-6',
+    gameId: 'dare-roulette',
+    category: 'extreme',
+    isLegendary: true,
+    rarity: 'legendary',
+    legendaryTitle: '★ LEGENDARY SPINNER ★',
+    text: 'The Live Interrogation Call: Call the third most recent person in your phone log on speakerphone and convince them in 45 seconds that you are fleeing the country tonight, without explaining why!'
   },
   {
     id: 'leg-ext-7',
@@ -537,6 +571,25 @@ export const LEGENDARY_CARDS: PromptItem[] = [
     text: 'Point to who in the relationship fell in love first, and point to who takes 5x longer to swallow their pride and apologize after an argument. Loser takes a sip!'
   },
   {
+    id: 'leg-cpl-10',
+    gameId: 'most-likely-to',
+    category: 'couples',
+    isLegendary: true,
+    rarity: 'legendary',
+    legendaryTitle: '★ LEGENDARY CONSENSUS ★',
+    text: 'Who is most likely to secretly plan a surprise romantic weekend getaway, completely overthink every single detail, and accidentally spoil the surprise 24 hours before leaving?'
+  },
+  {
+    id: 'leg-cpl-11',
+    gameId: 'confessions',
+    category: 'couples',
+    isLegendary: true,
+    rarity: 'legendary',
+    legendaryTitle: '★ LEGENDARY CONFESSION ★',
+    text: 'Confess the sweetest, most vulnerable insecurity you ever felt in this relationship that you were terrified to bring up until right now.',
+    confessionStarter: 'The most vulnerable insecurity I kept to myself was...'
+  },
+  {
     id: 'leg-cpl-12',
     gameId: 'hot-seat',
     category: 'couples',
@@ -547,121 +600,122 @@ export const LEGENDARY_CARDS: PromptItem[] = [
   },
 
   // ==========================================
-  // 7. SPICY CATEGORY (Flirty, dirty talk, kinks)
+  // 7. SPICY CATEGORY (Flirty, teasing, magnetic tension)
   // ==========================================
   {
     id: 'leg-spicy-1',
     gameId: 'truth-or-dare',
-    category: "18+",
-    type: 'dare',
-    isLegendary: true,
-    rarity: 'legendary',
-    legendaryTitle: '★ LEGENDARY SPICY DARE ★',
-    text: 'The Sensory Blindfold: Put on a blindfold. The player of your choice has 35 seconds to slowly trace their warm breath, fingertips, and whispers along your neck, jawline, and collarbone without touching your lips. If you shiver or pull back, take 2 penalty drinks!'
-  },
-  {
-    id: 'leg-spicy-2',
-    gameId: 'truth-or-dare',
-    category: "18+",
+    category: 'spicy',
     type: 'truth',
     isLegendary: true,
     rarity: 'legendary',
     legendaryTitle: '★ LEGENDARY SPICY TRUTH ★',
-    text: 'The Raw Fantasy: Describe in vivid, heart-pounding detail the single dirtiest, most tantalizing sexual fantasy you replay in your mind that you have never confessed out loud to anyone.'
+    text: 'The Irresistible Spell: What is the most enchanting, magnetic quality about someone in this room that makes it nearly impossible to maintain a straight face when they look at you?'
+  },
+  {
+    id: 'leg-spicy-2',
+    gameId: 'truth-or-dare',
+    category: 'spicy',
+    type: 'dare',
+    isLegendary: true,
+    rarity: 'legendary',
+    legendaryTitle: '★ LEGENDARY SPICY DARE ★',
+    text: 'The Seductive Stare: Sit across from the player of your choice, lean in close, and deliver a smooth 15-second whisper compliment directly into their ear that leaves them completely flustered!'
   },
   {
     id: 'leg-spicy-3',
     gameId: 'would-you-rather',
-    category: "18+",
+    category: 'spicy',
     isLegendary: true,
     rarity: 'legendary',
     legendaryTitle: '★ LEGENDARY SHOWDOWN ★',
-    text: 'Would you rather be handcuffed to the bed with zero control over what the other person does to tease you OR have total dominant control where they must obey every whispered command you give?',
-    optionA: 'Handcuffed with zero control in bed',
-    optionB: 'Total dominant control with them obeying'
+    text: 'Would you rather spend an entire evening with someone who maintains intense, electrifying eye contact with you across a candlelit table OR someone who whispers witty, charming compliments all night?',
+    optionA: 'Electrifying eye contact across a candlelit table',
+    optionB: 'Witty, charming whispers all night long'
   },
   {
     id: 'leg-spicy-4',
     gameId: 'never-have-i-ever',
-    category: "18+",
+    category: 'spicy',
     isLegendary: true,
     rarity: 'legendary',
     legendaryTitle: '★ LEGENDARY CONFESSION ★',
-    text: 'Never have I ever taken and sent a risky photo so explicit and daring that my pulse was pounding in my throat for the next 20 minutes waiting for their reaction.'
+    text: 'Never have I ever practiced my smoothest flirting lines or teasing smirk in the mirror before heading out on an exciting date.'
   },
   {
     id: 'leg-spicy-5',
     gameId: 'hot-takes',
-    category: "18+",
+    category: 'spicy',
     isLegendary: true,
     rarity: 'legendary',
     legendaryTitle: '★ LEGENDARY HOT TAKE ★',
-    text: 'Quiet, polite sex is completely overrated; if you aren\'t leaving marks, losing your breath, and talking filthy, you are doing it completely wrong.',
-    discussionPrompt: 'Do you prefer intense passionate dirty talk or gentle romantic rhythm?'
+    text: 'Subtle lingering eye contact and playful teasing banter are infinitely more exciting than being immediately obvious about your feelings.',
+    discussionPrompt: 'Do you prefer the suspense of slow flirting or direct honesty?'
   },
   {
     id: 'leg-spicy-6',
     gameId: 'dare-roulette',
-    category: "18+",
+    category: 'spicy',
     isLegendary: true,
     rarity: 'legendary',
     legendaryTitle: '★ LEGENDARY SPINNER ★',
-    text: 'The Pulse Check: Slide your hand under the shirt of the person on your right and place your palm directly over their bare chest and heartbeat for 25 uninterrupted seconds while holding unbroken eye contact!'
+    text: 'The Slow-Motion Wink: Look directly at the player on your left, deliver your most captivating, slow-motion flirty wink and charm them with a magnetic 10-second gaze without breaking character!'
   },
   {
     id: 'leg-spicy-7',
     gameId: 'red-flag-green-flag',
-    category: "18+",
+    category: 'spicy',
     isLegendary: true,
     rarity: 'legendary',
     legendaryTitle: '★ LEGENDARY JUDGMENT ★',
-    text: 'On date two, they casually mention that their nightstand is fully stocked with silk restraints, blindfolds, and massage oils, and they expect you to take charge on night one.'
+    text: 'On the first date, they playfully challenge you to a staring contest across the table and refuse to look away until you blush.'
   },
   {
     id: 'leg-spicy-8',
     gameId: 'truth-or-sip',
-    category: "18+",
+    category: 'spicy',
     isLegendary: true,
     rarity: 'legendary',
     legendaryTitle: '★ LEGENDARY TRUTH ★',
-    text: 'The Forbidden Kink: What is the filthiest, most unexpected kink you have ever been turned on by? Confess every detail with total honesty or finish your entire drink right now!',
-    "forfeit": "Take a sip of any drink, or pass."
+    text: 'The Sweetest Tease: Name the single most flirty, charming text you ever received that gave you butterflies for the rest of the day, or take 2 sips of your drink!',
+    forfeit: 'Take 2 sips of your drink, or pass.'
   },
   {
     id: 'leg-spicy-9',
     gameId: 'point-and-drink',
-    category: "18+",
+    category: 'spicy',
     isLegendary: true,
     rarity: 'legendary',
     legendaryTitle: '★ LEGENDARY POINT ★',
-    text: 'Point to the person whose touch or whisper would cause the most instantaneous, uncontrollable physical reaction in your body. Selected player gives out 3 drinks!'
+    text: 'Point to the person in this room whose smile and charming banter could talk their way out of a speeding ticket in under 30 seconds!'
   },
   {
     id: 'leg-spicy-10',
     gameId: 'most-likely-to',
-    category: "18+",
+    category: 'spicy',
     isLegendary: true,
     rarity: 'legendary',
     legendaryTitle: '★ LEGENDARY CONSENSUS ★',
-    text: 'Who is most likely to own a locked bedside drawer filled with toys, accessories, and gear that would give their parents a heart attack if ever discovered?'
+    text: 'Who is most likely to accidentally flirt their way into getting free dessert, drinks, and VIP seating at a luxury restaurant?'
   },
   {
     id: 'leg-spicy-11',
     gameId: 'confessions',
-    category: "18+",
+    category: 'spicy',
     isLegendary: true,
     rarity: 'legendary',
     legendaryTitle: '★ LEGENDARY CONFESSION ★',
-    text: 'Confess the single dirtiest, most explicit thought or daydream you have had about someone sitting in this room right now.'
+    text: 'Confess the boldest, most audacious romantic move you ever made when shooting your shot with someone you thought was completely out of your league.',
+    confessionStarter: 'My boldest shot at flirting was when...'
   },
   {
     id: 'leg-spicy-12',
     gameId: 'hot-seat',
-    category: "18+",
+    category: 'spicy',
     isLegendary: true,
     rarity: 'legendary',
     legendaryTitle: '★ LEGENDARY HOT SEAT ★',
-    text: 'The Spicy Crucible: 60 seconds on the hot seat! The group can ask you 3 explicit questions about your dirty talk, endurance, and bedroom kinks. Total honesty only!'
+    text: 'The Charisma Interrogation: 60 seconds under the spotlight! The group can ask you 3 questions about your secret crushes, first date rituals, and biggest romantic weaknesses!'
   },
 
   // ==========================================
@@ -771,6 +825,15 @@ export const LEGENDARY_CARDS: PromptItem[] = [
     rarity: 'legendary',
     legendaryTitle: '★ LEGENDARY CONFESSION ★',
     text: 'Confess the most taboo, explicit scenario you have ever searched in incognito mode that would leave you mortified if your browsing history was leaked to this room.'
+  },
+  {
+    id: 'leg-18p-12',
+    gameId: 'hot-seat',
+    category: '18+',
+    isLegendary: true,
+    rarity: 'legendary',
+    legendaryTitle: '★ LEGENDARY HOT SEAT ★',
+    text: 'The Midnight Hot Seat: 60 seconds on the hot seat with zero filter! The group can ask you 3 completely explicit questions about your bedroom preferences, endurance, and wildest fantasies. Total honesty required!'
   },
   {
     id: 'leg-editorial-spicy-truth', gameId: 'truth-or-dare', category: 'spicy', type: 'truth',

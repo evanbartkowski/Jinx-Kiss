@@ -354,15 +354,6 @@ const BASE_ONLINE_WOULD_YOU_RATHER_PROMPTS: PromptItem[] = [
   // EXPANDED KIDS (Silly, wholesome digital dilemmas)
   // ==========================================
   {
-    id: 'on-wyr-kids-5',
-    gameId: 'would-you-rather',
-    category: 'kids',
-    playMode: 'online',
-    text: "Would you rather have a pet dragon that fits inside your pocket or a pet giant panda that gives the best fluffy hugs?",
-    optionA: "Pocket dragon",
-    optionB: "Giant huggy panda"
-  },
-  {
     id: 'on-wyr-kids-6',
     gameId: 'would-you-rather',
     category: 'kids',

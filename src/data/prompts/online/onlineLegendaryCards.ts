@@ -25,12 +25,12 @@ export const ONLINE_LEGENDARY_CARDS: PromptItem[] = [
   {
     id: 'on-leg-kids-2',
     gameId: 'would-you-rather',
-    category: "18+",
+    category: 'kids',
     playMode: 'online',
     isLegendary: true,
     rarity: 'legendary',
     legendaryTitle: '★ LEGENDARY SHOWDOWN ★',
-    text: "Would you rather have a real-life Pikachu follow you on webcam everywhere you go OR have your bedroom turn into a zero-gravity bounce house every Saturday?",
+    text: "Would you rather have a real-life Pikachu follow you on webcam everywhere you go OR have your entire room turn into a zero-gravity bounce house every Saturday?",
     optionA: "Webcam Pikachu companion",
     optionB: "Zero-gravity bounce house room"
   },

@@ -19,7 +19,7 @@ export const SPECIAL_CARDS: SpecialCard[] = [
     type: 'reverse-card',
     title: 'Reverse Card',
     rarity: 'uncommon',
-    description: 'No you! Deflect the heat and redirect the challenge to someone else.',
+    description: 'Nuar you! Deflect the heat and redirect the challenge to someone else.',
     effect: 'You may pass this prompt to the player who went before you, or any player of your choice.',
     iconName: 'RotateCcw',
     themeColor: '#06B6D4', // Cyan
@@ -85,7 +85,7 @@ export const SPECIAL_CARDS: SpecialCard[] = [
     title: 'Truth Bomb',
     rarity: 'epic',
     description: 'Detonate a shocking secret. Everyone in the room must answer an explosive group revelation.',
-    effect: 'All players must answer honestly. Whoever gives the boldest confession earns 30 bonus points!',
+    effect: 'All players must answer honestly. Whoever gives the boldest confession earns absolutely nothing!',
     iconName: 'Flame',
     themeColor: '#D946EF', // Fuchsia
     pointsAwarded: 35,

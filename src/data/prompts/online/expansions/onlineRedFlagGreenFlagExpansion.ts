@@ -131,19 +131,5 @@ export const ONLINE_RED_FLAG_GREEN_FLAG_EXPANSION: PromptItem[] = [
     "category": "18+",
     "playMode": "online",
     "text": "They take full command in the bedroom, pinning your hands gently and making sure you are taken care of first."
-  },
-  {
-    "id": "on-rf-kids-e8",
-    "gameId": "red-flag-green-flag",
-    "category": "kids",
-    "playMode": "online",
-    "text": "They save you the best seat on the roller coaster or field trip bus next to the window."
-  },
-  {
-    "id": "on-rf-kids-e13",
-    "gameId": "red-flag-green-flag",
-    "category": "kids",
-    "playMode": "online",
-    "text": "They let you hold the big flashlight when you are exploring a cool dark blanket fort."
   }
 ];

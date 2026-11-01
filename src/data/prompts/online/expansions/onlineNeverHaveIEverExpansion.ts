@@ -308,13 +308,6 @@ export const ONLINE_NEVER_HAVE_I_EVER_EXPANSION: PromptItem[] = [
     "text": "Never have I ever built an epic blanket fort in the living room that took over the whole couch."
   },
   {
-    "id": "on-nhie-kids-e6",
-    "gameId": "never-have-i-ever",
-    "category": "kids",
-    "playMode": "online",
-    "text": "Never have I ever tried to balance a spoon on my nose at the dinner table until it dropped."
-  },
-  {
     "id": "on-nhie-kids-e13",
     "gameId": "never-have-i-ever",
     "category": "kids",

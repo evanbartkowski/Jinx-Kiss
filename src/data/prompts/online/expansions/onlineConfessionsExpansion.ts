@@ -205,13 +205,5 @@ export const ONLINE_CONFESSIONS_EXPANSION: PromptItem[] = [
     "playMode": "online",
     "text": "Confess the single sentence you would tell your partner if you only had 10 seconds to speak.",
     "confessionStarter": "If I only had ten seconds, I would tell them..."
-  },
-  {
-    "id": "on-cf-kids-e7",
-    "gameId": "confessions",
-    "category": "kids",
-    "playMode": "online",
-    "text": "Confess the name and color of your imaginary pet dragon or dinosaur.",
-    "confessionStarter": "My dragon's name is..."
   }
 ];

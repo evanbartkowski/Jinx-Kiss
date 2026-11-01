@@ -1,4 +1,4 @@
-﻿import { GameCategory, GameId, PlayMode, PromptItem } from '../../types/game';
+import { GameCategory, GameId, PlayMode, PromptItem } from '../../types/game';
 import { ALL_ONLINE_PROMPTS, getOnlinePromptsForGame, ONLINE_STANDALONE_PROMPTS } from './online';
 import { TRUTH_OR_DARE_PROMPTS } from './truthOrDare';
 import { NEVER_HAVE_I_EVER_PROMPTS } from './neverHaveIEver';
@@ -16,6 +16,7 @@ import { PREMIUM_EXPANSION_PROMPTS } from './premiumExpansion';
 import { INTERNET_VIRAL_PROMPTS } from './internetViralPrompts';
 import { MASTER_EXPANSION_V2_PROMPTS } from './masterExpansionV2';
 import { MEGA_EXPANSION_800_PROMPTS } from './megaExpansion800';
+import { ADULT_EXPANSION_PROMPTS } from './adultExpansion';
 import { createPromptCatalog } from '../../utils/promptCatalog';
 import { EDITORIAL_SPOTLIGHT_PROMPTS } from './editorialSpotlights';
 import { UNHINGED_PROMPTS } from './unhinged';
@@ -42,6 +43,7 @@ export const ALL_DEFAULT_PROMPTS = createPromptCatalog([
   ...INTERNET_VIRAL_PROMPTS,
   ...MASTER_EXPANSION_V2_PROMPTS,
   ...MEGA_EXPANSION_800_PROMPTS,
+  ...ADULT_EXPANSION_PROMPTS,
 ], 'in-person');
 
 export const CHAOS_MIX_PROMPTS = ALL_DEFAULT_PROMPTS['chaos-mix'];
@@ -54,4 +56,4 @@ export function getPromptsForGame(gameId: GameId, category?: GameCategory, playM
   return playMode === 'online' ? getOnlinePromptsForGame(gameId, category) : getDefaultPromptsForGame(gameId, category);
 }
 
-export { MASTER_COLLECTION_PROMPTS, ALL_ONLINE_PROMPTS, getOnlinePromptsForGame, ONLINE_STANDALONE_PROMPTS };
+export { MASTER_COLLECTION_PROMPTS, ALL_ONLINE_PROMPTS, getOnlinePromptsForGame, ONLINE_STANDALONE_PROMPTS, ADULT_EXPANSION_PROMPTS };

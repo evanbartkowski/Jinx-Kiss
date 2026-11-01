@@ -190,14 +190,6 @@ export const INTERNET_VIRAL_PROMPTS: PromptItem[] = [
 
   // KIDS
   {
-    id: 'iv-wyr-k1',
-    gameId: 'would-you-rather',
-    category: 'kids',
-    text: 'Would you rather have a real pet baby dragon that sneezes sparks or a pet unicorn that changes color with your emotions?',
-    optionA: 'Baby dragon that sneezes sparklers',
-    optionB: 'Mood-changing magical unicorn',
-  },
-  {
     id: 'iv-wyr-k2',
     gameId: 'would-you-rather',
     category: 'kids',
@@ -655,22 +647,10 @@ export const INTERNET_VIRAL_PROMPTS: PromptItem[] = [
 
   // KIDS
   {
-    id: 'iv-dr-k1',
-    gameId: 'dare-roulette',
-    category: 'kids',
-    text: 'Balance a spoon on the tip of your nose while singing Happy Birthday in a booming opera voice.',
-  },
-  {
     id: 'iv-dr-k2',
     gameId: 'dare-roulette',
     category: 'kids',
     text: 'Do your best penguin waddle around the room while balancing a sofa pillow on your head.',
-  },
-  {
-    id: 'iv-dr-e2',
-    gameId: 'dare-roulette',
-    category: 'easy',
-    text: 'Let the person to your left draw a tiny smiley face on your forehead with a washable pen or lipstick.',
   },
 
   // MEDIUM

@@ -94,13 +94,7 @@ export const PREMIUM_EXPANSION_PROMPTS: PromptItem[] = [
     id: "pe-nhie-11",
     gameId: "never-have-i-ever",
     category: "easy",
-    text: "Never have I ever looked up the synopsis or ending of a movie while watching it in the theater because I got impatient."
-  },
-  {
-    id: "pe-nhie-12",
-    gameId: "never-have-i-ever",
-    category: "kids",
-    text: "Never have I ever tried to balance a spoon on my nose for more than 10 seconds."
+    "text": "Never have I ever looked up the synopsis or ending of a movie while watching it in the theater because I got impatient."
   },
   {
     id: "pe-wyr-3",

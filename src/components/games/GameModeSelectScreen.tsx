@@ -135,17 +135,22 @@ export const GameModeSelectScreen: React.FC<GameModeSelectScreenProps> = ({
 
   const triggerGameLaunch = (categoryToStart: GameCategory) => {
     soundEffects.playGameStart();
-    confetti({
-      particleCount: isMobile ? 22 : 35,
-      spread: 60,
-      origin: { y: 0.8 },
-      colors: ['#FF4DA6', '#A855F7', '#06B6D4', '#10B981'],
-    });
     onSelectCategory(categoryToStart, isProgressive);
+    setTimeout(() => {
+      try {
+        confetti({
+          particleCount: isMobile ? 18 : 35,
+          spread: 60,
+          origin: { y: 0.8 },
+          colors: ['#FF4DA6', '#A855F7', '#06B6D4', '#10B981'],
+        });
+      } catch {
+        // fallback
+      }
+    }, 50);
   };
 
   const handleCategoryClick = (cat: GameCategory) => {
-    soundEffects.playCardFlip();
     setSelectedCategory(cat);
 
     // Selecting the active card starts the game; mobile keeps its single-tap launch.
@@ -155,6 +160,8 @@ export const GameModeSelectScreen: React.FC<GameModeSelectScreenProps> = ({
         return;
       }
       triggerGameLaunch(cat);
+    } else {
+      soundEffects.playCardFlip();
     }
   };
 

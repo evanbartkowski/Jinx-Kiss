@@ -88,16 +88,16 @@ function AppContent() {
     setCurrentView(view);
     if (view === 'home') {
       window.location.hash = '';
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      window.scrollTo(0, 0);
     } else if (view === 'game') {
       window.location.hash = `#/game/${param || selectedGameId}`;
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      window.scrollTo(0, 0);
     } else if (view === 'multiplayer') {
       window.location.hash = param ? `#/room/${param}` : `#/rooms`;
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      window.scrollTo(0, 0);
     } else {
       window.location.hash = `#/${view}`;
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      window.scrollTo(0, 0);
     }
   };
 
@@ -112,7 +112,7 @@ function AppContent() {
     setActiveCustomDeck(deck);
     setCurrentView('game');
     window.location.hash = `#/deck/${deck.id}`;
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo(0, 0);
   };
 
   const handleEditDeck = (deck: CustomDeck) => {
@@ -123,7 +123,7 @@ function AppContent() {
   const handleStartPartyMode = (config: PartyModeConfig) => {
     setActivePartyConfig(config);
     setCurrentView('party-game');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo(0, 0);
   };
 
   const handleQuickPlay = () => {
@@ -145,7 +145,7 @@ function AppContent() {
     if (session.mode === 'party' && session.partyConfig) {
       setActivePartyConfig(session.partyConfig);
       setCurrentView('party-game');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      window.scrollTo(0, 0);
     } else {
       setSelectedGameId(session.gameId);
       setActiveCustomDeck(null);

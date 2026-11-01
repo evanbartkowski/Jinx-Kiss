@@ -5,17 +5,18 @@ const CACHE_KEY = 'jinxkiss_official_prompts_override_v1';
 const listeners = new Set<() => void>();
 let contentVersion = 0;
 let memoryOverrides: PromptItem[] | undefined;
-let useMemoryCache = false;
+const poolCache = new Map<string, PromptItem[]>();
 
 export function notifyPromptContentChanged() {
   contentVersion += 1;
+  poolCache.clear();
   listeners.forEach((listener) => listener());
 }
 
 function onStorage(event: StorageEvent) {
   if (event.key === CACHE_KEY || event.key === null) {
     memoryOverrides = undefined;
-    useMemoryCache = false;
+    poolCache.clear();
     notifyPromptContentChanged();
   }
 }
@@ -34,25 +35,30 @@ export function getPromptContentVersion() {
 }
 
 export function getCachedPromptOverrides(): PromptItem[] {
-  if (useMemoryCache) return memoryOverrides || [];
   try {
-    const parsed = JSON.parse(localStorage.getItem(CACHE_KEY) || '[]');
-    return Array.isArray(parsed)
+    const raw = localStorage.getItem(CACHE_KEY);
+    if (!raw) {
+      memoryOverrides = [];
+      return [];
+    }
+    const parsed = JSON.parse(raw);
+    memoryOverrides = Array.isArray(parsed)
       ? parsed.filter((p) => p && typeof p.id === 'string' && typeof p.text === 'string')
       : [];
+    return memoryOverrides;
   } catch {
     return memoryOverrides || [];
   }
 }
 
 export function cachePromptOverrides(prompts: PromptItem[]) {
-  const changed = JSON.stringify(getCachedPromptOverrides()) !== JSON.stringify(prompts);
+  const current = getCachedPromptOverrides();
+  const changed = current.length !== prompts.length || JSON.stringify(current) !== JSON.stringify(prompts);
   memoryOverrides = prompts;
   try {
     localStorage.setItem(CACHE_KEY, JSON.stringify(prompts));
-    useMemoryCache = false;
   } catch {
-    useMemoryCache = true;
+    // fallback
   }
   if (changed) notifyPromptContentChanged();
 }
@@ -101,10 +107,16 @@ export function getCachedGamePrompts(
   category: GameCategory | undefined,
   mode: PlayMode
 ): PromptItem[] {
-  const source = Object.entries(catalog)
-    .filter(([id]) => id !== 'chaos-mix')
-    .flatMap(([, prompts]) => prompts);
-  let pool = mergePromptOverrides(source, getCachedPromptOverrides(), mode);
-  if (gameId === 'chaos-mix') pool = pool.map((p) => ({ ...p, originGameId: p.gameId, gameId: 'chaos-mix' }));
-  return filterPromptsForScope(pool, gameId, category, mode);
+  const cacheKey = `${mode}_${contentVersion}`;
+  let pool = poolCache.get(cacheKey);
+  if (!pool) {
+    const source = Object.entries(catalog)
+      .filter(([id]) => id !== 'chaos-mix')
+      .flatMap(([, prompts]) => prompts);
+    pool = mergePromptOverrides(source, getCachedPromptOverrides(), mode);
+    poolCache.set(cacheKey, pool);
+  }
+  let gamePool = pool;
+  if (gameId === 'chaos-mix') gamePool = gamePool.map((p) => ({ ...p, originGameId: p.gameId, gameId: 'chaos-mix' }));
+  return filterPromptsForScope(gamePool, gameId, category, mode);
 }

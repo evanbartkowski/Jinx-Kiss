@@ -23,6 +23,7 @@ export const CategorySelector: React.FC<CategorySelectorProps> = ({
   const [pendingCategory, setPendingCategory] = useState<GameCategory | null>(null);
 
   const handleCategoryClick = (cat: GameCategory) => {
+    if (cat === currentCategory) return;
     soundEffects.playClick();
     if (requiresAdultConfirmation(cat) && !isAgeConfirmed) {
       setPendingCategory(cat);

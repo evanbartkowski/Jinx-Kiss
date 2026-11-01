@@ -12,7 +12,7 @@ export const MYSTERY_CARDS: MysteryCard[] = [
   {
     id: 'myst-2',
     title: 'Code of Silence',
-    description: 'Anyone who laughs, chuckles, or speaks out of turn during this round loses 10 points or takes a sip.',
+    description: 'Anyone who laughs, chuckles, or speaks out of turn during this round takes a sip.',
     type: 'chaos',
     durationRounds: 1,
     points: 20,

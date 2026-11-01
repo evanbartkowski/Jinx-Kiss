@@ -65,33 +65,11 @@ export const MASTER_COLLECTION_PROMPTS: PromptItem[] = [
     "text": "Never have I ever built a blanket fort so massive it took over the entire living room."
   },
   {
-    "id": "mk-kids-wyr-5",
-    "gameId": "would-you-rather",
-    "category": "kids",
-    "text": "Would you rather have a pet miniature dragon the size of a teacup or a pet giant panda?",
-    "optionA": "have a pet miniature dragon the size of a teacup",
-    "optionB": "a pet giant panda"
-  },
-  {
-    "id": "mk-kids-conf-1",
-    "gameId": "confessions",
-    "category": "kids",
-    "type": "truth",
-    "text": "I once hid a vegetable under my napkin or fed it to the dog so I wouldn't have to eat it."
-  },
-  {
     "id": "mk-kids-conf-2",
     "gameId": "confessions",
     "category": "kids",
     "type": "truth",
     "text": "I have stayed awake past bedtime reading a book or playing games under the blanket with a flashlight."
-  },
-  {
-    "id": "mk-kids-conf-5",
-    "gameId": "confessions",
-    "category": "kids",
-    "type": "truth",
-    "text": "I once ate the last cookie in the jar and pretended I had no idea who took it."
   },
   {
     "id": "mk-easy-d-9",

@@ -40,7 +40,20 @@ export const GamePage: React.FC<GamePageProps> = ({ gameId, customDeck: initialD
   const customDeck = usePlayingDeckUpdates(initialDeck);
   const contentVersion = usePromptContentVersion();
   const { selectedCategory, setSelectedCategory, savedPlayers, setSavedPlayers, playMode, setPlayMode, isAgeConfirmed, confirmAge } = useGameSettings();
-  const [loadedPrompts, setPrompts] = useState<PromptItem[]>([]);
+  const [gameKey, setGameKey] = useState(0); // For clean restart
+  const [isSelectingMode, setIsSelectingMode] = useState<boolean>(!customDeck);
+  const promptScope = `${gameId}_${selectedCategory}_${playMode}_${customDeck?.id || 'official'}_${gameKey}`;
+  const [loadedPrompts, setPrompts] = useState<PromptItem[]>(() => {
+    if (customDeck) {
+      const deckMode = customDeck.playMode || 'in-person';
+      const deckCards = customDeck.cards.map(card => ({ ...card, playMode: card.playMode || deckMode }));
+      const validCards = filterPromptsForScope(deckCards, gameId, selectedCategory, deckMode);
+      return sessionService.filterUnseenCards(customDeck.id, validCards);
+    }
+    const base = getPromptsForGame(gameId, selectedCategory, playMode);
+    const historyKey = `${playMode}_${gameId}_${selectedCategory}`;
+    return sessionService.filterUnseenCards(historyKey, base);
+  });
   const prompts = useMemo(() => {
     if (customDeck) {
       const mode = customDeck.playMode || 'in-person';
@@ -51,10 +64,7 @@ export const GamePage: React.FC<GamePageProps> = ({ gameId, customDeck: initialD
     const scoped = gameId === 'chaos-mix' ? pool.map(card => ({ ...card, originGameId: card.originGameId || card.gameId, gameId })) : pool;
     return filterPromptsForScope(scoped, gameId, selectedCategory, playMode);
   }, [loadedPrompts, customDeck, gameId, selectedCategory, playMode, contentVersion]);
-  const [loadedScope, setLoadedScope] = useState<string | null>(null);
-  const [gameKey, setGameKey] = useState(0); // For clean restart
-  const [isSelectingMode, setIsSelectingMode] = useState<boolean>(!customDeck);
-  const promptScope = `${gameId}_${selectedCategory}_${playMode}_${customDeck?.id || 'official'}_${gameKey}`;
+  const [loadedScope, setLoadedScope] = useState<string | null>(() => promptScope);
 
   useEffect(() => {
     if (customDeck) {

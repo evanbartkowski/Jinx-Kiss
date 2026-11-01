@@ -111,22 +111,6 @@ export const ONLINE_TRUTH_OR_DARE_EXPANSION: PromptItem[] = [
     "text": "Narrate everything you are doing right now as if you are a nature documentary host studying a wild gamer."
   },
   {
-    "id": "on-tod-easy-e-d14",
-    "gameId": "truth-or-dare",
-    "category": "easy",
-    "playMode": "online",
-    "type": "dare",
-    "text": "Balance a pen or spoon on your nose or upper lip for 15 seconds without letting it fall on camera."
-  },
-  {
-    "id": "on-tod-easy-e-d33",
-    "gameId": "truth-or-dare",
-    "category": "easy",
-    "playMode": "online",
-    "type": "dare",
-    "text": "Do your best impression of a sports commentator calling a play-by-play of someone taking a sip of water."
-  },
-  {
     "id": "on-tod-easy-e-d34",
     "gameId": "truth-or-dare",
     "category": "easy",
@@ -149,14 +133,6 @@ export const ONLINE_TRUTH_OR_DARE_EXPANSION: PromptItem[] = [
     "playMode": "online",
     "type": "dare",
     "text": "Speak with a fake royalty accent and address everyone in the call as 'Your Highness' for one round."
-  },
-  {
-    "id": "on-tod-easy-e-d41",
-    "gameId": "truth-or-dare",
-    "category": "easy",
-    "playMode": "online",
-    "type": "dare",
-    "text": "Draw a smiley face on a piece of paper in 5 seconds and hold it up to your camera like high art."
   },
   {
     "id": "on-tod-easy-e-d42",
@@ -263,28 +239,12 @@ export const ONLINE_TRUTH_OR_DARE_EXPANSION: PromptItem[] = [
     "text": "Do your best impression of the person to your left or the host of this call for 20 seconds."
   },
   {
-    "id": "on-tod-medium-e-d21",
-    "gameId": "truth-or-dare",
-    "category": "medium",
-    "playMode": "online",
-    "type": "dare",
-    "text": "Type a message in the call chat with your nose and make sure it has at least three real words."
-  },
-  {
     "id": "on-tod-medium-e-d22",
     "gameId": "truth-or-dare",
     "category": "medium",
     "playMode": "online",
     "type": "dare",
     "text": "Let the group pick a random song that you have to lip-sync to on webcam with full passion."
-  },
-  {
-    "id": "on-tod-medium-e-d33",
-    "gameId": "truth-or-dare",
-    "category": "medium",
-    "playMode": "online",
-    "type": "dare",
-    "text": "Put a pair of socks on your hands and try to type a sentence in the call chat."
   },
   {
     "id": "on-tod-medium-e-d39",
@@ -709,29 +669,5 @@ export const ONLINE_TRUTH_OR_DARE_EXPANSION: PromptItem[] = [
     "playMode": "online",
     "type": "truth",
     "text": "If you could shrink down to the size of an ant for an hour, what would you explore?"
-  },
-  {
-    "id": "on-tod-kids-e-d17",
-    "gameId": "truth-or-dare",
-    "category": "kids",
-    "playMode": "online",
-    "type": "dare",
-    "text": "Put your hands on your hips and do a victory dance like you just won a video game match."
-  },
-  {
-    "id": "on-tod-kids-e-d42",
-    "gameId": "truth-or-dare",
-    "category": "kids",
-    "playMode": "online",
-    "type": "dare",
-    "text": "Hold up a piece of paper with a heart drawn on it to show love to the group."
-  },
-  {
-    "id": "on-tod-kids-e-d46",
-    "gameId": "truth-or-dare",
-    "category": "kids",
-    "playMode": "online",
-    "type": "dare",
-    "text": "Give yourself a huge high-five and a pat on the back on camera for being a great player!"
   }
 ];
