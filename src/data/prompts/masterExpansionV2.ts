@@ -273,7 +273,7 @@ export const MASTER_EXPANSION_V2_PROMPTS: PromptItem[] = [
     gameId: 'truth-or-dare',
     category: 'extreme',
     type: 'dare',
-    text: 'Do your most realistic, high-effort impression of having an awkward, noisy panic attack or breakdown for 20 seconds.',
+    text: 'Call a random contact in your phone and convince them you are having a complete identity crisis and need them to vouch for you.',
   },
   {
     id: 'exp2-ext-15',
@@ -339,14 +339,14 @@ export const MASTER_EXPANSION_V2_PROMPTS: PromptItem[] = [
     gameId: 'truth-or-dare',
     category: 'extreme',
     type: 'dare',
-    text: 'Call a friend who isn’t here on speaker and convince them for 60 seconds that you just bought a pet goat and need to keep it at their apartment.',
+    text: 'Call your most recent ex on speakerphone and ask them why they think your past relationship was such an absolute disaster.',
   },
   {
     id: 'exp2-ext-32',
     gameId: 'dare-roulette',
     category: 'extreme',
     type: 'dare',
-    text: 'Do 20 pushups right now, or let the person to your left slap you across the face with a tortilla or moist paper towel.',
+    text: 'Do 25 pushups right now, or let the person to your left pour a glass of ice-cold water down your back.',
   },
   {
     id: 'exp2-ext-33',

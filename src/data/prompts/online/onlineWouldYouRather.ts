@@ -305,9 +305,9 @@ const BASE_ONLINE_WOULD_YOU_RATHER_PROMPTS: PromptItem[] = [
     gameId: 'would-you-rather',
     category: 'extreme',
     playMode: 'online',
-    text: "Would you rather confess your most unhinged online purchase in front of this call or let the group pick your Discord profile banner for a week?",
-    optionA: "Confess unhinged purchase",
-    optionB: "Group picks banner (1 week)"
+    text: "Would you rather have all your private DMs from the past year displayed on screen to this call or have your parents read every text you sent while drunk?",
+    optionA: "Private DMs displayed to call",
+    optionB: "Drunk texts read by parents"
   },
 
   // ==========================================
@@ -471,9 +471,9 @@ const BASE_ONLINE_WOULD_YOU_RATHER_PROMPTS: PromptItem[] = [
     gameId: 'would-you-rather',
     category: 'extreme',
     playMode: 'online',
-    text: "Would you rather be banned from all online gaming and streaming for 6 months or only be able to communicate online using voice notes?",
-    optionA: "6-month gaming & stream ban",
-    optionB: "Voice notes only forever"
+    text: "Would you rather have your worst enemy manage your social media accounts for a month or spend 48 hours locked in a room with your most toxic ex?",
+    optionA: "Worst enemy manages accounts (1 month)",
+    optionB: "48 hours locked with toxic ex"
   },
   {
     id: 'on-wyr-cpl-11',

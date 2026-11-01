@@ -503,7 +503,7 @@ export const MEGA_EXPANSION_800_PROMPTS: PromptItem[] = [
     "id": "mega-18+-16",
     "gameId": "dare-roulette",
     "category": "extreme",
-    "text": "If a mysterious stranger offered you 10 extra years of healthy life in exchange for 5 years off a stranger's life, do you accept?"
+    "text": "Let the person on your left write an unhinged, cryptic sentence on your Instagram notes and leave it up for 2 hours."
   },
   {
     "id": "mega-18+-18",
@@ -550,7 +550,7 @@ export const MEGA_EXPANSION_800_PROMPTS: PromptItem[] = [
     "id": "mega-18+-38",
     "gameId": "dare-roulette",
     "category": "extreme",
-    "text": "If an artificial intelligence offered to make every major life decision for you with 99% guaranteed happiness, would you surrender control?"
+    "text": "Hand your phone to the player to your right and let them read your three most recent sent text messages aloud to the room."
   },
   {
     "id": "mega-18+-40",
@@ -583,27 +583,27 @@ export const MEGA_EXPANSION_800_PROMPTS: PromptItem[] = [
     "id": "mega-18+-90",
     "gameId": "truth-or-dare",
     "category": "extreme",
-    "text": "If you could secretly redirect 1% of the world's wealth into three specific causes, where is the money going?",
+    "text": "Who in this room do you think would be the quickest to stab everyone else in the back if their own freedom was on the line?",
     "type": "truth"
   },
   {
     "id": "mega-18+-95",
     "gameId": "truth-or-sip",
     "category": "extreme",
-    "text": "What is an adult vice that you believe society judges far too harshly compared to its actual harm?",
+    "text": "What is the most toxic relationship habit you refuse to give up even though it ruins your relationships?",
     "forfeit": "Take a sip of any drink, or pass."
   },
   {
     "id": "mega-18+-99",
     "gameId": "hot-seat",
     "category": "extreme",
-    "text": "What is the most profound realization about mortality or life purpose that ever stopped you dead in your tracks?"
+    "text": "What is the most toxic lie you told a past partner that completely shattered their trust in you forever?"
   },
   {
     "id": "mega-18+-100",
     "gameId": "truth-or-dare",
     "category": "extreme",
-    "text": "Pick one person in this room and tell them the single most fascinating psychological trait you observe in them.",
+    "text": "Pick one person in this room and tell them the single most pathetic or irritating trait you observe in them.",
     "type": "dare"
   },
   {

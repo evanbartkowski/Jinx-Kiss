@@ -137,7 +137,7 @@ export const ONLINE_MOST_LIKELY_TO_EXPANSION: PromptItem[] = [
     "gameId": "most-likely-to",
     "category": "extreme",
     "playMode": "online",
-    "text": "Who in this call is most likely to rage-smash a keyboard, monitor, or controller during a video game?"
+    "text": "Who in this call is most likely to cheat on their partner and convince themselves they were the victim?"
   },
   {
     "id": "on-mlt-extreme-e3",
@@ -158,14 +158,14 @@ export const ONLINE_MOST_LIKELY_TO_EXPANSION: PromptItem[] = [
     "gameId": "most-likely-to",
     "category": "extreme",
     "playMode": "online",
-    "text": "Who in this call is most likely to get doxxed by an angry internet forum over a video game argument?"
+    "text": "Who in this call is most likely to ghost their lifelong friends the moment they get into a new relationship?"
   },
   {
     "id": "on-mlt-extreme-e11",
     "gameId": "most-likely-to",
     "category": "extreme",
     "playMode": "online",
-    "text": "Who in this call is most likely to stay in an online voice call for 36 straight hours with zero sleep?"
+    "text": "Who in this call is most likely to turn their friend's crisis into drama about themselves?"
   },
   {
     "id": "on-mlt-extreme-e13",

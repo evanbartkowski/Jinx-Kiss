@@ -237,9 +237,9 @@ export const INTERNET_VIRAL_PROMPTS: PromptItem[] = [
     id: 'iv-wyr-ex2',
     gameId: 'would-you-rather',
     category: 'extreme',
-    text: 'Would you rather live with a curse where every toilet you use makes an audible horn noise, or every time you enter a room you must fight a medium-sized goat?',
-    optionA: 'Loud horn toilet every time',
-    optionB: 'Daily battle against a feisty goat',
+    text: 'Would you rather have everyone in this room see your entire private DM history or have your family see your last 100 Google searches?',
+    optionA: 'Room sees entire private DM history',
+    optionB: 'Family sees last 100 Google searches'
   },
 
   // UNHINGED
@@ -331,7 +331,7 @@ export const INTERNET_VIRAL_PROMPTS: PromptItem[] = [
     id: 'iv-nhe-ex1',
     gameId: 'never-have-i-ever',
     category: 'extreme',
-    text: 'Never have I ever walked home barefoot at 4 AM after a night out because my shoes were unbearable.',
+    text: 'Never have I ever pretended to be loyal to a friend while secretly plotting to take their partner or job.',
   },
   {
     id: 'iv-nhe-ex2',
@@ -796,7 +796,7 @@ export const INTERNET_VIRAL_PROMPTS: PromptItem[] = [
     id: 'iv-pad-ex2',
     gameId: 'point-and-drink',
     category: 'extreme',
-    text: 'Who in this room is most likely to accidentally become an international fugitive on vacation?',
+    text: 'Point to the person in this room who is most likely to sell out the entire friend group for a million dollars.',
   }
 ];
 

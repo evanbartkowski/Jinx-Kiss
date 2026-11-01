@@ -29,33 +29,33 @@ export const WOULD_YOU_RATHER_PROMPTS: PromptItem[] = [
     "id": "wyr-extreme-1",
     "gameId": "would-you-rather",
     "category": "extreme",
-    "text": "Would you rather be trapped in an elevator for 24 hours with your bitter ex or a venomous cobra?",
-    "optionA": "24 hrs with bitter ex",
-    "optionB": "24 hrs with cobra"
+    "text": "Would you rather be trapped in an elevator for 24 hours with your most toxic ex or have your entire bank account wiped to zero?",
+    "optionA": "24 hours trapped with toxic ex",
+    "optionB": "Entire bank account wiped to zero"
   },
   {
     "id": "wyr-extreme-2",
     "gameId": "would-you-rather",
     "category": "extreme",
-    "text": "Would you rather have your worst embarrassing secret broadcast on national television or do 30 days in jail?",
-    "optionA": "Broadcast on TV",
-    "optionB": "30 days in jail"
+    "text": "Would you rather serve 6 months in prison for a crime your best friend committed or rat them out to save yourself?",
+    "optionA": "Serve 6 months in prison for them",
+    "optionB": "Rat them out to save yourself"
   },
   {
     "id": "wyr-extreme-5",
     "gameId": "would-you-rather",
     "category": "extreme",
-    "text": "Would you rather lose the ability to lie forever or lose the ability to detect when others lie?",
-    "optionA": "Can never lie again",
-    "optionB": "Never detect lies"
+    "text": "Would you rather have everyone you know read your private search history from the past year or have your partner read all your unsent text drafts?",
+    "optionA": "Everyone reads your search history",
+    "optionB": "Partner reads unsent text drafts"
   },
   {
     "id": "wyr-extreme-7",
     "gameId": "would-you-rather",
     "category": "extreme",
-    "text": "Would you rather survive a zombie apocalypse with no supplies or an alien invasion with laser guns?",
-    "optionA": "Zombie apocalypse",
-    "optionB": "Alien invasion"
+    "text": "Would you rather have a permanent face tattoo of your worst enemy's initials or lose your three closest friends forever?",
+    "optionA": "Permanent face tattoo of enemy initials",
+    "optionB": "Lose 3 closest friends forever"
   },
   {
     "id": "wyr-couples-1",

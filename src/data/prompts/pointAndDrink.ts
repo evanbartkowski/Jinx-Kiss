@@ -11,36 +11,36 @@ export const POINT_AND_DRINK_PROMPTS: PromptItem[] = [
     "id": "pad-extreme-2",
     "gameId": "point-and-drink",
     "category": "extreme",
-    "text": "Who is most likely to survive a zombie apocalypse purely through cunning and ruthlessness?"
+    "text": "Point to the person in this room who is most likely to sell out their best friend for a promotion or $50,000 in cash."
   },
   {
     "id": "pad-extreme-5",
     "gameId": "point-and-drink",
     "category": "extreme",
-    "text": "Who is most likely to flee to a foreign country and start an entirely new secret identity?"
+    "text": "Point to the player here who would abandon this friend group without a word if they found a wealthier, cooler crowd."
   },
   {
     "id": "pad-extreme-6",
     "gameId": "point-and-drink",
     "category": "extreme",
-    "text": "Who is most likely to wake up in a completely different city after a wild night out?"
+    "text": "Point to the person who is most likely to get blacked out, start screaming at everyone, and ruin the night."
   },
   {
     "id": "pad-extreme-7",
     "gameId": "point-and-drink",
     "category": "extreme",
-    "text": "Who is most likely to talk their way out of a serious speeding ticket or legal crisis?"
+    "text": "Point to the person here who is the most manipulative liar when they get caught doing something shady."
   },
   {
     "id": "pad-extreme-8",
     "gameId": "point-and-drink",
     "category": "extreme",
-    "text": "Who is most likely to go skydiving or bungee jumping on a spontaneous impulse dare?"
+    "text": "Point to the player in this room who is most likely to betray their partner and blame it on their partner's insecurity."
   },
   {
     "id": "pad-extreme-10",
     "gameId": "point-and-drink",
     "category": "extreme",
-    "text": "Who is most likely to end up in a high-speed chase with paparazzi or campus security?"
+    "text": "Point to the person in this room who has the most embarrassing, toxic dating history of anyone here."
   }
 ];

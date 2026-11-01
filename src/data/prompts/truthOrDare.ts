@@ -142,7 +142,7 @@ export const TRUTH_OR_DARE_PROMPTS: PromptItem[] = [
     gameId: 'truth-or-dare',
     category: 'extreme',
     type: 'truth',
-    text: "Have you ever clogged a toilet at someone else’s house and walked away without saying a word?"
+    text: "What is the absolute most ruthless, cold-hearted thing you have ever done to get revenge on someone who wronged you?"
   },
   {
     id: 'tod-curated-t-18',
@@ -233,7 +233,7 @@ export const TRUTH_OR_DARE_PROMPTS: PromptItem[] = [
     gameId: 'truth-or-dare',
     category: 'extreme',
     type: 'truth',
-    text: "If you could erase one specific memory from your life forever, what is the PG-13 summary of it?"
+    text: "Who in this room do you secretly think is a complete bum with zero ambition and a dead-end future?"
   },
 
   // Curated High-Risk Dares (Prompts 31 - 70)
@@ -368,7 +368,7 @@ export const TRUTH_OR_DARE_PROMPTS: PromptItem[] = [
     gameId: 'truth-or-dare',
     category: 'extreme',
     type: 'dare',
-    text: "Call a local business and ask if they offer a service completely unrelated to their store (e.g., ask a pizza shop if they repair lawnmowers)."
+    text: "Call your most recent ex on speakerphone, ask \"Do you still miss me?\", and stay on the line for 20 seconds without laughing."
   },
   {
     id: 'tod-curated-d-50',
@@ -424,14 +424,7 @@ export const TRUTH_OR_DARE_PROMPTS: PromptItem[] = [
     gameId: 'truth-or-dare',
     category: 'extreme',
     type: 'dare',
-    text: 'Give a 1-minute passionate TED Talk on an unhinged topic chosen by the group (e.g., "Why cereal is soup" or "Why I should be dictator").'
-  },
-  {
-    id: 'tod-curated-d-58',
-    gameId: 'truth-or-dare',
-    category: 'easy',
-    type: 'dare',
-    text: 'End every single sentence you speak for the next three rounds with the phrase "...in accordance with the prophecy."'
+    text: "Look directly at the player you would least want to date in this room and explain why while holding a wall sit for 45 seconds."
   },
   {
     id: 'tod-curated-d-59',
@@ -508,7 +501,7 @@ export const TRUTH_OR_DARE_PROMPTS: PromptItem[] = [
     gameId: 'truth-or-dare',
     category: 'extreme',
     type: 'dare',
-    text: "Do the worm across the floor right now with 100% commitment, regardless of whether you know how."
+    text: "Let the person to your left scroll through your deleted photo album for 45 seconds and show the room the most embarrassing photo they find."
   },
   {
     id: 'tod-curated-d-70',
@@ -734,7 +727,7 @@ export const TRUTH_OR_DARE_PROMPTS: PromptItem[] = [
     gameId: 'truth-or-dare',
     category: 'extreme',
     type: 'truth',
-    text: "What is the most questionable hygiene shortcut you took that you swore you would take to the grave?"
+    text: "Who in this room do you think is the biggest fake friend who talks behind people's backs?"
   },
   {
     id: 'tod-exp-ext-t-06',
@@ -748,7 +741,7 @@ export const TRUTH_OR_DARE_PROMPTS: PromptItem[] = [
     gameId: 'truth-or-dare',
     category: 'extreme',
     type: 'truth',
-    text: "What is the most unhinged intrusive thought you had during a quiet, solemn moment like a graduation ceremony?"
+    text: "What is the most shameful, pathetic thing you have ever done to make an ex or crush notice you?"
   },
   {
     id: 'tod-exp-ext-d-01',
@@ -776,35 +769,35 @@ export const TRUTH_OR_DARE_PROMPTS: PromptItem[] = [
     gameId: 'truth-or-dare',
     category: 'extreme',
     type: 'dare',
-    text: "Call a delivery restaurant and ask if their chefs can put pineapple on an order in the shape of a heart because it's an emergency."
+    text: "Call your third most recent contact on speakerphone and tell them you are fleeing the country tonight and cannot explain why."
   },
   {
     id: 'tod-exp-ext-d-05',
     gameId: 'truth-or-dare',
     category: 'extreme',
     type: 'dare',
-    text: "Take a bite out of an unpeeled lemon or lime wedge with a straight face and pretend it tastes like sweet chocolate."
+    text: "Take a spoonful of hot sauce or swallow a raw clove of garlic right now with zero water for 30 seconds."
   },
   {
     id: 'tod-exp-ext-d-06',
     gameId: 'truth-or-dare',
     category: 'extreme',
     type: 'dare',
-    text: "Crawl on all fours like a frantic goblin to the front door, knock three times, and whisper 'they are coming'."
+    text: "Let the person to your left send a text saying 'I need to confess something crazy about us' to whoever they choose in your contacts."
   },
   {
     id: 'tod-exp-ext-d-07',
     gameId: 'truth-or-dare',
     category: 'extreme',
     type: 'dare',
-    text: "Let the group choose two totally incompatible foods from the fridge or pantry for you to combine into one bite."
+    text: "Stand in front of the room, look directly at the player who annoys you the most here, and state their single worst personality flaw to their face."
   },
   {
     id: 'tod-exp-ext-d-08',
     gameId: 'truth-or-dare',
     category: 'extreme',
     type: 'dare',
-    text: "Stand on a chair and sing the chorus of a dramatic ballad in an aggressive operatic vibrato until someone tells you to stop."
+    text: "Drop down and do 20 pushups right now, or let the person to your right dump a cup of ice water down your shirt."
   },
 
   // Couples (4 Truths, 4 Dares)

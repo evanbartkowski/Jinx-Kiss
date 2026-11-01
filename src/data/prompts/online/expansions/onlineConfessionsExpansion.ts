@@ -99,8 +99,8 @@ export const ONLINE_CONFESSIONS_EXPANSION: PromptItem[] = [
     "gameId": "confessions",
     "category": "extreme",
     "playMode": "online",
-    "text": "Confess the most degenerate amount of money you have ever lost gambling or on in-game pulls.",
-    "confessionStarter": "I blew over $500 on..."
+    "text": "Confess the most malicious lie you ever told to sabotage someone else's reputation or relationship.",
+    "confessionStarter": "I intentionally sabotaged them by claiming..."
   },
   {
     "id": "on-cf-extreme-e9",

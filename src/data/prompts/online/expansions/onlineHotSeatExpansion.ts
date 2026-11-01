@@ -81,7 +81,7 @@ export const ONLINE_HOT_SEAT_EXPANSION: PromptItem[] = [
     "gameId": "hot-seat",
     "category": "extreme",
     "playMode": "online",
-    "text": "What is the most degenerate amount of money you have ever lost gambling or on microtransactions?"
+    "text": "What is the most unforgivable, ruthless thing you have done to protect your own skin when someone else took the blame?"
   },
   {
     "id": "on-hs-couples-e1",

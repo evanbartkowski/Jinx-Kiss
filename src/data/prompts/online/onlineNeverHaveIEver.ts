@@ -59,7 +59,7 @@ const BASE_ONLINE_NEVER_HAVE_I_EVER_PROMPTS: PromptItem[] = [
 
   // ADDITIONAL EXTREME
   { id: 'on-nhie-ext-13', gameId: 'never-have-i-ever', category: 'extreme', playMode: 'online', text: "Never have I ever accidentally shared the wrong screen monitor during a group call and showed something personal." },
-  { id: 'on-nhie-ext-14', gameId: 'never-have-i-ever', category: 'extreme', playMode: 'online', text: "Never have I ever stayed up past 6 AM on call with someone while promising 'I am going to sleep in 5 minutes' every hour." },
+  { id: 'on-nhie-ext-14', gameId: 'never-have-i-ever', category: 'extreme', playMode: 'online', text: "Never have I ever stayed close with an ex while in a new relationship without telling my current partner." },
   { id: 'on-nhie-ext-15', gameId: 'never-have-i-ever', category: 'extreme', playMode: 'online', text: "Never have I ever stalked someone's location or live status so closely that I knew their exact schedule." },
 
   // ADDITIONAL COUPLES

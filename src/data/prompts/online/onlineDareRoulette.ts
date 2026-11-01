@@ -63,7 +63,7 @@ const BASE_ONLINE_DARE_ROULETTE_PROMPTS: PromptItem[] = [
     gameId: 'dare-roulette',
     category: 'extreme',
     playMode: 'online',
-    text: "Call someone not in this game on speakerphone and convince them for 60 seconds that you just bought an alpaca.",
+    text: "Call your most recent ex on speakerphone, ask if they think you are toxic, and stay on call for 20 seconds.",
     forfeit: "Take 3 penalty sips"
   },
 
@@ -151,7 +151,7 @@ const BASE_ONLINE_DARE_ROULETTE_PROMPTS: PromptItem[] = [
     gameId: 'dare-roulette',
     category: 'extreme',
     playMode: 'online',
-    text: "Call someone not in this call and tell them you're thinking of getting a face tattoo of a dolphin.",
+    text: "Call an ex or a former close friend on speakerphone right now, ask 'Do you honestly think I was the problem between us?', and listen to their answer without interrupting.",
     forfeit: "Take 3 penalty sips"
   },
   {
@@ -159,7 +159,7 @@ const BASE_ONLINE_DARE_ROULETTE_PROMPTS: PromptItem[] = [
     gameId: 'dare-roulette',
     category: 'extreme',
     playMode: 'online',
-    text: "Keep your camera tilted up showing only the ceiling while narrating everything you do in the third person for 2 rounds.",
+    text: "Show your camera roll on screen share for 30 seconds and let the call pause on any image they choose.",
     forfeit: "Take 3 penalty sips"
   },
 

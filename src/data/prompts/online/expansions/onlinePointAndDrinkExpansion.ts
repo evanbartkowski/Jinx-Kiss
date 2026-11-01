@@ -109,7 +109,7 @@ export const ONLINE_POINT_AND_DRINK_EXPANSION: PromptItem[] = [
     "gameId": "point-and-drink",
     "category": "extreme",
     "playMode": "online",
-    "text": "Who in this call is most likely to rage-smash a keyboard, controller, or headset during a video game?"
+    "text": "Who in this call is most likely to stab the entire group in the back for a massive financial payout?"
   },
   {
     "id": "on-pad-extreme-e2",
@@ -137,7 +137,7 @@ export const ONLINE_POINT_AND_DRINK_EXPANSION: PromptItem[] = [
     "gameId": "point-and-drink",
     "category": "extreme",
     "playMode": "online",
-    "text": "Who in this call is most likely to spend over $500 on gacha rolls, loot boxes, or microtransactions?"
+    "text": "Who in this call is most likely to stay in an emotionally abusive relationship just for the clout or money?"
   },
   {
     "id": "on-pad-extreme-e7",

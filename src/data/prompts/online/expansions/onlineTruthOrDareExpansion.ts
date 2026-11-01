@@ -372,7 +372,7 @@ export const ONLINE_TRUTH_OR_DARE_EXPANSION: PromptItem[] = [
     "category": "extreme",
     "playMode": "online",
     "type": "dare",
-    "text": "Let the group look at your screen while you open your Spotify 'On Repeat' or most played songs."
+    "text": "Open your camera roll on screen share and let the group pause on any photo from the past 6 months to explain."
   },
   {
     "id": "on-tod-extreme-e-d36",
@@ -380,7 +380,7 @@ export const ONLINE_TRUTH_OR_DARE_EXPANSION: PromptItem[] = [
     "category": "extreme",
     "playMode": "online",
     "type": "dare",
-    "text": "Do 15 squats while holding a full cup of water balanced on the palm of your hand without spilling."
+    "text": "Call someone not on this call on speakerphone, tell them you just made a life-altering confession, and refuse to explain before hanging up."
   },
   {
     "id": "on-tod-extreme-e-d41",

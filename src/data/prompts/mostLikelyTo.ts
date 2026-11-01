@@ -17,25 +17,25 @@ export const MOST_LIKELY_TO_PROMPTS: PromptItem[] = [
     "id": "mlt-extreme-1",
     "gameId": "most-likely-to",
     "category": "extreme",
-    "text": "Who is most likely to end up on national news for a wild, chaotic misunderstanding?"
+    "text": "Who is most likely to sell out their closest friend for a massive career promotion or payout?"
   },
   {
     "id": "mlt-extreme-3",
     "gameId": "most-likely-to",
     "category": "extreme",
-    "text": "Who is most likely to get kicked out of a VIP club or music festival for rowdy antics?"
+    "text": "Who is most likely to cause a screaming scene in public and violently ruin a trip for everyone?"
   },
   {
     "id": "mlt-extreme-4",
     "gameId": "most-likely-to",
     "category": "extreme",
-    "text": "Who is most likely to accidentally join an underground cult thinking it was a yoga retreat?"
+    "text": "Who is most likely to manipulate their partner into thinking they are the crazy one during an argument?"
   },
   {
     "id": "mlt-extreme-9",
     "gameId": "most-likely-to",
     "category": "extreme",
-    "text": "Who is most likely to accidentally burn down the kitchen trying to cook a gourmet dinner?"
+    "text": "Who is most likely to wake up in a holding cell and have zero memory of what they did?"
   },
   {
     "id": "mlt-couples-1",

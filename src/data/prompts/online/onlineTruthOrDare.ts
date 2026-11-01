@@ -38,7 +38,7 @@ const BASE_ONLINE_TRUTH_OR_DARE_PROMPTS: PromptItem[] = [
   { id: 'on-tod-kids-t-1', gameId: 'truth-or-dare', category: 'kids', type: 'truth', playMode: 'online', text: "If you could turn into any animal right now on this video call, what animal would you be?" },
   { id: 'on-tod-ext-t-7', gameId: 'truth-or-dare', category: 'extreme', type: 'truth', playMode: 'online', text: "What is a message you sent that you instantly regretted so much you considered faking your own death?" },
   { id: 'on-tod-ext-d-7', gameId: 'truth-or-dare', category: 'extreme', type: 'dare', playMode: 'online', text: "Open your camera roll on screen share and let the group pick one photo that you must post as your profile banner." },
-  { id: 'on-tod-ext-d-8', gameId: 'truth-or-dare', category: 'extreme', type: 'dare', playMode: 'online', text: "Call someone in your contacts on speaker right now and say 'I don't have much time, they're watching me' and hang up." },
+  { id: 'on-tod-ext-d-8', gameId: 'truth-or-dare', category: 'extreme', type: 'dare', playMode: 'online', text: "Call your most recent ex or former crush on speakerphone and ask them 'Did you ever genuinely love me or was it all in my head?'" },
   { id: 'on-tod-cpl-d-6', gameId: 'truth-or-dare', category: 'couples', type: 'dare', playMode: 'online', text: "Look straight into the lens, describe the exact moment you first knew you wanted to kiss me, and don't look away." },
 
   // 18+ ADDITIONS

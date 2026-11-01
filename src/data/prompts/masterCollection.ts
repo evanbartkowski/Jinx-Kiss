@@ -559,9 +559,9 @@ export const MASTER_COLLECTION_PROMPTS: PromptItem[] = [
     "id": "mk-ext-wyr-12",
     "gameId": "would-you-rather",
     "category": "extreme",
-    "text": "Would you rather get a face tattoo designed by your worst enemy or have to walk through downtown in a diaper?",
-    "optionA": "get a face tattoo designed by your worst enemy",
-    "optionB": "have to walk through downtown in a diaper"
+    "text": "Would you rather get a permanent face tattoo designed by your worst enemy or have all your private notes, drafts, and search history emailed to your family and boss?",
+    "optionA": "get a permanent face tattoo designed by your worst enemy",
+    "optionB": "have all your private notes, drafts, and search history emailed to your family and boss"
   },
   {
     "id": "mk-ext-ht-1",

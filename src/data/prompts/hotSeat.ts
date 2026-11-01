@@ -11,7 +11,7 @@ export const HOT_SEAT_PROMPTS: PromptItem[] = [
     "id": "hs-extreme-9",
     "gameId": "hot-seat",
     "category": "extreme",
-    "text": "What is the most awkward text you ever sent to the completely wrong recipient?"
+    "text": "What is the most toxic or manipulative thing you have ever done in a relationship that you never confessed to?"
   },
   {
     "id": "hs-couples-5",

@@ -76,7 +76,7 @@ const BASE_ONLINE_POINT_AND_DRINK_PROMPTS: PromptItem[] = [
     gameId: 'point-and-drink',
     category: 'extreme',
     playMode: 'online',
-    text: "Point at whoever is most likely to accidentally share the wrong screen or browser tab during a presentation."
+    text: "Point at whoever would immediately ditch their best friend at a party to leave with someone attractive."
   },
   {
     id: 'on-pad-ext-5',
@@ -133,7 +133,7 @@ const BASE_ONLINE_POINT_AND_DRINK_PROMPTS: PromptItem[] = [
     gameId: 'point-and-drink',
     category: 'extreme',
     playMode: 'online',
-    text: "Point at whoever is most likely to accidentally share their screen with something embarrassing open."
+    text: "Point at whoever has the most toxic, chaotic dating history that everyone secretly talks about."
   },
   {
     id: 'on-pad-ext-8',

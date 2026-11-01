@@ -60,7 +60,7 @@ export const ONLINE_DARE_ROULETTE_EXPANSION: PromptItem[] = [
     "gameId": "dare-roulette",
     "category": "extreme",
     "playMode": "online",
-    "text": "Put your phone on speaker, call a friend outside this group, and tell them you are joining a monastery."
+    "text": "Call your third most recent contact on speakerphone and tell them you are packing your bags to flee the state tonight."
   },
   {
     "id": "on-dr-extreme-e7",
@@ -81,7 +81,7 @@ export const ONLINE_DARE_ROULETTE_EXPANSION: PromptItem[] = [
     "gameId": "dare-roulette",
     "category": "extreme",
     "playMode": "online",
-    "text": "Show the group your most expensive purchase receipt in your Amazon order history on screen share."
+    "text": "Share your screen and let the group inspect your unread DMs or message requests for 30 seconds."
   },
   {
     "id": "on-dr-extreme-e15",

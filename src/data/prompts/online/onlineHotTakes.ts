@@ -195,8 +195,8 @@ const BASE_ONLINE_HOT_TAKES_PROMPTS: PromptItem[] = [
     gameId: 'hot-takes',
     category: 'extreme',
     playMode: 'online',
-    text: "Lying about your mic being broken to avoid speaking in a voice call makes you a fake friend.",
-    discussionPrompt: "Social battery exhaustion vs honest communication: where is the line?"
+    text: "Most people in friend groups secretly harbor intense jealousy toward their most successful friend and secretly root for their downfall.",
+    discussionPrompt: "Do close friends secretly resent each other's success?"
   },
   {
     id: 'on-ht-18-7',
