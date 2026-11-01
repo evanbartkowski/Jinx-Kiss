@@ -1,0 +1,41 @@
+# https://www.robotstxt.org/robotstxt.html
+# JinxKiss - The Ultimate Online & In-Person Party Card Games
+
+User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /api/
+
+# Specialized Crawlers
+User-agent: Googlebot
+Allow: /
+Disallow: /admin
+
+User-agent: Googlebot-Image
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+Disallow: /admin
+
+User-agent: Applebot
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: YandexBot
+Allow: /
+
+User-agent: Baiduspider
+Allow: /
+
+User-agent: Twitterbot
+Allow: /
+
+User-agent: facebookexternalhit
+Allow: /
+
+# Canonical Sitemaps
+Sitemap: https://jinxkiss-cfbaf.web.app/sitemap.xml
+Sitemap: https://jinxkiss.com/sitemap.xml

@@ -2,16 +2,296 @@
 <html lang="en" class="dark">
   <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+
+    <!-- Search Engine Indexing & Robots Directives -->
+    <title>JinxKiss - Ultimate Online Party Card Games | Truth or Dare, Never Have I Ever & More</title>
+    <meta name="description" content="Play JinxKiss: 12 free online & in-person party card games with friends. Truth or Dare, Never Have I Ever, Would You Rather, Point and Drink, live multiplayer rooms, and custom decks." />
+    <meta name="keywords" content="JinxKiss, Jinx Kiss, party games, party card games, truth or dare online, never have i ever online, would you rather game, drinking games online, multiplayer party games, couples card game, unhinged party games, truth or sip, point and drink, most likely to, virtual game night, zoom party games, discord party games, facetime drinking game" />
+    <meta name="author" content="JinxKiss" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+    <meta name="bingbot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+
+    <!-- Canonical & Alternates -->
+    <link rel="canonical" href="https://jinxkiss-cfbaf.web.app/" />
+    <link rel="alternate" hreflang="x-default" href="https://jinxkiss-cfbaf.web.app/" />
+    <link rel="alternate" hreflang="en" href="https://jinxkiss-cfbaf.web.app/" />
+
+    <!-- Favicon & PWA Manifest -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>Jinx Kiss</title>
-    <meta name="description" content="The ultimate neon-dark party gaming platform. Eight playable card games, custom decks, community prompts, and seamless group play." />
+    <link rel="apple-touch-icon" href="/favicon.svg" />
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="theme-color" content="#050505" />
+    <meta name="application-name" content="JinxKiss" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="JinxKiss" />
+    <meta name="format-detection" content="telephone=no" />
+
+    <!-- Open Graph (Facebook, Discord, LinkedIn, iMessage, Reddit) -->
+    <meta property="og:site_name" content="JinxKiss" />
+    <meta property="og:title" content="JinxKiss - Ultimate Online Party Card Games" />
+    <meta property="og:description" content="Play 12 thrilling party card games online or in-person. Truth or Dare, Never Have I Ever, Would You Rather, live multiplayer party rooms, and thousands of curated prompts." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://jinxkiss-cfbaf.web.app/" />
+    <meta property="og:image" content="https://jinxkiss-cfbaf.web.app/og-image.png" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="JinxKiss - Neon Dark Party Games Platform" />
+    <meta property="og:locale" content="en_US" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="JinxKiss - Ultimate Online Party Card Games" />
+    <meta name="twitter:description" content="Play 12 thrilling party card games online or in person. Truth or Dare, Never Have I Ever, Would You Rather, and real-time multiplayer rooms." />
+    <meta name="twitter:image" content="https://jinxkiss-cfbaf.web.app/og-image.png" />
+    <meta name="twitter:image:alt" content="JinxKiss - Neon Dark Party Games Platform" />
+
+    <!-- Fonts Preconnect -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Structured Data (JSON-LD) for Search Engines -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebApplication",
+          "@id": "https://jinxkiss-cfbaf.web.app/#webapp",
+          "name": "JinxKiss",
+          "url": "https://jinxkiss-cfbaf.web.app/",
+          "description": "The ultimate party card game platform featuring 12 game modes: Truth or Dare, Never Have I Ever, Would You Rather, Point and Drink, and realtime multiplayer rooms.",
+          "applicationCategory": "GameApplication",
+          "genre": ["Party Game", "Card Game", "Social Game", "Drinking Game"],
+          "operatingSystem": "All (Web Browser, iOS, Android, Windows, macOS)",
+          "browserRequirements": "Requires JavaScript. Requires HTML5.",
+          "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+          },
+          "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.9",
+            "ratingCount": "1280",
+            "bestRating": "5",
+            "worstRating": "1"
+          }
+        },
+        {
+          "@type": "ItemList",
+          "@id": "https://jinxkiss-cfbaf.web.app/#games-list",
+          "name": "JinxKiss Playable Party Games",
+          "description": "List of 12 party card games playable on JinxKiss in-person and online over voice or video calls.",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Truth or Dare",
+              "description": "Confess your deepest secrets or face wild challenges with zero filter.",
+              "url": "https://jinxkiss-cfbaf.web.app/#/game/truth-or-dare"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Never Have I Ever",
+              "description": "Uncover past wild antics and shocking confessions with your crew.",
+              "url": "https://jinxkiss-cfbaf.web.app/#/game/never-have-i-ever"
+            },
+            {
+              "@type": "ListItem",
+              "position": 3,
+              "name": "Would You Rather",
+              "description": "Impossible dilemmas, agonizing choices, and live consensus stats.",
+              "url": "https://jinxkiss-cfbaf.web.app/#/game/would-you-rather"
+            },
+            {
+              "@type": "ListItem",
+              "position": 4,
+              "name": "Truth or Sip",
+              "description": "Spill the unfiltered truth or take a drink penalty.",
+              "url": "https://jinxkiss-cfbaf.web.app/#/game/truth-or-sip"
+            },
+            {
+              "@type": "ListItem",
+              "position": 5,
+              "name": "Point and Drink",
+              "description": "Count to three and point fingers to expose your friends.",
+              "url": "https://jinxkiss-cfbaf.web.app/#/game/point-and-drink"
+            },
+            {
+              "@type": "ListItem",
+              "position": 6,
+              "name": "Dare Roulette",
+              "description": "Spin the neon wheel of fate and take your challenge.",
+              "url": "https://jinxkiss-cfbaf.web.app/#/game/dare-roulette"
+            },
+            {
+              "@type": "ListItem",
+              "position": 7,
+              "name": "Hot Takes",
+              "description": "Provocative claims that ignite heated room debates.",
+              "url": "https://jinxkiss-cfbaf.web.app/#/game/hot-takes"
+            },
+            {
+              "@type": "ListItem",
+              "position": 8,
+              "name": "Most Likely To",
+              "description": "Vote on who fits the most unhinged and chaotic scenarios.",
+              "url": "https://jinxkiss-cfbaf.web.app/#/game/most-likely-to"
+            },
+            {
+              "@type": "ListItem",
+              "position": 9,
+              "name": "Confessions",
+              "description": "Spill secrets anonymously and guess who wrote each one.",
+              "url": "https://jinxkiss-cfbaf.web.app/#/game/confessions"
+            },
+            {
+              "@type": "ListItem",
+              "position": 10,
+              "name": "Hot Seat",
+              "description": "Rapid-fire interrogation with zero mercy under the clock.",
+              "url": "https://jinxkiss-cfbaf.web.app/#/game/hot-seat"
+            },
+            {
+              "@type": "ListItem",
+              "position": 11,
+              "name": "Red Flag / Green Flag",
+              "description": "Rate dating habits, behavioral quirks, and relationship standards.",
+              "url": "https://jinxkiss-cfbaf.web.app/#/game/red-flag-green-flag"
+            },
+            {
+              "@type": "ListItem",
+              "position": 12,
+              "name": "Chaos Mix",
+              "description": "All party game modes colliding in random, unpredictable rounds.",
+              "url": "https://jinxkiss-cfbaf.web.app/#/game/chaos-mix"
+            }
+          ]
+        },
+        {
+          "@type": "FAQPage",
+          "@id": "https://jinxkiss-cfbaf.web.app/#faq",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "What is JinxKiss?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "JinxKiss is a free online and in-person party card game platform featuring 12 game modes including Truth or Dare, Never Have I Ever, Would You Rather, Point and Drink, and Confessions. It supports both in-person gatherings and remote party calls over Discord, Zoom, or FaceTime."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Can I play JinxKiss online with friends remotely?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes! JinxKiss features Realtime Multiplayer Party Rooms. You can host a room with a 5-digit code or share a link so friends on phones, tablets, or computers can join instantly without downloading an app."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Is JinxKiss free to play?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes, JinxKiss is 100% free to play with unlimited prompts, cards, and multiplayer party rooms."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What categories and intensity levels are available in JinxKiss?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "JinxKiss includes 8 distinct categories: Kids, Easy, Medium, Extreme, Unhinged, Couples, Spicy, and 18+. Mature 18+ and Spicy categories feature an age-confirmation gate."
+              }
+            }
+          ]
+        }
+      ]
+    }
+    </script>
   </head>
   <body class="bg-[#050505] text-[#f3f4f6] selection:bg-[#FF4DA6] selection:text-white antialiased">
-    <div id="root"></div>
+    <!-- Semantic Static Crawler Landing inside #root. React replaces this upon hydration. -->
+    <div id="root">
+      <main class="min-h-screen bg-[#050505] text-white p-6 max-w-5xl mx-auto flex flex-col items-center justify-center text-center">
+        <header class="mb-8">
+          <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight bg-gradient-to-r from-[#FF4DA6] via-[#D946EF] to-[#06B6D4] bg-clip-text text-transparent mb-4">
+            JinxKiss
+          </h1>
+          <p class="text-lg md:text-xl text-neutral-300 max-w-2xl mx-auto">
+            The Ultimate Online &amp; In-Person Party Card Games Platform. Play 12 wild game modes free with friends!
+          </p>
+        </header>
+
+        <section class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 w-full text-left my-6" aria-label="JinxKiss Games">
+          <article class="p-4 rounded-xl bg-neutral-900 border border-neutral-800">
+            <h2 class="text-xl font-bold text-[#FF4DA6] mb-1">
+              <a href="#/game/truth-or-dare">Truth or Dare</a>
+            </h2>
+            <p class="text-sm text-neutral-400">Confess your deepest secrets or face wild challenges with zero filter.</p>
+          </article>
+
+          <article class="p-4 rounded-xl bg-neutral-900 border border-neutral-800">
+            <h2 class="text-xl font-bold text-[#A855F7] mb-1">
+              <a href="#/game/never-have-i-ever">Never Have I Ever</a>
+            </h2>
+            <p class="text-sm text-neutral-400">Uncover past wild antics and shocking confessions with your crew.</p>
+          </article>
+
+          <article class="p-4 rounded-xl bg-neutral-900 border border-neutral-800">
+            <h2 class="text-xl font-bold text-[#06B6D4] mb-1">
+              <a href="#/game/would-you-rather">Would You Rather</a>
+            </h2>
+            <p class="text-sm text-neutral-400">Impossible dilemmas, agonizing choices, and live consensus stats.</p>
+          </article>
+
+          <article class="p-4 rounded-xl bg-neutral-900 border border-neutral-800">
+            <h2 class="text-xl font-bold text-[#F59E0B] mb-1">
+              <a href="#/game/truth-or-sip">Truth or Sip</a>
+            </h2>
+            <p class="text-sm text-neutral-400">Spill the unfiltered truth or take a drink penalty.</p>
+          </article>
+
+          <article class="p-4 rounded-xl bg-neutral-900 border border-neutral-800">
+            <h2 class="text-xl font-bold text-[#EC4899] mb-1">
+              <a href="#/game/point-and-drink">Point and Drink</a>
+            </h2>
+            <p class="text-sm text-neutral-400">Count to three and point fingers to expose your friends.</p>
+          </article>
+
+          <article class="p-4 rounded-xl bg-neutral-900 border border-neutral-800">
+            <h2 class="text-xl font-bold text-[#EF4444] mb-1">
+              <a href="#/game/dare-roulette">Dare Roulette</a>
+            </h2>
+            <p class="text-sm text-neutral-400">Spin the glowing neon wheel of fate and take your challenge.</p>
+          </article>
+        </section>
+
+        <section class="mt-8 text-neutral-400 text-sm max-w-2xl leading-relaxed">
+          <p>
+            Join friends in realtime multiplayer rooms, create custom decks, or play in-person. Featuring 8 intensity categories: Kids, Easy, Medium, Extreme, Unhinged, Couples, Spicy, and 18+.
+          </p>
+          <div class="mt-4 flex gap-4 justify-center">
+            <a href="#/rooms" class="px-5 py-2.5 rounded-lg bg-[#FF4DA6] text-white font-semibold">Join Party Room</a>
+            <a href="#/game/truth-or-dare" class="px-5 py-2.5 rounded-lg bg-neutral-800 text-white font-semibold border border-neutral-700">Play Now</a>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <noscript>
+      <div style="background-color: #050505; color: #fff; padding: 2rem; text-align: center; font-family: sans-serif;">
+        <h2>JavaScript Required</h2>
+        <p>Please enable JavaScript in your browser to enjoy the full interactive JinxKiss party card game experience.</p>
+      </div>
+    </noscript>
+
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

@@ -25,6 +25,7 @@ import { EditDeckPage } from './pages/EditDeckPage';
 import { ProfilePage } from './pages/ProfilePage';
 import { AdminDashboardPage } from './pages/AdminDashboardPage';
 import { adminService } from './services/adminService';
+import { updatePageSEO } from './utils/seo';
 
 export type AppView =
   | 'home'
@@ -49,30 +50,33 @@ function AppContent() {
   const [isAudioModalOpen, setIsAudioModalOpen] = useState(false);
   const [isHistoryModalOpen, setIsHistoryModalOpen] = useState(false);
 
-  // Sync with browser URL hash / history
+  // Sync with browser URL hash / history and direct paths for SEO
   useEffect(() => {
     const handleHash = () => {
-      const hash = window.location.hash.replace('#/', '').replace('#', '');
-      if (hash.startsWith('game/')) {
-        const id = hash.replace('game/', '') as GameId;
+      const hash = window.location.hash.replace(/^#\/?/, '');
+      const path = window.location.pathname.replace(/^\//, '');
+      const route = hash || path;
+
+      if (route.startsWith('game/')) {
+        const id = route.replace('game/', '') as GameId;
         setSelectedGameId(id);
         setActiveCustomDeck(null);
         setCurrentView('game');
-      } else if (hash.startsWith('room/')) {
-        const code = hash.replace('room/', '');
+      } else if (route.startsWith('room/')) {
+        const code = route.replace('room/', '');
         setActiveRoomCode(code);
         setCurrentView('multiplayer');
-      } else if (hash === 'multiplayer' || hash === 'rooms') {
+      } else if (route === 'multiplayer' || route === 'rooms') {
         setCurrentView('multiplayer');
-      } else if (hash === 'party' || hash === 'party-setup') {
+      } else if (route === 'party' || route === 'party-setup') {
         setCurrentView('party-setup');
-      } else if (hash === 'my-decks') {
+      } else if (route === 'my-decks') {
         setCurrentView('my-decks');
-      } else if (hash === 'create-deck') {
+      } else if (route === 'create-deck') {
         setCurrentView('create-deck');
-      } else if (hash === 'profile') {
+      } else if (route === 'profile') {
         setCurrentView('profile');
-      } else if (hash === 'admin') {
+      } else if (route === 'admin') {
         setCurrentView('admin');
       } else {
         setCurrentView('home');
@@ -80,9 +84,18 @@ function AppContent() {
     };
 
     window.addEventListener('hashchange', handleHash);
+    window.addEventListener('popstate', handleHash);
     handleHash();
-    return () => window.removeEventListener('hashchange', handleHash);
+    return () => {
+      window.removeEventListener('hashchange', handleHash);
+      window.removeEventListener('popstate', handleHash);
+    };
   }, []);
+
+  // Dynamically update document title, meta tags, and canonical for SEO
+  useEffect(() => {
+    updatePageSEO(currentView, selectedGameId);
+  }, [currentView, selectedGameId]);
 
   const navigateTo = (view: AppView, param?: string) => {
     setCurrentView(view);

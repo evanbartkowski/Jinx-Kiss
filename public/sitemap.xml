@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+        http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+
+  <!-- Main Homepage -->
+  <url>
+    <loc>https://jinxkiss-cfbaf.web.app/</loc>
+    <lastmod>2026-11-01</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- Realtime Multiplayer Party Rooms -->
+  <url>
+    <loc>https://jinxkiss-cfbaf.web.app/rooms</loc>
+    <lastmod>2026-11-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Party Mode Setup -->
+  <url>
+    <loc>https://jinxkiss-cfbaf.web.app/party</loc>
+    <lastmod>2026-11-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Community Custom Decks -->
+  <url>
+    <loc>https://jinxkiss-cfbaf.web.app/my-decks</loc>
+    <lastmod>2026-11-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <!-- Create Deck Hub -->
+  <url>
+    <loc>https://jinxkiss-cfbaf.web.app/create-deck</loc>
+    <lastmod>2026-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Game: Truth or Dare -->
+  <url>
+    <loc>https://jinxkiss-cfbaf.web.app/game/truth-or-dare</loc>
+    <lastmod>2026-11-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+  </url>
+
+  <!-- Game: Never Have I Ever -->
+  <url>
+    <loc>https://jinxkiss-cfbaf.web.app/game/never-have-i-ever</loc>
+    <lastmod>2026-11-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+  </url>
+
+  <!-- Game: Would You Rather -->
+  <url>
+    <loc>https://jinxkiss-cfbaf.web.app/game/would-you-rather</loc>
+    <lastmod>2026-11-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+  </url>
+
+  <!-- Game: Truth or Sip -->
+  <url>
+    <loc>https://jinxkiss-cfbaf.web.app/game/truth-or-sip</loc>
+    <lastmod>2026-11-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Game: Point and Drink -->
+  <url>
+    <loc>https://jinxkiss-cfbaf.web.app/game/point-and-drink</loc>
+    <lastmod>2026-11-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Game: Dare Roulette -->
+  <url>
+    <loc>https://jinxkiss-cfbaf.web.app/game/dare-roulette</loc>
+    <lastmod>2026-11-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Game: Hot Takes -->
+  <url>
+    <loc>https://jinxkiss-cfbaf.web.app/game/hot-takes</loc>
+    <lastmod>2026-11-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <!-- Game: Most Likely To -->
+  <url>
+    <loc>https://jinxkiss-cfbaf.web.app/game/most-likely-to</loc>
+    <lastmod>2026-11-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <!-- Game: Confessions -->
+  <url>
+    <loc>https://jinxkiss-cfbaf.web.app/game/confessions</loc>
+    <lastmod>2026-11-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <!-- Game: Hot Seat -->
+  <url>
+    <loc>https://jinxkiss-cfbaf.web.app/game/hot-seat</loc>
+    <lastmod>2026-11-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <!-- Game: Red Flag / Green Flag -->
+  <url>
+    <loc>https://jinxkiss-cfbaf.web.app/game/red-flag-green-flag</loc>
+    <lastmod>2026-11-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <!-- Game: Chaos Mix -->
+  <url>
+    <loc>https://jinxkiss-cfbaf.web.app/game/chaos-mix</loc>
+    <lastmod>2026-11-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+</urlset>
